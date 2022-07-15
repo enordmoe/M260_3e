@@ -66,7 +66,7 @@ Once you have completed installing the engine R, proceed to install the dashboar
 Once you will need to install a couple R *packages*. R packages are collections of functions and data sets developed by R users that increase the power of R by improving existing base R functions, add new functions, or bundle multiple datasets into a convenient "package." 
 
 
-The next video ([click here to access](https://youtu.be/eqpENzXToDI)) takes you through the steps to install the two R packages we will use most: **mosaic** and **Lock5withR**. Package installation is a one-time operation. Once a package is installed, you do not need to re-install it each time you use R. But you do need to "load" packages at the beginning of your session and the templates I will provide for homework assignments will include lines that do that. 
+The next video ([click here to access](https://youtu.be/eqpENzXToDI)) takes you through the steps to install the two R packages we will use most: **mosaic** and **Lock5Data**. Package installation is a one-time operation. Once a package is installed, you do not need to re-install it each time you use R. But you do need to "load" packages at the beginning of your session and the templates I will provide for homework assignments will include lines that do that. 
 
 
 

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Section 1.1 The Structure of Data</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="E. Nordmoe" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Section 1.1 The Structure of Data
+]
+.author[
+### E. Nordmoe
+]
+.date[
+### Math 260 Applied Statistics
+]
+
+---
+
+
+
+
+
+
+
+
+# Outline 
+
+- Data  
+
+- Cases and variables  
+
+- Categorical and quantitative variables  
+
+- Explanatory and response variables   
+
+- Using data to answer a question  
+
+---
+# Data
+
+- Data are a set of measurements taken on a set of individual units
+
+--
+
+- Data is typically stored and presented in a *dataset*, comprised of variables measured on cases
+
+
+???
+
+These are presenter notes
+
+---
+
+# The Data Family Tree  
+
+
+![Diagram of the Data Family Tree](figs/data_family_tree.png)
+---
+
+# A Word of Caution  
+
+* Race is a social construct    
+
+--
+
+* The [Genderbread Person](https://www.genderbread.org/)   
+
+--
+
+`\(\Rightarrow\)` How to measure the effects of systemic racism?  
+
+--
+
+`\(\Rightarrow\)` How to measure salary discrimination by sex/gender?  
+
+
+
+
+---
+
+# A Sample Data Set
+
+&lt;img src="figs/intro_survey.png" width="90%" /&gt;
+
+
+- Rows are cases
+- Columns are variables
+
+
+---
+
+
+
+# COVID-19 Data by County  
+
+&lt;img src="figs/covid-19_mich_data.png" width="2187" /&gt;
+
+---
+ 
+
+# Flights Data
+
+Source: [US Bureau of Transportation Statistics](https://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&amp;Link=0)
+
+
+
+| flight|tailnum |origin | month| day| distance| air_time|
+|------:|:-------|:------|-----:|---:|--------:|--------:|
+|   1794|N920WN  |EWR    |     5|  16|     1411|      205|
+|    133|N335AA  |JFK    |     8|  29|     2475|      296|
+|    343|N4WNAA  |LGA    |     6|   7|      733|      116|
+|    375|N653AW  |EWR    |     1|   9|      529|       88|
+|   3281|N722MQ  |LGA    |     9|   3|      479|       77|
+|    553|N523JB  |EWR    |     3|  21|     1068|      157|
+
+
+--
+
+Categorical - tailnum, origin, flight
+
+--
+
+Quantitative - distance, air_time, month, day  
+
+--
+
+**Careful**: Dates need to be handled with care and are not typical quantitative variables. Context is everything!  
+
+???
+
+More presenter notes here
+
+---
+
+# Flights Data Sets: Part 2  
+
+
+|faa |name                           |   lat|    lon|  alt| tz|dst |tzone            |
+|:---|:------------------------------|-----:|------:|----:|--:|:---|:----------------|
+|04G |Lansdowne Airport              | 41.13| -80.62| 1044| -5|A   |America/New_York |
+|06A |Moton Field Municipal Airport  | 32.46| -85.68|  264| -6|A   |America/Chicago  |
+|06C |Schaumburg Regional            | 41.99| -88.10|  801| -6|A   |America/Chicago  |
+|06N |Randall Airport                | 41.43| -74.39|  523| -5|A   |America/New_York |
+|09J |Jekyll Island Airport          | 31.07| -81.43|   11| -5|A   |America/New_York |
+|0A9 |Elizabethton Municipal Airport | 36.37| -82.17| 1593| -5|A   |America/New_York |
+
+
+
+
+---
+
+
+# Explanatory and Reponse Variables
+
+If we are using one variable to help us understand or predict values of another variable, we call the former the **explanatory** variable and the 
+latter the **response** variable.  
+    
+  
+Examples:  
+- Does meditation help reduce stress?  
+
+&lt;img src="https://media.npr.org/assets/img/2014/01/07/mindfulness_wide-b20c3525971d5796eba9ad993463fffe8faf2bcb-s1500-c85.jpg" height="200" /&gt;
+
+Source: [NPR](https://www.npr.org/sections/health-shots/2014/01/07/260470831/mindfulness-meditation-can-help-relieve-anxiety-and-depression)
+
+---
+
+# Explanatory and Reponse Variables
+
+
+- Do multivitamin supplements increase longevity?  
+
+
+![The Empty Promise of Vitamins](figs/empty_promise.png)
+
+
+---
+# Data is Everywhere!
+
+Examples
+
+* [US News and World Report National University Rankings](http://colleges.usnews.rankingsandreviews.com/best-colleges/rankings/national-liberal-arts-colleges/data)
+   + [No place like home](http://colleges.usnews.rankingsandreviews.com/best-colleges/kalamazoo-college-2275)
+   
+--
+
+* [US Government's Open Data](http://www.data.gov/)
+
+--
+
+* [CDC COVID Data Tracker](https://www.cdc.gov/covid-data-tracker/#cases/)
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": true,
+"includePresenterNotes": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

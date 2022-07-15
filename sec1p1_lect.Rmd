@@ -1,0 +1,196 @@
+---
+title: "Section 1.1 The Structure of Data"
+author: "E. Nordmoe"
+date: "Math 260 Applied Statistics"
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: true
+      includePresenterNotes: false
+---  
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_duo_accent(
+  primary_color = "#1381B0",
+  secondary_color = "#FF961C",
+  inverse_header_color = "#FFFFFF"
+)
+```
+
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(mosaic)
+library(Lock5withR)
+library(nycflights13)
+```
+
+# Outline 
+
+- Data  
+
+- Cases and variables  
+
+- Categorical and quantitative variables  
+
+- Explanatory and response variables   
+
+- Using data to answer a question  
+
+---
+# Data
+
+- Data are a set of measurements taken on a set of individual units
+
+--
+
+- Data is typically stored and presented in a *dataset*, comprised of variables measured on cases
+
+
+???
+
+These are presenter notes
+
+---
+
+# The Data Family Tree  
+
+
+![Diagram of the Data Family Tree](figs/data_family_tree.png)
+---
+
+# A Word of Caution  
+
+* Race is a social construct    
+
+--
+
+* The [Genderbread Person](https://www.genderbread.org/)   
+
+--
+
+$\Rightarrow$ How to measure the effects of systemic racism?  
+
+--
+
+$\Rightarrow$ How to measure salary discrimination by sex/gender?  
+
+
+
+
+---
+
+# A Sample Data Set
+
+```{r, echo=FALSE, out.width="90%"}
+knitr::include_graphics("figs/intro_survey.png")
+```
+
+
+- Rows are cases
+- Columns are variables
+
+
+---
+
+
+
+# COVID-19 Data by County  
+
+```{r, echo=FALSE}
+knitr::include_graphics("figs/covid-19_mich_data.png")
+```
+
+---
+ 
+
+# Flights Data
+
+Source: [US Bureau of Transportation Statistics](https://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0)
+
+
+```{r, echo=FALSE}
+library(nycflights13)
+knitr::kable(head(sample(flights[,c("flight","tailnum","origin","month","day","distance","air_time")],orig.ids=FALSE)))
+```
+
+
+--
+
+Categorical - tailnum, origin, flight
+
+--
+
+Quantitative - distance, air_time, month, day  
+
+--
+
+**Careful**: Dates need to be handled with care and are not typical quantitative variables. Context is everything!  
+
+???
+
+More presenter notes here
+
+---
+
+# Flights Data Sets: Part 2  
+
+```{r, echo=FALSE}
+library(nycflights13)
+knitr::kable(head(airports), digits = 2)
+```
+
+
+
+
+---
+
+
+# Explanatory and Reponse Variables
+
+If we are using one variable to help us understand or predict values of another variable, we call the former the **explanatory** variable and the 
+latter the **response** variable.  
+    
+  
+Examples:  
+- Does meditation help reduce stress?  
+
+```{r, echo=FALSE, out.height=200}
+knitr::include_graphics("https://media.npr.org/assets/img/2014/01/07/mindfulness_wide-b20c3525971d5796eba9ad993463fffe8faf2bcb-s1500-c85.jpg")
+```
+
+Source: [NPR](https://www.npr.org/sections/health-shots/2014/01/07/260470831/mindfulness-meditation-can-help-relieve-anxiety-and-depression)
+
+---
+
+# Explanatory and Reponse Variables
+
+
+- Do multivitamin supplements increase longevity?  
+
+
+![The Empty Promise of Vitamins](figs/empty_promise.png)
+
+
+---
+# Data is Everywhere!
+
+Examples
+
+* [US News and World Report National University Rankings](http://colleges.usnews.rankingsandreviews.com/best-colleges/rankings/national-liberal-arts-colleges/data)
+   + [No place like home](http://colleges.usnews.rankingsandreviews.com/best-colleges/kalamazoo-college-2275)
+   
+--
+
+* [US Government's Open Data](http://www.data.gov/)
+
+--
+
+* [CDC COVID Data Tracker](https://www.cdc.gov/covid-data-tracker/#cases/)
+
