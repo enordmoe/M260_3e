@@ -1,0 +1,75 @@
+---
+title: "Getting Started with R"
+subtitle: "Eric Nordmoe"
+output: 
+  html_document: 
+    fig_height: 4
+    fig_width: 9
+    theme: yeti
+    toc: true
+    toc_float: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r, message = FALSE, warning = FALSE,echo=FALSE}
+library(tidyverse)
+library(tree)
+library(vembedr)
+```
+
+
+## 1. Welcome
+
+This tutorial takes you throught the steps to get R and RStudio up and running on your Windows PC or Mac.  
+
+
+ 
+<img src="figures/R_logo.svg.png" alt="R logo" width=10%"/> is the statistical programming language.  
+
+<img src="figures/stickers/RStudio.png" alt="RStudio logo" width="10%"/> is the IDE (Integrated Development Environment).  
+
+The figure below provides a visual representation of the relationship between R and RStudio. R is the engine that drives our calculations while RStudio is the interactive environment we use to interact with R.  
+
+```{r fig.align="center", echo=FALSE}
+knitr::include_graphics("figures/engine-dashboard.png")
+```
+
+Source: http://moderndive.com  
+
+The remainder of this tutorial will lead you through the steps to install R and the RStudio IDE. These steps apply if you have either a Mac or Windows PC. If you have  a Chromebook or Linux computer, please contact me for help getting setup with R. 
+
+
+## 2. Installing R
+
+To install R on your own computer,  follow the instructions in the [video here](https://youtu.be/s45YUfs3q8Y)  Instructions are provided for both Mac and PC (latest version for both is 4.1.2 "Bird Hippie" as of December 17, 2021).
+
+
+
+
+
+  
+  
+## 3. Installing RStudio  
+
+Once you have completed installing the engine R, proceed to install the dashboard, the RStudio IDE (Integrated Development Environment). Follow the instructions provided in the [short video here](https://youtu.be/O5tsa3i331k). **Note:** The latest version of RStudio Desktop as of December 17, 2021 is "2021.09.1+372". This is the version you should install.
+
+
+
+
+## 4. Installing  R Packages
+
+Once you will need to install a couple R *packages*. R packages are collections of functions and data sets developed by R users that increase the power of R by improving existing base R functions, add new functions, or bundle multiple datasets into a convenient "package." 
+
+
+The next video ([click here to access](https://youtu.be/eqpENzXToDI)) takes you through the steps to install the two R packages we will use most: **mosaic** and **Lock5withR**. Package installation is a one-time operation. Once a package is installed, you do not need to re-install it each time you use R. But you do need to "load" packages at the beginning of your session and the templates I will provide for homework assignments will include lines that do that. 
+
+
+
+## 5 Next Steps  
+
+Now that you have completed these installations, you are ready to go. If you have run into problems or have questions, please contact me in Teams or by email at Eric.Nordmoe@kzoo.edu. 

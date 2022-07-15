@@ -1,0 +1,58 @@
+---
+title: "An important note about downloading files from Moodle!"
+
+output: 
+  html_document: 
+    fig_height: 4
+    fig_width: 9
+    theme: yeti
+    toc: true
+    toc_float: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+
+
+## 1. The Problem
+
+For this class, we will often download files from Moodle including files that end in `Rmd` which are **RMarkdown** files and files that end in `csv` which are comma separated data values. Depending on your browser and operating system, you might need to change settings to allow this.   Here are the most common problems students experience:  
+
+* Some browsers will change downloaded text files by adding `.txt` (so that `assignment.Rmd` becomes `assignment.Rmd.txt`).  
+* Some browsers will put all of your downloaded files into a Folder named "Downloads" without asking if you want the file somewhere different.  
+
+* Some browsers will automatically open a file with a program (such as using Numbers or Excel to open a `.csv` file).  
+
+We do not want any of these things to happen.  
+
+## 2. The Solutions  
+
+Here are things to check depending on which browser you are using. (If your favorite browser is not mentioned and you have figured out how to change the settings, please let me know and I will edit these instructions.)  
+
+### Safari  
+
+1. Open Safari  
+2. Open **Preferences**  
+3. Click on the **General** tab  
+4. Change the "File download location" from "Downloads" to "ask for each download."  
+5. Uncheck the box for "open safe files after download."   
+
+When you download using Safari, be sure to remove the `.txt` at the end before saving in your **Math260** work folder.
+
+
+### Chrome  
+
+1. Open Chrome  
+2. Under the Chrome menu, select Preferences$\ldots$  
+3. Scroll down and click the Advanced button  
+4. Scroll down to the Downloads section  
+5. Turn on the button "Ask where to save each file before downloading"
+
+## 3. Still having problems?    
+
+If you continue to run into problems, please contact me in Teams or by email at Eric.Nordmoe@kzoo.edu. 
