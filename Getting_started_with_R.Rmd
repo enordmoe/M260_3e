@@ -46,7 +46,7 @@ The remainder of this tutorial will lead you through the steps to install R and 
 
 ## 2. Installing R
 
-To install R on your own computer,  follow the instructions in the [video here](https://youtu.be/s45YUfs3q8Y)  Instructions are provided for both Mac and PC (latest version for both is 4.1.2 "Bird Hippie" as of December 17, 2021).
+To install R on your own computer,  follow the instructions in the [video here](https://youtu.be/s45YUfs3q8Y)  Instructions are provided for both Mac and PC (latest version for both is 4.2.1 as of June 23, 2022).
 
 
 
@@ -56,7 +56,7 @@ To install R on your own computer,  follow the instructions in the [video here](
   
 ## 3. Installing RStudio  
 
-Once you have completed installing the engine R, proceed to install the dashboard, the RStudio IDE (Integrated Development Environment). Follow the instructions provided in the [short video here](https://youtu.be/O5tsa3i331k). **Note:** The latest version of RStudio Desktop as of December 17, 2021 is "2021.09.1+372". This is the version you should install.
+Once you have completed installing the engine R, proceed to install the dashboard, the RStudio IDE (Integrated Development Environment). Follow the instructions provided in the [short video here](https://youtu.be/O5tsa3i331k). **Note:** The latest version of RStudio Desktop as of July 7, 2022 is "2022.07.0+548". This is the version you should install.
 
 
 
