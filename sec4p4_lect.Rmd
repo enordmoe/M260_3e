@@ -1,0 +1,92 @@
+---
+title: "4.4 Creating Randomization Distributions"
+author: "E. Nordmoe"
+date: "Math 260"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+```
+
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+```
+
+
+# Randomization Distributions  
+
+$p$-values can be calculated by randomization distributions:  
+
+* Simulate samples, assuming $H_0$ is true
+* Calculate the statistic of interest for each sample  
+* Find the $p$-value as the proportion of simulated statistics as extreme or more extreme than the observed statistic  
+
+--
+
+R can simulate randomization samples for many inference situations  
+
+---
+
+## Measuring Evidence Against the Null  
+
+> To see if a statistic provides evidence against $H_0$, we need to see what kind of sample statistics we would observe,  just **by random chance**,  **if $H_0$ were true**  
+
+---
+
+# Randomization Distribution Center
+
+A **randomization distribution** simulates samples assuming the null hypothesis is true, so  
+
+* It is centered at the value of the parameter given in the null hypothesis.
+
+--
+* For differences, if the hypothesized value is 0, the distribution will be centered at 0.
+
+---
+    
+# Randomization Distribution
+
+The main criteria to consider when creating randomization samples for a statistical test are:
+
+1. Be consistent with the null hypothesis $H_0$.  
+    + If we don’t do this, we won’t be testing our null hypothesis.
+--
+2. Use the **observed data** in the original sample.  
+    + We hope the original data will shed light on some aspects of the distribution that are not determined by null hypothesis.
+--
+3. Reflect the way the original data were collected.
+    + Important but not our emphasis here.
+
+**Note**: We'll consider several but not all situations and learn how to implement them manually and using R.
+
+---
+
+### Randomization Test Procedure Overview Using R  
+
+1. State null and alternative hypotheses  
+
+2. Use R to generate a randomization distribution 
+
+3. Find and interpret the $p$-value  
+
+4. State conclusion in context  
+
+---
+
+## Generating Randomization Samples
+
+*  As long as the original data is used and the null hypothesis is true for the randomization samples, most methods usually give similar answers in terms of 
+a $p$-value
+
+*  R generates the randomization distribution for you, but you need to be able to interpret results in context with respect to the null and alternative hypotheses.
+
