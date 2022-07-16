@@ -1,0 +1,119 @@
+---
+title: "3.1 Sampling Distributions"
+author: "E. Nordmoe"
+date: "Math 260"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+```
+
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+```
+
+# Statistical Inference
+
+**Statistical inference** is the process of drawing conclusions about the entire *population* based on information in a *sample*.
+
+--
+
+A **parameter** is a number that describes some aspect of a **population.**
+
+--
+
+A **statistic** is a number that is computed from data in a **sample.**
+
+???
+
+ Re-draw diagram with pop and sample showing idea of sampling distribution and inference
+
+---
+
+# Parameter vs Statistic
+
+| Measure     | **Parameter** | **Statistic** |
+|-------------|:---------:|:---------:|
+| Mean        |    $\mu$  |  $\bar x$ |
+| Proportion  |    $p$    |  $\hat p$ |
+| Std Dev     |  $\sigma$ |    $s$    |
+| Correlation |   $\rho$  |    $r$    |
+
+* We use a *statistic* from a *sample* as a **point estimate** of the corresponding *population parameter*.
+
+---
+
+# Important Points
+
+* Sample statistics vary from sample to sample.  
+
+* **Key Questions** For a given sample statistic, 
+
+    + What are plausible values for the population parameter?  
+  
+    + How much uncertainty is associated with the sample statistic?
+
+* **Key Answer**   It depends on how much the statistic varies *from sample to sample*!
+
+---
+
+# Sampling Distribution
+
+* A **sampling distribution** is the distribution of sample statistics computed for different samples of the same size from the same population.
+
+    + A sampling distribution shows us how the sample statistic varies *from sample to sample*.
+
+---
+  
+## Center and Shape of Sampling Distributions
+
+* **Center**: If samples are randomly selected, the sampling distribution will be centered around the population parameter.
+
+--
+
+* **Shape**: For most of the statistics we consider, if the sample size is large enough the sampling distribution will be *symmetric and bell-shaped*.
+
+**Caution**: These results only hold for random samples and will not apply if the sampling method is biased.
+
+---
+
+# Standard Error
+
+* To assess uncertainty of a statistic, we need to know its **sampling variability**, how much it varies from sample to sample.
+
+--
+
+* **Standard error (SE)**  is the *standard deviation* of a sample statistic.
+
+--
+
+* The **standard error** measures how much the statistic varies from sample to sample.
+
+--
+
+* The standard error of a statistic is just the **standard deviation of its sampling distribution.**
+
+---
+
+## What Happens to Sampling Variability as the Sample Size Gets Larger?
+
+* As the **sample size** *increases*, the variability of the sampling distribution *decreases*.
+
+--
+
+  + As $n\uparrow$, the statistic gets closer to the corresponding parameter.
+    
+--
+
+  + As $n\uparrow$, $\text{SE}\downarrow$
+
