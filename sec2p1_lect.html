@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>2.1 Categorical Variables</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="E. Nordmoe" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# 2.1 Categorical Variables
+]
+.author[
+### E. Nordmoe
+]
+.date[
+### Math 260
+]
+
+---
+
+
+
+
+
+
+
+
+
+
+# Descriptive Statistics
+
+* To make sense of data, we need to **summarize and visualize** it.
+
+* **Descriptive statistics** summarizing and visualizing variables and relationships between variables.
+
+* Different methods are used for categorical and quantitative variables.
+
+---
+class:  center, middle, inverse
+
+
+# Numerical and Visual Descriptions for Categorical Variables
+
+---
+background-image: url("https://imgs.xkcd.com/comics/self_description.png")
+background-position: center
+background-size: contain
+
+class: right, bottom, fullscale
+
+#### Source: https://xkcd.com/688/
+
+---
+
+# Summarizing Single Categorical Variables
+
+Summary statistics
+
+* **Frequency table** table showing number of cases in each category
+
+* **Proportion** number in category/total sample size
+
+* **Relative frequency table** table showing proportion of cases in each category
+
+Visualizations
+
+* **Bar chart** height of the bar shows the number (or proportion or percent) of cases in each category
+
+* **Pie chart** relative area represents proportion in each category (less preferred)
+
+---
+
+# Frequency Table of Counts
+
+
+```r
+tally(~LarkOwl, data = SleepStudy)
+```
+
+```
+## LarkOwl
+##    Lark Neither     Owl 
+##      41     163      49
+```
+
+---
+
+## Relative Frequency Table
+
+
+```r
+tally(~LarkOwl, format = "proportion",
+      margins = TRUE, data = SleepStudy)
+```
+
+```
+## LarkOwl
+##      Lark   Neither       Owl     Total 
+## 0.1620553 0.6442688 0.1936759 1.0000000
+```
+
+
+---
+
+## Bar Chart of Single Variable
+
+```r
+gf_bar(~LarkOwl, data = SleepStudy)
+```
+
+![](sec2p1_lect_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+---
+
+# Summarizing Two Categorical Variables: Two-Way Tables
+
+Frequency table used to look at the relationship between two categorical variables
+
+* Variable 1 categories: rows
+* Variable 2 categories: columns
+* Cell counts (frequencies): number of cases in corresponding row and column categories
+
+---
+
+# Two-Way Tables Example
+
+Cross classify two categorical variables to investigate their relationship:
+
+
+```r
+tally(~EarlyClass + LarkOwl, margins = TRUE,
+      data=SleepStudy)
+```
+
+```
+##           LarkOwl
+## EarlyClass Lark Neither Owl Total
+##      0       15      51  19    85
+##      1       26     112  30   168
+##      Total   41     163  49   253
+```
+
+Note: For *EarlyClass*, 0 = "No" and 1 = "Yes"
+--
+
+* What proportion of students with early classes are Larks?
+* What proportion of students without early classes are Larks?
+* What proportion of Owls have early classes?
+
+---
+
+# Two-Way Tables Example with Proportions
+
+
+```r
+tally(~EarlyClass + LarkOwl, margins = TRUE,
+      format = "proportion", data = SleepStudy)
+```
+
+```
+##           LarkOwl
+## EarlyClass       Lark    Neither        Owl      Total
+##      0     0.05928854 0.20158103 0.07509881 0.33596838
+##      1     0.10276680 0.44268775 0.11857708 0.66403162
+##      Total 0.16205534 0.64426877 0.19367589 1.00000000
+```
+
+---
+
+# Two-Way Tables Example with Conditional Proportions
+
+
+```r
+tally(~EarlyClass | LarkOwl, margins = TRUE,
+      format = "proportion", data = SleepStudy)
+```
+
+```
+##           LarkOwl
+## EarlyClass      Lark   Neither       Owl
+##      0     0.3658537 0.3128834 0.3877551
+##      1     0.6341463 0.6871166 0.6122449
+##      Total 1.0000000 1.0000000 1.0000000
+```
+
+`\(\Rightarrow\)` Conditional proportions are useful for comparing groups but be sure to compute the proportions in the correct direction.
+
+---
+
+# Bar Charts for Single Variables
+
+
+```r
+gf_bar( ~ LarkOwl, data = SleepStudy)
+```
+
+![](sec2p1_lect_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+
+---
+
+# Segmented Bar Charts for Two Variables
+
+* **Segmented bar chart** graphical display of a two-way table of counts  
+
+  * Note use of `factor()` to treat *EarlyClass* as categorical.
+
+
+```r
+gf_bar(~ LarkOwl, fill = ~factor(EarlyClass), data = SleepStudy)
+```
+
+![](sec2p1_lect_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+
+---
+
+# Comparative Stacked Bar Charts Comparing Proportions
+
+
+```r
+gf_bar(~LarkOwl, fill = ~factor(EarlyClass), data = SleepStudy, 
+       position = "fill")
+```
+
+![](sec2p1_lect_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+
+---
+
+# Side-by-Side Bar Charts
+
+* **Side-by-side** height of each bar is the number of the corresponding cell in the two-way table
+
+
+```r
+gf_bar(~LarkOwl, fill = ~factor(EarlyClass), 
+       data = SleepStudy, position = "dodge")
+```
+
+![](sec2p1_lect_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+---
+
+# Aesthetic Mappings
+
+* We control the appearance of graphs in R using  *aesthetics*, things we can see
+
+* Examples of aesthetics include:  
+    + position (i.e., on the x and y axes)  
+    + color ("outside" color)  
+    + fill ("inside" color)
+    + shape (of points)  
+    + linetype  
+    + size  
+    
+* Each type of graph accepts only a subset of possible aesthetics.  
+
+* Using commands to create graphs makes it easy to reproduce or update them later.
+
+---
+class:  center, middle, inverse
+
+# Your turn: In small groups...
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

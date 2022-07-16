@@ -1,0 +1,316 @@
+---
+title: "2.3-4 Measures of Spread, Outliers, Boxplots and Quantitative/Categorical Relationships"
+author: "E. Nordmoe"
+date: "Math 260"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+```
+
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+```
+
+
+class:  center, middle, inverse
+
+# Section 2.3 One Quantitative Variable: Measures of Spread
+
+---
+
+# Standard Deviation
+
+The **standard deviation** for a quantitative variable measures the spread of the data.
+
+$$
+s=\sqrt{\frac{\displaystyle\sum_{i=1}^n (x_i-\bar x)^2}{n-1}}
+$$
+
+--
+
+* Gives a rough estimate of the *typical distance* of data values from the mean.
+   + Std Dev $\approx\sqrt{\mbox{average of (deviations from average)}^2}$
+
+--
+
+* The larger the standard deviation, the greater the spread.
+
+--
+
+* Has the same units as the original data.
+
+---
+
+# Intepreting the Standard Deviation: The 95% Rule 
+
+* If a distribution of data is **approximately bell-shaped**, about 95% of the data should fall within two standard deviations of the mean.
+
+--
+
+* For a sample, about 95% of the data should be between $\bar x-2s$ and
+$\bar x+2s$.
+
+--
+
+* Note: In practice, this rule-of-thumb works reasonably well even when the data are not bell-shaped.
+
+---
+
+# SleepStudy Data 
+
+### Description
+
+* Data from a study of sleep patterns for college students.
+
+### Format
+
+* A dataset with 253 observations on  27 variables.
+
+---
+
+# Illustration of 95% Rule
+
+```{r,echo=FALSE,fig.height=4}
+xbar <- mean(~WeekdaySleep, data = SleepStudy)
+st.dev <- sd(~WeekdaySleep, data = SleepStudy)
+ggplot(SleepStudy, aes(x = WeekdaySleep)) +
+        geom_histogram(fill = "white", color = "black", breaks = seq(xbar - 4 * st.dev, xbar + 4 * st.dev, st.dev)) +
+        geom_histogram(data = subset(SleepStudy, WeekdaySleep >= xbar - 2 * st.dev & WeekdaySleep <= xbar + 2 * st.dev), breaks = seq(xbar - 4 * st.dev, xbar + 4 * st.dev, st.dev), color = "black", fill = "red", alpha =.5)
+```
+
+--
+
+* Despite skewness, about 95% of data lie between 7.87-2(1.17) and 7.87+2(1.17).  
+
+--
+
+* Note: It's actually 246/253=.972 for these data.
+
+---
+
+# Percentile
+
+The **p
+$^\text{th}$ percentile**  is the value which is greather than **p%** of the data.
+
+* A test score in the 80th percentile is greater than at least 80% of the scores on the test.
+
+---
+
+# Example: 80th Percentile 
+
+* Illustrate using an idealized smoothed histogram:
+
+```{r}
+quantile( ~ WeekdaySleep, data = SleepStudy, probs = c(.8))
+```
+```{r,echo=FALSE,fig.height=3}
+#  calculate quantiles
+qp8 <- quantile(~WeekdaySleep,data=SleepStudy,probs=c(.8))
+# generate the plot
+x <- density(SleepStudy$WeekdaySleep, n = 253)$x
+y <- density(SleepStudy$WeekdaySleep, n = 253)$y
+gg <- data.frame(SleepStudy, x, y)
+ggplot(SleepStudy) + stat_density(aes(x = WeekdaySleep), geom = "line") +
+        geom_ribbon(data = subset(gg, x <= qp8),
+                    aes(x = x, ymax = y), ymin = 0,fill = "red", alpha = 0.5) +
+        geom_ribbon(data = subset(gg, x >= qp8),
+                    aes(x = x, ymax = y), ymin = 0, fill = "blue", alpha = 0.5)+
+        annotate("text", x = 7, y = 0.08, label = "0.80")+
+        annotate("text", x = 9.2, y = 0.08, label = "0.20")
+```
+
+---
+
+# The z-Score
+
+The **
+$z$-score** for a data value, $x$, from a sample mean mean 
+$\bar x$ and standard deviation $s$ is defined to be
+
+$$
+z-\text{score}=\frac{x-\bar x}{s}
+$$
+
+* The $z$-score tells how many standard deviations the value is from the mean.
+
+* **Note:** For a population, replace $\bar x$ by $\mu$ and $s$ by $\sigma$. 
+
+---
+
+
+# z-Scores
+
+* A z-score puts values on a common scale
+
+* Values farther from 0 are more extreme 
+
+* For bell-shaped distributions, about 95% of all z-scores fall between -2 and 2
+
+    + Identify extreme values with $|z|>2$.
+
+
+???
+
+Carry out example(s) using R.  Which score is higher?
+
+---
+
+# z-Scores: Your turn
+
+* Is student 8 relatively more extreme on `DepressionScore` or `AnxietyScore`?  
+
+```{r}
+favstats(~ DepressionScore, data = SleepStudy)
+favstats(~ AnxietyScore , data = SleepStudy)
+SleepStudy[8 , c("DepressionScore", "AnxietyScore")]
+```
+
+---
+
+# Other Measures of Location
+
+* **Maximum** largest data value
+
+* **Minimum** smallest data value
+
+* Quartiles
+     + $Q_1$ (lower quartile) is the 25th percentile, with about $1/4$ of the data below it 
+   
+     + $Q_3$ (upper quartile) is the 75th percentile, with about $1/4$ of the data above it
+     
+---
+   
+# Five Number Summary
+
+**Five Number Summary** = (minimum, $Q_1$, median, $Q_3$, maximum)
+
+* The five number summary divides the dataset into fourths
+```{r}
+favstats(~ WeekdaySleep, data = SleepStudy)
+```
+
+---
+
+# Other Measures of Spread
+
+**Range** = Max - Min
+
+```{r}
+diff(range(~ WeekdaySleep, data = SleepStudy))
+```
+
+
+**Interquartile Range (IQR)**= $Q_3-Q_1$.
+
+```{r}
+IQR(~ WeekdaySleep , data = SleepStudy)
+```
+
+---
+
+# Summary
+
+| Chateracteristic |   Resistant  |         Non-Resistant         |
+|------------------|:------------:|:-----------------------------:|
+| Center           |    Median    |              Mean             |
+| Spread           |      IQR     | Standard deviation <br> Range |
+| Location         | $Q_1$, $Q_3$ |            Min, Max           |
+
+* Note that extreme percentiles (such as the 1st or 99th percentiles would be non-resistant unless the sample size were very large).
+
+---
+class: center, middle, inverse
+
+# Section 2.4 Outliers, Boxplots, and Quantitative/Categorical Relationships
+
+---
+
+# Outliers
+
+* Often best identified using judgement by inspection of a visual data display.
+
+* __Rule of Thumb__ suspected outliers are data values more than 1.5 IQRs beyond the quartiles
+
+--
+
+* A data value is a __suspected outlier__ if it is
+
+     + Smaller than the **Lower Fence**= $Q_1$ - 1.5 (IQR)
+   
+     + Greater than the **Upper Fence**= $Q_3$ + 1.5 (IQR)
+     
+---
+
+# Boxplot
+
+* A **boxplot** is 
+
+    + A visual depiction of the 5-number summary.
+
+    + Especially useful for a rough comparison of the center and spread of a variable across several sub-groups.
+
+---
+
+# Constructing a Boxplot 
+
+1. Draw a numerical scale appropriate for the data.
+
+2. Draw a box stretching from $Q_1$ to $Q_3$ representing the middle 50% of the data.
+
+3. Divide the box with a line at the median.
+
+4. Draw a line (whisker) from each quartile to the most extreme data value that is **not an outlier**.
+
+5. Identify each outlier individually by plotting with a symbol such as an asterisk or dot.
+
+**Note:** Use side-by-side boxes to compare sub-groups.
+
+---
+
+## Boxplot example comparing two groups
+
+```{r,fig.height=5}
+gf_boxplot(Calories ~ Smoke, data = NutritionStudy)
+```
+
+---
+
+## Advanced Boxplot for RStudio Masters 
+
+```{r,fig.height=2.5}
+gf_boxplot(Calories ~ Smoke, data = NutritionStudy, 
+           outlier.shape = NA) %>%  
+  gf_jitter(width = .1, alpha = .4) +
+  coord_flip()
+```
+* Overlay points using `jitter` on top of boxes to show more detail
+* `alpha` used to make points transparent (between 0 and 1)  
+* `+ coord_flip()` makes it horizontal
+
+---
+
+# Quantitative and Categorical Relationships
+
+* Compare the distribution of a quantitative variable across groups determined by the categorical variable(s).
+
+    + Use side-by-side boxplots for an overview.
+   
+    + Use comparative histograms or dotplots to see more detail.
+    
+--
+
+* Any of the statistics we use for a quantitative variable can be looked at separately for each level of a categorical variable.
+
+    + Often interested in the **difference in means** $=\bar x_1- \bar x_2$

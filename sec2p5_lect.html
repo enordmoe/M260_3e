@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>2.5 Two Quantitative Variables: Scatterplot and Correlation</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="E. Nordmoe" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# 2.5 Two Quantitative Variables: Scatterplot and Correlation
+]
+.author[
+### E. Nordmoe
+]
+.date[
+### Math 260
+]
+
+---
+
+
+
+
+
+
+
+
+# Exploratory Data Analysis for Pairs of Quantitative Variables
+
+* Visual/Graphical
+
+    + Scatterplot
+   
+* Numerical
+
+    + Correlation coefficient
+   
+    + Linear regression (Section 2.6)
+
+---
+
+# Scatterplot 
+
+* A **scatterplot** is the graph of the relationship between two quantitative variables.
+
+* Describe the *association* between two variables by commenting on:  
+    + Form
+        - linear, curvilinear, clusters, patternless
+    + Direction (if applicable)
+        - Positive or negative
+    + Strength
+        - Strong, moderate, weak
+---
+
+# Association
+
+* A **positive** association means that values of one variable tend to be **higher** when values of the other variable are higher.
+
+* A **negative** association means that values of one variable tend to be **lower** when values of the other variable are higher.
+
+* Two variables are **not associated**  (independent) if knowing the value of one variable does not give you any information about the value of the other variable.
+
+---
+
+# Scatterplots with R: Example 1
+
+
+```r
+gf_point(Alkalinity ~ pH,data = FloridaLakes, 
+         xlab = "Acidity (pH)")
+```
+
+![](sec2p5_lect_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+
+---
+
+# Scatterplots with R: Example 2
+
+* Smoother useful for identifying nonlinear trends
+
+```r
+gf_point(Alkalinity ~ pH,data = FloridaLakes,
+         xlab = "Acidity (pH)") %&gt;%
+  gf_smooth()
+```
+
+![](sec2p5_lect_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+---
+
+# Scatterplots with R: Example 3
+
+* Identify subgroups based on categorical variable using `color` or `shape`  
+
+```r
+gf_point(WeekendSleep ~ WeekdaySleep, 
+         color = ~ factor(EarlyClass), data = SleepStudy)
+```
+
+![](sec2p5_lect_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+---
+
+# Scatterplots with R: Example 4
+
+* Extreme points can be labeled and omitted if need be.  
+* `hjust=1` means right-justified, `hjust=0` means left-justified.
+
+
+```r
+gf_point(Alcohol ~ Calories, data = NutritionStudy) +
+        annotate("text", x = 6600, y = 203, hjust = 1,
+                 label = "Case #62")
+```
+
+![](sec2p5_lect_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+
+---
+
+## Scatterplots with R: Example 4 (cont'd)
+
+* Omit #62 and re-plot
+
+
+```r
+gf_point(Alcohol ~ Calories, data = NutritionStudy[-c(62) , ])
+```
+
+![](sec2p5_lect_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+
+---
+
+## Scatterplots with R: Example 4 (cont'd)
+
+* Create a subset first using the `filter()` function
+
+
+```r
+NutritionStudy2 &lt;- filter(NutritionStudy, Alcohol &lt; 100)
+gf_point(Alcohol ~ Calories, data = NutritionStudy2)
+```
+
+![](sec2p5_lect_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+
+---
+
+# Correlation
+
+The **correlation coefficient** is a numerical measure of the *strength and direction* of **linear** association between two quantitative variables.
+
+* Sample correlation coefficient: `\(r\)`
+* Population correlation coefficient: `\(\rho\)`
+
+---
+
+## Properties of the Correlation Coefficient
+
+1. `\(-1\le r\le 1\)`
+
+2. The sign of `\(r\)` indicates the direction of association:
+    + positive linear association: `\(r&gt;0\)`
+    + negative linear association: `\(r&lt;0\)`
+    + no linear assocation: `\(r=0\)`
+   
+3. The closer `\(r\)` is to `\(\pm 1\)`, the stronger the linear association.
+
+4. `\(r\)` has no units and does not depend on the units of measurement. 
+
+5. Swapping `\(X\)` and `\(Y\)` does not change the correlation coefficient.
+
+
+---
+
+# Using R to Compute Correlations
+
+* Use the formula syntax:
+
+```r
+cor(Calories ~ Alcohol, data = NutritionStudy)
+```
+
+```
+## [1] 0.4514698
+```
+
+```r
+cor(Calories ~ Alcohol, data = NutritionStudy[-c(62), ])
+```
+
+```
+## [1] 0.2212943
+```
+
+---
+
+# Correlation Cautions
+
+1. `\(r\)` is **not resistant**.
+    + Correlation can be heavily affected by outliers. 
+    + Always plot your data!
+--
+
+2. `\(r = 0\)` means no **linear** association.  The variables could still be otherwise associated.  
+    + Always plot your data!
+--
+
+3. Correlation does not imply causation!
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
