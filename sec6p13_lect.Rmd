@@ -1,0 +1,82 @@
+---
+title: "6.13 Inference About Means from Matched Pairs Data"
+author: "E. Nordmoe"
+date: "Math 260"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+```
+
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+```
+
+
+# Outline
+
+* Paired data     
+* Analyzing paired data  
+* Inference for paired data
+* Conditions
+
+---
+
+# Context: Inference about the Difference in Means for Paired Data
+
+**Paired data** includes the following:    
+
+* Two measurements on each unit    
+    + Same unit measured under different experimental conditions  
+* Measurements on a pair of units that go together
+    + Twin studies  
+    + Partner studies
+
+---
+
+# Analyzing Paired Data: <br> One-Sample t
+
+
+* For a matched pairs experiment, we look at the difference between responses for each unit (pair), rather than just the average difference between treatment groups.  
+
+* Get a new variable of the differences, and do inference for the difference as you would for a single mean.  
+
+* Rather than doing inference for a difference in means, do inference for the mean difference.  
+
+---
+
+# Inference for Paired Data
+
+To analyze the differences, we use the same formulas we already learned for a single mean:
+
+|            Standard Error           |            Confidence Interval            |                  Hypothesis Test                 |
+|:-----------------------------------:|:-----------------------------------------:|:------------------------------------------------:|
+| $\text{SE}= \frac{s_d}{\sqrt{n_d}}$ | $\bar x_d \pm t^* \frac{s_d}{\sqrt{n_d}}$ | $t=\displaystyle\frac{\bar x_d}{s_d/\sqrt{n_d}}$ |
+  
+  
+where  
+
+* $\bar x_d$ is the average difference  
+* $s_d$ is the standard deviation of the differences and  
+* $n_d$ is the number of differences (pairs)
+
+---
+
+# Conditions for t-Inference for Matched Pairs
+
+Conditions:  
+
+1. Simple random sample of differences
+2. Population of differences is approximately normal OR sample size of differences is  large $(n_d\ge 30)$
+
+
