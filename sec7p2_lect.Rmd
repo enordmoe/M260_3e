@@ -1,0 +1,135 @@
+---
+title: "7.2 Testing for an Association Between Two Categorical Variables"
+author: "E. Nordmoe"
+date: "Math 260"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+```
+
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+```
+
+
+# Outline
+
+* Test for a relationship between two categorical variables  
+    + Hypotheses  
+    + Expected counts  
+    + Chi-square test for association (independence)   
+
+---
+
+#Recap: Chi-square Goodness-of-Fit Test  
+
+* Null hypothesis specifies proportions $p_i$ for each of $k$ categories of a *single* categorical variable.   
+* Data= *observed counts* in each category (from a sample of size $n$).  
+* Compare *expected counts*= $np_i$ for each cell to observed counts using  
+
+$$
+\chi^2=\sum \frac{(\text{Observed}-\text{Expected})^2}{\text{Expected}}.
+$$
+
+* Find a $p$-value using the right (upper) tail of a chi-square distribution with df = (# of categories – 1).  
+
+---
+
+# Two Categorical Variables
+
+* The statistics behind a Chi-square test easily extends to *two* categorical variables.
+
+* A **chi-square test for association** (often called a **chi-square test for independence**) test for an *association* between two categorical variables.
+
+---
+
+# Chi-square Distribution for a Two-Way Table
+
+Use the same chi-square statistic:
+
+$$
+\chi^2=\sum \frac{(\text{Observed}-\text{Expected})^2}{\text{Expected}}.
+$$
+
+* For testing an $r\times c$ table, we can find a $p$-value using the right (upper) tail of a $\chi^2$-distribution
+  + With $(r-1)(c-1)$ degrees of freedom *if*
+  
+  + *Expected cell counts* are at least  5 in all cells.
+    
+* Notation: $r=$ number of rows and $c=$ number of columns in table.
+
+* If expected cell counts are not met, a randomization test in R could be used.
+
+---
+
+# Interpreting Results of the Chi-Square Test
+
+* The chi-square test only indicates **if** the variables are associated.
+
+* The **contribution** in each cell helps understand the nature of the relationship.
+
+---
+
+# Chi-Square Test for Association
+
+1. Test $H_0:$ the two variables are not associated vs $H_a:$ the two variables are associated.
+
+2. Calculate the expected counts for each cell. Check that all expected are at least 5 to proceed.
+$$
+\text{Expected cell count}=\frac{\text{Row Total }\times \text{ Column Total}}{\text{Overall Total}}
+$$
+
+3. Calculate the $X^2$ statistic:
+$$
+X^2=\sum \frac{(\text{Observed}-\text{Expected})^2}{\text{Expected}}.
+$$
+
+---
+
+# Chi-Square Test for Association (continued)  
+
+<span>4.</span> Compute the p-value as the area in the tail above the $X^2$ statistic, using a $\chi^2$-distribution with $\text{df} = (r – 1) \times (c – 1)$.
+
+<span>5.</span> Interpret the $p$-value in context.
+
+---
+
+# Chi-square and Z-test for 2 by 2 Table  
+
+* When testing 2 categorical variables with 2 categories each $(2\times 2$ table), the $\chi^2$ statistic is exactly the square of the $z$-statistic:  
+
+$$
+\chi^2=z^2
+$$
+
+* The $X^2$ distribution with 1 df is exactly the square of the standard normal distribution.  
+* Doing a two-sided $z$-test for difference in proportions or doing a chi-square test for a $2\times 2$ table will produce exactly the same $p$-value.  
+
+---
+
+# Summary Chi-square Tests  
+
+* The **chi-square test for goodness-of-fit** tests if *one* categorical variable differs from a hypothesized distribution.  
+* The **chi-square test for association** tests if *two* categorical variables are associated.  
+* For both, you calculate expected counts for each cell and compute   
+
+$$
+\chi^2=\sum \frac{(\text{Observed}-\text{Expected})^2}{\text{Expected}}.
+$$
+
+* Find the $p$-value as the area above this statistic with a $\chi^2$ distribution using degrees of freedom   
+    + $k-1$ for test for goodness-of-fit  
+    + $(r-1)\times(c-1)$ for test for association.
+
+

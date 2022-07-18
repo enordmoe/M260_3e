@@ -1,0 +1,130 @@
+---
+title: "7.1 Testing Goodness-of-Fit for a Single Categorical Variable"
+author: "E. Nordmoe"
+date: "Math 260"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+```
+
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+```
+
+
+# Outline
+
+* Test for a single categorical variable  
+    + Hypotheses  
+    + Expected counts  
+    + Chi-square statistic  
+    + Chi-square distribution  
+
+---
+
+# Multiple Categories  
+
+* We know how to test a proportion for a single category of a categorical variable.  
+    + Example: Test if the proportion of times a die lands 1 is different from 1/6.  
+    
+* What if we want to test proportions for several categories at once?   
+    + Are the 6 outcomes of a die equally likely?  
+    
+---
+
+# Chi-square Statistic
+
+The **chi-square statistic**  compares the *observed* to *expected* counts for derived from a null hypothesis:  
+$$
+\chi^2=\sum \frac{(\text{Observed}-\text{Expected})^2}{\text{Expected}}
+$$
+
+where the sum is over all cells of the table.  
+
+---
+
+# P-value for a Chi-Square Statistic  
+
+Two options for a $p$-value:  
+
+1. Randomization test (Using R)
+    + Take Math Stats (Math 365) if you're interested
+--
+
+2. Chi-square distribution  
+    + degrees of freedom = number of categories-1
+    
+
+---
+
+# Chi-square Distribution
+
+* If each of the expected counts are at least 5, AND  
+
+* If the null hypothesis is true, then the $\chi^2$  statistic follows a $\chi^2$ distribution, with degrees of freedom equal to  
+
+$$
+\text{df = number of categories – 1}
+$$
+
+--
+<br><br><br>
+**Note:** The $p$-value is always one-sided (right-tailed) since only *large* values of $\chi^2$ are evidence *against* the hypothesized proportions.  
+
+---
+
+# Goodness-of-Fit
+
+* A $\chi^2$ test for goodness-of-fit tests whether the distribution of a categorical variable is the same as some *null hypothesized 
+distribution*.  
+
+* The null hypothesized proportions for each category do not have to be the same.  
+
+---
+
+# Chi-Square Test for Goodness of Fit  
+
+1. State null hypothesized proportions for each category, $p_i$.
+    + Alternative is that at least one of the proportions is different than specified in the null.  
+2. Calculate the expected counts for each cell as $np_i$.
+    + Make sure they are all greater than 5 to proceed.
+
+3. Calculate the $\chi^2$ statistic:
+$$
+\chi^2=\sum \frac{(\text{Observed}-\text{Expected})^2}{\text{Expected}}
+$$
+
+---
+
+# Chi-Square Test for Goodness of Fit (cont'd)
+
+<span>4.</span> Compute the $p$-value 
+as the area in the tail above the $\chi^2$ statistic, for a $\chi^2$ distribution with  df = (# of categories – 1).
+
+<span>5.</span> Interpret the $p$-value in context.
+
+---
+
+# Summary
+
+
+* Use a chi-square goodness-of-fit test to assess hypotheses about the distribution of categories for a single categorical variable.   
+
+* Data are observed counts in each category (cell) that we compare to expected counts (under $H_0$) using  
+
+$$
+\chi^2=\sum \frac{(\text{Observed}-\text{Expected})^2}{\text{Expected}}.
+$$
+
+* Find a $p$-value using the right (upper) tail of a chi-square distribution  with df = (# of categories – 1).  
