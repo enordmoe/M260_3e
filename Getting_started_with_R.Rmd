@@ -46,7 +46,7 @@ The remainder of this tutorial will lead you through the steps to install R and 
 
 ## 2. Installing R
 
-To install R on your own computer,  follow the instructions in the [video here](https://youtu.be/s45YUfs3q8Y)  Instructions are provided for both Mac and PC (latest version for both is 4.2.1 as of June 23, 2022).
+To install R on your own computer,  follow the instructions in the [video here](https://youtu.be/s45YUfs3q8Y)  Instructions are provided for both Mac and PC (latest version for both is 4.2.1 as of June 23, 2022). If you have a Windows PC, this [link](https://cran.r-project.org/bin/windows/base/) will take you directly to the download page for R.
 
 
 
