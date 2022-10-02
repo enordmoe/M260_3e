@@ -40,7 +40,7 @@ where the **margin of error** quantifies the precision of the sample statistic a
 
 ---
 
-# Using SE to Finding MOE
+# Using SE to Find MOE
 
 * **Question** How do we determine the margin of error (MOE)?
 
