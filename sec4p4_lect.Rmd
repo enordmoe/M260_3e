@@ -1,5 +1,5 @@
 ---
-title: "4.4 Creating Randomization Distributions"
+title: "4.4 A Closer Look at Testing"
 author: "E. Nordmoe"
 date: "Math 260"
 output:
@@ -22,71 +22,83 @@ library(mosaic)
 library(Lock5Data)
 ```
 
+# Type I and Type II Errors
 
-# Randomization Distributions  
+|                |       Reject $H_0$      |   Do not reject $H_0$   |
+|----------------|:-----------------------:|:-----------------------:|
+| $H_0$ is true  | Type I Error $(\alpha)$ |         No error        |
+| $H_0$ is false |         No error        | Type II Error $(\beta)$ |
 
-$p$-values can be calculated by randomization distributions:  
+---
 
-* Simulate samples, assuming $H_0$ is true
-* Calculate the statistic of interest for each sample  
-* Find the $p$-value as the proportion of simulated statistics as extreme or more extreme than the observed statistic  
+# Type I and Type II Errors (cont'd)
+
+## Type I Error
+
+* False positive   
+
+* Convicting an innocent person 
 
 --
+   
+## Type II Error
 
-R can simulate randomization samples for many inference situations  
+* False negative    
+
+* Absolving a guilty person   
+     
+---
+
+# Significance Level  
+
+The significance level, $\alpha$, represents the tolerable probability of making a Type I error.  
 
 ---
 
-## Measuring Evidence Against the Null  
+# Multiple Testing
 
-> To see if a statistic provides evidence against $H_0$, we need to see what kind of sample statistics we would observe,  just **by random chance**,  **if $H_0$ were true**  
+*  When multiple hypothesis tests are conducted, the chance that at least one test incorrectly rejects a true null hypothesis increases with the number of tests.
+
+*  If the null hypotheses are all true, $\alpha$ of the tests will yield statistically significant results just by random chance.
+
+---
+background-image: url(https://imgs.xkcd.com/comics/significant.png)
+background-position: center
+background-size: contain
+
+
 
 ---
 
-# Randomization Distribution Center
+## Publication Bias
 
-A **randomization distribution** simulates samples assuming the null hypothesis is true, so  
+* **Publication bias** refers to the fact that usually only the significant results get published.
 
-* It is centered at the value of the parameter given in the null hypothesis.
+* The one study that turns out significant gets published, and no one knows about all the insignificant results.
 
---
-* For differences, if the hypothesized value is 0, the distribution will be centered at 0.
+* This combined with the problem of multiple comparisons, can yield very misleading results.
 
----
-    
-# Randomization Distribution
-
-The main criteria to consider when creating randomization samples for a statistical test are:
-
-1. Be consistent with the null hypothesis $H_0$.  
-    + If we don’t do this, we won’t be testing our null hypothesis.
---
-2. Use the **observed data** in the original sample.  
-    + We hope the original data will shed light on some aspects of the distribution that are not determined by null hypothesis.
---
-3. Reflect the way the original data were collected.
-    + Important but not our emphasis here.
-
-**Note**: We'll consider several but not all situations and learn how to implement them manually and using R.
 
 ---
 
-### Randomization Test Procedure Overview Using R  
+## Replicating Results  
 
-1. State null and alternative hypotheses  
+By attempting to *replicate* significant results with another study, this second study can either:  
 
-2. Use R to generate a randomization distribution 
+a. reject $H_0$, providing further confirmation that $H_a$ is true
 
-3. Find and interpret the $p$-value  
-
-4. State conclusion in context  
+b. fail to reject $H_0$, suggesting that the first study may have yielded a Type I error.
 
 ---
+  
+## Practical vs Statistical Significance
 
-## Generating Randomization Samples
+* With small sample sizes, even large differences or effects may not be significant.
 
-*  As long as the original data is used and the null hypothesis is true for the randomization samples, most methods usually give similar answers in terms of 
-a $p$-value
+* With large sample sizes, even a very small difference or effect can be significant.
 
-*  R generates the randomization distribution for you, but you need to be able to interpret results in context with respect to the null and alternative hypotheses.
+* A statistically significant result is not always practically significant, especially with large sample sizes.
 
+
+
+     
