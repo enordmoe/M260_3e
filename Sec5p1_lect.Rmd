@@ -1,5 +1,5 @@
 ---
-title: "5.1 Normal Distributions"
+title: "5.1 Hypothesis Tests Using Normal Distributions"
 author: "E. Nordmoe"
 date: "Math 260"
 output:
@@ -22,42 +22,19 @@ library(mosaic)
 library(Lock5Data)
 ```
 
-# Outline
+## Outline
 
-* Density curves  
-* Normal distribution  
-* Finding normal probabilities  
-* Backward normal calculations   
-* The standard normal distribution  
+* Normal distributions
+* Standard normal distribution
+* The Central Limit Theorem
+* P-values from Normal Distributions
+* P-values from Standard Normal Distributions
 
----
-
-# Density Curve
-
-A **density curve** is
-
-* A theoretical model to describe a variable’s distribution
-
-* An idealized histogram
-    
----
-
-# Characteristics of density curves
-
-Characteristics of density curves
-
-* Total area under the curve = 1 (or 100%)
-
-* The proportion of the population in any interval is the **area** under the curve over that interval.
-
-```{r, out.height ="300px",echo=FALSE,fig.align='center'}
-knitr::include_graphics("figs/shaded_density.jpg")
-```
 
 
 ---
 
-# Normal Distribution
+## Normal Distribution
 
 * A **normal distribution**  has a *symmetric, single-peaked, and bell-shaped* density curve.
 
@@ -79,18 +56,28 @@ $$
 
 ---
 
-# Finding Areas under the Normal Curve  
+## Finding Areas under the Normal Curve  
 
-Use R to find areas and endpoints of intervals:
+Use StatKey to find areas and endpoints of intervals:
 
 
 ```{r, out.height ="400px",echo=FALSE,fig.align='center'}
-knitr::include_graphics("figs/normal_curve.png")
+knitr::include_graphics("figs/normal1.png")
+```
+
+---
+## Finding Areas under the Normal Curve (cont'd)
+
+Use StatKey to find areas and endpoints of intervals:
+
+
+```{r, out.height ="400px",echo=FALSE,fig.align='center'}
+knitr::include_graphics("figs/normal2.png")
 ```
 
 ---
 
-# Standard Normal Distribution
+## Standard Normal Distribution
 
 The standard normal $(Z)$ distribution has
 
@@ -104,12 +91,83 @@ $$
 Z=\frac{X-\mu}{\sigma}
 $$
 
+---
+## Central Limit Theorem  
+
+> For random samples with a *sufficiently large* sample size, the distribution of sample statistics for a mean or a proportion is approximately normal.
+
+---
+
+## Central Limit Theorem  
+
+* The central limit theorem holds for **any** original distribution, although "sufficiently large sample size" varies.
+
+    + The more skewed the original distribution is, the larger $n$ has to be for the CLT to work.
+
+* For quantitative variables that are not very skewed, $n\ge 30$ is usually sufficient.
+
+* For categorical variables, counts of at least 10 within each category are usually sufficient.
+
+---
+
+## Connecting the Normal Distribution to Randomization Distributions
+
+If the randomization distribution is normal:  
+
+> To calculate a $p$-value, we just need to find the area in the appropriate tail(s) beyond the observed statistic of the distribution   
+
+$$
+N(\text{null value}, \text{SE})
+$$
+
+---
+
+## Standardized Test Statistic  
+
+We often streamline the hypothesis test process by *standardization*:
+
+> The standardized *test statistic* is the number of standard errors a test statistic is away from the hypothesized null value:
+
+$$
+z=\frac{\text{Sample statistic}-\text{Null parameter}}{\text{SE}}
+$$
+
+* Calculating the number of standard errors a statistic is from the null value allows us to assess *extremity* on a common scale.
+
+---
+
+## P-value Using the Standard Normal  
+
+
+If a statistic is normally distributed under $H_0$, the **p-value** is the probability  a standard normal is at or beyond the standardized test statistic.
+
+$$
+z=\frac{\text{Sample statistic}-\text{Null parameter}}{\text{SE}}
+$$
+
 --
+* One-tailed $p$-values  
+    + $p=P(Z\ge z)$ or $p=P(Z\le z)$
 
-* Solving for $X$ gives the formula to go backward or *unstandardize*:
+* Two-tailed $p$-value  
+    + Double the one-tailed value
+  
+where $P(Z\ge z)$ means the probability *to the right* of the observed test statistic $z$ under the standard normal density represented by $Z$.
+
+---
+
+## Summary
+
+* If the distribution of a statistic is normal, the standardized test statistic is:
+
 
 $$
-X=\mu+Z\sigma
+z=\frac{\text{Sample statistic}-\text{Null parameter}}{\text{SE}}
 $$
+
+* Obtain the $p$-value by comparing $z$ to the **standard normal** $N(0,1)$ distribution.
+
+
+
 
 
