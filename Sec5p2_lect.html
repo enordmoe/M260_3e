@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Section 5.2 Confidence Intervals and P-values Using Normal Distributions</title>
+    <title>Section 5.2 Confidence Intervals Using Normal Distributions</title>
     <meta charset="utf-8" />
     <meta name="author" content="E. Nordmoe" />
     <script src="libs/header-attrs-2.14/header-attrs.js"></script>
@@ -12,7 +12,7 @@
 class: center, middle, inverse, title-slide
 
 .title[
-# Section 5.2 Confidence Intervals and P-values Using Normal Distributions
+# Section 5.2 Confidence Intervals Using Normal Distributions
 ]
 .author[
 ### E. Nordmoe
@@ -32,96 +32,49 @@ class: center, middle, inverse, title-slide
 
 # Outline
 
-* Central Limit Theorem  
 * Confidence interval using a normal distribution  
-* Hypothesis test using a normal distribution  
 
 ---
-
-# Central Limit Theorem  
-
-&gt; For random samples with a *sufficiently large* sample size, the distribution of sample statistics for a mean or a proportion is approximately normal.
-
----
-
-# Central Limit Theorem  
-
-* The central limit theorem holds for **any** original distribution, although "sufficiently large sample size" varies.
-
-    + The more skewed the original distribution is, the larger `\(n\)` has to be for the CLT to work.
-
-* For quantitative variables that are not very skewed, `\(n\ge 30\)` is usually sufficient.
-
-* For categorical variables, counts of at least 10 within each category are usually sufficient.
-
-???
-
- ## Example: Hearing Loss in Teenagers   
+## Example: Hearing Loss in Teenagers   
 
 New York Times [report](http://www.nytimes.com/2010/08/24/health/research/24child.html?_r=0)  on a study of hearing loss in teenagers:
 
-What proportion of Americans aged 12 to 19 have some hearing loss?  Give a 95% CI. 
+* What proportion of Americans aged 12 to 19 have some hearing loss?
 
+  - Give a 95% confidence interval. 
+
+???
 Use bootstrap to get percentile interval; then use SE to get 95% interval. Extend to other levels using the basic form getting the critical value from the standard normal
 
 ---
+## Confidence Intervals Using Normal Distributions
 
-# Confidence Intervals Using the Standard Normal  
+&gt; If a bootstrap distribution is bell-shaped, a P% confidence interval can be found as the interval containing the middle P% of the normal distribution with mean equal to the observed sample statistic and standard deviation equal to the standard error of the statistic:
 
-If a statistic is normally distributed, we find a P% confidence interval for the parameter using
+$$
+N(\mbox{sample statistic}, \mbox{SE})
+$$
+
+
+---
+
+## Confidence Intervals Using the Standard Normal  
+
+* If a statistic is normally distributed, we find a P% confidence interval for the parameter using
 
 $$\text{statistic} \pm z^* \text{SE} $$  
 
 where `\(z^*\)` is the *critical value* with area P% between `\(-z^*\)` and `\(z^*\)` in the standard normal distribution.   
 
----
 
-# P-values
-
-If the randomization distribution is normal:  
-
-&gt; To calculate a `\(p\)`-value, we just need to find the area in the appropriate tail(s) beyond the observed statistic of the distribution   
-
-$$
-N(\text{null value}, \text{SE})
-$$
+* Extends SE method to confidence levels beyond just 95%.
 
 ---
+## Use StatKey to Find the Critical Value `\(z^*\)`
 
-# Standardized Test Statistic  
-
-
-&gt; The standardized *test statistic* is the number of standard errors a test statistic is away from the hypothesized null value:  
-
-$$
-z=\frac{\text{Sample statistic}-\text{Null parameter}}{\text{SE}}
-$$
-
-* Calculating the number of standard errors a statistic is from the null value allows us to assess *extremity* on a common scale.  
-
+&lt;img src="figs/statkey_with_zstar.png" width="2387" height="400px" style="display: block; margin: auto;" /&gt;
 ---
-
-# P-value Using the Standard Normal  
-
-
-If a statistic is normally distributed under `\(H_0\)`, the **p-value** is the probability  a standard normal is at or beyond  
-
-$$
-z=\frac{\text{Sample statistic}-\text{Null parameter}}{\text{SE}}
-$$
-
---
-* One-tailed `\(p\)`-values  
-    + `\(p=P(Z\ge z)\)` or `\(p=P(Z\le z)\)`
-
-* Two-tailed `\(p\)`-value  
-    + Double the one-tailed value  
-  
-where `\(P(Z\ge z)\)` means the probability *to the right* of the observed test statistic `\(z\)` under the standard normal density represented by `\(Z\)`.  
-
----
-
-# Summary: General Formulas
+## Chap 5 Summary: General Formulas
 
 ### Confidence interval
 
