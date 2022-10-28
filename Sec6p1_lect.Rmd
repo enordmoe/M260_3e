@@ -1,5 +1,5 @@
 ---
-title: "6.1-6.3 Inference About a Single Proportion"
+title: "6.1 Inference About a Single Proportion"
 author: "E. Nordmoe"
 date: "Math 260"
 output:
