@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>6.2 Inference About a Single Mean</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="E. Nordmoe" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# 6.2 Inference About a Single Mean
+]
+.author[
+### E. Nordmoe
+]
+.date[
+### Math 260
+]
+
+---
+
+
+
+
+
+
+
+
+# Outline
+
+* Standard Error
+* Sampling Distribution
+* Hypothesis Test
+* Confidence Interval
+* Sample Size for Desired Margin of Error
+
+---
+
+# Standard Error for Sample Means
+
+
+&gt; For random samples of size `\(n\)` from a population with mean `\(\mu\)`, the standard error of the sample mean `\(\bar x\)` is 
+$$
+SE=\frac{\sigma}{\sqrt{n}}
+$$
+
+* The larger the sample size `\(n\)`, the smaller the SE.
+
+---
+
+# The Central Limit Theorem for Sample Means
+
+
+If `\(n\)` is sufficently large,
+$$
+\bar x \sim N\left(\mu,\frac{\sigma}{\sqrt{n}}\right)
+$$
+
+* A normal distribution is usually a good approximation as long as `\(n\ge 30\)`
+
+* Smaller sample sizes may be sufficient for symmetric distributions, and 30 may not be sufficient for very skewed distributions or distributions with high outliers.
+
+---
+
+# Standard Error of the Sample Mean in Practice
+
+Usually, we don’t know the population standard deviation `\(\sigma\)`, so estimate it with the sample standard deviation, `\(s\)`
+to get the estimated **standard error**
+$$
+\text{SE}=\frac{s}{\sqrt{n}}
+$$
+
+---
+
+# t-Distribution
+
+* Replacing `\(\sigma\)` with `\(s\)` changes the distribution of the `\(z\)`-statistic from Normal to `\(t\)`.
+
+* The `\(t\)` distribution is very similar to the standard normal `\(Z\)`, but with slightly thicker tails to reflect this added uncertainty.
+
+---
+
+# Degrees of Freedom
+
+
+* The `\(t\)`-distribution is characterized by its **degrees of freedom** (df).
+
+* Degrees of freedom are calculated based on the sample size.
+
+* The greater the degrees of freedom, the closer the `\(t\)`-distribution is to the standard normal.
+ 
+---
+
+# t-distribution
+
+
+* If a population with mean `\(\mu_0\)` is approximately normal or if `\(n\)` is large
+`\((n \ge 30),\)` the standardized statistic for a mean using the sample `\(s\)` 
+follows a `\(t\)`-distribution with `\(n–1\)` degrees of freedom:
+
+`$$\frac{\bar x-\mu_0}{s/\sqrt{n}}\sim t_{n-1}$$`
+
+---
+
+# Normality Condition
+
+
+* Using the t-distribution requires that the data comes from a *normal distribution*
+
+*  Note: this assumption is about the population data, *not* the distribution of the statistic.
+
+* For large sample sizes we do not need to worry about this, because `\(s\)` will be a very good estimate of `\(\sigma\)` and `\(t\)` will be very close to `\(N(0,1)\)`.
+
+* For small sample sizes `\((n&lt;30)\)`, we can only use the `\(t\)`-distribution if the distribution of the data is approximately normal.
+   + Problem: Hard to assess normality for small samples.
+
+---
+
+# Small Samples
+
+
+* If sample sizes are small, only use the `\(t\)`-distribution if the data look reasonably symmetric and do not have any extreme outliers.
+
+* Even then, remember that the `\(t\)` is just an approximation! 
+
+* In practice, if sample sizes are small, use simulation methods (bootstrapping and randomization).
+
+---
+
+# t-test for a Single Mean
+
+The one-sample `\(t\)` test statistic of `\(H_0:\mu=\mu_0\)`:
+
+`$$t=\frac{\bar x-\mu_0}{s/\sqrt{n}}$$`
+
+The `\(p\)`-value is the area in the tail(s) beyond `\(t\)` for a `\(t\)`-distribution with `\(n–1\)` degrees of freedom.
+
+* Conditions:
+
+1. Simple random sample
+
+2. Population distribution is approximately normal OR sample size is large `\((n\ge 30)\)`
+
+---
+
+## Confidence Interval for a Single Mean
+
+
+* The general formula for a confidence interval is statistic `\(\text{statistic}\pm z^* \text{SE}\)`
+
+* For means, replacing `\(\sigma\)` with `\(s\)` causes us to use the `\(t\)`-distribution instead of the standard normal
+
+---
+
+# t-Distribution Confidence Interval for a Single Mean
+
+&gt;  A confidence interval for a population `\(\mu\)` is given by: `$$\bar x \pm t^* \frac{s}{\sqrt{n}}$$`
+&gt;where `\(t^*\)`  is the critical value from a `\(t\)`-distribution with `\(n-1\)` degrees of freedom.
+
+* Conditions:
+
+1. Simple random sample
+
+2. Population distribution is approximately normal OR sample size is large `\((n\ge 30)\)`
+
+---
+
+## Sample Size for Desired Margin of Error
+
+
+* To estimate a population mean `\(\mu\)` to within a desired margin of error, ME, with a given level of confidence, select
+
+`$$n=\left(\frac{z^*\cdot \tilde\sigma}{\text{ME}}\right)^2$$`
+
+where `\(\tilde\sigma\)` is an estimate of the population standard deviation.
+
+* Note that do not know `\(n\)` so we cannot use a `\(t^*\)` as it would depend on `\(n\)` through the degrees of freedom. Instead we use `\(z^*\)` to get an approximation.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

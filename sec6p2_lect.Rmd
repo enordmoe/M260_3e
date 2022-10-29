@@ -1,5 +1,5 @@
 ---
-title: "6.4-6.6 Inference About a Single Mean"
+title: "6.2 Inference About a Single Mean"
 author: "E. Nordmoe"
 date: "Math 260"
 output:
