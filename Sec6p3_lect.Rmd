@@ -1,5 +1,5 @@
 ---
-title: "6.7-6.9 Inference About Differences in Proportions"
+title: "6.3 Inference About Differences in Proportions"
 author: "E. Nordmoe"
 date: "Math 260"
 output:
