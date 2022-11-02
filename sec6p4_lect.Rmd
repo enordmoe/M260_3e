@@ -1,5 +1,5 @@
 ---
-title: "6.10-6.12 Inference About Differences in Means"
+title: "6.4 Inference About Differences in Means"
 author: "E. Nordmoe"
 date: "Math 260"
 output:
