@@ -1,5 +1,5 @@
 ---
-title: "6.13 Inference About Means from Matched Pairs Data"
+title: "6.5 Paired Difference in Means"
 author: "E. Nordmoe"
 date: "Math 260"
 output:
