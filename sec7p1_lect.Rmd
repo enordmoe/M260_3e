@@ -58,8 +58,8 @@ where the sum is over all cells of the table.
 
 Two options for a $p$-value:  
 
-1. Randomization test (Using R)
-    + Take Math Stats (Math 365) if you're interested
+1. Randomization test (Using StatKey)
+    + See More Advanced Randomization Tests row
 --
 
 2. Chi-square distribution  
