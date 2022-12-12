@@ -43,24 +43,15 @@ Source: http://moderndive.com
 The remainder of this tutorial will lead you through the steps to install R and the RStudio IDE. These steps apply if you have either a Mac or Windows PC. If you have  a Chromebook or Linux computer, please contact me for help getting setup with R. 
 
 
-## 2. Installing R
+## 2. Installing R and RStudio
 
-To install R on your own computer,  follow the instructions in the [video here](https://youtu.be/s45YUfs3q8Y)  Instructions are provided for both Mac and PC (latest version for both is 4.2.1 as of June 23, 2022). If you have a Windows PC, this [link](https://cran.r-project.org/bin/windows/base/) will take you directly to the download page for R.
-
-
-
-
-
-  
-  
-## 3. Installing RStudio  
-
-Once you have completed installing the engine R, proceed to install the dashboard, the RStudio IDE (Integrated Development Environment). Follow the instructions provided in the [short video here](https://youtu.be/O5tsa3i331k). **Note:** The latest version of RStudio Desktop as of September 7, 2022 is "2022.07.1+554". This is the version you should install.
+To install R and RStudio on your own computer, go to the site https://posit.co/ and
+follow the instructions in the [video here](https://kzoo-my.sharepoint.com/:v:/g/personal/eric_nordmoe_kzoo_edu/EdB_-Fge26VIkk_LjgifCjIBPDsN_mC2zQQEm63f1KrzRw)  Instructions are provided for both Mac and PC. Install the latest version of the software that is compatible with your computer. As of December 11, 2022, the latest version of R is 4.2.2 and the latest version of RStudio is 2022.07.2+576. 
 
 
 
 
-## 4. Installing  R Packages
+## 3. Installing  R Packages
 
 Once you will need to install a couple R *packages*. R packages are collections of functions and data sets developed by R users that increase the power of R by improving existing base R functions, add new functions, or bundle multiple datasets into a convenient "package." 
 
@@ -69,6 +60,6 @@ The next video ([click here to access](https://web.microsoftstream.com/video/2ce
 
 
 
-## 5 Next Steps  
+## 4. Next Steps  
 
 Now that you have completed these installations, you are ready to go. If you have run into problems or have questions, please contact me by Teams or email.
