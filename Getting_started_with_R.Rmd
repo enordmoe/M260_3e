@@ -46,7 +46,7 @@ The remainder of this tutorial will lead you through the steps to install R and 
 ## 2. Installing R and RStudio
 
 To install R and RStudio on your own computer, go to the site https://posit.co/ and
-follow the instructions in the [video here](https://kzoo-my.sharepoint.com/:v:/g/personal/eric_nordmoe_kzoo_edu/EdB_-Fge26VIkk_LjgifCjIBPDsN_mC2zQQEm63f1KrzRw)  Instructions are provided for both Mac and PC. Install the latest version of the software that is compatible with your computer. As of December 11, 2022, the latest version of R is 4.2.2 and the latest version of RStudio is 2022.07.2+576. 
+follow the instructions in the [video here](https://kzoo-my.sharepoint.com/:v:/g/personal/eric_nordmoe_kzoo_edu/EYuV8kj74cNBjJngEAVVDBgB5KqVRathrDBK_KPyW6mE4g?e=2J4GV9)  Instructions are provided for both Mac and PC. Install the latest version of the software that is compatible with your computer. As of March 26, 2023, the latest version of R is 4.2.3 and the latest version of RStudio is 2023.03.0+386. 
 
 
 
