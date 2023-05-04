@@ -1,7 +1,7 @@
 ---
 title: "4.5 Making Connections"
 author: "E. Nordmoe"
-date: "Math 260"
+date: "Math 261"
 output:
   xaringan::moon_reader:
     lib_dir: libs
