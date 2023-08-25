@@ -175,6 +175,8 @@ gf_bar(~LarkOwl, fill = ~factor(EarlyClass), data = SleepStudy,
        position = "fill")
 ```
 
+* Note that the function `gf_props()` can also be used to plot proportions when working with categorical data.
+
 ---
 
 # Side-by-Side Bar Charts
@@ -186,8 +188,8 @@ gf_bar(~LarkOwl, fill = ~factor(EarlyClass),
        data = SleepStudy, position = "dodge")
 ```
 
----
 
+---
 # Aesthetic Mappings
 
 * We control the appearance of graphs in R using  *aesthetics*, things we can see
