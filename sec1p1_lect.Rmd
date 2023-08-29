@@ -71,7 +71,7 @@ These are presenter notes
 
 --
 
-* The [Genderbread Person](https://www.genderbread.org/)   
+* The [Genderbread Person](https://www.itspronouncedmetrosexual.com/2015/03/the-genderbread-person-v3/)   
 
 --
 
@@ -112,7 +112,7 @@ knitr::include_graphics("figs/covid-19_mich_data.png")
 
 # Flights Data
 
-Source: [US Bureau of Transportation Statistics](https://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&Link=0)
+Source: [US Bureau of Transportation Statistics](https://www.transtats.bts.gov/ONTIME/Index.aspx)
 
 
 ```{r, echo=FALSE}
@@ -183,8 +183,8 @@ Source: [NPR](https://www.npr.org/sections/health-shots/2014/01/07/260470831/min
 
 Examples
 
-* [US News and World Report National University Rankings](http://colleges.usnews.rankingsandreviews.com/best-colleges/rankings/national-liberal-arts-colleges/data)
-   + [No place like home](http://colleges.usnews.rankingsandreviews.com/best-colleges/kalamazoo-college-2275)
+* [US News and World Report National University Rankings]https://www.usnews.com/best-colleges/rankings/national-liberal-arts-colleges)
+   + [No place like home](https://www.usnews.com/best-colleges/kalamazoo-college-2275)
    
 --
 
