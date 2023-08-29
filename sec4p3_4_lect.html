@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>4.3 Determining Statistical Significance</title>
+    <title>4.3 Determining Statistical Significance and   4.4 A Closer Look at Testing</title>
     <meta charset="utf-8" />
     <meta name="author" content="E. Nordmoe" />
-    <script src="libs/header-attrs-2.19/header-attrs.js"></script>
-    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
-    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <script src="libs/header-attrs-2.22/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
 .title[
-# 4.3 Determining Statistical Significance
+# 4.3 Determining Statistical Significance and <br> 4.4 A Closer Look at Testing
 ]
 .author[
 ### E. Nordmoe
@@ -29,6 +28,15 @@ class: center, middle, inverse, title-slide
 
 
 
+
+
+
+
+class: middle, center,inverse
+
+# Section 4.3 Determining Statistical Significance  
+
+---
 
 # p-value and `\(H_0\)`  
 
@@ -82,9 +90,9 @@ The most common value of `\(\alpha\)` is .05
 
 * `\(p\)`-value `\(&lt;\alpha\)` `\(\Longrightarrow\)` Results are **statistically significant**
     + Reject `\(H_0\)` in favor of `\(H_a\)`
-    
 --
-  
+
+
 * `\(p\)`-value `\(\ge\alpha\)` `\(\Longrightarrow\)` Results are **not statistically significant**
     + Test is inconclusive
 
@@ -94,6 +102,7 @@ The most common value of `\(\alpha\)` is .05
 ### A formal hypothesis test includes the following components:
 
 1. State the null and alternative hypotheses (defining parameters when necessary).
+
 --
 
 2. Determine the value of the observed sample statistic.
@@ -148,6 +157,87 @@ class: top
 * "Do not reject `\(H_0\)`" is not the same as "accept `\(H_0\)`"!
 
 *  Lack of evidence against `\(H_0\)` is **not** the same as evidence for `\(H_0\)`!
+
+---
+
+class: middle, center,inverse
+
+# Section 4.4 A Closer Look at Testing
+
+---
+
+
+# Type I and Type II Errors
+
+|                |       Reject `\(H_0\)`      |   Do not reject `\(H_0\)`   |
+|----------------|:-----------------------:|:-----------------------:|
+| `\(H_0\)` is true  | Type I Error `\((\alpha)\)` |         No error        |
+| `\(H_0\)` is false |         No error        | Type II Error `\((\beta)\)` |
+
+--
+
+### Type I Error `\(==&gt;\)` False positive   
+
+--
+   
+### Type II Error `\(==&gt;\)` False negative
+
+
+---
+
+# Significance Level  
+
+The significance level, `\(\alpha\)`, represents the tolerable probability of making a Type I error.  
+
+---
+
+# Multiple Testing
+
+*  When multiple hypothesis tests are conducted, the chance that at least one test incorrectly rejects a true null hypothesis increases with the number of tests.
+
+*  If the null hypotheses are all true, `\(\alpha\)` of the tests will yield statistically significant results just by random chance.
+
+---
+background-image: url(https://imgs.xkcd.com/comics/significant.png)
+background-position: center
+background-size: contain
+
+
+
+---
+
+## Publication Bias
+
+* **Publication bias** refers to the fact that usually only the significant results get published.
+
+* The one study that turns out significant gets published, and no one knows about all the insignificant results.
+
+* This combined with the problem of multiple comparisons, can yield very misleading results.
+
+
+---
+
+## Replicating Results  
+
+By attempting to *replicate* significant results with another study, this second study can either:  
+
+* Reject `\(H_0\)`, providing further confirmation that `\(H_a\)` is true 
+
+OR
+
+--
+
+* Fail to reject `\(H_0\)`, suggesting that the first study may have yielded a Type I error.
+
+---
+  
+## Practical vs Statistical Significance
+
+* With small sample sizes, even large differences or effects may not be significant.
+
+* With large sample sizes, even a very small difference or effect can be significant.
+
+* A statistically significant result is not always practically significant, especially with large sample sizes.
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

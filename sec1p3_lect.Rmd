@@ -16,7 +16,7 @@ output:
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 library(mosaic)
-library(Lock5withR)
+library(Lock5Data)
 library(nycflights13)
 ```
 
