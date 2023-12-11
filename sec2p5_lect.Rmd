@@ -74,7 +74,7 @@ gf_point(Alkalinity ~ pH,data = FloridaLakes,
 * Smoother useful for identifying nonlinear trends
 ```{r,fig.height=4.5}
 gf_point(Alkalinity ~ pH,data = FloridaLakes,
-         xlab = "Acidity (pH)") %>%
+         xlab = "Acidity (pH)") |> 
   gf_smooth()
 ```
 

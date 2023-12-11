@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>2.2 One Quantitative Variable: Shape and Center</title>
+    <title>2.4 Boxplots and Quantitative/Categorical Relationships</title>
     <meta charset="utf-8" />
     <meta name="author" content="E. Nordmoe" />
-    <script src="libs/header-attrs/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -12,7 +12,7 @@
 class: center, middle, inverse, title-slide
 
 .title[
-# 2.2 One Quantitative Variable: Shape and Center
+# 2.4 Boxplots and Quantitative/Categorical Relationships
 ]
 .author[
 ### E. Nordmoe
@@ -30,228 +30,90 @@ class: center, middle, inverse, title-slide
 
 
 
+# Outliers
 
+* An outlier is an observed value that is notably distinct from the other values in a dataset.
 
-# Dotplot
+* Often best identified using judgement by inspection of a visual data display.
 
-In a **dotplot**, each case of a quantitative variable is represented by a dot over the corresponding value.  
-
---
-
-* Dots are stacked to show repeated values  
+* __Rule of Thumb__ suspected outliers are data values more than 1.5 IQRs beyond the quartiles
 
 --
 
-* Especially useful for relatively **small** datasets with repeated cases having the same value.  
+* A data value is a __suspected outlier__ if it is
+
+     + Smaller than the **Lower Fence**= `\(Q_1\)` - 1.5 (IQR)
+   
+     + Greater than the **Upper Fence**= `\(Q_3\)` + 1.5 (IQR)
+     
+---
+
+# Boxplot
+
+* A **boxplot** is 
+
+    + A visual depiction of the 5-number summary.
+
+    + Especially useful for a rough comparison of the center and spread of a variable across several sub-groups.
 
 ---
 
-# Dotplot: Example
+# Constructing a Boxplot 
 
-* Example dotplot for **CaffeineTaps** data set `\((n=20)\)`:   
+1. Draw a numerical scale appropriate for the data.
+
+2. Draw a box stretching from `\(Q_1\)` to `\(Q_3\)` representing the middle 50% of the data.
+
+3. Divide the box with a line at the median.
+
+4. Draw a line (whisker) from each quartile to the most extreme data value that is **not an outlier**.
+
+5. Identify each outlier individually by plotting with a symbol such as an asterisk or dot.
+
+**Note:** Use side-by-side boxes to compare sub-groups.
+
+---
+
+## Boxplot example comparing two groups
 
 
 ```r
-gf_dotplot(~Taps, data = CaffeineTaps)
+gf_boxplot(Calories ~ Smoke, data = NutritionStudy)
 ```
 
-![](sec2p2_lect_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
+![](sec2p4_lect_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
 
 ---
 
-# Histogram
-
-* The height of each bar corresponds to the number of cases in the corresponding range of a quantitative variable.
-
-* Especially useful for relatively **large** datasets.  
-
+## Advanced Boxplot for RStudio Masters 
 
 
 ```r
-gf_histogram(~WeekdaySleep, data = SleepStudy)
+gf_boxplot(Smoke ~ Calories, data = NutritionStudy, 
+           outlier.shape = NA) |&gt;   
+  gf_jitter(height = .1, alpha = .4) 
 ```
 
-![](sec2p2_lect_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+![](sec2p4_lect_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+* Overlay points using `jitter` on top of boxes to show more detail
+* `alpha` used to make points transparent (between 0 and 1)  
+* `outlier.shape = NA` avoids plotting outlier point twice.
 
 ---
 
-# Histogram vs Bar Chart
+# Quantitative and Categorical Relationships
 
-### Bar chart
+* Compare the distribution of a quantitative variable across groups determined by the categorical variable(s).
 
-* Use for categorical data
-* `\(x\)`-axis has no numerical scale
-* The number of bars is the number of categories
-
---
-
-### Histogram
-
-* Use for quantitative data
-* `\(x\)`-axis is numeric (drawn to scale)
-* The number of bars is set by judgement
-* Appearance differs depending on interval width
-
----
-
-# Shapes of Distributions
-
-.pull-left[
-### Skewed Left
-![dist1](figs/shapes2.png)
-]
-
-.pull-right[
-### Skewed Right
-![dist2](figs/shapes1.png)
-]
-
----
-
-
-
-# Shapes of Distributions
-
-.pull-left[
-### Symmetric &lt;br&gt;bell-shaped
-![dist3](figs/shapes3.png)
-]
-
-.pull-right[
-### Symmetric but not &lt;br&gt; bell-shaped
-![dist4](figs/shapes4.png)
-]
-
----
-
-# Outlier
-
-An **outlier** is an observed value that is notably distinct from the other values in a dataset. Usually, an outlier is much larger or much smaller than the rest of the data values.  
-
-* A rule of thumb for identifying possible outliers is given in Section 2.4.  
-
----
-
-
-# Mean
-
-The **mean** of the data values for a single quantitative variable is given by  
-
-$$
-\text{Mean}=\frac{x_1+x_2+\cdots+x_n}{n}
-$$
-
-* The mean of a sample is `\(\bar x\)`.  
-
-* The mean of a population is denoted `\(\mu\)`.  
-
-* The mean is the "balancing point" of a dotplot or histogram.   
-
-
----
-
-# R Examples: Mean
-
-* Mean of a single numerical variable:  
-
-
-```r
-mean(~WeekdaySleep, data = SleepStudy)
-```
-
-```
-## [1] 7.866008
-```
-
-* Mean of a single numerical variable for each category of a categorical variable:  
-
-
-```r
-mean(WeekdaySleep ~ EarlyClass, data = SleepStudy)
-```
-
-```
-##        0        1 
-## 8.238353 7.677619
-```
-
----
-
-# Median
-
-The **median**, `\(m\)`, of a quantitative variable is  
-
-* the middle entry if there are an *odd* number of data values or  
-
-* the average of the two middle values if there are an *even* number of data values.  
-
-* The median divides the area of a histogram in half.  
-
-* Useful applet for exploring properties of mean and median
-   - [Mean and median applet](http://digitalfirst.bfwpub.com/stats_applet/stats_applet_6_meanmed.html)
-
----
-
-# R Examples: Median
-
-* Median of a single numerical variable:  
-
-
-```r
-median(~WeekdaySleep, data = SleepStudy)
-```
-
-```
-## [1] 7.95
-```
-
-* Median of a single numerical variable for each category of a categorical variable:  
-
-
-```r
-median(WeekdaySleep ~ EarlyClass, data = SleepStudy)
-```
-
-```
-##    0    1 
-## 8.25 7.73
-```
-
-
----
-
-# Resistance
-
-A statistic is **resistant** if it is relatively unaffected by extreme values.  
-* The median is resistant but the mean is not.  
-* When a distribution is skewed, the mean is pulled in the direction of the skewness.  
-    + Right skewness `\(\Rightarrow\)` mean &gt; median  
-    + Left skewness  `\(\Rightarrow\)` mean &lt; median  
-&lt;img src="figs/mean_median_plot.jpg" width="1867" height="200px" style="display: block; margin: auto;" /&gt;
-
----
-
-# Summary
-
-* Visualizing one quantitative variable:  
-    + Dotplot  
-    + Histogram  
+    + Use side-by-side boxplots for an overview.
+   
+    + Use comparative histograms or dotplots to see more detail.
     
 --
-    
-* Shape:  
-    + Symmetric  
-    + Skewed  
-    
---
-    
-* Measures of center  
-    + Mean (not resistant to outliers)  
-    + Median (resistant to outliers)  
 
+* Any of the statistics we use for a quantitative variable can be looked at separately for each level of a categorical variable.
 
-
-
+    + Often interested in the **difference in means** `\(=\bar x_1- \bar x_2\)`
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

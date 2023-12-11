@@ -206,10 +206,6 @@ gf_bar(~LarkOwl, fill = ~factor(EarlyClass),
 
 * Using commands to create graphs makes it easy to reproduce or update them later.
 
----
-class:  center, middle, inverse
-
-# Your turn: In small groups...
 
 
 

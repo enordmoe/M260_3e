@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>2.2 One Quantitative Variable: Shape and Center</title>
+    <title>2.3 One Quantitative Variable: Measures of Spread</title>
     <meta charset="utf-8" />
     <meta name="author" content="E. Nordmoe" />
-    <script src="libs/header-attrs/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -12,7 +12,7 @@
 class: center, middle, inverse, title-slide
 
 .title[
-# 2.2 One Quantitative Variable: Shape and Center
+# 2.3 One Quantitative Variable: Measures of Spread
 ]
 .author[
 ### E. Nordmoe
@@ -31,226 +31,230 @@ class: center, middle, inverse, title-slide
 
 
 
+# Standard Deviation
 
-# Dotplot
-
-In a **dotplot**, each case of a quantitative variable is represented by a dot over the corresponding value.  
-
---
-
-* Dots are stacked to show repeated values  
-
---
-
-* Especially useful for relatively **small** datasets with repeated cases having the same value.  
-
----
-
-# Dotplot: Example
-
-* Example dotplot for **CaffeineTaps** data set `\((n=20)\)`:   
-
-
-```r
-gf_dotplot(~Taps, data = CaffeineTaps)
-```
-
-![](sec2p2_lect_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
-
----
-
-# Histogram
-
-* The height of each bar corresponds to the number of cases in the corresponding range of a quantitative variable.
-
-* Especially useful for relatively **large** datasets.  
-
-
-
-```r
-gf_histogram(~WeekdaySleep, data = SleepStudy)
-```
-
-![](sec2p2_lect_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
-
----
-
-# Histogram vs Bar Chart
-
-### Bar chart
-
-* Use for categorical data
-* `\(x\)`-axis has no numerical scale
-* The number of bars is the number of categories
-
---
-
-### Histogram
-
-* Use for quantitative data
-* `\(x\)`-axis is numeric (drawn to scale)
-* The number of bars is set by judgement
-* Appearance differs depending on interval width
-
----
-
-# Shapes of Distributions
-
-.pull-left[
-### Skewed Left
-![dist1](figs/shapes2.png)
-]
-
-.pull-right[
-### Skewed Right
-![dist2](figs/shapes1.png)
-]
-
----
-
-
-
-# Shapes of Distributions
-
-.pull-left[
-### Symmetric &lt;br&gt;bell-shaped
-![dist3](figs/shapes3.png)
-]
-
-.pull-right[
-### Symmetric but not &lt;br&gt; bell-shaped
-![dist4](figs/shapes4.png)
-]
-
----
-
-# Outlier
-
-An **outlier** is an observed value that is notably distinct from the other values in a dataset. Usually, an outlier is much larger or much smaller than the rest of the data values.  
-
-* A rule of thumb for identifying possible outliers is given in Section 2.4.  
-
----
-
-
-# Mean
-
-The **mean** of the data values for a single quantitative variable is given by  
+The **standard deviation** for a quantitative variable measures the spread of the data.
 
 $$
-\text{Mean}=\frac{x_1+x_2+\cdots+x_n}{n}
+s=\sqrt{\frac{\displaystyle\sum_{i=1}^n (x_i-\bar x)^2}{n-1}}
 $$
 
-* The mean of a sample is `\(\bar x\)`.  
+--
 
-* The mean of a population is denoted `\(\mu\)`.  
+* Gives a rough estimate of the *typical distance* of data values from the mean.
+   + Std Dev `\(\approx\sqrt{\mbox{average of (deviations from average)}^2}\)`
 
-* The mean is the "balancing point" of a dotplot or histogram.   
+--
 
+* The larger the standard deviation, the greater the spread.
 
----
+--
 
-# R Examples: Mean
-
-* Mean of a single numerical variable:  
-
-
-```r
-mean(~WeekdaySleep, data = SleepStudy)
-```
-
-```
-## [1] 7.866008
-```
-
-* Mean of a single numerical variable for each category of a categorical variable:  
-
-
-```r
-mean(WeekdaySleep ~ EarlyClass, data = SleepStudy)
-```
-
-```
-##        0        1 
-## 8.238353 7.677619
-```
+* Has the same units as the original data.
 
 ---
 
-# Median
+# Intepreting the Standard Deviation: The 95% Rule 
 
-The **median**, `\(m\)`, of a quantitative variable is  
+* If a distribution of data is **approximately bell-shaped**, about 95% of the data should fall within two standard deviations of the mean.
 
-* the middle entry if there are an *odd* number of data values or  
+--
 
-* the average of the two middle values if there are an *even* number of data values.  
+* For a sample, about 95% of the data should be between `\(\bar x-2s\)` and
+`\(\bar x+2s\)`.
 
-* The median divides the area of a histogram in half.  
+--
 
-* Useful applet for exploring properties of mean and median
-   - [Mean and median applet](http://digitalfirst.bfwpub.com/stats_applet/stats_applet_6_meanmed.html)
-
----
-
-# R Examples: Median
-
-* Median of a single numerical variable:  
-
-
-```r
-median(~WeekdaySleep, data = SleepStudy)
-```
-
-```
-## [1] 7.95
-```
-
-* Median of a single numerical variable for each category of a categorical variable:  
-
-
-```r
-median(WeekdaySleep ~ EarlyClass, data = SleepStudy)
-```
-
-```
-##    0    1 
-## 8.25 7.73
-```
-
+* Note: In practice, this rule-of-thumb works reasonably well even when the data are not bell-shaped.
 
 ---
 
-# Resistance
+# SleepStudy Data 
 
-A statistic is **resistant** if it is relatively unaffected by extreme values.  
-* The median is resistant but the mean is not.  
-* When a distribution is skewed, the mean is pulled in the direction of the skewness.  
-    + Right skewness `\(\Rightarrow\)` mean &gt; median  
-    + Left skewness  `\(\Rightarrow\)` mean &lt; median  
-&lt;img src="figs/mean_median_plot.jpg" width="1867" height="200px" style="display: block; margin: auto;" /&gt;
+### Description
+
+* Data from a study of sleep patterns for college students.
+
+### Format
+
+* A dataset with 253 observations on  27 variables.
+
+---
+
+# Illustration of 95% Rule
+
+![](sec2p3_lect_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+
+--
+
+* Despite skewness, about 95% of data lie between 7.87-2(1.17) and 7.87+2(1.17).  
+
+--
+
+* Note: It's actually 246/253=.972 for these data.
+
+---
+
+# Percentile
+
+The **p
+`\(^\text{th}\)` percentile**  is the value which is greather than **p%** of the data.
+
+* A test score in the 80th percentile is greater than at least 80% of the scores on the test.
+
+---
+
+# Example: 80th Percentile 
+
+* Illustrate using an idealized smoothed histogram:
+
+
+```r
+quantile( ~ WeekdaySleep, data = SleepStudy, probs = c(.8))
+```
+
+```
+##   80% 
+## 8.762
+```
+![](sec2p3_lect_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+---
+
+# The z-Score
+
+The **
+`\(z\)`-score** for a data value, `\(x\)`, from a sample mean mean 
+`\(\bar x\)` and standard deviation `\(s\)` is defined to be
+
+$$
+z-\text{score}=\frac{x-\bar x}{s}
+$$
+
+* The `\(z\)`-score tells how many standard deviations the value is from the mean.
+
+* **Note:** For a population, replace `\(\bar x\)` by `\(\mu\)` and `\(s\)` by `\(\sigma\)`. 
+
+---
+
+
+# z-Scores
+
+* A z-score puts values on a common scale
+
+* Values farther from 0 are more extreme 
+
+* For bell-shaped distributions, about 95% of all z-scores fall between -2 and 2
+
+    + Identify extreme values with `\(|z|&gt;2\)`.
+
+
+???
+
+Carry out example(s) using R.  Which score is higher?
+
+---
+
+# z-Scores: Your turn
+
+* Is student 8 relatively more extreme on `DepressionScore` or `AnxietyScore`?  
+
+
+```r
+favstats(~ DepressionScore, data = SleepStudy)
+```
+
+```
+##  min Q1 median Q3 max     mean       sd   n missing
+##    0  1      3  7  35 5.201581 6.000899 253       0
+```
+
+```r
+favstats(~ AnxietyScore , data = SleepStudy)
+```
+
+```
+##  min Q1 median Q3 max     mean       sd   n missing
+##    0  1      4  8  26 5.371542 5.197327 253       0
+```
+
+```r
+SleepStudy[8 , c("DepressionScore", "AnxietyScore")]
+```
+
+```
+##   DepressionScore AnxietyScore
+## 8               2            2
+```
+
+---
+
+# Other Measures of Location
+
+* **Maximum** largest data value
+
+* **Minimum** smallest data value
+
+* Quartiles
+     + `\(Q_1\)` (lower quartile) is the 25th percentile, with about `\(1/4\)` of the data below it 
+   
+     + `\(Q_3\)` (upper quartile) is the 75th percentile, with about `\(1/4\)` of the data above it
+     
+---
+   
+# Five Number Summary
+
+**Five Number Summary** = (minimum, `\(Q_1\)`, median, `\(Q_3\)`, maximum)
+
+* The five number summary divides the dataset into fourths
+
+```r
+favstats(~ WeekdaySleep, data = SleepStudy)
+```
+
+```
+##  min  Q1 median  Q3   max     mean       sd   n missing
+##    3 7.2   7.95 8.6 10.97 7.866008 1.167788 253       0
+```
+
+---
+
+# Other Measures of Spread
+
+**Range** = Max - Min
+
+
+```r
+diff(range(~ WeekdaySleep, data = SleepStudy))
+```
+
+```
+## [1] 7.97
+```
+
+
+**Interquartile Range (IQR)**= `\(Q_3-Q_1\)`.
+
+
+```r
+IQR(~ WeekdaySleep , data = SleepStudy)
+```
+
+```
+## [1] 1.4
+```
 
 ---
 
 # Summary
 
-* Visualizing one quantitative variable:  
-    + Dotplot  
-    + Histogram  
-    
---
-    
-* Shape:  
-    + Symmetric  
-    + Skewed  
-    
---
-    
-* Measures of center  
-    + Mean (not resistant to outliers)  
-    + Median (resistant to outliers)  
+| Chateracteristic |   Resistant  |         Non-Resistant         |
+|------------------|:------------:|:-----------------------------:|
+| Center           |    Median    |              Mean             |
+| Spread           |      IQR     | Standard deviation &lt;br&gt; Range |
+| Location         | `\(Q_1\)`, `\(Q_3\)` |            Min, Max           |
 
-
-
+* Note that extreme percentiles (such as the 1st or 99th percentiles would be non-resistant unless the sample size were very large).
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

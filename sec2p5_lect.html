@@ -4,7 +4,7 @@
     <title>2.5 Two Quantitative Variables: Scatterplot and Correlation</title>
     <meta charset="utf-8" />
     <meta name="author" content="E. Nordmoe" />
-    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -85,7 +85,7 @@ gf_point(Alkalinity ~ pH,data = FloridaLakes,
 
 ```r
 gf_point(Alkalinity ~ pH,data = FloridaLakes,
-         xlab = "Acidity (pH)") %&gt;%
+         xlab = "Acidity (pH)") |&gt; 
   gf_smooth()
 ```
 
