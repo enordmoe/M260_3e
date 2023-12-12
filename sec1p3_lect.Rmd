@@ -314,25 +314,27 @@ class:  center, middle
 * Replication
 
 ---
+## Effect of Therapy Dogs
 
-# Example: The Power of Kawaii  
+1\. What was the research question?  
 
-Questions about the design:
+2\. Who were the participants in the study?  
 
-* What are the cases?
+3\. What was explanatory variable?  
 
-* What are the variables?
-    + Explanatory
-    + Response
+4\. Name at least two response variables?   
 
-* What are the treatment groups?
+5\. How were participants assigned to treatment groups? Why?  
 
-* How did researchers control for the effect of differing abilities of participants?
+---
+## Effect of Therapy Dogs (cont'd)
 
-* What can be concluded?
+6\. Explain the importance of having a control group in this study.  
 
-???
+7\. Is this a randomized comparative design or a matched pairs design experiment?  
 
-What was changed in Experiment 2? Why food?
+8\. What problems threatened the validity of the test results?  
+
+9\. What can be concluded from this experiment?
 
 
