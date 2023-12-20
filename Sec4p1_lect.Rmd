@@ -1,0 +1,91 @@
+---
+title: "4.1 Introducing Hypothesis Tests"
+author: "E. Nordmoe"
+date: "Math 260"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+```
+
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+```
+
+
+
+# Statistical Test
+
+A **statistical** test uses data from a sample to assess a claim about a population.  
+
+> An outcome that would rarely happen if a claim were true is good evidence that the claim is not true.  
+
+---
+
+# Statistical Hypotheses
+
+Statistical tests are framed formally in terms of two competing hypotheses:  
+
+* **Null Hypothesis $(H_0)$** the statement being tested in a statistical test.  
+    + Statement we hope to reject  
+    + Claim that there is no effect or difference  
+
+--
+
+* **Alternative Hypothesis $(H_a)$** the statement we expect or hope to be true.  
+    + It is typically the research hypothesis  
+    + Claim for which we seek evidence.  
+
+---
+
+# Points to Note
+
+* Hypotheses are statements about **population parameters**.  
+
+--
+
+* A **statistic** should *never* appear in a hypothesis statement; only parameters should appear.  
+
+---
+
+# Statistical Significance
+
+> When results as extreme as the observed sample statistic are unlikely to occur by random chance alone (assuming the null hypothesis is true), we say the sample results are **statistically significant**  
+
+--
+
+* If our sample is statistically significant, we have convincing evidence against $H_0$ in favor of $H_a$.  
+
+--
+
+* If our sample is *not* statistically significant, our test is *inconclusive*.  
+---
+
+# Statistical Significance
+
+![](http://imgs.xkcd.com/comics/boyfriend.png)
+
+---
+
+# Summary
+
+* Statistical tests use data from a sample to assess a claim about a population  
+
+* Statistical tests are usually formalized with competing hypotheses:  
+    + **Null hypothesis $(H_0)$**: no effect or no difference  
+    + **Alternative hypothesis $(H_a)$**: what we seek evidence for  
+    
+  
+* If data are **statistically significant**, we have convincing evidence against the null hypothesis, and **in favor** of the alternative  
+
+
