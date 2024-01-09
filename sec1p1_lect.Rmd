@@ -65,31 +65,31 @@ These are presenter notes
 ![Diagram of the Data Family Tree](figs/data_family_tree.png)
 ---
 
-# A Word of Caution  
+# Cautions 
 
 * Race is a social construct    
 
 --
-
-* The [Genderbread Person](https://www.itspronouncedmetrosexual.com/2015/03/the-genderbread-person-v3/)   
-
---
-
 $\Rightarrow$ How to measure the effects of systemic racism?  
+$\Rightarrow$ How to study disease risk factors?  
 
 --
 
+* The [Gender Unicorn](https://www.transhealthsa.com/wp-content/uploads/2017/05/The-Gender-Unicorn.pdf)   
+
+--
 $\Rightarrow$ How to measure salary discrimination by sex/gender?  
+$\Rightarrow$ Estimate incidence of cancer?  
 
 
 
 
 ---
 
-# A Sample Data Set
+# The American Community Survey
 
 ```{r, echo=FALSE, out.width="90%"}
-knitr::include_graphics("figs/intro_survey.png")
+knitr::include_graphics("figs/ACS_data.png")
 ```
 
 
