@@ -53,10 +53,14 @@ knitr::include_graphics("figs/sampling_soup.png")
 
 ---
 
-# Sampling Bias  
+# Bias vs Sampling Bias  
 
-**Sampling bias** occurs when the method of selecting a 
-sample causes the sample to systematically differ from the population.  
+* **Bias**  exists when the method of collecting data causes the sample data to inaccurately reflect the population.
+
+--
+
+* **Sampling bias** occurs when *the method of selecting a 
+sample* causes the sample to systematically differ from the population.
 
 ---
 
@@ -123,7 +127,7 @@ Note: Only the first 4 of 18 columns are shown due to space limitations.
 
 # Other Kinds of Bias
 
-In general, **bias** occurs when the method of collecting data causes the sample data to inaccurately reflect the population.  
+Recall **bias** occurs when the method of collecting data causes the sample data to inaccurately reflect the population.  
 
 --
 

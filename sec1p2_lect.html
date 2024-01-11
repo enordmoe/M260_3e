@@ -34,7 +34,7 @@ class: center, middle, inverse, title-slide
 
 ## Cooking up a Random Sample?
 
-&lt;img src="figs/sampling_soup.png" width="309" /&gt;
+![](figs/sampling_soup.png)&lt;!-- --&gt;
 ---
 
 # Sample versus Population  
@@ -51,10 +51,14 @@ class: center, middle, inverse, title-slide
 
 ---
 
-# Sampling Bias  
+# Bias vs Sampling Bias  
 
-**Sampling bias** occurs when the method of selecting a 
-sample causes the sample to systematically differ from the population.  
+* **Bias**  exists when the method of collecting data causes the sample data to inaccurately reflect the population.
+
+--
+
+* **Sampling bias** occurs when *the method of selecting a 
+sample* causes the sample to systematically differ from the population.
 
 ---
 
@@ -78,7 +82,7 @@ sample(1:28,5)
 ```
 
 ```
-## [1]  4 25  7 10 11
+## [1] 25 19 24 26  9
 ```
 
 ---
@@ -97,9 +101,9 @@ sample(StudentSurvey, 3)
 
 ```
 ##          Year Sex Smoke   Award
-## 259 Sophomore   M    No   Nobel
-## 66  Sophomore   F    No Olympic
-## 337 Sophomore   F   Yes Olympic
+## 276 Sophomore   F    No Olympic
+## 227 Sophomore   F    No   Nobel
+## 311    Senior   M    No   Nobel
 ```
 
 Note: Only the first 4 of 18 columns are shown due to space limitations.
@@ -117,10 +121,10 @@ mysample
 
 
 ```
-##          Year Sex Smoke   Award
-## 197 Sophomore   F    No   Nobel
-## 102 Sophomore   F    No   Nobel
-## 312 Sophomore   M    No Olympic
+##          Year Sex Smoke Award
+## 254    Senior   M    No Nobel
+## 15  FirstYear   M    No Nobel
+## 112 Sophomore   M    No Nobel
 ```
 
 Note: Only the first 4 of 18 columns are shown due to space limitations.
@@ -129,7 +133,7 @@ Note: Only the first 4 of 18 columns are shown due to space limitations.
 
 # Other Kinds of Bias
 
-In general, **bias** occurs when the method of collecting data causes the sample data to inaccurately reflect the population.  
+Recall **bias** occurs when the method of collecting data causes the sample data to inaccurately reflect the population.  
 
 --
 
