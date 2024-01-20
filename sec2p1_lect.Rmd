@@ -46,15 +46,6 @@ class:  center, middle, inverse
 # Numerical and Visual Descriptions for Categorical Variables
 
 ---
-background-image: url("https://imgs.xkcd.com/comics/self_description.png")
-background-position: center
-background-size: contain
-
-class: right, bottom, fullscale
-
-#### Source: https://xkcd.com/688/
-
----
 
 # Summarizing Single Categorical Variables
 
