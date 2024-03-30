@@ -1,0 +1,100 @@
+---
+title: "1.1 The Structure of Data"
+subtitle: "Math 261"
+author: "Eric Nordmoe"
+format:
+  revealjs:
+    chalkboard: true
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+```
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+library(palmerpenguins)
+```
+
+## Outline
+
+-   Datasets: cases and variables
+-   Types of variables
+-   Explanatory and response variables
+
+## The Palmer Penguins Dataset {.smaller}
+
+```{r, echo = FALSE}
+set.seed((261))
+knitr::kable(sample(penguins,8)[,1:8])
+```
+
+-   Rows are cases (or obserations)
+-   Columns are variables
+
+## The Data Family Tree
+
+![](figs/data_family_tree.png)
+
+## Types of Variables
+
+Data are recorded as either **categorical** or **quantitative**
+
+-   A **Quantitative** variable measures or records an *inherently* numerical quantity for each case.
+
+-   **Categorical** variables divide the data into groups.
+
+## The ICUAdmissions Data {.smaller}
+
+```{r, echo = FALSE}
+set.seed((327))
+knitr::kable(sample(ICUAdmissions,8)[,1:14], row.names = FALSE)
+```
+
+## Explanatory and Response Variables
+
+If we are using one variable to help us understand or predict values of another variable, we call the former the **explanatory** variable and the latter the **response** variable.
+
+Examples:\
+- Does meditation help reduce stress?\
+- Does sugar consumption increase hyperactivity?\
+- Do multivitamin supplements increase longevity?
+
+## Kidney Cancer Data
+
+Counties with the **highest** kidney cancer death rates
+
+![](figs/kidney_high.png){fig-align="center" width="808"}
+
+::: aside
+Source: Gelman et. al. Bayesian Data Anaylsis, CRC Press, 2004.
+:::
+
+## Kidney Cancer Data
+
+Counties with the **lowest** kidney cancer death rates
+
+![](figs/kidney_low.png){fig-align="center" width="627"}
+
+## Kidney Cancer Data
+
+-   If the values in the kidney cancer dataset are rates of kidney cancer deaths, then the cases are **counties**
+-   If the values in the kidney cancer dataset are yes/no, then the cases are **people**
+
+## Data is Everywhere!
+
+Examples
+
+-   [National Health and Nutrition Examination Study](https://www.kaggle.com/cdc/national-health-and-nutrition-examination-survey)
+
+-   [Scientific Data from Nature Journal](http://www.nature.com/sdata/about/principles/)
+
+-   [Google Data and Google Trends](https://trends.google.com/trends/)
+
+-   [US Government's Open Data](http://www.data.gov/)
+
+-   [Other Open Data Sites](http://www.data.gov/open-gov/)
+
+### Big Data is Big!
