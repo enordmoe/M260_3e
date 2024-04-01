@@ -69,7 +69,7 @@ Counties with the **highest** kidney cancer death rates
 ![](figs/kidney_high.png){fig-align="center" width="808"}
 
 ::: aside
-Source: Gelman et. al. Bayesian Data Anaylsis, CRC Press, 2004.
+Source: Gelman et. al. Bayesian Data Analysis, CRC Press, 2004.
 :::
 
 ## Kidney Cancer Data
