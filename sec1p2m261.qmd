@@ -5,6 +5,7 @@ author: "Eric Nordmoe"
 format:
   revealjs:
     chalkboard: true
+    theme: dark
 editor: visual
 ---
 
