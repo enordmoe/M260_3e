@@ -53,6 +53,8 @@ set.seed((327))
 knitr::kable(sample(ICUAdmissions,8)[,1:14], row.names = FALSE)
 ```
 
+
+
 ## Explanatory and Response Variables
 
 If we are using one variable to help us understand or predict values of another variable, we call the former the **explanatory** variable and the latter the **response** variable.

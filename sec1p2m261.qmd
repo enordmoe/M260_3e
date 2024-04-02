@@ -1,0 +1,116 @@
+---
+title: "1.2 Sampling from a Population"
+subtitle: "Math 261"
+author: "Eric Nordmoe"
+format:
+  revealjs:
+    chalkboard: true
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+```
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+library(palmerpenguins)
+```
+
+## Cooking up a Random Sample?
+
+![](figs/A_woman_taste_testing_her_cooking_soup_110425-232575-826009.jpg){fig-alt="woman tasting soup"}
+
+## Sample versus Population
+
+::: incremental
+-   A **population** includes all individuals or objects of interest.
+
+-   A **sample** is the set of cases for which we have data.
+
+-   **Statistical inference** is the process of using a sample to learn about the population.
+:::
+
+## Graduate school?
+
+Click [here](https://goo.gl/forms/SUA7JeE9xulEt94K3) to answer
+
+![](figs/gs_survey_qr.png){width="50"}
+
+## Graduate school
+
+-   What is the sample?
+
+-   Suppose K College is interested in the proportion of it’s students who want to go to graduate school. What is the population?
+
+-   Can our sample data be generalized to make inferences about the population? Why or why not?
+
+## Sampling Bias
+
+**Sampling bias** occurs when the method of selecting a sample causes the sample to systematically differ from the population.
+
+-   If sampling bias exists, we cannot trust generalizations from the sample to the population.
+
+## Scope of Interest
+
+-   Inference can only extend to a population that "looks like" the sample\
+-   Examples:
+    -   Study of girls with anorexia\
+    -   Tracking disease by those who visit doctors\
+    -   Generalizing from experiments in the Arb
+
+## Simple Random Sample {.build}
+
+When choosing a **simple random sample** of $n$ units, all groups of size $n$ in the popuation have the *same* chance of being selected for the sample.
+
+Use a simple random sample to avoid **sampling bias**.
+
+## Using R to Help Draw a Random Sample
+
+Generating random integers to select a random sample:
+
+```{r}
+# Sample 5 students from a class of 30
+sample(1:30,5)
+```
+
+## Using R to Sample from an R Data Frame {.smaller}
+
+Randomly sample $n$ rows from a data set:
+
+```{r,eval=FALSE,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+# sample of size 3
+sample(ICUAdmissions,3)
+```
+
+```{r,echo=FALSE,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+# sample of size 3
+#knitr::kable(sample(ICUAdmissions,3)[,-22], row.names = FALSE)
+sample(ICUAdmissions,3)
+```
+
+::: footnote
+The `orig.id` tells us which rows were sampled but is not needed here since there was an ID variable in the original data.
+:::
+
+## Other Kinds of Bias
+
+In general, **bias** occurs when the method of collecting data causes the sample data to inaccurately reflect the population.
+
+::: incremental
+-   **Undercoverage** some groups of the population are omitted from the process of choosing the sample.\
+-   **Nonresponse bias** individuals can’t be contacted or refuse to participate.\
+-   **Response bias** behavior of respondent or interviewer causes bias.\
+-   **Wording bias** wording of the question influences the response.
+:::
+
+## A Difficult Question
+
+. . .
+
+Do you love statistics?
