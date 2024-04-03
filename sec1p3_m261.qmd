@@ -50,9 +50,9 @@ Stephen Jay Gould
 
 ## Hans Rosling- The Joy of Stats
 
-Smoking and Lung Cancer
+[Smoking and Lung Cancer]( https://www.youtube.com/embed/6RzDMEW5omc)
 
-{{< video https://www.youtube.com/embed/6RzDMEW5omc width="640" height="480" >}}
+
 
 ## Association is not Causation! {.build}
 
