@@ -493,50 +493,46 @@ Eric Nordmoe
 <p>A <a href="https://www.bmj.com/content/332/7546/883">2006 BMJ study</a> found no link between frequency of use of cell phones and brain tumors.</p>
 <p><span class="math inline">\(\implies\)</span> Observational study or experiment?</p>
 </section>
-<section id="randomization" class="slide level2">
-<h2>Randomization</h2>
-<p>Eliminate confounding factors by <strong>randomization</strong></p>
-<ul>
-<li>Randomly assign values of the explanatory variable in an experiment.</li>
-</ul>
-</section>
 <section id="study-of-the-effect-of-arthroscopic-knee-surgery" class="slide level2">
 <h2>Study of the Effect of Arthroscopic Knee Surgery</h2>
+<p>About 700,000 arthroscopic partial meniscectomies performed annually in the United States</p>
 <ul>
-<li class="fragment">About 700,000 arthroscopic partial meniscectomies performed annually in the United States</li>
-</ul>
-<ul>
-<li class="fragment">Are they effective?</li>
-</ul>
-<ul>
-<li class="fragment">Is an experiment feasible?</li>
-</ul>
-<ul>
-<li class="fragment">Design?</li>
-</ul>
-</section>
-<section id="arthroscopic-knee-surgery-study-contd" class="slide level2">
-<h2>Arthroscopic Knee Surgery Study (cont’d)</h2>
-<ul>
-<li class="fragment">“Arthroscopic Partial Meniscectomy versus Sham Surgery for a Degenerative Meniscal Tear”</li>
-</ul>
-<ul>
-<li class="fragment">Does the evidence suggest that arthroscopic surgery is more effective than a sham surgery?</li>
-</ul>
-<ul>
-<li class="fragment">http://www.nejm.org/doi/pdf/10.1056/NEJMoa1305189</li>
+<li><p>Are they effective?</p></li>
+<li><p>Is an experiment feasible?</p></li>
+<li><p>How to design a study to assess its effectiveness?</p></li>
 </ul>
 </section>
 <section id="principles-of-statistical-design-of-experiments" class="slide level2">
 <h2>Principles of Statistical Design of Experiments</h2>
 <ol type="1">
-<li><p>Random allocation into experimental groups</p></li>
+<li><p>Random allocation into experimental groups</p>
+<ul>
+<li>Eliminate confounding factors by <strong>randomization</strong></li>
+</ul></li>
 <li><p>Control the effect of outside variables</p>
 <ul>
 <li>A <strong>control group</strong> is a group of subjects from which the treatment of interest is withheld.</li>
 </ul></li>
 <li><p>Replication on many subjects to reduce chance variation</p></li>
 </ol>
+</section>
+<section id="control-by-blinding" class="slide level2">
+<h2>Control by blinding</h2>
+<!-- Use knee surgery study to motivate additional control mechanisms-->
+<ul>
+<li><p><strong>Placebo</strong> a fake treatment that simulates the idea of a treatment of interest</p>
+<ul>
+<li>Placebo effect: people experience the effect they think they should be experiencing, even if they aren’t actually receiving the treatment</li>
+</ul></li>
+<li><p><strong>Double-blind study</strong> neither the participant nor the evaluator knows the participant’s treatment</p></li>
+</ul>
+</section>
+<section id="arthroscopic-knee-surgery-study-contd" class="slide level2 build">
+<h2>Arthroscopic Knee Surgery Study (cont’d)</h2>
+<ul>
+<li><p><a href="http://www.nejm.org/doi/pdf/10.1056/NEJMoa1305189">“Arthrosscopic Partial Meniscectomy versus Sham Surgery for a Degenerative Meniscal Tear”</a></p></li>
+<li><p>Does the evidence suggest that arthroscopic surgery is more effective than a sham surgery?</p></li>
+</ul>
 </section>
 <section id="randomized-experiment-in-practice" class="slide level2">
 <h2>Randomized Experiment in Practice</h2>
@@ -552,9 +548,7 @@ Eric Nordmoe
 </section>
 <section id="does-a-small-amount-of-exercise-raise-pulse-rates" class="slide level2 smaller">
 <h2>Does a Small Amount of Exercise Raise Pulse Rates?</h2>
-<blockquote>
 <p>Is just 10 seconds of exercise enough to increase pulse rates measurably?</p>
-</blockquote>
 <ul>
 <li><p><strong>Treatment groups</strong>: (1) seated or (2) exercise 10 seconds</p></li>
 <li><p>Randomly divide the class into two groups</p></li>
@@ -611,17 +605,14 @@ Eric Nordmoe
 <span id="cb4-4"><a href="#cb4-4"></a>newlist[<span class="dv">16</span><span class="sc">:</span><span class="dv">30</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="more-control-mechanisms" class="slide level2">
-<h2>More Control Mechanisms</h2>
-<!-- Use knee surgery study to motivate additional control mechanisms-->
-<ul>
-<li><p><strong>Placebo</strong> a fake treatment that simulates the idea of a treatment of interest</p>
-<ul>
-<li>Placebo effect: people experience the effect they think they should be experiencing, even if they aren’t actually receiving the treatment</li>
-</ul></li>
-<li><p><strong>Double-blind study</strong> neither the participant nor the evaluator knows the participant’s treatment</p></li>
-</ul>
-</section>
+<section id="pulse-data-experiment" class="slide level2">
+<h2>Pulse Data Experiment</h2>
+<p>Access the survey and report your results:</p>
+<p><img data-src="figs/pulse_rate_QR.png" alt="QR code" width="400"></p>
+
+<aside><div>
+<p>You may opt out if you prefer to not participate.</p>
+</div></aside></section>
 <section id="two-types-of-randomized-experiments" class="slide level2 build">
 <h2>Two Types of Randomized Experiments</h2>
 <ol type="1">
@@ -631,16 +622,14 @@ Eric Nordmoe
 </section>
 <section id="matched-pairs" class="slide level2">
 <h2>Matched Pairs</h2>
+<p><strong>Matched pairs</strong> designs:</p>
 <ul>
-<li><p><strong>Matched pairs</strong> designs:</p>
-<ol type="a">
 <li><p>Each participant is their own control (pre-vs-post) OR</p></li>
 <li><p>Participants are paired and a randomly selected member of each pair gets each treatment OR</p></li>
 <li><p>Each participant gets both treatments in a random order</p></li>
-</ol></li>
 </ul>
 </section>
-<section id="a-matched-pairs-study-gatorade-and-running" class="slide level2 smaller">
+<section id="a-matched-pairs-study-gatorade-and-running" class="slide level2">
 <h2>A Matched Pairs Study: Gatorade and Running</h2>
 <ul>
 <li>Does drinking Gatorade make you run faster?</li>

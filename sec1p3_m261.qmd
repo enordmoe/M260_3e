@@ -50,9 +50,7 @@ Stephen Jay Gould
 
 ## Hans Rosling- The Joy of Stats
 
-[Smoking and Lung Cancer]( https://www.youtube.com/embed/6RzDMEW5omc)
-
-
+[Smoking and Lung Cancer](https://www.youtube.com/embed/6RzDMEW5omc)
 
 ## Association is not Causation! {.build}
 
@@ -112,39 +110,43 @@ A [2006 BMJ study](https://www.bmj.com/content/332/7546/883) found no link betwe
 
 $\implies$ Observational study or experiment?
 
-## Randomization
-
-Eliminate confounding factors by **randomization**
-
--   Randomly assign values of the explanatory variable in an experiment.
-
 ## Study of the Effect of Arthroscopic Knee Surgery
 
-> -   About 700,000 arthroscopic partial meniscectomies performed annually in the United States
+About 700,000 arthroscopic partial meniscectomies performed annually in the United States
 
-> -   Are they effective?
+-   Are they effective?
 
-> -   Is an experiment feasible?
+-   Is an experiment feasible?
 
-> -   Design?
-
-## Arthroscopic Knee Surgery Study (cont'd)
-
-> -   "Arthroscopic Partial Meniscectomy versus Sham Surgery for a Degenerative Meniscal Tear"
-
-> -   Does the evidence suggest that arthroscopic surgery is more effective than a sham surgery?
-
-> -   http://www.nejm.org/doi/pdf/10.1056/NEJMoa1305189
+-   How to design a study to assess its effectiveness?
 
 ## Principles of Statistical Design of Experiments
 
 1.  Random allocation into experimental groups
+
+    -   Eliminate confounding factors by **randomization**
 
 2.  Control the effect of outside variables
 
     -   A **control group** is a group of subjects from which the treatment of interest is withheld.
 
 3.  Replication on many subjects to reduce chance variation
+
+## Control by blinding
+
+<!-- Use knee surgery study to motivate additional control mechanisms-->
+
+-   **Placebo** a fake treatment that simulates the idea of a treatment of interest
+
+    -   Placebo effect: people experience the effect they think they should be experiencing, even if they aren’t actually receiving the treatment
+
+-   **Double-blind study** neither the participant nor the evaluator knows the participant's treatment
+
+## Arthroscopic Knee Surgery Study (cont'd) {.build}
+
+-   ["Arthrosscopic Partial Meniscectomy versus Sham Surgery for a Degenerative Meniscal Tear"](http://www.nejm.org/doi/pdf/10.1056/NEJMoa1305189)
+
+-   Does the evidence suggest that arthroscopic surgery is more effective than a sham surgery?
 
 ## Randomized Experiment in Practice
 
@@ -160,7 +162,7 @@ Eliminate confounding factors by **randomization**
 
 ## Does a Small Amount of Exercise Raise Pulse Rates? {.smaller}
 
-> Is just 10 seconds of exercise enough to increase pulse rates measurably?
+Is just 10 seconds of exercise enough to increase pulse rates measurably?
 
 -   **Treatment groups**: (1) seated or (2) exercise 10 seconds
 
@@ -205,15 +207,15 @@ newlist[1:15,]
 newlist[16:30,]
 ```
 
-## More Control Mechanisms
+## Pulse Data Experiment
 
-<!-- Use knee surgery study to motivate additional control mechanisms-->
+Access the survey and report your results:
 
--   **Placebo** a fake treatment that simulates the idea of a treatment of interest
+![](figs/pulse_rate_QR.png){fig-alt="QR code" width="400"}
 
-    -   Placebo effect: people experience the effect they think they should be experiencing, even if they aren’t actually receiving the treatment
-
--   **Double-blind study** neither the participant nor the evaluator knows the participant's treatment
+::: aside
+You may opt out if you prefer to not participate.
+:::
 
 ## Two Types of Randomized Experiments {.build}
 
@@ -223,15 +225,15 @@ newlist[16:30,]
 
 ## Matched Pairs
 
--   **Matched pairs** designs:
+**Matched pairs** designs:
 
-    a.  Each participant is their own control (pre-vs-post) OR
+-   Each participant is their own control (pre-vs-post) OR
 
-    b.  Participants are paired and a randomly selected member of each pair gets each treatment OR
+-   Participants are paired and a randomly selected member of each pair gets each treatment OR
 
-    c.  Each participant gets both treatments in a random order
+-   Each participant gets both treatments in a random order
 
-## A Matched Pairs Study: Gatorade and Running  {.smaller}
+## A Matched Pairs Study: Gatorade and Running
 
 -   Does drinking Gatorade make you run faster?
 
