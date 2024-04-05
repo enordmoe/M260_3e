@@ -76,6 +76,8 @@ A third variable that is associated with *both* the explanatory variable and the
 
 -   The article headline: ["Huge New Study Shows Why Exercise Should Be The First Choice in Treating Depression"](https://www.sciencealert.com/huge-new-study-shows-why-exercise-should-be-the-first-choice-in-treating-depression)
 
+-   The underlying study: ["Effectiveness of physical activity interventions for improving depression, anxiety and distress: an overview of systematic reviews"](https://bjsm.bmj.com/content/57/18/1203)
+
 -   Is the headline valid? Why or why not?
 
 ## Dental X-rays and Cancer
@@ -94,7 +96,7 @@ A third variable that is associated with *both* the explanatory variable and the
 
 ## Correlation and Causation
 
-Do you agree? Or can you identify counfounding variables?
+Do you agree? Or can you identify confounding variables?
 
 ::: incremental
 1.  **Vitamin C and Colds:** "Since people who take vitamin C supplements seem to get fewer colds, taking vitamin C must prevent colds."
@@ -103,12 +105,6 @@ Do you agree? Or can you identify counfounding variables?
 
 3.  **Organic Food and Health:** "People who eat organic food are healthier, so organic food must be the cause of better health."
 :::
-
-## Cell Phones and Brain Tumors
-
-A [2006 BMJ study](https://www.bmj.com/content/332/7546/883) found no link between frequency of use of cell phones and brain tumors.
-
-$\implies$ Observational study or experiment?
 
 ## Study of the Effect of Arthroscopic Knee Surgery
 
@@ -178,12 +174,21 @@ Is just 10 seconds of exercise enough to increase pulse rates measurably?
 
     -   Compute response=change in pulse (after-before)
 
-## Using R to Randomly Assign Treatments
+## Using R to Randomly Assign Treatments {.smaller}
 
 -   Randomly assign students in **classlist**
 
-```{r}
+```{r, eval=F}
 library(mosaic)
+classlist<- data.frame(names =c("Annalise Bailey", "Ethan Barnes", "Styx Bonebrake", "Yvette Boyse-Peacor", 
+"Jay Breck", "Amaia Cadenas", "Isabel Chiang", "Logan Coller", 
+"MacKenzie Cruz", "Lareen Darwesh", "Lucas De Almeida", "Sofia Fleming", 
+"Wes Grinwis", "Cassie Grotelueschen", "Celina Haase", "Luke Johnson-Sears", 
+"Huin Lee", "Grace Lounds", "Madi Magda", "Andrew Mallon", "Cedric May", 
+"Ameera Mirza", "Allie Nutt", "Astrid Parker", "Mia Pascuzzi", 
+"Sofie Santos", "Tobin Schiller", "Maddy Vrba", "Emerson Wesselhoff", 
+"Shun Yonehara")
+)
 head(classlist)
 ```
 
@@ -201,9 +206,9 @@ head(newlist)
 -   Assign the first half to group 1 and second half to group 2,...\
 
 ```{r,eval=F}
-# Group 1
+# Group 1: Run in place for 10 seconds
 newlist[1:15,]
-# Group 2
+# Group 2: Remain Seated
 newlist[16:30,]
 ```
 
