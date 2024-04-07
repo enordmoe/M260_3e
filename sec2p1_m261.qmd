@@ -19,33 +19,31 @@ library(Lock5Data)
 library(palmerpenguins)
 ```
 
-
 ## Descriptive Statistics
 
-* To make sense of data, we need to **summarize and visualize** it.
+-   To make sense of data, we need to **summarize and visualize** it.
 
-* **Descriptive statistics** summarizing and visualizing variables and relationships between variables.
+-   **Descriptive statistics** summarizing and visualizing variables and relationships between variables.
 
-* Different methods are used for categorical and quantitative variables.
-
-# Section 2.1 Categorical Variables
-
+-   Different methods are used for categorical and quantitative variables.
 
 ## Summarizing Single Categorical Variables {.smaller}
 
 Summary statistics
 
-* **Frequency table** table showing number of cases in each category
+-   **Frequency table** table showing number of cases in each category
 
-* **Proportion** number in category/total sample size
+-   **Proportion** number in category/total sample size
 
-* **Relative frequency table** table showing proportion of cases in each category
+-   **Relative frequency table** table showing proportion of cases in each category
+
+. . .
 
 Visualizations
 
-* **Bar chart** height of the bar shows the number (or proportion or percent) of cases in each category
+-   **Bar chart** height of the bar shows the number (or proportion or percent) of cases in each category
 
-* **Pie chart** relative area represents proportion in each category (less preferred)
+-   **Pie chart** relative area represents proportion in each category (less preferred)
 
 ## Frequency Table of Counts
 
@@ -56,38 +54,38 @@ tally(~ LarkOwl, data = SleepStudy)
 ## Relative Frequency Table
 
 ```{r}
-tally(~ LarkOwl, format = "proportion", margins = TRUE, data = SleepStudy)
+tally(~ LarkOwl, format = "proportion", margins = TRUE,
+      data = SleepStudy)
 ```
 
 ## Bar Chart of Single Variable
+
 ```{r}
 gf_bar(~ LarkOwl, data = SleepStudy)
 ```
-
 
 ## Summarizing Two Categorical Variables: Two-Way Tables
 
 Frequency table used to look at the relationship between two categorical variables
 
-* Variable 1 categories: rows
-* Variable 2 categories: columns
-* Cell counts (frequencies): number of cases in corresponding row and column categories
-
-
+-   Variable 1 categories: rows
+-   Variable 2 categories: columns
+-   Cell counts (frequencies): number of cases in corresponding row and column categories
 
 ## Two-Way Tables Example
 
-Cross classify two categorical variables to investigate theire relationship:
+Cross classify two categorical variables to investigate their relationship:
 
 ```{r}
 tally(~ EarlyClass + LarkOwl, margins = TRUE,
       data = SleepStudy)
 ```
 
-
-* What proportion of students with early classes are Larks?
-* What proportion of students without early classes are Larks?
-* What proportion of Owls have early classes?
+::: incremental
+-   What proportion of students have early classes and are Larks?
+-   What proportion of students with early classes are Larks?
+-   What proportion of Larks have early classes?
+:::
 
 ## Two-Way Tables Example with Proportions
 
@@ -96,40 +94,50 @@ tally(~ EarlyClass + LarkOwl, margins = TRUE,
       format = "proportion", data = SleepStudy)
 ```
 
-## Two-Way Tables Example with Conditional Proportions
+## Two-Way Tables Example with Conditional Proportions: Version 1 {.smaller}
+
+To compare Larks and Owls:
 
 ```{r}
-tally(~ EarlyClass|LarkOwl, margins = TRUE,
+tally(EarlyClass ~ LarkOwl, margins = TRUE,
       format = "proportion", data = SleepStudy)
 ```
 
-$\Rightarrow$ Conditional proportions are useful for comparing groups but be sure to compute the proportions in the correct direction.
 
+
+## Two-Way Tables Example with Conditional Proportions: Version 2 {.smaller}
+
+To compare students with and without early classes:
+
+
+```{r}
+tally(LarkOwl ~ EarlyClass, margins = TRUE,
+      format = "proportion", data = SleepStudy)
+```
 
 ## Segmented Bar Charts for Two Variables: The Wrong Way {.smaller}
 
-*  **Segmented bar chart** graphical display of a two-way table of counts 
+-   **Segmented bar chart** graphical display of a two-way table of counts
 
 ```{r,fig.height = 3}
-gf_bar(~ LarkOwl,fill = ~ EarlyClass, data = SleepStudy)
+gf_bar(~ LarkOwl, fill = ~ EarlyClass, data = SleepStudy)
 ```
 
-* Question: Why didn't `fill = ~ EarlyClass` have any effect?
+-  Question: Why didn't `fill = ~ EarlyClass` have any effect?
 
-. . .
-* Answer: It's coded as a 0-1 variable.
+. . . 
 
-## Segmented Bar Charts for Two Variables: The Right Way
+-  Answer: It's coded as a 0-1 variable.
 
-*  **Segmented bar chart** graphical display of a two-way table of counts 
+## Segmented Bar Charts for Two Variables: The Right Way {.smaller}
+
+-   **Segmented bar chart** graphical display of a two-way table of counts
 
 Note: We use `factor()` to make R treat EarlyClass as a categorical variable.
-
 
 ```{r,fig.height = 2.5}
 gf_bar(~ LarkOwl,fill = ~ factor(EarlyClass), data = SleepStudy)
 ```
-
 
 ## Comparative Stacked Bar Charts Comparing Proportions
 
@@ -138,10 +146,9 @@ gf_props(~ LarkOwl, data = SleepStudy,
          fill = ~ factor(EarlyClass), position = "stack")
 ```
 
-
 ## Side-by-Side Bar Charts
 
-* **Side-by-side** height of each bar is the number of the corresponding cell in the two-way table
+-   **Side-by-side** height of each bar is the number of the corresponding cell in the two-way table
 
 ```{r, fig.height = 3}
 gf_bar(~ LarkOwl, data = SleepStudy,
@@ -150,36 +157,17 @@ gf_bar(~ LarkOwl, data = SleepStudy,
 
 ## Side-by-Side Bar Charts Comparing Proportions
 
-* **Side-by-side** height of each bar is now 1 to allow comparison of proportions within each LarkOwl group: 
+-   **Side-by-side** height of each bar is now 1 to allow comparison of proportions within each LarkOwl group:
 
 ```{r, fig.height = 3}
 gf_props(~ LarkOwl, data = SleepStudy,
        fill = ~ factor(EarlyClass), position = "fill")
 ```
 
-## Aesthetic Mapping {.smaller}
-In case you're interested...  
+## Summary  {.smaller}
 
-* In **ggformula**, *aesthetic* means "something you can see"  
+1. **Frequency Tables and Proportions**: Summarize single categorical variables using frequency tables to count cases in each category, and calculate proportions to understand the relative size of each category.
 
-* Examples include:  
-    + position (i.e., on the x and y axes)  
-    + color ("outside" color)  
-    + fill ("inside" color)
-    + shape (of points)  
-    + linetype  
-    + size  
-    
-* Each type of `gf_plot()` accepts only a subset of all aesthetics.  
+2. **Two-Way Tables**: Explore relationships between two categorical variables using two-way tables, which cross-classify variables to investigate how they are related and to calculate conditional proportions to compare categories.
 
-## End of Warning Section
-
-* Like R, **ggformula** is vast. I do not expect you to master all these advanced topics but want to give you a glimpse of what can be done.  
-
-* The package **ggformula** is a modified version of **ggplot2** to be used with the **mosaic** package. Be careful googling for help as there are many packages that can be used to create graphs in R and it's easy to get confused if you simply google or ask AI how to do something.
-
-
-
-
-
-
+3. **Bar Charts for Visualization**: Visualize categorical data with bar charts, including segmented bar charts to display two-way table counts, and side-by-side bar charts to compare proportions within categories.

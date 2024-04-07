@@ -412,11 +412,6 @@ Eric Nordmoe
 <li><p>Different methods are used for categorical and quantitative variables.</p></li>
 </ul>
 </section>
-<section>
-<section id="section-2.1-categorical-variables" class="title-slide slide level1 center">
-<h1>Section 2.1 Categorical Variables</h1>
-
-</section>
 <section id="summarizing-single-categorical-variables" class="slide level2 smaller">
 <h2>Summarizing Single Categorical Variables</h2>
 <p>Summary statistics</p>
@@ -425,11 +420,13 @@ Eric Nordmoe
 <li><p><strong>Proportion</strong> number in category/total sample size</p></li>
 <li><p><strong>Relative frequency table</strong> table showing proportion of cases in each category</p></li>
 </ul>
+<div class="fragment">
 <p>Visualizations</p>
 <ul>
 <li><p><strong>Bar chart</strong> height of the bar shows the number (or proportion or percent) of cases in each category</p></li>
 <li><p><strong>Pie chart</strong> relative area represents proportion in each category (less preferred)</p></li>
 </ul>
+</div>
 </section>
 <section id="frequency-table-of-counts" class="slide level2">
 <h2>Frequency Table of Counts</h2>
@@ -445,7 +442,8 @@ Eric Nordmoe
 <section id="relative-frequency-table" class="slide level2">
 <h2>Relative Frequency Table</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">tally</span>(<span class="sc">~</span> LarkOwl, <span class="at">format =</span> <span class="st">"proportion"</span>, <span class="at">margins =</span> <span class="cn">TRUE</span>, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">tally</span>(<span class="sc">~</span> LarkOwl, <span class="at">format =</span> <span class="st">"proportion"</span>, <span class="at">margins =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-2"><a href="#cb3-2"></a>      <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>LarkOwl
      Lark   Neither       Owl     Total 
@@ -471,7 +469,7 @@ Eric Nordmoe
 </section>
 <section id="two-way-tables-example" class="slide level2">
 <h2>Two-Way Tables Example</h2>
-<p>Cross classify two categorical variables to investigate theire relationship:</p>
+<p>Cross classify two categorical variables to investigate their relationship:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">tally</span>(<span class="sc">~</span> EarlyClass <span class="sc">+</span> LarkOwl, <span class="at">margins =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb6-2"><a href="#cb6-2"></a>      <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -483,11 +481,13 @@ EarlyClass Lark Neither Owl Total
      Total   41     163  49   253</code></pre>
 </div>
 </div>
+<div>
 <ul>
-<li>What proportion of students with early classes are Larks?</li>
-<li>What proportion of students without early classes are Larks?</li>
-<li>What proportion of Owls have early classes?</li>
+<li class="fragment">What proportion of students have early classes and are Larks?</li>
+<li class="fragment">What proportion of students with early classes are Larks?</li>
+<li class="fragment">What proportion of Larks have early classes?</li>
 </ul>
+</div>
 </section>
 <section id="two-way-tables-example-with-proportions" class="slide level2">
 <h2>Two-Way Tables Example with Proportions</h2>
@@ -503,10 +503,11 @@ EarlyClass       Lark    Neither        Owl      Total
 </div>
 </div>
 </section>
-<section id="two-way-tables-example-with-conditional-proportions" class="slide level2">
-<h2>Two-Way Tables Example with Conditional Proportions</h2>
+<section id="two-way-tables-example-with-conditional-proportions-version-1" class="slide level2 smaller">
+<h2>Two-Way Tables Example with Conditional Proportions: Version 1</h2>
+<p>To compare Larks and Owls:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">tally</span>(<span class="sc">~</span> EarlyClass<span class="sc">|</span>LarkOwl, <span class="at">margins =</span> <span class="cn">TRUE</span>,</span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">tally</span>(EarlyClass <span class="sc">~</span> LarkOwl, <span class="at">margins =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb10-2"><a href="#cb10-2"></a>      <span class="at">format =</span> <span class="st">"proportion"</span>, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          LarkOwl
@@ -516,7 +517,22 @@ EarlyClass      Lark   Neither       Owl
      Total 1.0000000 1.0000000 1.0000000</code></pre>
 </div>
 </div>
-<p><span class="math inline">\(\Rightarrow\)</span> Conditional proportions are useful for comparing groups but be sure to compute the proportions in the correct direction.</p>
+</section>
+<section id="two-way-tables-example-with-conditional-proportions-version-2" class="slide level2 smaller">
+<h2>Two-Way Tables Example with Conditional Proportions: Version 2</h2>
+<p>To compare students with and without early classes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">tally</span>(LarkOwl <span class="sc">~</span> EarlyClass, <span class="at">margins =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-2"><a href="#cb12-2"></a>      <span class="at">format =</span> <span class="st">"proportion"</span>, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         EarlyClass
+LarkOwl           0         1
+  Lark    0.1764706 0.1547619
+  Neither 0.6000000 0.6666667
+  Owl     0.2235294 0.1785714
+  Total   1.0000000 1.0000000</code></pre>
+</div>
+</div>
 </section>
 <section id="segmented-bar-charts-for-two-variables-the-wrong-way" class="slide level2 smaller">
 <h2>Segmented Bar Charts for Two Variables: The Wrong Way</h2>
@@ -524,91 +540,70 @@ EarlyClass      Lark   Neither       Owl
 <li><strong>Segmented bar chart</strong> graphical display of a two-way table of counts</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">gf_bar</span>(<span class="sc">~</span> LarkOwl,<span class="at">fill =</span> <span class="sc">~</span> EarlyClass, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">gf_bar</span>(<span class="sc">~</span> LarkOwl, <span class="at">fill =</span> <span class="sc">~</span> EarlyClass, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="sec2p1_m261_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"><ul>
+<img data-src="sec2p1_m261_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"><ul>
 <li>Question: Why didn’t <code>fill = ~ EarlyClass</code> have any effect?</li>
 </ul>
-<p>. . . * Answer: It’s coded as a 0-1 variable.</p>
+<div class="fragment">
+<ul>
+<li>Answer: It’s coded as a 0-1 variable.</li>
+</ul>
+</div>
 </section>
-<section id="segmented-bar-charts-for-two-variables-the-right-way" class="slide level2">
+<section id="segmented-bar-charts-for-two-variables-the-right-way" class="slide level2 smaller">
 <h2>Segmented Bar Charts for Two Variables: The Right Way</h2>
 <ul>
 <li><strong>Segmented bar chart</strong> graphical display of a two-way table of counts</li>
 </ul>
 <p>Note: We use <code>factor()</code> to make R treat EarlyClass as a categorical variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">gf_bar</span>(<span class="sc">~</span> LarkOwl,<span class="at">fill =</span> <span class="sc">~</span> <span class="fu">factor</span>(EarlyClass), <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="sec2p1_m261_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section></section>
-<section>
-<section id="a-warning" class="title-slide slide level1 center" data-background-color="aquamarine">
-<h1>A Warning</h1>
-<p>The next two slide types involve more advanced graphics. There are easier ways to make these but not using the <code>ggformula</code> package we are using. The <code>ggformula</code> package is powerful and excellent for publication quality graphics.</p>
-</section>
-<section id="comparative-stacked-bar-charts-comparing-proportions" class="slide level2">
-<h2>Comparative Stacked Bar Charts Comparing Proportions</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">gf_props</span>(<span class="sc">~</span> LarkOwl, <span class="at">data =</span> SleepStudy,</span>
-<span id="cb14-2"><a href="#cb14-2"></a>         <span class="at">fill =</span> <span class="sc">~</span> <span class="fu">factor</span>(EarlyClass), <span class="at">position =</span> <span class="st">"stack"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">gf_bar</span>(<span class="sc">~</span> LarkOwl,<span class="at">fill =</span> <span class="sc">~</span> <span class="fu">factor</span>(EarlyClass), <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="sec2p1_m261_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<section id="comparative-stacked-bar-charts-comparing-proportions" class="slide level2">
+<h2>Comparative Stacked Bar Charts Comparing Proportions</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">gf_props</span>(<span class="sc">~</span> LarkOwl, <span class="at">data =</span> SleepStudy,</span>
+<span id="cb16-2"><a href="#cb16-2"></a>         <span class="at">fill =</span> <span class="sc">~</span> <span class="fu">factor</span>(EarlyClass), <span class="at">position =</span> <span class="st">"stack"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="sec2p1_m261_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
 <section id="side-by-side-bar-charts" class="slide level2">
 <h2>Side-by-Side Bar Charts</h2>
 <ul>
 <li><strong>Side-by-side</strong> height of each bar is the number of the corresponding cell in the two-way table</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">gf_bar</span>(<span class="sc">~</span> LarkOwl, <span class="at">data =</span> SleepStudy,</span>
-<span id="cb15-2"><a href="#cb15-2"></a>       <span class="at">fill =</span> <span class="sc">~</span> <span class="fu">factor</span>(EarlyClass), <span class="at">position =</span> <span class="st">"dodge"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">gf_bar</span>(<span class="sc">~</span> LarkOwl, <span class="at">data =</span> SleepStudy,</span>
+<span id="cb17-2"><a href="#cb17-2"></a>       <span class="at">fill =</span> <span class="sc">~</span> <span class="fu">factor</span>(EarlyClass), <span class="at">position =</span> <span class="st">"dodge"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="sec2p1_m261_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<img data-src="sec2p1_m261_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
 <section id="side-by-side-bar-charts-comparing-proportions" class="slide level2">
 <h2>Side-by-Side Bar Charts Comparing Proportions</h2>
 <ul>
 <li><strong>Side-by-side</strong> height of each bar is now 1 to allow comparison of proportions within each LarkOwl group:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">gf_props</span>(<span class="sc">~</span> LarkOwl, <span class="at">data =</span> SleepStudy,</span>
-<span id="cb16-2"><a href="#cb16-2"></a>       <span class="at">fill =</span> <span class="sc">~</span> <span class="fu">factor</span>(EarlyClass), <span class="at">position =</span> <span class="st">"fill"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">gf_props</span>(<span class="sc">~</span> LarkOwl, <span class="at">data =</span> SleepStudy,</span>
+<span id="cb18-2"><a href="#cb18-2"></a>       <span class="at">fill =</span> <span class="sc">~</span> <span class="fu">factor</span>(EarlyClass), <span class="at">position =</span> <span class="st">"fill"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="sec2p1_m261_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
-<section id="aesthetic-mapping" class="slide level2">
-<h2>Aesthetic Mapping</h2>
-<p>In case you’re interested…</p>
-<ul>
-<li><p>In <strong>ggformula</strong>, <em>aesthetic</em> means “something you can see”</p></li>
-<li><p>Examples include:</p>
-<ul>
-<li>position (i.e., on the x and y axes)<br>
-</li>
-<li>color (“outside” color)<br>
-</li>
-<li>fill (“inside” color)</li>
-<li>shape (of points)<br>
-</li>
-<li>linetype<br>
-</li>
-<li>size</li>
-</ul></li>
-<li><p>Each type of <code>gf_plot()</code> accepts only a subset of all aesthetics.</p></li>
-</ul>
-</section>
-<section id="end-of-warning-section" class="slide level2">
-<h2>End of Warning Section</h2>
-<ul>
-<li><p>Like R, <strong>ggformula</strong> is vast. I do not expect you to master all these advanced topics but want to give you a glimpse of what can be done.</p></li>
-<li><p>The package <strong>ggformula</strong> is a modified version of <strong>ggplot2</strong> to be used with the <strong>mosaic</strong> package. Be careful googling for help as there are many packages that can be used to create graphs in R and it’s easy to get confused if you simply google or ask AI how to do something.</p></li>
-</ul>
+<img data-src="sec2p1_m261_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
+<section id="summary" class="slide level2 smaller">
+<h2>Summary</h2>
+<ol type="1">
+<li><p><strong>Frequency Tables and Proportions</strong>: Summarize single categorical variables using frequency tables to count cases in each category, and calculate proportions to understand the relative size of each category.</p></li>
+<li><p><strong>Two-Way Tables</strong>: Explore relationships between two categorical variables using two-way tables, which cross-classify variables to investigate how they are related and to calculate conditional proportions to compare categories.</p></li>
+<li><p><strong>Bar Charts for Visualization</strong>: Visualize categorical data with bar charts, including segmented bar charts to display two-way table counts, and side-by-side bar charts to compare proportions within categories.</p></li>
+</ol>
 <div class="footer footer-default">
 
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
