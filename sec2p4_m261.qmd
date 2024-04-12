@@ -22,25 +22,11 @@ library(palmerpenguins)
 
 ## Agenda
 
+-   One more visual display: the boxplot
 
-* One more visual display: the boxplot
+-   Investigating relationships between quantitative and categorical relationships
 
-* Investigating relationships between quantitative and categorical relationships
-   + Comparing quantitative variables across groups
-   
-
-
-## Outliers
-
--   Often best identified using judgement by inspection of a visual data display.
-
--   **Rule of Thumb** suspected outliers are data values more than 1.5 IQRs beyond the quartiles
-
--   A data value is a **suspected outlier** if it is
-
-    -   Smaller than the **Lower Fence**= $Q_1$ - 1.5 (IQR)
-
-    -   Greater than the **Upper Fence**= $Q_3$ + 1.5 (IQR)
+    -   Comparing quantitative variables across groups
 
 
 ## Boxplot
@@ -66,29 +52,54 @@ library(palmerpenguins)
 **Note:** Use side-by-side boxes to compare sub-groups.
 
 
-## Boxplot example comparing groups: Wrong Way
+## Boxplot example comparing groups: Vertical
 
-```{r,fig.height=3.5}
-gf_boxplot(Calories ~ PriorSmoke, data = NutritionStudy)
+```{r}
+gf_boxplot(Quetelet ~ Smoke, data = NutritionStudy)
 ```
 
-## Boxplot example comparing groups: Right Way
+## Boxplot example comparing groups: Horizontal
 
-```{r,fig.height=3.5}
-gf_boxplot(Calories ~ factor(PriorSmoke), data = NutritionStudy)
+```{r}
+gf_boxplot(Smoke ~ Quetelet, data = NutritionStudy)
 ```
+## Outliers
 
-## Advanced Boxplot for RStudio Masters
+-   Often best identified using judgement by inspection of a visual data display.
 
-```{r,fig.height=2}
-gf_boxplot(Calories ~ factor(PriorSmoke), data = NutritionStudy,
-           outlier.shape = NA) %>%
-  gf_jitter(width = .1, alpha = .4) %>%
-  gf_refine(coord_flip())
+-   **Rule of Thumb** suspected outliers are data values more than 1.5 IQRs beyond the quartiles
+
+-   A data value is a **suspected outlier** if it is
+
+    -   Smaller than the **Lower Fence**= $Q_1$ - 1.5 (IQR)
+
+    -   Greater than the **Upper Fence**= $Q_3$ + 1.5 (IQR)
+
+# Your turn: Investigate Quetelet (BMI) by Prior Smoking Status (PriorSmoke) {background-color="#EA6820"}
+
+
+## Advanced Boxplot for RStudio Masters {.smaller}
+
+```{r,fig.height=3}
+gf_boxplot(factor(PriorSmoke) ~ Quetelet, data = NutritionStudy,
+           outlier.shape = NA, ylab = "Prior Smoking Status") %>%
+  gf_jitter(height = .1, alpha = .4) 
 ```
 
 -   Overlay points using `jitter` on top of boxes to show more detail
 -   `alpha` used to make points transparent (between 0 and 1)
+-   Add y label using `ylab`
+
+## Faceted Histograms: A more detailed comparison
+
+We can get side by side histograms using the vertical bar (`|`) to "condition" on the group variable.
+
+```{r}
+#| output-location: slide
+gf_histogram(~Quetelet | PriorSmoke ~ ., data = NutritionStudy)
+```
+
+
 
 ## Comparing Numerical Statistics
 
@@ -98,7 +109,7 @@ Use `favstats()` to compare numerical statistics for a *quantitative variable* a
 favstats(Calories ~ PriorSmoke, data = NutritionStudy)
 ```
 
-## Quantitative and Categorical Relationships
+## Quantitative and Categorical Relationships {.smaller}
 
 -   Compare the distribution of a quantitative variable across groups determined by the categorical variable(s).
 
@@ -109,3 +120,5 @@ favstats(Calories ~ PriorSmoke, data = NutritionStudy)
 -   Any of the statistics we use for a quantitative variable can be looked at separately for each level of a categorical variable.
 
     -   Often interested in the **difference in means** $=\bar x_1- \bar x_2$
+    
+More [details and examples](https://heroic-horse-92e142.netlify.app/describing_quantitative_variables) in the R Resources on Moodle

@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="sec2p4_m261_files/libs/clipboard/clipboard.min.js"></script>
-<script src="sec2p4_m261_files/libs/quarto-html/tabby.min.js"></script>
-<script src="sec2p4_m261_files/libs/quarto-html/popper.min.js"></script>
-<script src="sec2p4_m261_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="sec2p4_m261_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="sec2p4_m261_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="sec2p4_m261_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="sec2p4_m261_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="CopyOfsec1p3_m261_files/libs/clipboard/clipboard.min.js"></script>
+<script src="CopyOfsec1p3_m261_files/libs/quarto-html/tabby.min.js"></script>
+<script src="CopyOfsec1p3_m261_files/libs/quarto-html/popper.min.js"></script>
+<script src="CopyOfsec1p3_m261_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="CopyOfsec1p3_m261_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="CopyOfsec1p3_m261_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="CopyOfsec1p3_m261_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="CopyOfsec1p3_m261_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Eric Nordmoe">
-  <title>2.4 Outliers, Boxplots, and Quantitative/Categorical Relationships</title>
+  <title>1.3 Experiments and Observational Studies</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="sec2p4_m261_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="sec2p4_m261_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="CopyOfsec1p3_m261_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="CopyOfsec1p3_m261_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -95,14 +95,13 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="sec2p4_m261_files/libs/revealjs/dist/theme/quarto.css">
-  <link rel="stylesheet" href="custom.css">
-  <link href="sec2p4_m261_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="sec2p4_m261_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="sec2p4_m261_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="sec2p4_m261_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="sec2p4_m261_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="sec2p4_m261_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="CopyOfsec1p3_m261_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="CopyOfsec1p3_m261_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="CopyOfsec1p3_m261_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="CopyOfsec1p3_m261_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="CopyOfsec1p3_m261_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="CopyOfsec1p3_m261_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="CopyOfsec1p3_m261_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -393,7 +392,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">2.4 Outliers, Boxplots, and Quantitative/Categorical Relationships</h1>
+  <h1 class="title">1.3 Experiments and Observational Studies</h1>
   <p class="subtitle">Math 261</p>
 
 <div class="quarto-title-authors">
@@ -405,122 +404,259 @@ Eric Nordmoe
 </div>
 
 </section>
-<section id="agenda" class="slide level2">
-<h2>Agenda</h2>
+<section id="two-primary-methods-of-data-collection" class="slide level2 smaller">
+<h2>Two Primary Methods of Data Collection</h2>
+<div>
 <ul>
-<li><p>One more visual display: the boxplot</p></li>
-<li><p>Investigating relationships between quantitative and categorical relationships</p>
+<li class="fragment"><strong>Observational study</strong> observing individuals and measuring variables of interest without attempting to influence responses.
 <ul>
-<li>Comparing quantitative variables across groups</li>
+<li class="fragment">Purpose: descriptive, study of associations<br>
+</li>
+<li class="fragment">Examples: Health surveys, retrospective studies, field observations</li>
+</ul></li>
+<li class="fragment"><strong>Experiment</strong> a study in which the researcher actively controls one or more of the explanatory variables.
+<ul>
+<li class="fragment">Purpose: investigate cause-and-effect relationships<br>
+</li>
+<li class="fragment">Examples: tests of new drugs (<a href="https://www.history.com/this-day-in-history/polio-vaccine-trials-begin">Salk Polio vaccine trial</a>, <a href="https://www.nejm.org/doi/full/10.1056/nejmoa2034577">Covid Vaccine Trials</a> ), classic agricultural experiments (<a href="https://www.rothamsted.ac.uk/long-term-experiments">Rothamsted research</a>)</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="a-quote" class="slide level2">
+<h2>A Quote</h2>
+<blockquote>
+<p>“The invalid assumption that correlation implies cause is probably among the two or three most serious and common errors of human reasoning.”</p>
+</blockquote>
+<p>Stephen Jay Gould</p>
+</section>
+<section id="hans-rosling--the-joy-of-stats" class="slide level2">
+<h2>Hans Rosling- The Joy of Stats</h2>
+<p><a href="https://www.youtube.com/embed/6RzDMEW5omc">Smoking and Lung Cancer</a></p>
+</section>
+<section id="association-is-not-causation" class="slide level2 build">
+<h2>Association is not Causation!</h2>
+<ul>
+<li><p>Two variables are <strong>associated</strong> if values of one variable tend to be related to the values of the other variable.</p></li>
+<li><p>Two variables are <strong>causally associated</strong> if changing the value of one variable influences the value of the other variable.</p>
+<ul>
+<li>Temporal precedence</li>
+<li>Covariation (<span class="math inline">\(A \rightarrow B\)</span>, <span class="math inline">\(\tilde A \rightarrow \tilde B\)</span>)</li>
+<li>No plausible alternative explanation</li>
 </ul></li>
 </ul>
 </section>
-<section id="boxplot" class="slide level2">
-<h2>Boxplot</h2>
+<section id="confounding" class="slide level2">
+<h2>Confounding</h2>
+<p>A third variable that is associated with <em>both</em> the explanatory variable and the response variable is called a <strong>confounding variable</strong></p>
 <ul>
-<li><p>A <strong>boxplot</strong> is</p>
+<li><p>Plausible explanation for an association between explanatory and response variables</p></li>
+<li><p>Prevents determining causation.</p></li>
+</ul>
+<!-- Sketch diagram of Explanatory, Response, and Confounding variable-->
+</section>
+<section id="exercise-and-depression" class="slide level2">
+<h2>Exercise and Depression</h2>
 <ul>
-<li><p>A visual depiction of the 5-number summary.</p></li>
-<li><p>Especially useful for a rough comparison of the center and spread of a variable across several sub-groups.</p></li>
-</ul></li>
+<li><p>The article headline: <a href="https://www.sciencealert.com/huge-new-study-shows-why-exercise-should-be-the-first-choice-in-treating-depression">“Huge New Study Shows Why Exercise Should Be The First Choice in Treating Depression”</a></p></li>
+<li><p>The underlying study: <a href="https://bjsm.bmj.com/content/57/18/1203">“Effectiveness of physical activity interventions for improving depression, anxiety and distress: an overview of systematic reviews”</a></p></li>
+<li><p>Is the headline valid? Why or why not?</p></li>
 </ul>
 </section>
-<section id="constructing-a-boxplot" class="slide level2">
-<h2>Constructing a Boxplot</h2>
-<ol type="1">
-<li><p>Draw a numerical scale appropriate for the data.</p></li>
-<li><p>Draw a box stretching from <span class="math inline">\(Q_1\)</span> to <span class="math inline">\(Q_3\)</span> representing the middle 50% of the data.</p></li>
-<li><p>Divide the box with a line at the median.</p></li>
-<li><p>Draw a line (whisker) from each quartile to the most extreme data value that is <strong>not an outlier</strong>.</p></li>
-<li><p>Identify each outlier individually by plotting with a symbol such as an asterisk or dot.</p></li>
-</ol>
-<p><strong>Note:</strong> Use side-by-side boxes to compare sub-groups.</p>
-</section>
-<section id="boxplot-example-comparing-groups-vertical" class="slide level2">
-<h2>Boxplot example comparing groups: Vertical</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">gf_boxplot</span>(Quetelet <span class="sc">~</span> Smoke, <span class="at">data =</span> NutritionStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="sec2p4_m261_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
-<section id="boxplot-example-comparing-groups-horizontal" class="slide level2">
-<h2>Boxplot example comparing groups: Horizontal</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">gf_boxplot</span>(Smoke <span class="sc">~</span> Quetelet, <span class="at">data =</span> NutritionStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="sec2p4_m261_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
-<section id="outliers" class="slide level2">
-<h2>Outliers</h2>
+<section id="dental-x-rays-and-cancer" class="slide level2">
+<h2>Dental X-rays and Cancer</h2>
 <ul>
-<li><p>Often best identified using judgement by inspection of a visual data display.</p></li>
-<li><p><strong>Rule of Thumb</strong> suspected outliers are data values more than 1.5 IQRs beyond the quartiles</p></li>
-<li><p>A data value is a <strong>suspected outlier</strong> if it is</p>
-<ul>
-<li><p>Smaller than the <strong>Lower Fence</strong>= <span class="math inline">\(Q_1\)</span> - 1.5 (IQR)</p></li>
-<li><p>Greater than the <strong>Upper Fence</strong>= <span class="math inline">\(Q_3\)</span> + 1.5 (IQR)</p></li>
-</ul></li>
+<li><p>The headline: “Dental X-rays Linked to Brain Tumors”</p></li>
+<li><p><a href="http://www.webmd.com/brain/news/20120410/dental-x-rays-linked-brain-tumors">The lead sentence</a>: “Getting frequent dental X-rays appears to increase the risk for a commonly diagnosed brain tumor, a new study finds.”</p></li>
+<li><p>The <a href="http://onlinelibrary.wiley.com/doi/10.1002/cncr.26625/abstract">abstract</a></p></li>
+<li><p>The <a href="https://www.nbcnews.com/video/dental-x-rays-may-raise-risk-of-brain-tumor-44453955975">NBC News Story</a></p></li>
+<li><p>The <a href="https://www.youtube.com/watch?v=kYGkvMwqyys">NutritionFacts.org</a> take on the study.</p></li>
 </ul>
 </section>
 <section>
-<section id="your-turn-investigate-quetelet-bmi-by-prior-smoking-status-priorsmoke" class="title-slide slide level1 center" data-background-color="#EA6820">
-<h1>Your turn: Investigate Quetelet (BMI) by Prior Smoking Status (PriorSmoke)</h1>
+<section id="correlation-does-not-imply-causation-no-matter-how-conclusive-the-results-sound." class="title-slide slide level1 center" data-background-color="aquamarine">
+<h1>Correlation does NOT imply causation… no matter how conclusive the results sound.</h1>
 
 </section>
-<section id="advanced-boxplot-for-rstudio-masters" class="slide level2 smaller">
-<h2>Advanced Boxplot for RStudio Masters</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">gf_boxplot</span>(<span class="fu">factor</span>(PriorSmoke) <span class="sc">~</span> Quetelet, <span class="at">data =</span> NutritionStudy,</span>
-<span id="cb3-2"><a href="#cb3-2"></a>           <span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">ylab =</span> <span class="st">"Prior Smoking Status"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">gf_jitter</span>(<span class="at">height =</span> .<span class="dv">1</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<section id="correlation-and-causation" class="slide level2">
+<h2>Correlation and Causation</h2>
+<p>Do you agree? Or can you identify confounding variables?</p>
+<div>
+<ol type="1">
+<li class="fragment"><p><strong>Vitamin C and Colds:</strong> “Since people who take vitamin C supplements seem to get fewer colds, taking vitamin C must prevent colds.”</p></li>
+<li class="fragment"><p><strong>Exercise and Heart Disease:</strong> “Heart disease rates are lower in people who exercise regularly, so exercise must directly prevent heart disease.”</p></li>
+<li class="fragment"><p><strong>Organic Food and Health:</strong> “People who eat organic food are healthier, so organic food must be the cause of better health.”</p></li>
+</ol>
 </div>
-<img data-src="sec2p4_m261_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"><ul>
-<li>Overlay points using <code>jitter</code> on top of boxes to show more detail</li>
-<li><code>alpha</code> used to make points transparent (between 0 and 1)</li>
-<li>Add y label using <code>ylab</code></li>
+</section>
+<section id="study-of-the-effect-of-arthroscopic-knee-surgery" class="slide level2">
+<h2>Study of the Effect of Arthroscopic Knee Surgery</h2>
+<p>About 700,000 arthroscopic partial meniscectomies performed annually in the United States</p>
+<ul>
+<li><p>Are they effective?</p></li>
+<li><p>Is an experiment feasible?</p></li>
+<li><p>How to design a study to assess its effectiveness?</p></li>
 </ul>
 </section>
-<section id="faceted-histograms-a-more-detailed-comparison" class="slide level2">
-<h2>Faceted Histograms: A more detailed comparison</h2>
-<p>We can get side by side histograms using the vertical bar (<code>|</code>) to “condition” on the group variable.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">gf_histogram</span>(<span class="sc">~</span>Quetelet <span class="sc">|</span> PriorSmoke <span class="sc">~</span> ., <span class="at">data =</span> NutritionStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section>
-<section id="faceted-histograms-a-more-detailed-comparison-output" class="slide level2 output-location-slide"><h2>Faceted Histograms: A more detailed comparison</h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<p><img data-src="sec2p4_m261_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
-</div>
-</div></section><section id="comparing-numerical-statistics" class="slide level2">
-<h2>Comparing Numerical Statistics</h2>
-<p>Use <code>favstats()</code> to compare numerical statistics for a <em>quantitative variable</em> across <em>categories</em> of a categorical variable:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">favstats</span>(Calories <span class="sc">~</span> PriorSmoke, <span class="at">data =</span> NutritionStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  PriorSmoke   min     Q1 median      Q3    max     mean       sd   n missing
-1          1 445.2 1324.0 1631.0 2038.50 4373.6 1713.387 592.1822 157       0
-2          2 659.3 1386.1 1751.1 2290.20 3711.0 1861.184 643.5338 115       0
-3          3 784.4 1435.9 1662.7 2396.95 6662.2 1928.100 989.3975  43       0</code></pre>
-</div>
-</div>
-</section>
-<section id="quantitative-and-categorical-relationships" class="slide level2 smaller">
-<h2>Quantitative and Categorical Relationships</h2>
+<section id="principles-of-statistical-design-of-experiments" class="slide level2">
+<h2>Principles of Statistical Design of Experiments</h2>
+<ol type="1">
+<li><p>Random allocation into experimental groups</p>
 <ul>
-<li><p>Compare the distribution of a quantitative variable across groups determined by the categorical variable(s).</p>
-<ul>
-<li><p>Use side-by-side boxplots for an overview.</p></li>
-<li><p>Use comparative histograms or dotplots to see more detail.</p></li>
+<li>Eliminate confounding factors by <strong>randomization</strong></li>
 </ul></li>
-<li><p>Any of the statistics we use for a quantitative variable can be looked at separately for each level of a categorical variable.</p>
+<li><p>Control the effect of outside variables</p>
 <ul>
-<li>Often interested in the <strong>difference in means</strong> <span class="math inline">\(=\bar x_1- \bar x_2\)</span></li>
+<li>A <strong>control group</strong> is a group of subjects from which the treatment of interest is withheld.</li>
+</ul></li>
+<li><p>Replication on many subjects to reduce chance variation</p></li>
+</ol>
+</section>
+<section id="control-by-blinding" class="slide level2">
+<h2>Control by blinding</h2>
+<!-- Use knee surgery study to motivate additional control mechanisms-->
+<ul>
+<li><p><strong>Placebo</strong> a fake treatment that simulates the idea of a treatment of interest</p>
+<ul>
+<li>Placebo effect: people experience the effect they think they should be experiencing, even if they aren’t actually receiving the treatment</li>
+</ul></li>
+<li><p><strong>Double-blind study</strong> neither the participant nor the evaluator knows the participant’s treatment</p></li>
+</ul>
+</section>
+<section id="arthroscopic-knee-surgery-study-contd" class="slide level2 build">
+<h2>Arthroscopic Knee Surgery Study (cont’d)</h2>
+<ul>
+<li><p><a href="http://www.nejm.org/doi/pdf/10.1056/NEJMoa1305189">“Arthrosscopic Partial Meniscectomy versus Sham Surgery for a Degenerative Meniscal Tear”</a></p></li>
+<li><p>Does the evidence suggest that arthroscopic surgery is more effective than a sham surgery?</p></li>
+</ul>
+</section>
+<section id="randomized-experiment-in-practice" class="slide level2">
+<h2>Randomized Experiment in Practice</h2>
+<ul>
+<li><p>The different levels of the explanatory variable are known as <strong>treatments</strong></p></li>
+<li><p>Randomly divide the units into groups.</p>
+<ul>
+<li>Use R</li>
+</ul></li>
+<li><p>Randomly assign a different treatment to each group.</p></li>
+<li><p>If the treatments are randomly assigned, the <strong>treatment groups</strong> should all look similar.</p></li>
+</ul>
+</section>
+<section id="does-a-small-amount-of-exercise-raise-pulse-rates" class="slide level2 smaller">
+<h2>Does a Small Amount of Exercise Raise Pulse Rates?</h2>
+<p>Is just 10 seconds of exercise enough to increase pulse rates measurably?</p>
+<ul>
+<li><p><strong>Treatment groups</strong>: (1) seated or (2) exercise 10 seconds</p></li>
+<li><p>Randomly divide the class into two groups</p></li>
+<li><p>Obtain baseline pulse rate (beats per 30 seconds)</p></li>
+<li><p>Administer the treatment</p>
+<ul>
+<li>Running in place for 10 seconds.</li>
+</ul></li>
+<li><p>Measure pulse after treatment (rate in beats per 30 seconds)</p>
+<ul>
+<li>Compute response=change in pulse (after-before)</li>
 </ul></li>
 </ul>
-<p>More <a href="https://heroic-horse-92e142.netlify.app/describing_quantitative_variables">details and examples</a> in the R Resources on Moodle</p>
-<div class="footer footer-default">
+</section>
+<section id="using-r-to-randomly-assign-treatments" class="slide level2 smaller">
+<h2>Using R to Randomly Assign Treatments</h2>
+<ul>
+<li>Randomly assign students in <strong>classlist</strong></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(mosaic)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>classlist<span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">names =</span><span class="fu">c</span>(<span class="st">"Annalise Bailey"</span>, <span class="st">"Ethan Barnes"</span>, <span class="st">"Styx Bonebrake"</span>, <span class="st">"Yvette Boyse-Peacor"</span>, </span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="st">"Jay Breck"</span>, <span class="st">"Amaia Cadenas"</span>, <span class="st">"Isabel Chiang"</span>, <span class="st">"Logan Coller"</span>, </span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="st">"MacKenzie Cruz"</span>, <span class="st">"Lareen Darwesh"</span>, <span class="st">"Lucas De Almeida"</span>, <span class="st">"Sofia Fleming"</span>, </span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="st">"Wes Grinwis"</span>, <span class="st">"Cassie Grotelueschen"</span>, <span class="st">"Celina Haase"</span>, <span class="st">"Luke Johnson-Sears"</span>, </span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="st">"Huin Lee"</span>, <span class="st">"Grace Lounds"</span>, <span class="st">"Madi Magda"</span>, <span class="st">"Andrew Mallon"</span>, <span class="st">"Cedric May"</span>, </span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="st">"Ameera Mirza"</span>, <span class="st">"Allie Nutt"</span>, <span class="st">"Astrid Parker"</span>, <span class="st">"Mia Pascuzzi"</span>, </span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="st">"Sofie Santos"</span>, <span class="st">"Tobin Schiller"</span>, <span class="st">"Maddy Vrba"</span>, <span class="st">"Emerson Wesselhoff"</span>, </span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="st">"Shun Yonehara"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10"></a>)</span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="fu">head</span>(classlist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="using-r-to-randomly-assign-treatments-contd" class="slide level2">
+<h2>Using R to Randomly Assign Treatments (cont’d)</h2>
+<ul>
+<li>Use <code>shuffle()</code> function to shuffle rows</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>newlist <span class="ot">&lt;-</span> <span class="fu">shuffle</span>(classlist)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">head</span>(newlist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="using-r-to-randomly-assign-treatments-contd-1" class="slide level2">
+<h2>Using R to Randomly Assign Treatments (cont’d)</h2>
+<ul>
+<li>Assign the first half to group 1 and second half to group 2,…<br>
+</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Group 1: Run in place for 10 seconds</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>newlist[<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>,]</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co"># Group 2: Remain Seated</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>newlist[<span class="dv">16</span><span class="sc">:</span><span class="dv">30</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="pulse-data-experiment" class="slide level2">
+<h2>Pulse Data Experiment</h2>
+<p>Access the survey and report your results:</p>
+<p><img data-src="figs/pulse_rate_QR.png" alt="QR code" width="400"></p>
+
+<aside><div>
+<p>You may opt out if you prefer to not participate.</p>
+</div></aside></section>
+<section id="two-types-of-randomized-experiments" class="slide level2 build">
+<h2>Two Types of Randomized Experiments</h2>
+<ol type="1">
+<li><p>In a <strong>randomized comparative experiment</strong>, we randomly assign cases to different treatment groups and then compare results on the response variable(s).</p></li>
+<li><p>In a <strong>matched pairs experiment</strong>, each case gets both treatments in random order (or cases get paired up in some other obvious way), and we examine individual differences in the response variable between the two treatments.</p></li>
+</ol>
+</section>
+<section id="matched-pairs" class="slide level2">
+<h2>Matched Pairs</h2>
+<p><strong>Matched pairs</strong> designs:</p>
+<ul>
+<li><p>Each participant is their own control (pre-vs-post) OR</p></li>
+<li><p>Participants are paired and a randomly selected member of each pair gets each treatment OR</p></li>
+<li><p>Each participant gets both treatments in a random order</p></li>
+</ul>
+</section>
+<section id="a-matched-pairs-study-gatorade-and-running" class="slide level2">
+<h2>A Matched Pairs Study: Gatorade and Running</h2>
+<ul>
+<li>Does drinking Gatorade make you run faster?</li>
+</ul>
+<aside class="notes">
+<ul>
+<li><p><strong>Variables:</strong></p>
+<ul>
+<li><em>Explanatory</em>: drink Gatorade or placebo before running<br>
+</li>
+<li><em>Response</em>: time to run a certain distance (a mile?)</li>
+</ul></li>
+<li><p><strong>Completely randomized:</strong> Randomize half of the people to drink Gatorade half to drink a placebo.</p></li>
+<li><p><strong>Matched pairs:</strong> have each person run twice (on different days?), one time drinking Gatorade, one time drinking placebo. Randomize order.</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="randomization-and-scope-of-inference" class="slide level2">
+<h2>Randomization and Scope of Inference</h2>
+
+<img data-src="figs/statistics1e_fig_01_03.jpg" width="700" class="r-stretch"><div class="footer footer-default">
 
 </div>
 </section></section>
@@ -528,20 +664,20 @@ Eric Nordmoe
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="sec2p4_m261_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="CopyOfsec1p3_m261_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="sec2p4_m261_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="sec2p4_m261_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="sec2p4_m261_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="sec2p4_m261_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="sec2p4_m261_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="sec2p4_m261_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="CopyOfsec1p3_m261_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="CopyOfsec1p3_m261_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="CopyOfsec1p3_m261_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="CopyOfsec1p3_m261_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="CopyOfsec1p3_m261_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="CopyOfsec1p3_m261_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="sec2p4_m261_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="sec2p4_m261_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="sec2p4_m261_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="sec2p4_m261_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="CopyOfsec1p3_m261_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="CopyOfsec1p3_m261_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="CopyOfsec1p3_m261_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="CopyOfsec1p3_m261_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
