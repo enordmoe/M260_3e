@@ -131,8 +131,7 @@ FloridaLakes$residuals <- resid(model)
 
 . . .
 
-<br>
-<br>
+<br> <br>
 
 ::: callout-important
 You can use R to get the predicted values and residuals, but be sure you know how to compute them by hand calculator using the regression equation.
