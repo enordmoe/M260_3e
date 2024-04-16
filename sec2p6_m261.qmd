@@ -1,0 +1,151 @@
+---
+title: '2.6 Two Quantitative Variables: Linear Regression '
+subtitle: "Math 261"
+author: "Eric Nordmoe"
+format:
+  revealjs:
+    css: custom.css
+    chalkboard: true
+    theme: default
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+```
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+library(palmerpenguins)
+```
+
+# Linear regression: predicting the value of one quantitative variable from another
+
+## Plotting the Data
+
+Obtain a scatterplot of the data to investigate the relationship between **ph** and **AvgMercury**.
+
+```{r}
+gf_point(AvgMercury ~ pH,data=FloridaLakes, xlab = "Acidity (pH)", 
+         ylab="Mercury (ppm)") %>%
+  gf_smooth()
+```
+
+-   Can we use acidity to predict the mercury level of lake in Florida?
+-   Can we use a straight line to predict?
+
+## The Regression Line
+
+-   The process of fitting a line to a set of data is called **linear regression** and the line of best fit is called the **regression line**.
+
+-   The estimated regression line is $$
+    \hat y = a +bx
+    $$ where $x$ is the quantitative explanatory variable and $\hat y$ is the predicted quantitative response.
+
+-   The regression equation can be used to predict $y$ for a given value of $x$.
+
+## Finding the Regression Line
+
+-   The **observed response variable**, $y$, is the response value for a particular data point.
+
+-   The **predicted response variable**, $\hat y$, is the reponse value that would be predicted for a given $x$ value based on a model.
+
+-   The best fitting line is the one which makes the predicted values closest to the actual values.
+
+## Residuals
+
+-   The **residual** for each data point is $$
+    \text{observed}-\text{predicted}=y-\hat y
+    $$
+
+-   The residual is also the *vertical* distance from each point to the fitted line.
+
+# Try it yourself: [Rossman/Chance regression applet](http://www.rossmanchance.com/applets/RegShuffle.htm)
+
+## Least Squares Line
+
+-   The **least squares line** is the line which minimizes the sum of **squared** residuals:
+
+$$
+\text{sum of (residuals}^2)=\sum_{i=1}^n (y_i-\hat y_i)^2
+$$
+
+-   Use R to find the equation of the line.
+
+**Note**: The "regression line" and the "least squares line" are the same thing.
+
+## Slope and Intercept Interpretations
+
+The estimated regression line is $$
+\hat y = a + bx
+$$
+
+-   **Slope (*b*)**: increase in predicted $y$ for every 1 unit increase in $x$.
+
+-   **Intercept (*a*)**: predicted $y$ value when $x=0$
+
+Note: In practice, interpretation of the slope is typically most important.
+
+## Using R to find and graph a regression line:
+
+Use the `lm()` command to fit a **l**inear regression **m**odel with R.
+
+```{r}
+lm(AvgMercury ~ pH, data = FloridaLakes)
+```
+
+## Finding the regression equation from the output:
+
+See the annotated output below: ![](figs/annotated_reg_output.png)
+
+. . .
+
+The least squares regression equation is $$
+\widehat{\mbox{AvgMercury}} = -1.531 -0.152(\mbox{pH})
+$$
+
+## Superimposing the Regression Line on the Scatterplot {.smaller}
+
+Use R to plot the regression line on the scatterplot:
+
+```{r,tidy=TRUE}
+gf_point(AvgMercury ~ pH, data = FloridaLakes, 
+         xlab = "Acidity (pH)", ylab="Mercury (ppm)") %>%
+  gf_smooth(method="lm")
+```
+
+-   Use `gf_smooth()` with `method="lm"` for **l**inear **m**odel
+
+## Using R to obtain residuals and predicted values
+
+Add residuals and predicted values to the dataset
+
+```{r}
+#| eval: false
+# fit and save the regression model with a name
+model <- lm(AvgMercury ~ pH, data = FloridaLakes)
+FloridaLakes$predicted <- predict(model)
+FloridaLakes$residuals <- resid(model)
+```
+
+. . .
+
+<br>
+<br>
+
+::: callout-important
+You can use R to get the predicted values and residuals, but be sure you know how to compute them by hand calculator using the regression equation.
+:::
+
+## Regression Cautions {.smaller}
+
+::: incremental
+1.  **Do not extrapolate!** Do not use the regression equation or line to predict outside the range of $x$ values available in your data.
+
+2.  Only use the regession line if the association is **approximately linear**. **Always plot your data!**
+
+3.  **Beware of outliers!** Outliers (especially values that are extreme on the $x$ axis) can be very influential on the regression line.
+
+4.  **Correlation is not causation** $\ldots$ and neither is regression! Higher values of $x$ may correspond to higher (or lower) predicted values of $y$, but this does **not** mean that changing $x$ will *cause* $y$ to increase or decrease.
+:::

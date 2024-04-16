@@ -1,0 +1,75 @@
+---
+title: '2.6 Two Quantitative Variables: Linear Regression '
+author: "Eric Nordmoe"
+date: "Math 261"
+output:
+  ioslides_presentation: default
+---
+
+
+## The Regression Line
+
+
+* The process of fitting a line to a set of data is called **linear regression** and the line of best fit is called the **regression line**. 
+
+* The estimated regression line is
+$$
+\hat y = a +bx
+$$
+where $x$ is the quantitative explanatory variable and $\hat y$ is the predicted quantitative response.
+
+* The regression equation can be used to predict $y$ for a given value of $x$.
+
+
+## Finding the Regression Line
+
+* The **observed response variable**, $y$, is the response value for a particular data point.
+
+* The **predicted response variable**, $\hat y$, is the reponse value that would be predicted for a given $x$ value based on a model.
+
+* The best fitting line is the one which makes the predicted values closest to the actual values.
+
+## Residuals
+
+* The **residual** for each data point is 
+$$
+\text{observed}-\text{predicted}=y-\hat y
+$$
+
+* The residual is also the *vertical* distance from each point to the fitted line.
+
+## Least Squares Line
+
+* The **least squares line** is the line which minimizes the sum of **squared** residuals:
+
+$$
+\text{sum of (residuals}^2)=\sum_{i=1}^n (y_i-\hat y_i)^2
+$$
+
+* Use  R to find the equation of the line.
+
+**Note**: The "regression line" and the "least squares line" are the same thing.
+
+## Slope and Intercept Interpretations
+
+The estimated regression line is 
+$$
+\hat y = a + bx
+$$
+
+* **Slope (_b_)**: increase in  predicted $y$ for every 1 unit increase in $x$.
+
+* **Intercept (_a_)**: predicted $y$ value when $x=0$
+
+Note: In practice, interpretation of the slope is typically most important.
+
+## Regression Cautions 
+
+1. **Do not extrapolate!** Do not use the regression equation or line to predict outside the range of $x$ values available in your data.
+
+2. Only use the regession line if the association is **approximately linear**. **Always plot your data!** 
+
+3. **Beware of outliers!** Outliers (especially  values that are extreme on the $x$ axis) can be very influential on the regression line. 
+
+4. **Correlation is not causation $\ldots$ and neither is regression!** Higher values of $x$ may correspond to higher (or lower) predicted values of $y$, but this does **not** mean that changing $x$ will *cause* $y$ to increase or decrease.
+
