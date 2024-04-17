@@ -102,7 +102,7 @@ See the annotated output below: ![](figs/annotated_reg_output.png)
 . . .
 
 The least squares regression equation is $$
-\widehat{\mbox{AvgMercury}} = -1.531 -0.152(\mbox{pH})
+\widehat{\mbox{AvgMercury}} = 1.531 -0.152(\mbox{pH})
 $$
 
 ## Superimposing the Regression Line on the Scatterplot {.smaller}

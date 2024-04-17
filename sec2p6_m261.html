@@ -501,7 +501,7 @@ Coefficients:
 <p>See the annotated output below: <img data-src="figs/annotated_reg_output.png"></p>
 <div class="fragment">
 <p>The least squares regression equation is <span class="math display">\[
-\widehat{\mbox{AvgMercury}} = -1.531 -0.152(\mbox{pH})
+\widehat{\mbox{AvgMercury}} = 1.531 -0.152(\mbox{pH})
 \]</span></p>
 </div>
 </section>
@@ -509,9 +509,8 @@ Coefficients:
 <h2>Superimposing the Regression Line on the Scatterplot</h2>
 <p>Use R to plot the regression line on the scatterplot:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">gf_point</span>(AvgMercury <span class="sc">~</span> pH, <span class="at">data =</span> FloridaLakes, </span>
-<span id="cb4-2"><a href="#cb4-2"></a>         <span class="at">xlab =</span> <span class="st">"Acidity (pH)"</span>, <span class="at">ylab=</span><span class="st">"Mercury (ppm)"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">gf_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">gf_point</span>(AvgMercury <span class="sc">~</span> pH, <span class="at">data =</span> FloridaLakes, <span class="at">xlab =</span> <span class="st">"Acidity (pH)"</span>, <span class="at">ylab =</span> <span class="st">"Mercury (ppm)"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>    <span class="fu">gf_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="sec2p6_m261_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"><ul>
