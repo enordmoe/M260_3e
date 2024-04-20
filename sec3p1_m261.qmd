@@ -3,7 +3,7 @@ title: "3.1 Sampling Distributions"
 subtitle: "Math 261"
 format:
   revealjs:
-    css: custom.css
+#    css: custom.css
     chalkboard: true
     theme: default
 editor: visual
