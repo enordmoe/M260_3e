@@ -1,0 +1,174 @@
+---
+title: "4.1-2 Introducing Hypothesis Tests and P-values"
+subtitle: "Math 261"
+format:
+  revealjs:
+#    css: custom.css
+    chalkboard: true
+    theme: default
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+```
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+```
+
+# Section 4.1 Introducing Hypothesis Tests {background-color="#EA6820"}
+
+## Statistical Test
+
+A **statistical test** is used to determine whether results from a sample are convincing enough to allow us to conclude something about the population.
+
+> An outcome that would rarely happen if a claim were true is good evidence that the claim is not true.
+
+## Statistical Hypotheses: Null
+
+Statistical tests are framed formally in terms of two competing hypotheses:
+
+-   **Null Hypothesis (**$H_0$) the statement being tested in a statistical test.
+    -   Statement we hope to reject\
+    -   Claim that there is no effect or difference
+
+## Statistical Hypotheses: Alternative
+
+-   **Alternative Hypothesis (**$H_a$) the statement we expect or hope to be true.
+    -   It is typically the research hypothesis\
+    -   Claim for which we seek evidence.
+
+## Statistical Hypotheses
+
+-   The null and alternative hypotheses are competing claims about a population.
+
+-   The alternative hypothesis is established by observing evidence (data) that contradicts the null hypothesis and supports the alternative hypothesis.
+
+## Points to Note
+
+-   Hypotheses are statements about **population parameters**.
+
+    -   A **statistic** ($\hat p$, $\bar X$, etc.) should *never* appear in a hypothesis statement; only parameters ($p$, $\mu_1$, etc.) should appear.
+
+-   The null hypothesis always contains an equality
+
+-   The alternative hypothesis always contains an inequality ($<$, $>$, $\neq$)
+
+-   The direction of inequality in the alternative depends on the specifics of the research question of interest
+
+## Null Hypothesis
+
+![](http://imgs.xkcd.com/comics/null_hypothesis.png)
+
+## Evidence
+
+The goal of a hypothesis test is to determine whether the sample data provide enough evidence to refute the null hypothesis in favor of the alternative hypothesis.
+
+## Topics to Come
+
+-   How do we *quantify* the strength of evidence against $H_0$ and in favor of $H_a$?
+
+. . .
+
+-   How do we know whether we have enough *evidence* to reject $H_0$ in favor of $H_a$?
+
+## Summary
+
+-   Statistical tests use data from a sample to assess a claim about a population
+
+-   Statistical tests are usually formalized with competing hypotheses:
+
+    -   **Null hypothesis (**$H_0$): no effect or no difference\
+    -   **Alternative hypothesis (**$H_a$): what we seek evidence for
+
+-   A hypothesis test examines whether sample data provide enough evidence to refute the null hypothesis and support the alternative hypothesis.
+
+# Section 4.2 Measuring Evidence with P-values {background-color="#EA6820"}
+
+## Key Question
+
+> How unusual is it to see a sample statistic as extreme as that observed, if $H_0$ were true?
+
+-   If it is very unusual, we have statistically significant evidence against the null hypothesis
+
+. . .
+
+$\Longrightarrow$ But *how* do we measure how **unusual** a sample statistic is, if $H_0$ were true?
+
+## Quantifying Evidence Against the Null Hypothesis
+
+> To see if a statistic provides evidence against $H_0$, we need to see what kind of sample statistics we would observe, just by *random chance*, **if** $H_0$ were true
+
+<!-- Spinning pennies 20 times and count number of heads. Randomization distribution -->
+
+## Randomization Distribution
+
+-   A **randomization distribution** is a collection of statistics from samples simulated assuming the null hypothesis is true
+
+. . .
+
+-   The randomization distribution shows what values of statistics would be observed, just by random chance, *if the null hypothesis were true*
+
+## Key Question
+
+> How unusual is it to see a sample statistic as extreme as that observed, if $H_0$ is true?
+
+-   A **randomization distribution** tells us what values of statistics we would see just by random chance, *if the null hypothesis were true*
+
+-   Use the distribution to assess how extreme the observed statistic is!
+
+## p-value
+
+-   The $p$-value is the chance of obtaining a sample statistic as extreme (or more extreme) than the observed sample statistic, *if the null hypothesis were true*
+
+-   **Calculate** the $p$-value as the proportion of statistics in a randomization distribution that are as extreme (or more extreme) than the observed sample statistic
+
+## Calculating a p-value
+
+1.  What kinds of statistics would we get, just by random chance, if the null hypothesis were true?
+    -   Randomization distribution
+2.  What proportion of these statistics are as extreme as our original sample statistic?
+    -   $p$-value
+
+## Calculating a p-value: StatKey
+
+![](figs/statkey_pval.png){fig-align="center"}
+
+## Alternative Hypothesis
+
+-   A one-sided alternative contains either $>$ or $<$
+
+-   A two-sided alternative contains $\neq$
+
+-   The $p$-value is the proportion **in the tail in the direction specified by** $H_a$
+
+-   For a two-sided alternative, the $p$-value is **twice the proportion in the smallest tail**
+
+## Estimating a P-value from a Randomization Distribution
+
+-   **One-tailed alternative**: Find the proportion of randomization samples that **equal or exceed** the original statistic in the direction (tail) indicated by the alternative hypothesis.
+
+-   **Two-tailed alternative**: Find the proportion of randomization samples in the smaller tail **at or beyond the original** statistic and then **double the proportion** to account for the other tail.
+
+## Guidelines for Thinking About p-values
+
+When wording conclusions from a test of significance, you can consider:
+
+-   $.05\le p \le .10 \implies$ *slight* evidence
+
+-   $.01\le p \le .05 \implies$ *some* or *moderate* evidence
+
+-   $p \le .01 \implies$ *strong* or *convincing* evidence
+
+## Summary
+
+-   The randomization distribution shows what types of statistics would be observed, just by random chance, *if the null hypothesis were true*
+
+-   A $p$-value is the chance of getting a statistic as extreme as that observed, *if* $H_0$ were true
+
+-   A $p$-value can be calculated as the proportion of statistics in the randomization distribution *as extreme or more extreme than the observed sample statistic*
+
+-   The smaller the *p*-value, the greater the evidence against $H_0$
+
