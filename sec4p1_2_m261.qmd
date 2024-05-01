@@ -18,6 +18,18 @@ library(mosaic)
 library(Lock5Data)
 ```
 
+## Some Questions to Consider
+
+![](images/clipboard-4164983454.png){.absolute top=0 left=1000 height="200"}
+
+::: incremental
+1.  Does a new anti-hypertension drug lower blood pressure more effectively than the current standard?
+2.  Is there a significant difference in cholesterol levels between individuals following a plant-based diet and those on a traditional diet?
+3.  Is the survival rate for patients on a new cancer treatment better than for those on the existing standard of care?
+4.  Is the diversity of plant species associate with the population of pollinator insects in a given ecosystem?
+5.  Are warming temperatures causing earlier flowering times in temperate zone plants?
+:::
+
 # Section 4.1 Introducing Hypothesis Tests {background-color="#EA6820"}
 
 ## Statistical Test
@@ -171,4 +183,3 @@ When wording conclusions from a test of significance, you can consider:
 -   A $p$-value can be calculated as the proportion of statistics in the randomization distribution *as extreme or more extreme than the observed sample statistic*
 
 -   The smaller the *p*-value, the greater the evidence against $H_0$
-
