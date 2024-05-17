@@ -1,0 +1,121 @@
+---
+title: "Investigative Group Worksheet: Bootstrap t Intervals"
+author: "Mathematical Statistics with Resampling"
+date: "2024-05-17"
+format: html
+---
+
+# Investigative Group Worksheet: Bootstrap t Intervals
+
+## Objectives
+- Understand and implement Bootstrap t intervals for a single mean.
+- Understand and implement Bootstrap t intervals for the difference in means.
+- Interpret the results and discuss their implications.
+
+## Instructions
+Work in groups to complete the following tasks. Use R and the provided code snippets to guide your analysis. Discuss your findings with your group and prepare to share your results with the class.
+
+### Part 1: Bootstrap t Interval for a Single Mean
+
+#### Task 1: Load the Data
+Load the `mtcars` dataset and focus on the `mpg` (miles per gallon) variable.
+
+```{r}
+data(mtcars)
+mpg <- mtcars$mpg
+```
+
+#### Task 2: Calculate the Bootstrap t Interval
+Write a function to calculate the Bootstrap t interval for the mean of `mpg`.
+
+```{r}
+set.seed(123)
+bootstrap_t_interval <- function(data, B = 1000, alpha = 0.05) {
+  n <- length(data)
+  original_mean <- mean(data)
+  bootstrap_means <- numeric(B)
+  bootstrap_se <- numeric(B)
+  
+  for (i in 1:B) {
+    sample_data <- sample(data, n, replace = TRUE)
+    bootstrap_means[i] <- mean(sample_data)
+    bootstrap_se[i] <- sd(sample_data) / sqrt(n)
+  }
+  
+  t_star <- qt(1 - alpha / 2, df = n - 1)
+  lower <- original_mean - t_star * sd(bootstrap_means)
+  upper <- original_mean + t_star * sd(bootstrap_means)
+  
+  return(c(lower, upper))
+}
+
+interval <- bootstrap_t_interval(mpg)
+interval
+```
+
+#### Task 3: Interpret the Results
+1. What are the lower and upper bounds of the 95% Bootstrap t interval for the mean of `mpg`?
+2. How do these results compare to the traditional t-interval obtained using the `t.test` function?
+
+```{r}
+t.test(mpg)$conf.int
+```
+
+### Part 2: Bootstrap t Interval for the Difference in Means
+
+#### Task 4: Load the Data
+Split the `mtcars` dataset into two groups based on the number of cylinders (`cyl`): 4-cylinder and 6-cylinder cars. Focus on the `mpg` variable.
+
+```{r}
+mpg_4cyl <- mtcars$mpg[mtcars$cyl == 4]
+mpg_6cyl <- mtcars$mpg[mtcars$cyl == 6]
+```
+
+#### Task 5: Calculate the Bootstrap t Interval for the Difference in Means
+Write a function to calculate the Bootstrap t interval for the difference in means between 4-cylinder and 6-cylinder cars.
+
+```{r}
+bootstrap_diff_t_interval <- function(data1, data2, B = 1000, alpha = 0.05) {
+  n1 <- length(data1)
+  n2 <- length(data2)
+  original_diff <- mean(data1) - mean(data2)
+  bootstrap_diffs <- numeric(B)
+  bootstrap_se <- numeric(B)
+  
+  for (i in 1:B) {
+    sample_data1 <- sample(data1, n1, replace = TRUE)
+    sample_data2 <- sample(data2, n2, replace = TRUE)
+    bootstrap_diffs[i] <- mean(sample_data1) - mean(sample_data2)
+    bootstrap_se[i] <- sqrt(sd(sample_data1)^2 / n1 + sd(sample_data2)^2 / n2)
+  }
+  
+  t_star <- qt(1 - alpha / 2, df = min(n1, n2) - 1)
+  lower <- original_diff - t_star * sd(bootstrap_diffs)
+  upper <- original_diff + t_star * sd(bootstrap_diffs)
+  
+  return(c(lower, upper))
+}
+
+diff_interval <- bootstrap_diff_t_interval(mpg_4cyl, mpg_6cyl)
+diff_interval
+```
+
+#### Task 6: Interpret the Results
+1. What are the lower and upper bounds of the 95% Bootstrap t interval for the difference in means between 4-cylinder and 6-cylinder cars?
+2. How do these results compare to the traditional t-interval obtained using the `t.test` function?
+
+```{r}
+t.test(mpg_4cyl, mpg_6cyl)$conf.int
+```
+
+### Discussion Questions
+1. Discuss the advantages and limitations of using Bootstrap t intervals compared to traditional methods.
+2. How might the sample size affect the width of the Bootstrap t intervals?
+3. What assumptions are we making when using Bootstrap t intervals? Are these assumptions reasonable in the context of this dataset?
+
+## Submission
+Submit your group's findings, including the R code and interpretations, to the class Moodle page.
+
+---
+
+Happy Bootstrapping!
