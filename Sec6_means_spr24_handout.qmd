@@ -39,7 +39,6 @@ Anorexia_2samp <- read.csv("http://people.kzoo.edu/enordmoe/math261/data/Anorexi
 -   If the data are normal, smaller $n$ will be sufficient\
 -   If the data are skewed and/or have outliers, $n$ may have to be much higher than 30
 
-<!--Reminder of StatKey Simulations -->
 
 ## Sample Standard Error Formulas
 
@@ -65,13 +64,13 @@ $$
 
 ## Three Questions ($\pm 1$)
 
-> -   What is the standard deviation of the *population*?
+*   What is the standard deviation of the *population*?
 
-> -   What is the standard deviation of the *sample*?
+*   What is the standard deviation of the *sample*?
 
-> -   What is the standard error of the *sample mean*?
+*   What is the standard error of the *sample mean*?
 
-> -   What is the *estimated* standard error of the *sample mean*?
+*   What is the *estimated* standard error of the *sample mean*?
 
 ## The $t$-Distribution
 
@@ -104,7 +103,7 @@ $$
 
 -   **Anorexia nervosa** is an eating disorder characterized by weight loss (or lack of appropriate weight gain in growing children); difficulties maintaining an appropriate body weight for height, age, and stature; and, in many individuals, distorted body image. (https://www.nationaleatingdisorders.org/anorexia-nervosa)
 
-. . .
+
 
 -   Randomized controlled experiment in the UK to assess effectiveness of two experimental treatments compared with the established *control* treatment (Hand, D. J., Daly, F., McConway, K., Lunn, D. and Ostrowski, E. eds (1993) *A Handbook of Small Data Sets. Chapman & Hall*, Data set 285 (p. 229))
 
@@ -115,14 +114,14 @@ $$
     \mbox{sample statistic} \pm t^* \times \mbox{SE}
     $$
 
-. . .
+
 
 -   Hypothesis test\
     $$
      t=\frac{\mbox{sample statistic}-\mbox{null parameter}}{\mbox{SE}}
     $$
 
-. . .
+
 
 -   Use the $t$ distribution for $p$-values and critical $t^*$ values.
 
@@ -132,7 +131,7 @@ $$
     -   Control: 26 girls
     -   Family therapy: 17 girls
 
-. . .
+
 
 -   Variables:
     -   Group\
@@ -142,7 +141,6 @@ $$
 
 ## Case Study: Research Questions
 
-::: incremental
 1.  Do girls on family therapy gain weight?
     -   Hypothesis test
 2.  How much weight do girls on family therapy gain?
@@ -151,7 +149,6 @@ $$
     -   Hypothesis test
 4.  **How much more** weight do girls on family therapy gain than girls on control therapy?
     -   Confidence interval
-:::
 
 ## Matched Pairs
 
@@ -299,14 +296,14 @@ favstats(Gain ~ Group, data = Anorexia_2samp)
   - Accounts for additional uncertainty in sample estimates
   - Thicker tails compared to the normal distribution
 
-. . . 
+
 
 - **Inference procedures**
   - Use $t$-based confidence intervals and hypothesis tests for means
   - Consider degrees of freedom
   - Ensure conditions for using the $t$-distribution are met
 
-. . . 
+
 
 - **Practical application**
   - Analyze weight gain data from anorexia nervosa treatment study

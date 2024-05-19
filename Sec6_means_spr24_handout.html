@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="Sec6_means_spr24_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Sec6_means_spr24_files/libs/quarto-html/tabby.min.js"></script>
-<script src="Sec6_means_spr24_files/libs/quarto-html/popper.min.js"></script>
-<script src="Sec6_means_spr24_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="Sec6_means_spr24_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Sec6_means_spr24_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="Sec6_means_spr24_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="Sec6_means_spr24_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="Sec6_means_spr24_handout_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Sec6_means_spr24_handout_files/libs/quarto-html/tabby.min.js"></script>
+<script src="Sec6_means_spr24_handout_files/libs/quarto-html/popper.min.js"></script>
+<script src="Sec6_means_spr24_handout_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="Sec6_means_spr24_handout_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Sec6_means_spr24_handout_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="Sec6_means_spr24_handout_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="Sec6_means_spr24_handout_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.450">
 
   <title>6.2, 6.4, 6.5 Inference About Means</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="Sec6_means_spr24_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="Sec6_means_spr24_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="Sec6_means_spr24_handout_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="Sec6_means_spr24_handout_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -94,13 +94,13 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="Sec6_means_spr24_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="Sec6_means_spr24_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="Sec6_means_spr24_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="Sec6_means_spr24_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="Sec6_means_spr24_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="Sec6_means_spr24_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="Sec6_means_spr24_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="Sec6_means_spr24_handout_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="Sec6_means_spr24_handout_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="Sec6_means_spr24_handout_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="Sec6_means_spr24_handout_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="Sec6_means_spr24_handout_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="Sec6_means_spr24_handout_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="Sec6_means_spr24_handout_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -419,7 +419,6 @@
 </li>
 <li>If the data are skewed and/or have outliers, <span class="math inline">\(n\)</span> may have to be much higher than 30</li>
 </ul>
-<!--Reminder of StatKey Simulations -->
 </section>
 <section id="sample-standard-error-formulas" class="slide level2">
 <h2>Sample Standard Error Formulas</h2>
@@ -475,16 +474,10 @@
 <section id="three-questions-pm-1" class="slide level2">
 <h2>Three Questions (<span class="math inline">\(\pm 1\)</span>)</h2>
 <ul>
-<li class="fragment">What is the standard deviation of the <em>population</em>?</li>
-</ul>
-<ul>
-<li class="fragment">What is the standard deviation of the <em>sample</em>?</li>
-</ul>
-<ul>
-<li class="fragment">What is the standard error of the <em>sample mean</em>?</li>
-</ul>
-<ul>
-<li class="fragment">What is the <em>estimated</em> standard error of the <em>sample mean</em>?</li>
+<li><p>What is the standard deviation of the <em>population</em>?</p></li>
+<li><p>What is the standard deviation of the <em>sample</em>?</p></li>
+<li><p>What is the standard error of the <em>sample mean</em>?</p></li>
+<li><p>What is the <em>estimated</em> standard error of the <em>sample mean</em>?</p></li>
 </ul>
 </section>
 <section id="the-t-distribution" class="slide level2">
@@ -522,35 +515,23 @@
 <section id="case-study-treatments-for-anorexia-nervosa" class="slide level2 smaller">
 <h2>Case Study: Treatments for Anorexia Nervosa</h2>
 <ul>
-<li><strong>Anorexia nervosa</strong> is an eating disorder characterized by weight loss (or lack of appropriate weight gain in growing children); difficulties maintaining an appropriate body weight for height, age, and stature; and, in many individuals, distorted body image. (https://www.nationaleatingdisorders.org/anorexia-nervosa)</li>
+<li><p><strong>Anorexia nervosa</strong> is an eating disorder characterized by weight loss (or lack of appropriate weight gain in growing children); difficulties maintaining an appropriate body weight for height, age, and stature; and, in many individuals, distorted body image. (https://www.nationaleatingdisorders.org/anorexia-nervosa)</p></li>
+<li><p>Randomized controlled experiment in the UK to assess effectiveness of two experimental treatments compared with the established <em>control</em> treatment (Hand, D. J., Daly, F., McConway, K., Lunn, D. and Ostrowski, E. eds (1993) <em>A Handbook of Small Data Sets. Chapman &amp; Hall</em>, Data set 285 (p.&nbsp;229))</p></li>
 </ul>
-<div class="fragment">
-<ul>
-<li>Randomized controlled experiment in the UK to assess effectiveness of two experimental treatments compared with the established <em>control</em> treatment (Hand, D. J., Daly, F., McConway, K., Lunn, D. and Ostrowski, E. eds (1993) <em>A Handbook of Small Data Sets. Chapman &amp; Hall</em>, Data set 285 (p.&nbsp;229))</li>
-</ul>
-</div>
 </section>
 <section id="t-based-formulas" class="slide level2">
 <h2><span class="math inline">\(t\)</span>-Based Formulas</h2>
 <ul>
-<li>Confidence interval<br>
+<li><p>Confidence interval<br>
 <span class="math display">\[
 \mbox{sample statistic} \pm t^* \times \mbox{SE}
-\]</span></li>
-</ul>
-<div class="fragment">
-<ul>
-<li>Hypothesis test<br>
+\]</span></p></li>
+<li><p>Hypothesis test<br>
 <span class="math display">\[
 t=\frac{\mbox{sample statistic}-\mbox{null parameter}}{\mbox{SE}}
-\]</span></li>
+\]</span></p></li>
+<li><p>Use the <span class="math inline">\(t\)</span> distribution for <span class="math inline">\(p\)</span>-values and critical <span class="math inline">\(t^*\)</span> values.</p></li>
 </ul>
-</div>
-<div class="fragment">
-<ul>
-<li>Use the <span class="math inline">\(t\)</span> distribution for <span class="math inline">\(p\)</span>-values and critical <span class="math inline">\(t^*\)</span> values.</li>
-</ul>
-</div>
 </section>
 <section id="case-study-treatments-for-anorexia-nervosa-1" class="slide level2">
 <h2>Case Study: Treatments for Anorexia Nervosa</h2>
@@ -560,9 +541,6 @@ t=\frac{\mbox{sample statistic}-\mbox{null parameter}}{\mbox{SE}}
 <li>Control: 26 girls</li>
 <li>Family therapy: 17 girls</li>
 </ul></li>
-</ul>
-<div class="fragment">
-<ul>
 <li>Variables:
 <ul>
 <li>Group<br>
@@ -574,30 +552,27 @@ t=\frac{\mbox{sample statistic}-\mbox{null parameter}}{\mbox{SE}}
 <li>Gain= After-Before (<em>Gain</em>)</li>
 </ul></li>
 </ul>
-</div>
 </section>
 <section id="case-study-research-questions" class="slide level2">
 <h2>Case Study: Research Questions</h2>
-<div>
 <ol type="1">
-<li class="fragment">Do girls on family therapy gain weight?
+<li>Do girls on family therapy gain weight?
 <ul>
-<li class="fragment">Hypothesis test</li>
+<li>Hypothesis test</li>
 </ul></li>
-<li class="fragment">How much weight do girls on family therapy gain?
+<li>How much weight do girls on family therapy gain?
 <ul>
-<li class="fragment">Confidence interval</li>
+<li>Confidence interval</li>
 </ul></li>
-<li class="fragment">Do girls on family therapy gain <strong>more</strong> weight than girls on control therapy?
+<li>Do girls on family therapy gain <strong>more</strong> weight than girls on control therapy?
 <ul>
-<li class="fragment">Hypothesis test</li>
+<li>Hypothesis test</li>
 </ul></li>
-<li class="fragment"><strong>How much more</strong> weight do girls on family therapy gain than girls on control therapy?
+<li><strong>How much more</strong> weight do girls on family therapy gain than girls on control therapy?
 <ul>
-<li class="fragment">Confidence interval</li>
+<li>Confidence interval</li>
 </ul></li>
 </ol>
-</div>
 </section>
 <section id="matched-pairs" class="slide level2">
 <h2>Matched Pairs</h2>
@@ -766,19 +741,12 @@ t=\frac{\mbox{sample statistic}-\mbox{null parameter}}{\mbox{SE}}
 <li>Accounts for additional uncertainty in sample estimates</li>
 <li>Thicker tails compared to the normal distribution</li>
 </ul></li>
-</ul>
-<div class="fragment">
-<ul>
 <li><strong>Inference procedures</strong>
 <ul>
 <li>Use <span class="math inline">\(t\)</span>-based confidence intervals and hypothesis tests for means</li>
 <li>Consider degrees of freedom</li>
 <li>Ensure conditions for using the <span class="math inline">\(t\)</span>-distribution are met</li>
 </ul></li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
 <li><strong>Practical application</strong>
 <ul>
 <li>Analyze weight gain data from anorexia nervosa treatment study</li>
@@ -789,26 +757,25 @@ t=\frac{\mbox{sample statistic}-\mbox{null parameter}}{\mbox{SE}}
 <div class="footer footer-default">
 
 </div>
-</div>
 </section></section>
     </div>
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="Sec6_means_spr24_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="Sec6_means_spr24_handout_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="Sec6_means_spr24_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="Sec6_means_spr24_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="Sec6_means_spr24_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="Sec6_means_spr24_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="Sec6_means_spr24_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="Sec6_means_spr24_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="Sec6_means_spr24_handout_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="Sec6_means_spr24_handout_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="Sec6_means_spr24_handout_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="Sec6_means_spr24_handout_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="Sec6_means_spr24_handout_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="Sec6_means_spr24_handout_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="Sec6_means_spr24_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="Sec6_means_spr24_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="Sec6_means_spr24_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="Sec6_means_spr24_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="Sec6_means_spr24_handout_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="Sec6_means_spr24_handout_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="Sec6_means_spr24_handout_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="Sec6_means_spr24_handout_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
