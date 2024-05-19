@@ -1,0 +1,303 @@
+---
+title: "6.2, 6.4, 6.5 Inference About Means"
+subtitle: "Math 261"
+format:
+  revealjs:
+#    css: custom.css
+    chalkboard: true
+    theme: default
+title-slide-attributes:
+  data-background-color: "#EA6820"
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+```
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+```
+
+```{r, echo=FALSE}
+Anorexia_2samp <- read.csv("http://people.kzoo.edu/enordmoe/math261/data/Anorexia_2samp.csv")
+```
+
+## Outline
+
+-   Formulas for Standard Errors\
+-   Introduction to the $t$ distribution
+-   $t$-based Inference for Means
+
+## Central Limit Theorem
+
+> For random samples with a *sufficiently large* sample size, the distribution of sample statistics for a mean or a proportion is approximately normal.
+
+-   For means, "sufficiently large" is often $n \ge 30$\
+-   If the data are normal, smaller $n$ will be sufficient\
+-   If the data are skewed and/or have outliers, $n$ may have to be much higher than 30
+
+<!--Reminder of StatKey Simulations -->
+
+## Sample Standard Error Formulas
+
+|         Parameter         |       Distribution        |                               Standard Error                               |
+|:-----------------:|:-----------------:|:--------------------------------:|
+|        Proportion         |          Normal           |                    $\sqrt{\frac{\hat p(1-\hat p)}{n}}$                     |
+| Difference in Proportions |          Normal           | $\sqrt{\frac{\hat p_1(1-\hat p_1)}{n_1}+\frac{\hat p_2(1-\hat p_2)}{n_2}}$ |
+|           Mean            |       $t$, df$=n-1$       |                           $\sqrt{\frac{s^2}{n}}$                           |
+|    Difference in Means    | $t$, df$=\min(n_1,n_2)-1$ |                $\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}$                |
+
+## SE of a Mean
+
+The standard error for a sample mean can be calculated by
+
+$$
+\LARGE 
+\mbox{SE}=\frac{\sigma}{\sqrt{n}}
+$$
+
+## Three Questions
+
+![Three important questions](https://img.gifglobe.com/grabs/montypython/MontyPythonAndTheHolyGrail/gif/plCDRJc3Bbjv.gif)
+
+## Three Questions ($\pm 1$)
+
+> -   What is the standard deviation of the *population*?
+
+> -   What is the standard deviation of the *sample*?
+
+> -   What is the standard error of the *sample mean*?
+
+> -   What is the *estimated* standard error of the *sample mean*?
+
+## The $t$-Distribution
+
+-   For quantitative data, we use a $t$-distribution instead of the normal distribution
+
+-   Reason: Using $s$ from the sample to estimate $\sigma$ in the SE formula
+
+-   The $t$ distribution is very similar to the standard normal, but with slightly thicker tails (to reflect the uncertainty in the sample standard deviations)
+
+-   Use [StatKey](https://www.lock5stat.com/StatKey/theoretical_distribution/theoretical_distribution.html#t) to get $p$-values for hypothesis tests and critical values $t^*$ for confidence intervals.
+
+## Degrees of Freedom
+
+-   The $t$-distribution is characterized by its *degrees of freedom (df)*\
+-   Degrees of freedom are based on the sample size
+    -   Single mean: $df = n – 1$\
+    -   Difference in means: $df = \min(n_1, n_2) – 1$
+    -   ANOVA: $df = n – K$
+-   The higher the degrees of freedom, the closer the $t$-distribution is to the standard normal.
+
+## $t$-Distribution versus Normal Distribution
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Student_t_pdf.svg/600px-Student_t_pdf.svg.png)
+
+## Where was the first $t$-Test done?
+
+![](https://www.kpl.gov/app/uploads/2019/02/kalamazoo-map-1861-asylum-grounds-1600.jpg)
+
+## Case Study: Treatments for Anorexia Nervosa {.smaller}
+
+-   **Anorexia nervosa** is an eating disorder characterized by weight loss (or lack of appropriate weight gain in growing children); difficulties maintaining an appropriate body weight for height, age, and stature; and, in many individuals, distorted body image. (https://www.nationaleatingdisorders.org/anorexia-nervosa)
+
+. . .
+
+-   Randomized controlled experiment in the UK to assess effectiveness of two experimental treatments compared with the established *control* treatment (Hand, D. J., Daly, F., McConway, K., Lunn, D. and Ostrowski, E. eds (1993) *A Handbook of Small Data Sets. Chapman & Hall*, Data set 285 (p. 229))
+
+## $t$-Based Formulas
+
+-   Confidence interval\
+    $$
+    \mbox{sample statistic} \pm t^* \times \mbox{SE}
+    $$
+
+. . .
+
+-   Hypothesis test\
+    $$
+     t=\frac{\mbox{sample statistic}-\mbox{null parameter}}{\mbox{SE}}
+    $$
+
+. . .
+
+-   Use the $t$ distribution for $p$-values and critical $t^*$ values.
+
+## Case Study: Treatments for Anorexia Nervosa
+
+-   Today we focus on two groups:
+    -   Control: 26 girls
+    -   Family therapy: 17 girls
+
+. . .
+
+-   Variables:
+    -   Group\
+    -   Before Weight (*Wtbef*)\
+    -   After Weight (*Wtaft*)\
+    -   Gain= After-Before (*Gain*)
+
+## Case Study: Research Questions
+
+::: incremental
+1.  Do girls on family therapy gain weight?
+    -   Hypothesis test
+2.  How much weight do girls on family therapy gain?
+    -   Confidence interval
+3.  Do girls on family therapy gain **more** weight than girls on control therapy?
+    -   Hypothesis test
+4.  **How much more** weight do girls on family therapy gain than girls on control therapy?
+    -   Confidence interval
+:::
+
+## Matched Pairs
+
+-   For a matched pairs experiment, we look at the differences for each pair, and do analysis on this one quantitative variable
+
+-   Inference for a single mean (mean difference)
+
+## Getting the Data into R
+
+Use the following command to import the data into the data frame `Anorexia_2samp`.
+
+```{r, tiny, eval = FALSE}
+Anorexia_2samp <-
+  read.csv("http://people.kzoo.edu/enordmoe/math261/data/Anorexia_2samp.csv")
+```
+
+## Results for the Family Therapy Girls
+
+-   The average before weight of family therapy girls was 83.2 pounds.
+
+-   The average weight gain for girls in the family therapy group was 7.26 pounds.
+
+-   The standard deviation of these gains was 7.16 pounds.
+
+-   The sample size was 17 girls.
+
+## Q1: Weight gain for girls in Family Therapy: Hypothesis Test
+
+1.  State hypotheses
+
+2.  Check conditions
+
+3.  Calculate standard error SE
+
+4.  Calculate $t$-statistic
+
+5.  Compute $p$-value
+
+6.  Interpret in context
+
+<!--Carry out calculations on whiteboard -->
+
+------------------------------------------------------------------------
+
+### Q1: Weight gain for girls in Family Therapy: Hypothesis Test Calculations
+
+## Q2: Weight gain for girls in Family Therapy: Confidence Interval
+
+1.  Check conditions
+
+2.  Find $t^*$ corresponding to desired level of confidence
+
+3.  Compute the confidence interval
+
+4.  Interpret in context
+
+<!--Carry out calculations on whiteboard -->
+
+------------------------------------------------------------------------
+
+### Q2: Weight gain for girls in Family Therapy: Confidence Interval Calculations {.smaller}
+
+## Question 3
+
+**Hypothesis Test: Do girls on family therapy gain more weight than girls on control therapy?**
+
+1.  State hypotheses
+
+    -   Two independent samples
+
+2.  Check conditions
+
+3.  Calculate standard error SE
+
+4.  Calculate $t$-statistic
+
+5.  Compute $p$-value
+
+6.  Interpret in context
+
+## Summary Results for Family Therapy and Control Groups
+
+```{r}
+favstats(Gain ~ Group, data = Anorexia_2samp)
+```
+
+------------------------------------------------------------------------
+
+## Question 3 {.smaller}
+
+**Do girls on family therapy gain more weight than girls on control therapy? Hypothesis Test Calculations**
+
+## Question 4
+
+**How much more weight do girls on family therapy gain than girls on control therapy? Confidence interval**
+
+1.  Check conditions
+
+2.  Find $t^*$ corresponding to desired level of confidence
+
+3.  Compute the confidence interval
+
+4.  Interpret in context
+
+------------------------------------------------------------------------
+
+### Question 4 {.smaller}
+
+**How much more weight do girls on family therapy gain than girls on control therapy? Confidence interval calculations**
+
+## Inference formulas for means {.smaller}
+
+| Parameter of Interest |                            Confidence Interval                             |                             Test of Significance                             |
+|:----------------:|:-------------------------:|:-------------------------:|
+|         $\mu$         |                   $$\bar x \pm t^* \frac{s}{\sqrt{n}}$$                    |                    $$t=\frac{\bar x-\mu_0}{s/\sqrt{n}}$$                     |
+|     $\mu_1-\mu_2$     | $$(\bar x_1-\bar x_2) \pm t^* \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}$$ | $$t=\frac{(\bar x_1-\bar x_2)}{\sqrt{\frac{s_1^2}{n_1}+\frac{2_2^2}{n_2}}}$$ |
+
+# A Few Words about Conditions {background-color="#FF0139"}
+
+## Normality Conditions
+
+-   Using the t-distribution requires that the data comes from a *normal distribution*
+
+-   Note: this assumption is about the population data, *not* the distribution of the statistic.
+
+-   For large sample sizes we do not need to worry about this, because $s$ will be a very good estimate of $\sigma$ and $t$ will be very close to $N(0,1)$.
+
+## Small Samples
+
+-   For **small sample sizes** ($n<30$), we can only use the $t$-distribution if the distribution of the data is approximately **normal**.
+
+    -   Problem: Hard to assess normality for small samples.
+
+. . .
+
+-   If sample sizes are **small**, only use the $t$-distribution if the data look reasonably symmetric and do not have any extreme outliers.
+
+    -   Even then, remember that the $t$ is just an approximation!
+
+    -   In practice, if sample sizes are small, use **simulation methods** (bootstrapping and randomization).
+
+## Summary
+
+::: incremental
+-   **Understanding the** $t$-distribution: The $t$-distribution accounts for the additional uncertainty when estimating population parameters using sample statistics, and it has thicker tails compared to the normal distribution.
+
+-   **Inference procedures**: Use $t$-based confidence intervals and hypothesis tests for means, considering the degrees of freedom and conditions for using the $t$-distribution.
+
+-   **Practical application**: Analyzing weight gain data from a study on treatments for anorexia nervosa, applying hypothesis tests and confidence intervals to draw conclusions about treatment effectiveness.
+:::
