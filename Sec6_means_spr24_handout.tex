@@ -1,0 +1,766 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+  aspectratio=32,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolshorizontal
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\usetheme[]{AnnArbor}
+\usecolortheme{lily}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\newif\ifbibliography
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={6.2, 6.4, 6.5 Inference About Means},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{6.2, 6.4, 6.5 Inference About Means}
+\subtitle{Math 261}
+\author{}
+\date{}
+
+\begin{document}
+\frame{\titlepage}
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, breakable, boxrule=0pt, frame hidden, sharp corners, interior hidden, enhanced]}{\end{tcolorbox}}\fi
+
+\begin{frame}{Outline}
+\protect\hypertarget{outline}{}
+\begin{itemize}
+\tightlist
+\item
+  Formulas for Standard Errors\\
+\item
+  Introduction to the \(t\) distribution
+\item
+  \(t\)-based Inference for Means
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Central Limit Theorem}
+\protect\hypertarget{central-limit-theorem}{}
+\begin{quote}
+For random samples with a \emph{sufficiently large} sample size, the
+distribution of sample statistics for a mean or a proportion is
+approximately normal.
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  For means, ``sufficiently large'' is often \(n \ge 30\)\\
+\item
+  If the data are normal, smaller \(n\) will be sufficient\\
+\item
+  If the data are skewed and/or have outliers, \(n\) may have to be much
+  higher than 30
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Sample Standard Error Formulas}
+\protect\hypertarget{sample-standard-error-formulas}{}
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2639}}
+  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2639}}
+  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4722}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+Parameter
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Distribution
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Standard Error
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+Proportion & Normal & \(\sqrt{\frac{\hat p(1-\hat p)}{n}}\) \\
+Difference in Proportions & Normal &
+\(\sqrt{\frac{\hat p_1(1-\hat p_1)}{n_1}+\frac{\hat p_2(1-\hat p_2)}{n_2}}\) \\
+Mean & \(t\), df\(=n-1\) & \(\sqrt{\frac{s^2}{n}}\) \\
+Difference in Means & \(t\), df\(=\min(n_1,n_2)-1\) &
+\(\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}\) \\
+\bottomrule\noalign{}
+\end{longtable}
+\end{frame}
+
+\begin{frame}{SE of a Mean}
+\protect\hypertarget{se-of-a-mean}{}
+The standard error for a sample mean can be calculated by
+
+\[
+\LARGE 
+\mbox{SE}=\frac{\sigma}{\sqrt{n}}
+\]
+\end{frame}
+
+\begin{frame}{Three Questions}
+\protect\hypertarget{three-questions}{}
+\begin{figure}
+
+{\centering \includegraphics{Sec6_means_spr24_handout_files/mediabag/plCDRJc3Bbjv.gif}
+
+}
+
+\caption{Three important questions}
+
+\end{figure}
+\end{frame}
+
+\begin{frame}{Three Questions (\(\pm 1\))}
+\protect\hypertarget{three-questions-pm-1}{}
+\begin{itemize}
+\item
+  What is the standard deviation of the \emph{population}?
+\item
+  What is the standard deviation of the \emph{sample}?
+\item
+  What is the standard error of the \emph{sample mean}?
+\item
+  What is the \emph{estimated} standard error of the \emph{sample mean}?
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The \(t\)-Distribution}
+\protect\hypertarget{the-t-distribution}{}
+\begin{itemize}
+\item
+  For quantitative data, we use a \(t\)-distribution instead of the
+  normal distribution
+\item
+  Reason: Using \(s\) from the sample to estimate \(\sigma\) in the SE
+  formula
+\item
+  The \(t\) distribution is very similar to the standard normal, but
+  with slightly thicker tails (to reflect the uncertainty in the sample
+  standard deviations)
+\item
+  Use
+  \href{https://www.lock5stat.com/StatKey/theoretical_distribution/theoretical_distribution.html\#t}{StatKey}
+  to get \(p\)-values for hypothesis tests and critical values \(t^*\)
+  for confidence intervals.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Degrees of Freedom}
+\protect\hypertarget{degrees-of-freedom}{}
+\begin{itemize}
+\tightlist
+\item
+  The \(t\)-distribution is characterized by its \emph{degrees of
+  freedom (df)}\\
+\item
+  Degrees of freedom are based on the sample size
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Single mean: \(df = n – 1\)\\
+  \item
+    Difference in means: \(df = \min(n_1, n_2) – 1\)
+  \item
+    ANOVA: \(df = n – K\)
+  \end{itemize}
+\item
+  The higher the degrees of freedom, the closer the \(t\)-distribution
+  is to the standard normal.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{\(t\)-Distribution versus Normal Distribution}
+\protect\hypertarget{t-distribution-versus-normal-distribution}{}
+\includegraphics{Sec6_means_spr24_handout_files/mediabag/600px-Student_t_pdf..png}
+\end{frame}
+
+\begin{frame}{Where was the first \(t\)-Test done?}
+\protect\hypertarget{where-was-the-first-t-test-done}{}
+\includegraphics{Sec6_means_spr24_handout_files/mediabag/kalamazoo-map-1861-a.jpg}
+\end{frame}
+
+\begin{frame}{Case Study: Treatments for Anorexia Nervosa}
+\protect\hypertarget{case-study-treatments-for-anorexia-nervosa}{}
+\begin{itemize}
+\item
+  \textbf{Anorexia nervosa} is an eating disorder characterized by
+  weight loss (or lack of appropriate weight gain in growing children);
+  difficulties maintaining an appropriate body weight for height, age,
+  and stature; and, in many individuals, distorted body image.
+  (https://www.nationaleatingdisorders.org/anorexia-nervosa)
+\item
+  Randomized controlled experiment in the UK to assess effectiveness of
+  two experimental treatments compared with the established
+  \emph{control} treatment (Hand, D. J., Daly, F., McConway, K., Lunn,
+  D. and Ostrowski, E. eds (1993) \emph{A Handbook of Small Data Sets.
+  Chapman \& Hall}, Data set 285 (p.~229))
+\end{itemize}
+\end{frame}
+
+\begin{frame}{\(t\)-Based Formulas}
+\protect\hypertarget{t-based-formulas}{}
+\begin{itemize}
+\item
+  Confidence interval\\
+  \[
+  \mbox{sample statistic} \pm t^* \times \mbox{SE}
+  \]
+\item
+  Hypothesis test\\
+  \[
+   t=\frac{\mbox{sample statistic}-\mbox{null parameter}}{\mbox{SE}}
+  \]
+\item
+  Use the \(t\) distribution for \(p\)-values and critical \(t^*\)
+  values.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Case Study: Treatments for Anorexia Nervosa}
+\protect\hypertarget{case-study-treatments-for-anorexia-nervosa-1}{}
+\begin{itemize}
+\tightlist
+\item
+  Today we focus on two groups:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Control: 26 girls
+  \item
+    Family therapy: 17 girls
+  \end{itemize}
+\item
+  Variables:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Group\\
+  \item
+    Before Weight (\emph{Wtbef})\\
+  \item
+    After Weight (\emph{Wtaft})\\
+  \item
+    Gain= After-Before (\emph{Gain})
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Case Study: Research Questions}
+\protect\hypertarget{case-study-research-questions}{}
+\begin{enumerate}
+\tightlist
+\item
+  Do girls on family therapy gain weight?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Hypothesis test
+  \end{itemize}
+\item
+  How much weight do girls on family therapy gain?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Confidence interval
+  \end{itemize}
+\item
+  Do girls on family therapy gain \textbf{more} weight than girls on
+  control therapy?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Hypothesis test
+  \end{itemize}
+\item
+  \textbf{How much more} weight do girls on family therapy gain than
+  girls on control therapy?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Confidence interval
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Matched Pairs}
+\protect\hypertarget{matched-pairs}{}
+\begin{itemize}
+\item
+  For a matched pairs experiment, we look at the differences for each
+  pair, and do analysis on this one quantitative variable
+\item
+  Inference for a single mean (mean difference)
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Getting the Data into R}
+\protect\hypertarget{getting-the-data-into-r}{}
+Use the following command to import the data into the data frame
+\texttt{Anorexia\_2samp}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Anorexia\_2samp }\OtherTok{\textless{}{-}}
+  \FunctionTok{read.csv}\NormalTok{(}\StringTok{"http://people.kzoo.edu/enordmoe/math261/data/Anorexia\_2samp.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}{Results for the Family Therapy Girls}
+\protect\hypertarget{results-for-the-family-therapy-girls}{}
+\begin{itemize}
+\item
+  The average before weight of family therapy girls was 83.2 pounds.
+\item
+  The average weight gain for girls in the family therapy group was 7.26
+  pounds.
+\item
+  The standard deviation of these gains was 7.16 pounds.
+\item
+  The sample size was 17 girls.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Q1: Weight gain for girls in Family Therapy: Hypothesis
+Test}
+\protect\hypertarget{q1-weight-gain-for-girls-in-family-therapy-hypothesis-test}{}
+\begin{enumerate}
+\item
+  State hypotheses
+\item
+  Check conditions
+\item
+  Calculate standard error SE
+\item
+  Calculate \(t\)-statistic
+\item
+  Compute \(p\)-value
+\item
+  Interpret in context
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Q1: Weight gain for girls in Family Therapy: Hypothesis
+Test Calculations}
+\protect\hypertarget{q1-weight-gain-for-girls-in-family-therapy-hypothesis-test-calculations}{}
+\end{block}
+\end{frame}
+
+\begin{frame}{Q2: Weight gain for girls in Family Therapy: Confidence
+Interval}
+\protect\hypertarget{q2-weight-gain-for-girls-in-family-therapy-confidence-interval}{}
+\begin{enumerate}
+\item
+  Check conditions
+\item
+  Find \(t^*\) corresponding to desired level of confidence
+\item
+  Compute the confidence interval
+\item
+  Interpret in context
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Q2: Weight gain for girls in Family Therapy: Confidence
+Interval Calculations}
+\protect\hypertarget{q2-weight-gain-for-girls-in-family-therapy-confidence-interval-calculations}{}
+\end{block}
+\end{frame}
+
+\begin{frame}{Question 3}
+\protect\hypertarget{question-3}{}
+\textbf{Hypothesis Test: Do girls on family therapy gain more weight
+than girls on control therapy?}
+
+\begin{enumerate}
+\item
+  State hypotheses
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Two independent samples
+  \end{itemize}
+\item
+  Check conditions
+\item
+  Calculate standard error SE
+\item
+  Calculate \(t\)-statistic
+\item
+  Compute \(p\)-value
+\item
+  Interpret in context
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Summary Results for Family Therapy and Control
+Groups}
+\protect\hypertarget{summary-results-for-family-therapy-and-control-groups}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{favstats}\NormalTok{(Gain }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Group, }\AttributeTok{data =}\NormalTok{ Anorexia\_2samp)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    Group   min   Q1 median   Q3  max      mean       sd  n missing
+1 Control -12.2 -7.0  -0.35  3.6 15.9 -0.450000 7.988705 26       0
+2  Family  -5.3  3.9   9.00 11.4 21.5  7.264706 7.157421 17       0
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{Question 3}
+\protect\hypertarget{question-3-1}{}
+\textbf{Do girls on family therapy gain more weight than girls on
+control therapy? Hypothesis Test Calculations}
+\end{frame}
+
+\begin{frame}{Question 4}
+\protect\hypertarget{question-4}{}
+\textbf{How much more weight do girls on family therapy gain than girls
+on control therapy? Confidence interval}
+
+\begin{enumerate}
+\item
+  Check conditions
+\item
+  Find \(t^*\) corresponding to desired level of confidence
+\item
+  Compute the confidence interval
+\item
+  Interpret in context
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Question 4}
+\protect\hypertarget{question-4-1}{}
+\textbf{How much more weight do girls on family therapy gain than girls
+on control therapy? Confidence interval calculations}
+\end{block}
+\end{frame}
+
+\begin{frame}{Inference formulas for means}
+\protect\hypertarget{inference-formulas-for-means}{}
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2500}}
+  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3750}}
+  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3750}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+Parameter of Interest
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Confidence Interval
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Test of Significance
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\(\mu\) & \(\bar x \pm t^* \frac{s}{\sqrt{n}}\) &
+\(t=\frac{\bar x-\mu_0}{s/\sqrt{n}}\) \\
+\(\mu_1-\mu_2\) &
+\((\bar x_1-\bar x_2) \pm t^* \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}\)
+&
+\(t=\frac{(\bar x_1-\bar x_2)}{\sqrt{\frac{s_1^2}{n_1}+\frac{2_2^2}{n_2}}}\) \\
+\bottomrule\noalign{}
+\end{longtable}
+\end{frame}
+
+\hypertarget{a-few-words-about-conditions}{%
+\section{A Few Words about
+Conditions}\label{a-few-words-about-conditions}}
+
+\begin{frame}{Normality Conditions}
+\protect\hypertarget{normality-conditions}{}
+\begin{itemize}
+\item
+  Using the t-distribution requires that the data comes from a
+  \emph{normal distribution}
+\item
+  Note: this assumption is about the population data, \emph{not} the
+  distribution of the statistic.
+\item
+  For large sample sizes we do not need to worry about this, because
+  \(s\) will be a very good estimate of \(\sigma\) and \(t\) will be
+  very close to \(N(0,1)\).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Small Samples}
+\protect\hypertarget{small-samples}{}
+\begin{itemize}
+\item
+  For \textbf{small sample sizes} (\(n<30\)), we can only use the
+  \(t\)-distribution if the distribution of the data is approximately
+  \textbf{normal}.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Problem: Hard to assess normality for small samples.
+  \end{itemize}
+\end{itemize}
+
+\pause
+
+\begin{itemize}
+\item
+  If sample sizes are \textbf{small}, only use the \(t\)-distribution if
+  the data look reasonably symmetric and do not have any extreme
+  outliers.
+
+  \begin{itemize}
+  \item
+    Even then, remember that the \(t\) is just an approximation!
+  \item
+    In practice, if sample sizes are small, use \textbf{simulation
+    methods} (bootstrapping and randomization).
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Summary}
+\protect\hypertarget{summary}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Understanding the \(t\)-distribution}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Accounts for additional uncertainty in sample estimates
+  \item
+    Thicker tails compared to the normal distribution
+  \end{itemize}
+\item
+  \textbf{Inference procedures}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Use \(t\)-based confidence intervals and hypothesis tests for means
+  \item
+    Consider degrees of freedom
+  \item
+    Ensure conditions for using the \(t\)-distribution are met
+  \end{itemize}
+\item
+  \textbf{Practical application}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Analyze weight gain data from anorexia nervosa treatment study
+  \item
+    Apply hypothesis tests and confidence intervals
+  \item
+    Draw conclusions about treatment effectiveness
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\end{document}

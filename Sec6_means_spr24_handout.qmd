@@ -3,13 +3,10 @@ title: "6.2, 6.4, 6.5 Inference About Means"
 subtitle: "Math 261"
 format:
   revealjs:
-    chalkboard: true
     theme: default
     reveal-options:
       slideNumber: true
-title-slide-attributes:
-  data-background-color: "#EA6820"
-editor: visual
+  editor: visual
 ---
 
 ```{r setup, include=FALSE}
