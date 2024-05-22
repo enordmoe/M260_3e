@@ -25,6 +25,44 @@ library(Lock5Data)
 Anorexia_2samp <- read.csv("http://people.kzoo.edu/enordmoe/math261/data/Anorexia_2samp.csv")
 ```
 
+## Case Study: Treatments for Anorexia Nervosa {.smaller}
+
+-   **Anorexia nervosa** is an eating disorder characterized by weight loss (or lack of appropriate weight gain in growing children); difficulties maintaining an appropriate body weight for height, age, and stature; and, in many individuals, distorted body image. (https://www.nationaleatingdisorders.org/anorexia-nervosa)
+
+. . .
+
+-   Randomized controlled experiment in the UK to assess effectiveness of two experimental treatments compared with the established *control* treatment (Hand, D. J., Daly, F., McConway, K., Lunn, D. and Ostrowski, E. eds (1993) *A Handbook of Small Data Sets. Chapman & Hall*, Data set 285 (p. 229))
+
+
+## Case Study: Treatments for Anorexia Nervosa
+
+-   Today we focus on two groups:
+    -   Control: 26 girls
+    -   Family therapy: 17 girls
+
+. . .
+
+-   Variables:
+    -   Group\
+    -   Before Weight (*Wtbef*)\
+    -   After Weight (*Wtaft*)\
+    -   Gain= After-Before (*Gain*)
+
+## Case Study: Research Questions
+
+::: incremental
+1.  Do girls on family therapy gain weight?
+    -   Hypothesis test
+2.  How much weight do girls on family therapy gain?
+    -   Confidence interval
+3.  Do girls on family therapy gain **more** weight than girls on control therapy?
+    -   Hypothesis test
+4.  **How much more** weight do girls on family therapy gain than girls on control therapy?
+    -   Confidence interval
+:::
+
+
+
 ## Outline
 
 -   Formulas for Standard Errors\
@@ -295,21 +333,20 @@ favstats(Gain ~ Group, data = Anorexia_2samp)
 
 ## Summary {.smaller}
 
-- **Understanding the $t$-distribution**
-  - Accounts for additional uncertainty in sample estimates
-  - Thicker tails compared to the normal distribution
+-   **Understanding the** $t$-distribution
+    -   Accounts for additional uncertainty in sample estimates
+    -   Thicker tails compared to the normal distribution
 
-. . . 
+. . .
 
-- **Inference procedures**
-  - Use $t$-based confidence intervals and hypothesis tests for means
-  - Consider degrees of freedom
-  - Ensure conditions for using the $t$-distribution are met
+-   **Inference procedures**
+    -   Use $t$-based confidence intervals and hypothesis tests for means
+    -   Consider degrees of freedom
+    -   Ensure conditions for using the $t$-distribution are met
 
-. . . 
+. . .
 
-- **Practical application**
-  - Analyze weight gain data from anorexia nervosa treatment study
-  - Apply hypothesis tests and confidence intervals
-  - Draw conclusions about treatment effectiveness
-
+-   **Practical application**
+    -   Analyze weight gain data from anorexia nervosa treatment study
+    -   Apply hypothesis tests and confidence intervals
+    -   Draw conclusions about treatment effectiveness

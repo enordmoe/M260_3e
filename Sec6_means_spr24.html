@@ -8,7 +8,7 @@
 <link href="Sec6_means_spr24_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="Sec6_means_spr24_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="Sec6_means_spr24_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.4.553">
 
   <title>6.2, 6.4, 6.5 Inference About Means</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -30,7 +30,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -222,7 +222,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -398,6 +399,64 @@
 </div>
 
 </section>
+<section id="case-study-treatments-for-anorexia-nervosa" class="slide level2 smaller">
+<h2>Case Study: Treatments for Anorexia Nervosa</h2>
+<ul>
+<li><strong>Anorexia nervosa</strong> is an eating disorder characterized by weight loss (or lack of appropriate weight gain in growing children); difficulties maintaining an appropriate body weight for height, age, and stature; and, in many individuals, distorted body image. (https://www.nationaleatingdisorders.org/anorexia-nervosa)</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Randomized controlled experiment in the UK to assess effectiveness of two experimental treatments compared with the established <em>control</em> treatment (Hand, D. J., Daly, F., McConway, K., Lunn, D. and Ostrowski, E. eds (1993) <em>A Handbook of Small Data Sets. Chapman &amp; Hall</em>, Data set 285 (p.&nbsp;229))</li>
+</ul>
+</div>
+</section>
+<section id="case-study-treatments-for-anorexia-nervosa-1" class="slide level2">
+<h2>Case Study: Treatments for Anorexia Nervosa</h2>
+<ul>
+<li>Today we focus on two groups:
+<ul>
+<li>Control: 26 girls</li>
+<li>Family therapy: 17 girls</li>
+</ul></li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Variables:
+<ul>
+<li>Group<br>
+</li>
+<li>Before Weight (<em>Wtbef</em>)<br>
+</li>
+<li>After Weight (<em>Wtaft</em>)<br>
+</li>
+<li>Gain= After-Before (<em>Gain</em>)</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="case-study-research-questions" class="slide level2">
+<h2>Case Study: Research Questions</h2>
+<div>
+<ol type="1">
+<li class="fragment">Do girls on family therapy gain weight?
+<ul>
+<li class="fragment">Hypothesis test</li>
+</ul></li>
+<li class="fragment">How much weight do girls on family therapy gain?
+<ul>
+<li class="fragment">Confidence interval</li>
+</ul></li>
+<li class="fragment">Do girls on family therapy gain <strong>more</strong> weight than girls on control therapy?
+<ul>
+<li class="fragment">Hypothesis test</li>
+</ul></li>
+<li class="fragment"><strong>How much more</strong> weight do girls on family therapy gain than girls on control therapy?
+<ul>
+<li class="fragment">Confidence interval</li>
+</ul></li>
+</ol>
+</div>
+</section>
 <section id="outline" class="slide level2">
 <h2>Outline</h2>
 <ul>
@@ -519,7 +578,7 @@
 <h2>Where was the first <span class="math inline">\(t\)</span>-Test done?</h2>
 
 <img data-src="https://www.kpl.gov/app/uploads/2019/02/kalamazoo-map-1861-asylum-grounds-1600.jpg" class="r-stretch"></section>
-<section id="case-study-treatments-for-anorexia-nervosa" class="slide level2 smaller">
+<section id="case-study-treatments-for-anorexia-nervosa-2" class="slide level2 smaller">
 <h2>Case Study: Treatments for Anorexia Nervosa</h2>
 <ul>
 <li><strong>Anorexia nervosa</strong> is an eating disorder characterized by weight loss (or lack of appropriate weight gain in growing children); difficulties maintaining an appropriate body weight for height, age, and stature; and, in many individuals, distorted body image. (https://www.nationaleatingdisorders.org/anorexia-nervosa)</li>
@@ -552,7 +611,7 @@ t=\frac{\mbox{sample statistic}-\mbox{null parameter}}{\mbox{SE}}
 </ul>
 </div>
 </section>
-<section id="case-study-treatments-for-anorexia-nervosa-1" class="slide level2">
+<section id="case-study-treatments-for-anorexia-nervosa-3" class="slide level2">
 <h2>Case Study: Treatments for Anorexia Nervosa</h2>
 <ul>
 <li>Today we focus on two groups:
@@ -576,7 +635,7 @@ t=\frac{\mbox{sample statistic}-\mbox{null parameter}}{\mbox{SE}}
 </ul>
 </div>
 </section>
-<section id="case-study-research-questions" class="slide level2">
+<section id="case-study-research-questions-1" class="slide level2">
 <h2>Case Study: Research Questions</h2>
 <div>
 <ol type="1">
@@ -610,8 +669,8 @@ t=\frac{\mbox{sample statistic}-\mbox{null parameter}}{\mbox{SE}}
 <h2>Getting the Data into R</h2>
 <p>Use the following command to import the data into the data frame <code>Anorexia_2samp</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>Anorexia_2samp <span class="ot">&lt;-</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>  <span class="fu">read.csv</span>(<span class="st">"http://people.kzoo.edu/enordmoe/math261/data/Anorexia_2samp.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>Anorexia_2samp <span class="ot">&lt;-</span></span>
+<span id="cb1-2"><a href=""></a>  <span class="fu">read.csv</span>(<span class="st">"http://people.kzoo.edu/enordmoe/math261/data/Anorexia_2samp.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="results-for-the-family-therapy-girls" class="slide level2">
@@ -671,7 +730,7 @@ t=\frac{\mbox{sample statistic}-\mbox{null parameter}}{\mbox{SE}}
 <section id="summary-results-for-family-therapy-and-control-groups" class="slide level2">
 <h2>Summary Results for Family Therapy and Control Groups</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">favstats</span>(Gain <span class="sc">~</span> Group, <span class="at">data =</span> Anorexia_2samp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">favstats</span>(Gain <span class="sc">~</span> Group, <span class="at">data =</span> Anorexia_2samp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Group   min   Q1 median   Q3  max      mean       sd  n missing
 1 Control -12.2 -7.0  -0.35  3.6 15.9 -0.450000 7.988705 26       0
@@ -761,7 +820,7 @@ t=\frac{\mbox{sample statistic}-\mbox{null parameter}}{\mbox{SE}}
 <section id="summary" class="slide level2 smaller">
 <h2>Summary</h2>
 <ul>
-<li><strong>Understanding the <span class="math inline">\(t\)</span>-distribution</strong>
+<li><strong>Understanding the</strong> <span class="math inline">\(t\)</span>-distribution
 <ul>
 <li>Accounts for additional uncertainty in sample estimates</li>
 <li>Thicker tails compared to the normal distribution</li>
@@ -786,8 +845,10 @@ t=\frac{\mbox{sample statistic}-\mbox{null parameter}}{\mbox{SE}}
 <li>Draw conclusions about treatment effectiveness</li>
 </ul></li>
 </ul>
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </div>
 </section></section>
@@ -818,7 +879,6 @@ t=\frac{\mbox{sample statistic}-\mbox{null parameter}}{\mbox{SE}}
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -1118,10 +1178,27 @@ t=\frac{\mbox{sample statistic}-\mbox{null parameter}}{\mbox{SE}}
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1131,8 +1208,17 @@ t=\frac{\mbox{sample statistic}-\mbox{null parameter}}{\mbox{SE}}
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -1146,7 +1232,11 @@ t=\frac{\mbox{sample statistic}-\mbox{null parameter}}{\mbox{SE}}
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {
