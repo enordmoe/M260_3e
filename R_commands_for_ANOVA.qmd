@@ -23,41 +23,43 @@ library(mosaic)
 library(Lock5Data)
 ```
 
-(Note: This R guide for ANOVA is adapted from the *Lock5 with R companion to Statistics:Unlocking the Power of Data*  by Randall Pruim and Lana Park.)
+(Note: This R guide for ANOVA is adapted from the *Lock5 with R companion to Statistics:Unlocking the Power of Data* by Randall Pruim and Lana Park.)
 
-# 8.1 Analysis of Variance  
+# 8.1 Analysis of Variance
 
 ## Overview
 
-* Two variables: categorical explanatory and quantitative response  
-    + Can be used in either experimental or observational designs.  
+-   Two variables: categorical explanatory and quantitative response
 
-* Main Question: Does the population mean response depend on the (treatment) group?  
-    + $H_0$: the population group means are all equal ($\mu_1 = \mu_2=\cdots=\mu_k$   
-    + $H_a$: the population group means are not all equal  
-    
-* If categorical variable has only 2 values, we already have a method:  2-sample $t$-test  
-    + ANOVA allows for 3 or more groups (sub-populations)  
-   
-* $F$ statistic compares within group variation (how different are individuals in the same group?) to between group variation (how different are the different group means?)  
+    -   Can be used in either experimental or observational designs.
 
-* ANOVA assumes that each group is normally distributed with the same (population) standard deviation.  
-    + Check normality from data plots; normality more critical for small samples. In practice, watch out for clear skewness or extreme outliers if the sample size is small.     
-    + Check equal standard deviation using 2:1 ratio rule (largest standard deviation at most twice the smallest standard deviation).  
-    
+-   Main Question: Does the population mean response depend on the (treatment) group?
 
-## Null and Alternative Hypotheses  
+    -   $H_0$: the population group means are all equal ($\mu_1 = \mu_2=\cdots=\mu_k$\
+    -   $H_a$: the population group means are not all equal
 
-### Example 8.1   
+-   If categorical variable has only 2 values, we already have a method: 2-sample $t$-test
 
-Are some kinds of sandwiches likely to attrach ants more than others?  
+    -   ANOVA allows for 3 or more groups (sub-populations)
+
+-   $F$ statistic compares within group variation (how different are individuals in the same group?) to between group variation (how different are the different group means?)
+
+-   ANOVA assumes that each group is normally distributed with the same (population) standard deviation.
+
+    -   Check normality from data plots; normality more critical for small samples. In practice, watch out for clear skewness or extreme outliers if the sample size is small.\
+    -   Check equal standard deviation using 2:1 ratio rule (largest standard deviation at most twice the smallest standard deviation).
+
+## Null and Alternative Hypotheses
+
+### Example 8.1
+
+Are some kinds of sandwiches likely to attrach ants more than others?
 
 ```{r}
 favstats(Ants ~ Filling, data = SandwichAnts)
 ```
 
-
-**Summary Plots** 
+**Summary Plots**
 
 Obtain an overview using a boxplot:
 
@@ -65,14 +67,13 @@ Obtain an overview using a boxplot:
 gf_boxplot(Ants ~ Filling, data = SandwichAnts)
 ```
 
-
-Get more details by using dotplots:  
+Get more details by using dotplots:
 
 ```{r}
 gf_dotplot(~Ants | Filling ~ ., data = SandwichAnts, dotsize = 0.5)
 ```
 
-Can also overlay the mean on the dotplots, but things are getting pretty complicated now!    
+Can also overlay the mean on the dotplots, but things are getting pretty complicated now!
 
 ```{r}
 gf_jitter(Filling ~ Ants, data = SandwichAnts, height = 0.05) %>%
@@ -80,81 +81,75 @@ gf_jitter(Filling ~ Ants, data = SandwichAnts, height = 0.05) %>%
              color = "red")
 ```
 
-We see there is variability *between* the means as well as *within* the groups. The question is whether the variability in means is too great to be explained by chance variability.  
+We see there is variability *between* the means as well as *within* the groups. The question is whether the variability in means is too great to be explained by chance variability.
 
-
-## Carrying out ANOVA and Partitioning Variability   
+## Carrying out ANOVA and Partitioning Variability
 
 ### Example 8.3
- 
+
 ```{r}
 Ants.Model <- lm(Ants ~ Filling, data = SandwichAnts)
 anova(Ants.Model)
 ```
 
+The $p$-value listed in this output (`Pr(>F)=0.01105`) is the $p$-value for our null hypothesis that the mean population response is the same in each treatment group. In this case, our test would provide fairly strong evidence against the null hypothesis in favor of the alternative that there is a difference somewhere among the means.
 
-The $p$-value listed in this output (`Pr(>F)=0.01105`) is the $p$-value for our null hypothesis that the mean population response is the same in each treatment group. In this case, our test would provide fairly strong evidence against the null hypothesis in favor of the alternative that there is a difference somewhere among the means. 
+In the next section we'll look at this test in more detail, but notice that if you know the assumptions of a test, the null hypothesis being tested, and the $p$-value, you can generally interpret the results even if you don't know all the details of how the test statistic is computed.
 
-In the next section we'll look at this test in more detail, but notice that if you know the assumptions of a test, the null hypothesis being tested, and the $p$-value, you can generally interpret the results even if you don't know all the details of how the test statistic is computed.  
+## The F-Statistic
 
-## The F-Statistic  
+The ANOVA test statistic (called $F$) is based on three ingredients:
 
-The ANOVA test statistic (called $F$) is based on three ingredients:  
+1.  how different the group means are (between group differences)\
+2.  the amount of variability within each group (within group differences)\
+3.  sample size
 
-1. how different the group means are (between group differences)  
-2. the amount of variability within each group (within group differences)  
-3. sample size   
+Each of these is involved in the calculation of $F$.
 
-Each of these is  involved in the calculation of $F$.  
+## The F-distribution
 
+Under certain conditions, the $F$ statistic has a known distribution (called the $F$ distribution). Those conditions are\
+1. The null hypothesis is true (i.e., each group has the same mean)\
+2. Each group is sampled from a normal population\
+3. Each population group has the same standard deviation
 
-## The F-distribution  
+When these conditions are met, we can use the $F$-distribution to compute the $p$-value without generating the randomization distribution.
 
-Under certain conditions, the $F$ statistic has a known distribution (called the $F$ distribution). Those conditions are  
-1. The null hypothesis is true (i.e., each group has the same mean)  
-2. Each group is sampled from a normal population  
-3. Each population group has the same standard deviation  
+-   $F$ distributions have two parameters: the degrees of freedom for the numerator and for the denominator. In our example, this is 2 for the numerator and 7 for the denominator.
 
-When these conditions are met, we can use the $F$-distribution to compute the $p$-value without generating the randomization distribution.  
+-   When $H_0$ is true, the numerator and denominator both have a mean of 1, so F will tend to be close to 1.
 
-* $F$ distributions have two parameters: the degrees of freedom for the numerator and for the denominator.  In our example, this is 2 for the numerator and 7 for the denominator.  
+-   When $H_0$ is false, there is more variability between the groups, so the numerator tends to be larger.
 
-* When $H_0$ is true, the numerator and denominator both have a mean of 1, so F will tend to be close to 1.  
+-   This means we find evidence against the null hypothesis when $F$ gets large giving a small right-tail area.
 
-* When $H_0$ is false, there is more variability between the groups, so the numerator tends to be larger.  
+## More Examples of ANOVA
 
-* This means we find evidence against the null hypothesis when $F$ gets large giving a small right-tail area.  
-
-
-## More Examples of ANOVA  
-
-Use ANOVA to explore whether pulse rate is related to Award desired.  
+Use ANOVA to explore whether pulse rate is related to Award desired.
 
 ```{r}
 head(StudentSurvey,3)
 ```
 
 Summary statistics of `Pulse`
- 
+
 ```{r}
 favstats(~Pulse, data = StudentSurvey)
 ```
 
-
-Summary statistics by `Award` sought: 
+Summary statistics by `Award` sought:
 
 ```{r}
 favstats(Pulse ~ Award, data = StudentSurvey)
 ```
 
+Carry out the ANOVA:
 
-Carry out the ANOVA: 
 ```{r}
 anova(lm(Pulse ~ Award, StudentSurvey))
 ```
 
-
-The low $p$-value is evidence that mean pulse rates differ across groups, assuming the conditions for the ANOVA hold.  
+The low $p$-value is evidence that mean pulse rates differ across groups, assuming the conditions for the ANOVA hold.
 
 **Figure 8.5**
 
@@ -163,59 +158,49 @@ gf_boxplot(Pulse ~ Award, data = StudentSurvey, outlier.shape = NA) %>%
   gf_jitter(width = .1)
 ```
 
-
-
 # 8.2 Pairwise Comparisons and Inference After ANOVA
 
-## Using ANOVA for Inferences about Group Means  
+## Using ANOVA for Inferences about Group Means
 
-In Chapter 6 we used formulas for doing inference (either confidence intervals or tests) for a single mean and differences in two means.  If we have found an ANOVA table based on samples from several groups, we make a couple of small adjustments to the computations in the Chapter 6 formulas:    
+In Chapter 6 we used formulas for doing inference (either confidence intervals or tests) for a single mean and differences in two means. If we have found an ANOVA table based on samples from several groups, we make a couple of small adjustments to the computations in the Chapter 6 formulas:
 
-* Estimate any standard deviation with the common $MSE$ from the ANOVA table.  
+-   Estimate any standard deviation with the common $MSE$ from the ANOVA table.
 
-* Use the error degrees of freedom, $n - k$, for any $t$-distributions.  
+-   Use the error degrees of freedom, $n - k$, for any $t$-distributions.
 
-For example, to find a confidence interval for the mean of the $i$th group, we use 
-$$
+For example, to find a confidence interval for the mean of the $i$th group, we use $$
 \bar x_i \pm t^* \frac{\sqrt{\text{MSE}}}{\sqrt{n_i}}
 $$
 
+Since one of the conditions for the ANOVA is that the standard deviation is the same in each group, using $\sqrt{\text{MSE}}$ gives an estimate that is based on all of the samples, rather than just one. That is why we use the MSE degrees of freedom, $n-k$, rather than $n_i-1$. . We often call MSE the *pooled* standard deviation.
 
-
-Since one of the conditions for the ANOVA is that the standard deviation is the same in each group, using  $\sqrt{\text{MSE}}$ gives an estimate that is based on all of the samples, rather than just one. That is why we use the MSE degrees of freedom, $n-k$, rather than $n_i-1$. . We often call	MSE the *pooled* standard deviation.  
-
-**Example 8.7**  
+**Example 8.7**
 
 ```{r}
 #Referring to the Ants.Model created with the lm() command above:
 anova(Ants.Model)
 ```
 
-
 ```{r}
 MSE <- 138.71
 mean(Ants ~ Filling, data = SandwichAnts)
 ```
 
-
-
-Use Tukey's HSD method (not mentioned in the text) to get pairwise comparisons for *all* pairs of means:  
+Use Tukey's HSD method (not mentioned in the text) to get pairwise comparisons for *all* pairs of means:
 
 ```{r}
 TukeyHSD(Ants.Model)
 ```
 
-
-The results can also be plotted to help visualize the differences in means:  
+The results can also be plotted to help visualize the differences in means:
 
 ```{r}
 plot(TukeyHSD(Ants.Model))
 ```
 
+## Lots of Pairwise Comparisons
 
-## Lots of Pairwise Comparisons  
-
-**Example 8.10** 
+**Example 8.10**
 
 ```{r}
 head(TextbookCosts,3)
@@ -232,7 +217,6 @@ gf_boxplot(Cost ~ Field, data = TextbookCosts, outlier.shape = NA) %>%
   gf_jitter(width = 0.1)
 ```
 
-
 Get pairwise comparisons among the mean prices of textbooks from different fields:
 
 ```{r}
@@ -240,14 +224,8 @@ Books.Model <- lm(Cost ~ Field, data = TextbookCosts)
 anova(Books.Model)
 ```
 
-
-
-
 ```{r}
 # This method (Tukey) is better than method in the text
 # because it controls for multiple comparisons.
 TukeyHSD(Books.Model)
 ```
-
-
-
