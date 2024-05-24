@@ -1,0 +1,40 @@
+
+
+Mice Diet Restriction Analysis
+========================================================
+
+
+```{r setup2,include=FALSE}
+options(digits=8)
+# set global chunk options: images will be 7x5 inches
+opts_chunk$set(warning=FALSE,message=FALSE)
+```
+
+```{r}
+#Load packages
+require(ggplot2)
+require(mosaic)
+#Read data from class directory
+mice<-read.csv("http://people.kzoo.edu/enordmoe/math261/data/mice_diet_restrict.csv")
+```
+
+### Get Summary Statistics
+
+```{r}
+favstats(Lifetime~Diet,data=mice)
+```
+
+### Data plots
+```{r}
+#Data plots
+qplot(Lifetime,data=mice,facets=Diet~.)
+qplot(Diet,Lifetime,data=mice,geom="boxplot")
+```
+Plots and summary suggest differences in lifetime across diets.
+
+### ANOVA procedures and output
+
+```{r}
+mod1=lm(Lifetime~Diet,data=mice)
+anova(mod1)
+```
