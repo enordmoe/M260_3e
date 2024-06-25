@@ -1,0 +1,139 @@
+---
+title: "Sec 1.1: The Structure of Data"
+author: "Math 260 Applied Statistics"
+format:
+  revealjs:
+    chalkboard: true
+    theme: default
+    reveal-options:
+      slideNumber: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+```
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+library(nycflights13)
+```
+
+## Outline
+
+-   Data
+-   Cases and variables
+-   Categorical and quantitative variables
+-   Explanatory and response variables
+
+## Data
+
+-   Data are measurements taken on a set of individual units
+
+-   Data is typically stored and presented in a *dataset*, comprised of variables measured on cases
+
+## The Data Family Tree
+
+![Diagram of the Data Family Tree](figs/data_family_tree.png)
+
+# Cautions in Research
+
+## The Challenge of Categorization
+
+-   **Race is a Social Construct**
+    -   To investigate systemic racism, we often need to categorize people by race.
+    -   How do we measure the effects of systemic racism using these categories?
+    -   How can we study disease risk factors across these socially constructed categories?
+
+## Gender and Discrimination
+
+-   **The [Gender Unicorn](https://www.transhealthsa.com/wp-content/uploads/2017/05/The-Gender-Unicorn.pdf)**
+    -   To measure salary discrimination, we need to classify individuals by sex/gender.
+    -   How do we accurately measure salary discrimination across diverse gender identities?
+    -   How do we estimate the incidence of various medical conditions considering sex/gender differences?
+
+## Ethical and Methodological Implications
+
+-   While categorizing people can help us measure important effects, it also risks oversimplification and reinforcing stereotypes.
+-   How can researchers balance the need for categorization with the complexities of individual identities?
+
+# Sample Data Sets
+
+## The American Community Survey {.smaller}
+
+```{r, echo=FALSE, out.width="90%"}
+knitr::include_graphics("figs/ACS_data.png")
+```
+
+-   Rows are cases
+-   Columns are variables
+
+## COVID-19 Data by County
+
+![](figs/covid-19_mich_data.png)
+
+## Flights Data {.smaller}
+
+Source: [US Bureau of Transportation Statistics](https://www.transtats.bts.gov/ONTIME/Index.aspx)
+
+```{r, echo=FALSE}
+library(nycflights13)
+knitr::kable(head(sample(flights[,c("flight","tailnum","origin","month","day","distance","air_time")],orig.ids=FALSE)))
+```
+
+. . .
+
+Categorical - tailnum, origin, flight
+
+Quantitative - distance, air_time, month, day
+
+. . .
+
+**Careful**: Dates need to be handled with care and are not typical quantitative variables. Context is everything!
+
+## Flights Data Sets: Part 2 {.smaller}
+
+```{r, echo=FALSE}
+library(nycflights13)
+knitr::kable(head(airports), digits = 2)
+```
+
+# Explanatory and Response Variables
+
+
+## Definitions
+
+If we are using one variable to help us understand or predict values of another variable, we call the former the [explanatory]{style="color:red;"} variable and the latter the [response]{style="color:red;"} variable.
+
+## Explanatory and Reponse Variables: Example 1
+
+Question: Does meditation help reduce stress?
+
+![](https://media.npr.org/assets/img/2014/01/07/mindfulness_wide-b20c3525971d5796eba9ad993463fffe8faf2bcb-s1500-c85.jpg)
+
+Source: [NPR](https://www.npr.org/sections/health-shots/2014/01/07/260470831/mindfulness-meditation-can-help-relieve-anxiety-and-depression)
+
+## Explanatory and Reponse Variables: Example 2
+
+Question: Is coffee helpful for people with depression?
+
+. . .
+
+![](figs/coffee_article.png)
+
+Source: [NBC Health News](https://www.nbcnews.com/health/health-news/coffee-can-cut-depression-risk-women-flna1c9453823)
+
+## Data is Everywhere!
+
+Examples
+
+-   [US News and World Report National University Rankings](https://www.usnews.com/best-colleges/rankings/national-liberal-arts-colleges)
+
+    -   [No place like home](https://www.usnews.com/best-colleges/kalamazoo-college-2275)
+
+-   [US Government's Open Data](http://www.data.gov/)
+
+-   [CDC COVID Data Tracker](https://www.cdc.gov/covid-data-tracker/#cases/)

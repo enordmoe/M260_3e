@@ -44,7 +44,7 @@ Anorexia_2samp <- read.csv("http://people.kzoo.edu/enordmoe/math261/data/Anorexi
 ## Sample Standard Error Formulas
 
 |         Parameter         |       Distribution        |                               Standard Error                               |
-|:-----------------:|:-----------------:|:--------------------------------:|
+|:--------------:|:--------------:|:-------------------------------------:|
 |        Proportion         |          Normal           |                    $\sqrt{\frac{\hat p(1-\hat p)}{n}}$                     |
 | Difference in Proportions |          Normal           | $\sqrt{\frac{\hat p_1(1-\hat p_1)}{n_1}+\frac{\hat p_2(1-\hat p_2)}{n_2}}$ |
 |           Mean            |       $t$, df$=n-1$       |                           $\sqrt{\frac{s^2}{n}}$                           |
@@ -265,7 +265,7 @@ favstats(Gain ~ Group, data = Anorexia_2samp)
 ## Inference formulas for means {.smaller}
 
 | Parameter of Interest |                            Confidence Interval                             |                             Test of Significance                             |
-|:----------------:|:-------------------------:|:-------------------------:|
+|:--------------:|:--------------------------:|:---------------------------:|
 |         $\mu$         |                   $$\bar x \pm t^* \frac{s}{\sqrt{n}}$$                    |                    $$t=\frac{\bar x-\mu_0}{s/\sqrt{n}}$$                     |
 |     $\mu_1-\mu_2$     | $$(\bar x_1-\bar x_2) \pm t^* \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}$$ | $$t=\frac{(\bar x_1-\bar x_2)}{\sqrt{\frac{s_1^2}{n_1}+\frac{2_2^2}{n_2}}}$$ |
 
@@ -295,21 +295,20 @@ favstats(Gain ~ Group, data = Anorexia_2samp)
 
 ## Summary {.smaller}
 
-- **Understanding the $t$-distribution**
-  - Accounts for additional uncertainty in sample estimates
-  - Thicker tails compared to the normal distribution
+-   **Understanding the** $t$-distribution
+    -   Accounts for additional uncertainty in sample estimates
+    -   Thicker tails compared to the normal distribution
 
-. . . 
+. . .
 
-- **Inference procedures**
-  - Use $t$-based confidence intervals and hypothesis tests for means
-  - Consider degrees of freedom
-  - Ensure conditions for using the $t$-distribution are met
+-   **Inference procedures**
+    -   Use $t$-based confidence intervals and hypothesis tests for means
+    -   Consider degrees of freedom
+    -   Ensure conditions for using the $t$-distribution are met
 
-. . . 
+. . .
 
-- **Practical application**
-  - Analyze weight gain data from anorexia nervosa treatment study
-  - Apply hypothesis tests and confidence intervals
-  - Draw conclusions about treatment effectiveness
-
+-   **Practical application**
+    -   Analyze weight gain data from anorexia nervosa treatment study
+    -   Apply hypothesis tests and confidence intervals
+    -   Draw conclusions about treatment effectiveness
