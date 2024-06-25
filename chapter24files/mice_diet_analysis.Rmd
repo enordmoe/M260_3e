@@ -1,0 +1,68 @@
+---
+title: "Example of ANOVA Analysis with R"
+author: "Biostatistics"
+date: "Mice Diet Restriction Study"
+output: 
+  html_document: 
+    fig_height: 4
+    fig_width: 7
+    theme: yeti
+    toc: true
+    toc_float: false
+
+---
+
+```{r setup,include=FALSE}
+knitr::opts_chunk$set(fig.width=7, fig.height=4,warning=FALSE,message=FALSE)
+library(mosaic)
+#Read data from my website
+mice<-read.csv("http://people.kzoo.edu/enordmoe/math261/data/mice_diet_restrict.csv")
+```
+
+## Get Summary Statistics   
+
+```{r}
+favstats(Lifetime ~ Diet, data = mice)
+```
+
+## Data plots   
+
+```{r}
+#Data plots
+gf_histogram(~Lifetime | Diet ~ ., data = mice)
+gf_boxplot(Lifetime ~ Diet, data = mice)
+```
+
+Plots and summary suggest differences in lifetime across diets.
+
+## ANOVA procedures and output   
+
+```{r}
+mice.mod1 <- lm(Lifetime ~ Diet, data = mice)
+anova(mice.mod1)
+```
+
+## Multiple Comparisons Procedures
+
+### Tukey Multiple Comparisons  
+
+```{r}
+TukeyHSD(mice.mod1)
+plot(TukeyHSD(mice.mod1))
+```
+
+### Bonferroni Critical Value
+
+```{r}
+# Multiplier for c=5 planned comparisons
+xct(1-.05/5, df = 343)
+```
+
+```{r}
+# Multiplier for all possible c=15 planned comparisons
+xct(1-.05/15, df = 343)
+```
+
+
+
+
