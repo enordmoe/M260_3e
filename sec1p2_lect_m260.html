@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="sec1p1_lect_m260_files/libs/clipboard/clipboard.min.js"></script>
-<script src="sec1p1_lect_m260_files/libs/quarto-html/tabby.min.js"></script>
-<script src="sec1p1_lect_m260_files/libs/quarto-html/popper.min.js"></script>
-<script src="sec1p1_lect_m260_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="sec1p1_lect_m260_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="sec1p1_lect_m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="sec1p1_lect_m260_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="sec1p1_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="sec1p2_lect_m260_files/libs/clipboard/clipboard.min.js"></script>
+<script src="sec1p2_lect_m260_files/libs/quarto-html/tabby.min.js"></script>
+<script src="sec1p2_lect_m260_files/libs/quarto-html/popper.min.js"></script>
+<script src="sec1p2_lect_m260_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="sec1p2_lect_m260_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="sec1p2_lect_m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="sec1p2_lect_m260_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="sec1p2_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Math 260 Applied Statistics">
-  <title>Sec 1.1: The Structure of Data</title>
+  <title>1.2 Sampling From a Population</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="sec1p1_lect_m260_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="sec1p1_lect_m260_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="sec1p2_lect_m260_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="sec1p2_lect_m260_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -29,14 +29,79 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="sec1p1_lect_m260_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="sec1p1_lect_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="sec1p1_lect_m260_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="sec1p1_lect_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="sec1p1_lect_m260_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="sec1p1_lect_m260_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="sec1p1_lect_m260_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="sec1p2_lect_m260_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="sec1p2_lect_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="sec1p2_lect_m260_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="sec1p2_lect_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="sec1p2_lect_m260_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="sec1p2_lect_m260_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="sec1p2_lect_m260_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -327,7 +392,7 @@
     <div class="slides">
 
 <section id="title-slide" data-background-color="#EA6820" class="quarto-title-block center">
-  <h1 class="title">Sec 1.1: The Structure of Data</h1>
+  <h1 class="title">1.2 Sampling From a Population</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -338,310 +403,368 @@ Math 260 Applied Statistics
 </div>
 
 </section>
-<section id="outline" class="slide level2">
-<h2>Outline</h2>
-<ul>
-<li>Data</li>
-<li>Cases and variables</li>
-<li>Categorical and quantitative variables</li>
-<li>Explanatory and response variables</li>
-</ul>
-</section>
-<section id="data" class="slide level2">
-<h2>Data</h2>
-<ul>
-<li><p>Data are measurements taken on a set of individual units</p></li>
-<li><p>Data is typically stored and presented in a <em>dataset</em>, comprised of variables measured on cases</p></li>
-</ul>
-</section>
-<section id="the-data-family-tree" class="slide level2">
-<h2>The Data Family Tree</h2>
+<section id="cooking-up-a-random-sample" class="slide level2">
+<h2>Cooking up a Random Sample?</h2>
 
-<img data-src="figs/data_family_tree.png" class="r-stretch quarto-figure-center"><p class="caption">Diagram of the Data Family Tree</p></section>
-<section>
-<section id="cautions-in-research" class="title-slide slide level1 center">
-<h1>Cautions in Research</h1>
-
-</section>
-<section id="the-challenge-of-categorization" class="slide level2">
-<h2>The Challenge of Categorization</h2>
+<img data-src="figs/sampling_soup.png" class="r-stretch"></section>
+<section id="sample-versus-population" class="slide level2">
+<h2>Sample versus Population</h2>
+<div>
 <ul>
-<li><strong>Race is a Social Construct</strong>
-<ul>
-<li>To investigate systemic racism, we often need to categorize people by race.</li>
-<li>How do we measure the effects of systemic racism using these categories?</li>
-<li>How can we study disease risk factors across these socially constructed categories?</li>
-</ul></li>
+<li class="fragment"><p>A <strong>population</strong> includes all individuals or objects of interest.</p></li>
+<li class="fragment"><p>A <strong>sample</strong> is the set of cases for which we have data.</p></li>
+<li class="fragment"><p><strong>Statistical inference</strong> is the process of using a sample to learn about the population.</p></li>
 </ul>
+</div>
 </section>
-<section id="gender-and-discrimination" class="slide level2">
-<h2>Gender and Discrimination</h2>
+<section id="bias-vs-sampling-bias" class="slide level2">
+<h2>Bias vs Sampling Bias</h2>
+<p><img data-src="figs/arrow_bias.png" class="absolute" style="bottom: 0px; right: 0px; height: 200px; "></p>
+<div>
 <ul>
-<li><strong>The <a href="https://www.transhealthsa.com/wp-content/uploads/2017/05/The-Gender-Unicorn.pdf">Gender Unicorn</a></strong>
-<ul>
-<li>To measure salary discrimination, we need to classify individuals by sex/gender.</li>
-<li>How do we accurately measure salary discrimination across diverse gender identities?</li>
-<li>How do we estimate the incidence of various medical conditions considering sex/gender differences?</li>
-</ul></li>
+<li class="fragment"><strong>Bias</strong> exists when the method of collecting data causes the sample data to inaccurately reflect the population.</li>
+<li class="fragment"><strong>Sampling bias</strong> occurs when <em>the method of selecting a sample</em> causes the sample to systematically differ from the population.</li>
 </ul>
+</div>
 </section>
-<section id="ethical-and-methodological-implications" class="slide level2">
-<h2>Ethical and Methodological Implications</h2>
-<ul>
-<li>While categorizing people can help us measure important effects, it also risks oversimplification and reinforcing stereotypes.</li>
-<li>How can researchers balance the need for categorization with the complexities of individual identities?</li>
-</ul>
-</section></section>
-<section>
-<section id="sample-data-sets" class="title-slide slide level1 center">
-<h1>Sample Data Sets</h1>
-
+<section id="simple-random-sample" class="slide level2">
+<h2>Simple Random Sample</h2>
+<p><img data-src="figs/sampling_from_bowl.png" class="absolute" style="bottom: 50px; right: 0px; height: 250px; "> When choosing a <strong>simple random sample</strong> of <span class="math inline">\(n\)</span> units, all groups of size <span class="math inline">\(n\)</span> in the population have the <em>same</em> chance of being selected for the sample.</p>
+<div class="fragment">
+<p>Use a simple random sample to avoid <strong>sampling bias</strong>.</p>
+</div>
 </section>
-<section id="the-american-community-survey" class="slide level2 smaller">
-<h2>The American Community Survey</h2>
-
-<img data-src="figs/ACS_data.png" style="width:90.0%" class="r-stretch"><ul>
-<li>Rows are cases</li>
-<li>Columns are variables</li>
-</ul>
+<section id="using-r-to-draw-a-random-sample" class="slide level2">
+<h2>Using R to Draw a Random Sample</h2>
+<p><br></p>
+<p>Generating random integers to select a random sample of 5 students from a class of 30:</p>
+<p><br></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(mosaic)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  5  2  4  7 15</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="covid-19-data-by-county" class="slide level2">
-<h2>COVID-19 Data by County</h2>
-
-<img data-src="figs/covid-19_mich_data.png" class="r-stretch"></section>
-<section id="flights-data" class="slide level2 smaller">
-<h2>Flights Data</h2>
-<p>Source: <a href="https://www.transtats.bts.gov/ONTIME/Index.aspx">US Bureau of Transportation Statistics</a></p>
+<section id="sampling-from-an-r-data-frame" class="slide level2">
+<h2>Sampling from an R Data Frame</h2>
+<p><br></p>
+<p>Randomly sample 3 rows from the <strong>StudentSurvey</strong> data set:</p>
+<p><br></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(mosaic)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">library</span>(Lock5Data)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co"># sample of size 3</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="fu">sample</span>(StudentSurvey, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<div style="font-size: 0.45em">
 <div class="cell">
 <div class="cell-output-display">
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: right;">flight</th>
-<th style="text-align: left;">tailnum</th>
-<th style="text-align: left;">origin</th>
-<th style="text-align: right;">month</th>
-<th style="text-align: right;">day</th>
-<th style="text-align: right;">distance</th>
-<th style="text-align: right;">air_time</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">543</td>
-<td style="text-align: left;">N5FKAA</td>
-<td style="text-align: left;">JFK</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">1089</td>
-<td style="text-align: right;">145</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">278</td>
-<td style="text-align: left;">N563UA</td>
-<td style="text-align: left;">EWR</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1023</td>
-<td style="text-align: right;">149</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">4140</td>
-<td style="text-align: left;">N14950</td>
-<td style="text-align: left;">EWR</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">746</td>
-<td style="text-align: right;">121</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">561</td>
-<td style="text-align: left;">N503UA</td>
-<td style="text-align: left;">LGA</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">1620</td>
-<td style="text-align: right;">215</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">399</td>
-<td style="text-align: left;">N854VA</td>
-<td style="text-align: left;">JFK</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">2475</td>
-<td style="text-align: right;">310</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">3202</td>
-<td style="text-align: left;">N942MQ</td>
-<td style="text-align: left;">JFK</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">13</td>
-<td style="text-align: right;">665</td>
-<td style="text-align: right;">115</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="fragment">
-<p>Categorical - tailnum, origin, flight</p>
-<p>Quantitative - distance, air_time, month, day</p>
-</div>
-<div class="fragment">
-<p><strong>Careful</strong>: Dates need to be handled with care and are not typical quantitative variables. Context is everything!</p>
-</div>
-</section>
-<section id="flights-data-sets-part-2" class="slide level2 smaller">
-<h2>Flights Data Sets: Part 2</h2>
-<div class="cell">
-<div class="cell-output-display">
-<table>
+<table style="width:100%;">
 <colgroup>
-<col style="width: 5%">
-<col style="width: 40%">
+<col style="width: 2%">
 <col style="width: 7%">
-<col style="width: 9%">
-<col style="width: 6%">
-<col style="width: 3%">
+<col style="width: 2%">
+<col style="width: 4%">
 <col style="width: 5%">
-<col style="width: 22%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 2%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 3%">
+<col style="width: 2%">
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 5%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">faa</th>
-<th style="text-align: left;">name</th>
-<th style="text-align: right;">lat</th>
-<th style="text-align: right;">lon</th>
-<th style="text-align: right;">alt</th>
-<th style="text-align: right;">tz</th>
-<th style="text-align: left;">dst</th>
-<th style="text-align: left;">tzone</th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Year</th>
+<th style="text-align: left;">Sex</th>
+<th style="text-align: left;">Smoke</th>
+<th style="text-align: left;">Award</th>
+<th style="text-align: left;">HigherSAT</th>
+<th style="text-align: right;">Exercise</th>
+<th style="text-align: right;">TV</th>
+<th style="text-align: right;">Height</th>
+<th style="text-align: right;">Weight</th>
+<th style="text-align: right;">Siblings</th>
+<th style="text-align: right;">BirthOrder</th>
+<th style="text-align: right;">VerbalSAT</th>
+<th style="text-align: right;">MathSAT</th>
+<th style="text-align: right;">SAT</th>
+<th style="text-align: right;">GPA</th>
+<th style="text-align: right;">Pulse</th>
+<th style="text-align: right;">Piercings</th>
+<th style="text-align: left;">orig.id</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">04G</td>
-<td style="text-align: left;">Lansdowne Airport</td>
-<td style="text-align: right;">41.13</td>
-<td style="text-align: right;">-80.62</td>
-<td style="text-align: right;">1044</td>
-<td style="text-align: right;">-5</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: left;">America/New_York</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">Sophomore</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Nobel</td>
+<td style="text-align: left;">Verbal</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">114</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">600</td>
+<td style="text-align: right;">550</td>
+<td style="text-align: right;">1150</td>
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">6</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">06A</td>
-<td style="text-align: left;">Moton Field Municipal Airport</td>
-<td style="text-align: right;">32.46</td>
-<td style="text-align: right;">-85.68</td>
-<td style="text-align: right;">264</td>
-<td style="text-align: right;">-6</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: left;">America/Chicago</td>
+<td style="text-align: left;">219</td>
+<td style="text-align: left;">Sophomore</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Nobel</td>
+<td style="text-align: left;">Math</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">165</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">520</td>
+<td style="text-align: right;">670</td>
+<td style="text-align: right;">1190</td>
+<td style="text-align: right;">3.5</td>
+<td style="text-align: right;">71</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">219</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">06C</td>
-<td style="text-align: left;">Schaumburg Regional</td>
-<td style="text-align: right;">41.99</td>
-<td style="text-align: right;">-88.10</td>
-<td style="text-align: right;">801</td>
-<td style="text-align: right;">-6</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: left;">America/Chicago</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">06N</td>
-<td style="text-align: left;">Randall Airport</td>
-<td style="text-align: right;">41.43</td>
-<td style="text-align: right;">-74.39</td>
-<td style="text-align: right;">523</td>
-<td style="text-align: right;">-5</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: left;">America/New_York</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">09J</td>
-<td style="text-align: left;">Jekyll Island Airport</td>
-<td style="text-align: right;">31.07</td>
-<td style="text-align: right;">-81.43</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">-5</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: left;">America/New_York</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">0A9</td>
-<td style="text-align: left;">Elizabethton Municipal Airport</td>
-<td style="text-align: right;">36.37</td>
-<td style="text-align: right;">-82.17</td>
-<td style="text-align: right;">1593</td>
-<td style="text-align: right;">-5</td>
-<td style="text-align: left;">A</td>
-<td style="text-align: left;">America/New_York</td>
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">FirstYear</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Olympic</td>
+<td style="text-align: left;">Math</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">580</td>
+<td style="text-align: right;">600</td>
+<td style="text-align: right;">1180</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">12</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-</section></section>
-<section>
-<section id="explanatory-and-response-variables" class="title-slide slide level1 center">
-<h1>Explanatory and Response Variables</h1>
-
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="definitions" class="slide level2">
-<h2>Definitions</h2>
-<p>If we are using one variable to help us understand or predict values of another variable, we call the former the <span style="color:red;">explanatory</span> variable and the latter the <span style="color:red;">response</span> variable.</p>
-</section>
-<section id="explanatory-and-reponse-variables-example-1" class="slide level2">
-<h2>Explanatory and Reponse Variables: Example 1</h2>
-<p>Question: Does meditation help reduce stress?</p>
-
-<img data-src="https://media.npr.org/assets/img/2014/01/07/mindfulness_wide-b20c3525971d5796eba9ad993463fffe8faf2bcb-s1500-c85.jpg" class="r-stretch"><p>Source: <a href="https://www.npr.org/sections/health-shots/2014/01/07/260470831/mindfulness-meditation-can-help-relieve-anxiety-and-depression">NPR</a></p>
-</section>
-<section id="explanatory-and-reponse-variables-example-2" class="slide level2">
-<h2>Explanatory and Reponse Variables: Example 2</h2>
-<p>Question: Is coffee helpful for people with depression?</p>
+<section id="saving-a-sample-as-a-new-data-set" class="slide level2">
+<h2>Saving a Sample as a New Data Set</h2>
+<p><br> Randomly sample <span class="math inline">\(3\)</span> rows from the <strong>StudentSurvey</strong> data set and save to a data set called <strong>mysample</strong>:</p>
+<p><br></p>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(mosaic)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">library</span>(Lock5Data)</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co"># sample of size 3</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>mysample <span class="ot">&lt;-</span> <span class="fu">sample</span>(StudentSurvey, <span class="dv">3</span>)</span>
+<span id="cb4-5"><a href="#cb4-5"></a>mysample</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:45%;">
 <div class="fragment">
-<p><img data-src="figs/coffee_article.png"></p>
-<p>Source: <a href="https://www.nbcnews.com/health/health-news/coffee-can-cut-depression-risk-women-flna1c9453823">NBC Health News</a></p>
+<div style="font-size: 0.45em">
+<div class="cell">
+<div class="cell-output-display">
+<table style="width:100%;">
+<colgroup>
+<col style="width: 2%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 2%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Year</th>
+<th style="text-align: left;">Sex</th>
+<th style="text-align: left;">Smoke</th>
+<th style="text-align: left;">Award</th>
+<th style="text-align: left;">HigherSAT</th>
+<th style="text-align: right;">Exercise</th>
+<th style="text-align: right;">TV</th>
+<th style="text-align: right;">Height</th>
+<th style="text-align: right;">Weight</th>
+<th style="text-align: right;">Siblings</th>
+<th style="text-align: right;">BirthOrder</th>
+<th style="text-align: right;">VerbalSAT</th>
+<th style="text-align: right;">MathSAT</th>
+<th style="text-align: right;">SAT</th>
+<th style="text-align: right;">GPA</th>
+<th style="text-align: right;">Pulse</th>
+<th style="text-align: right;">Piercings</th>
+<th style="text-align: left;">orig.id</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">311</td>
+<td style="text-align: left;">Senior</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Nobel</td>
+<td style="text-align: left;">Math</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">66</td>
+<td style="text-align: right;">170</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">460</td>
+<td style="text-align: right;">520</td>
+<td style="text-align: right;">980</td>
+<td style="text-align: right;">3.05</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">311</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">345</td>
+<td style="text-align: left;">FirstYear</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Nobel</td>
+<td style="text-align: left;">Math</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">68</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">540</td>
+<td style="text-align: right;">670</td>
+<td style="text-align: right;">1210</td>
+<td style="text-align: right;">3.30</td>
+<td style="text-align: right;">84</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">345</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">23</td>
+<td style="text-align: left;">FirstYear</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Olympic</td>
+<td style="text-align: left;">Math</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">73</td>
+<td style="text-align: right;">195</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">560</td>
+<td style="text-align: right;">620</td>
+<td style="text-align: right;">1180</td>
+<td style="text-align: right;">3.50</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">23</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </section>
-<section id="data-is-everywhere" class="slide level2">
-<h2>Data is Everywhere!</h2>
-<p>Examples</p>
+<section id="other-kinds-of-bias" class="slide level2">
+<h2>Other Kinds of Bias</h2>
+<p>Recall <strong>bias</strong> occurs when the method of collecting data causes the sample data to inaccurately reflect the population.</p>
+<div>
 <ul>
-<li><p><a href="https://www.usnews.com/best-colleges/rankings/national-liberal-arts-colleges">US News and World Report National University Rankings</a></p>
-<ul>
-<li><a href="https://www.usnews.com/best-colleges/kalamazoo-college-2275">No place like home</a></li>
-</ul></li>
-<li><p><a href="http://www.data.gov/">US Government’s Open Data</a></p></li>
-<li><p><a href="https://www.cdc.gov/covid-data-tracker/#cases/">CDC COVID Data Tracker</a></p></li>
+<li class="fragment"><p><strong>Undercoverage</strong> some groups of the population are omitted from the process of choosing the sample.</p></li>
+<li class="fragment"><p><strong>Nonresponse bias</strong> individuals can’t be contacted or refuse to participate.</p></li>
+<li class="fragment"><p><strong>Response bias</strong> behavior of respondent or interviewer causes bias.</p></li>
+<li class="fragment"><p><strong>Wording bias</strong> wording of the question influences the response.</p></li>
 </ul>
-<div class="footer footer-default">
+</div>
+</section>
+<section id="data-collection-and-bias" class="slide level2">
+<h2>Data Collection and Bias</h2>
+
+<img data-src="figs/sampling_diagram_with_biases.png" alt="Diagram of Sampling from a Population" class="r-stretch"><div class="footer footer-default">
 
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="sec1p1_lect_m260_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="sec1p2_lect_m260_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="sec1p1_lect_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="sec1p1_lect_m260_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="sec1p1_lect_m260_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="sec1p1_lect_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="sec1p1_lect_m260_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="sec1p1_lect_m260_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="sec1p2_lect_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="sec1p2_lect_m260_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="sec1p2_lect_m260_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="sec1p2_lect_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="sec1p2_lect_m260_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="sec1p2_lect_m260_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="sec1p1_lect_m260_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="sec1p1_lect_m260_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="sec1p1_lect_m260_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="sec1p1_lect_m260_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="sec1p2_lect_m260_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="sec1p2_lect_m260_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="sec1p2_lect_m260_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="sec1p2_lect_m260_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
