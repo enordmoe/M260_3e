@@ -85,6 +85,7 @@ gf_bar(~LarkOwl, data = SleepStudy)
 
 ## Bar Chart of Single Variable: with colors
 
+
 ```{r}
 gf_bar(~LarkOwl, fill = ~ LarkOwl, data = SleepStudy,
        show.legend = FALSE)
