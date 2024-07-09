@@ -1,0 +1,190 @@
+---
+title: "2.1 Categorical Variables"
+author: "Math 260 Applied Statistics"
+format:
+  revealjs:
+    chalkboard: true
+    theme: [default, custom.scss]
+    reveal-options:
+      slideNumber: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE,warning=FALSE)
+library(mosaic)
+library(Lock5Data)
+```
+
+## Outline
+
+## The Big Picture
+
+![](figs/inference_with_data_description_p2.png){.absolute top="100" left="0"}
+
+::: {.fragment .fade-out}
+![](figs/inference_with_data_description_p1.png){.absolute top="100" left="0"}
+:::
+
+::: aside
+Source: Lock5 text image
+:::
+
+## Descriptive Statistics
+
+-   To make sense of data, we need to **summarize and visualize** it.
+
+-   **Descriptive statistics:** summarizing and visualizing variables and relationships between variables.
+
+-   Different methods are used for [categorical]{style="color:red;"} and [quantitative]{style="color:red;"} variables.
+
+# Numerical and Visual Descriptions for Categorical Variables
+
+## Summarizing Single Categorical Variables {.smaller}
+
+### Summary statistics :computer:
+
+-   **Frequency table** table showing number of cases in each category
+
+-   **Proportion** number in category/total sample size
+
+-   **Relative frequency table** table showing proportion of cases in each category
+
+
+### Visualizations  :bar_chart:
+
+-   **Bar chart** height of the bar shows the number (or proportion or percent) of cases in each category
+
+-   **Pie chart** relative area represents proportion in each category (less preferred)
+
+## Frequency Table of Counts
+
+```{r}
+tally(~LarkOwl, data = SleepStudy)
+```
+
+
+
+## Relative Frequency Table
+
+```{r}
+tally(~LarkOwl, format = "proportion",
+      margins = TRUE, data = SleepStudy)
+```
+
+
+## Bar Chart of Single Variable
+
+```{r}
+gf_bar(~LarkOwl, data = SleepStudy)
+```
+
+## Bar Chart of Single Variable: with colors
+
+```{r}
+gf_bar(~LarkOwl, fill = ~ LarkOwl, data = SleepStudy,
+       show.legend = FALSE)
+```
+
+## Summarizing Two Categorical Variables: Two-Way Tables
+
+Frequency table used to look at the relationship between two categorical variables
+
+-   Variable 1 categories: rows
+-   Variable 2 categories: columns
+-   Cell counts (frequencies): number of cases in corresponding row and column categories
+
+
+## Two-Way Tables Example
+
+Cross classify two categorical variables to investigate their relationship:
+
+```{r}
+tally(~EarlyClass + LarkOwl, margins = TRUE,
+      data=SleepStudy)
+```
+
+## Note: For *EarlyClass*, 0 = "No" and 1 = "Yes"
+
+-   What proportion of students with early classes are Larks?
+-   What proportion of students without early classes are Larks?
+-   What proportion of Owls have early classes?
+
+
+## Two-Way Tables Example with Proportions
+
+```{r}
+tally(~EarlyClass + LarkOwl, margins = TRUE,
+      format = "proportion", data = SleepStudy)
+```
+
+
+## Two-Way Tables Example with Conditional Proportions
+
+```{r}
+tally(~EarlyClass | LarkOwl, margins = TRUE,
+      format = "proportion", data = SleepStudy)
+```
+
+$\Rightarrow$ Conditional proportions are useful for comparing groups but be sure to compute the proportions in the correct direction.
+
+
+## Bar Charts for Single Variables
+
+```{r, fig.height = 6}
+gf_bar( ~ LarkOwl, data = SleepStudy)
+```
+
+
+
+## Segmented Bar Charts for Two Variables
+
+-   **Segmented bar chart** graphical display of a two-way table of counts
+
+    -   Note use of `factor()` to treat *EarlyClass* as categorical.
+
+```{r}
+gf_bar(~ LarkOwl, fill = ~factor(EarlyClass), data = SleepStudy)
+```
+
+
+## Comparative Stacked Bar Charts Comparing Proportions
+
+```{r}
+gf_bar(~LarkOwl, fill = ~factor(EarlyClass), data = SleepStudy, 
+       position = "fill")
+```
+
+-   Note that the function `gf_props()` can also be used to plot proportions when working with categorical data.
+
+
+## Side-by-Side Bar Charts
+
+-   **Side-by-side** height of each bar is the number of the corresponding cell in the two-way table
+
+```{r, fig.height=4}
+gf_bar(~LarkOwl, fill = ~factor(EarlyClass), 
+       data = SleepStudy, position = "dodge")
+```
+
+
+## Aesthetic Mappings {.smaller}
+
+-   We control the appearance of graphs in R using *aesthetics*, things we can see
+
+-   Examples of aesthetics include:
+
+    -   position (i.e., on the x and y axes)\
+    -   color ("outside" color)\
+    -   fill ("inside" color)
+    -   shape (of points)\
+    -   linetype\
+    -   size
+
+-   Each type of graph accepts only a subset of possible aesthetics.
+
+-   Using commands to create graphs makes it easy to reproduce or update them later.
