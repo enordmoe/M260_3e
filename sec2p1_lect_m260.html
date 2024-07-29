@@ -543,14 +543,7 @@ EarlyClass      Lark   Neither       Owl
 </div>
 <p><span class="math inline">\(\Rightarrow\)</span> Conditional proportions are useful for comparing groups but be sure to compute the proportions in the correct direction.</p>
 </section>
-<section id="bar-charts-for-single-variables" class="slide level2">
-<h2>Bar Charts for Single Variables</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">gf_bar</span>( <span class="sc">~</span> LarkOwl, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="sec2p1_lect_m260_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
-<section id="segmented-bar-charts-for-two-variables" class="slide level2">
+<section id="segmented-bar-charts-for-two-variables" class="slide level2 smaller">
 <h2>Segmented Bar Charts for Two Variables</h2>
 <ul>
 <li><p><strong>Segmented bar chart</strong> graphical display of a two-way table of counts</p>
@@ -559,18 +552,18 @@ EarlyClass      Lark   Neither       Owl
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">gf_bar</span>(<span class="sc">~</span> LarkOwl, <span class="at">fill =</span> <span class="sc">~</span><span class="fu">factor</span>(EarlyClass), <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">gf_bar</span>(<span class="sc">~</span> LarkOwl, <span class="at">fill =</span> <span class="sc">~</span><span class="fu">factor</span>(EarlyClass), <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="sec2p1_lect_m260_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<img data-src="sec2p1_lect_m260_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
 <section id="comparative-stacked-bar-charts-comparing-proportions" class="slide level2">
 <h2>Comparative Stacked Bar Charts Comparing Proportions</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">gf_bar</span>(<span class="sc">~</span>LarkOwl, <span class="at">fill =</span> <span class="sc">~</span><span class="fu">factor</span>(EarlyClass), <span class="at">data =</span> SleepStudy, </span>
-<span id="cb15-2"><a href=""></a>       <span class="at">position =</span> <span class="st">"fill"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">gf_bar</span>(<span class="sc">~</span>LarkOwl, <span class="at">fill =</span> <span class="sc">~</span><span class="fu">factor</span>(EarlyClass), <span class="at">data =</span> SleepStudy, </span>
+<span id="cb14-2"><a href=""></a>       <span class="at">position =</span> <span class="st">"fill"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="sec2p1_lect_m260_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"><ul>
+<img data-src="sec2p1_lect_m260_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"><ul>
 <li>Note that the function <code>gf_props()</code> can also be used to plot proportions when working with categorical data.</li>
 </ul>
 </section>
@@ -580,11 +573,11 @@ EarlyClass      Lark   Neither       Owl
 <li><strong>Side-by-side</strong> height of each bar is the number of the corresponding cell in the two-way table</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">gf_bar</span>(<span class="sc">~</span>LarkOwl, <span class="at">fill =</span> <span class="sc">~</span><span class="fu">factor</span>(EarlyClass), </span>
-<span id="cb16-2"><a href=""></a>       <span class="at">data =</span> SleepStudy, <span class="at">position =</span> <span class="st">"dodge"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">gf_bar</span>(<span class="sc">~</span>LarkOwl, <span class="at">fill =</span> <span class="sc">~</span><span class="fu">factor</span>(EarlyClass), </span>
+<span id="cb15-2"><a href=""></a>       <span class="at">data =</span> SleepStudy, <span class="at">position =</span> <span class="st">"dodge"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="sec2p1_lect_m260_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<img data-src="sec2p1_lect_m260_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
 <section id="aesthetic-mappings" class="slide level2 smaller">
 <h2>Aesthetic Mappings</h2>
 <ul>
@@ -604,6 +597,16 @@ EarlyClass      Lark   Neither       Owl
 </ul></li>
 <li><p>Each type of graph accepts only a subset of possible aesthetics.</p></li>
 <li><p>Using commands to create graphs makes it easy to reproduce or update them later.</p></li>
+</ul>
+</section>
+<section id="summary" class="slide level2 smaller">
+<h2>Summary</h2>
+<ul>
+<li>Descriptive statistics summarize and visualize categorical variables in frequency tables, proportions, and relative frequency tables.</li>
+<li>Bar charts are useful for visualizing single categorical variables.</li>
+<li>Two-way tables show the relationship between two categorical variables using frequency and proportion tables.</li>
+<li>Conditional proportions offer detailed comparisons by showing the proportion of one category within each level of another category.</li>
+<li>Segmented, stacked, and side-by-side bar charts offer insightful comparisons of categorical data across multiple variables.</li>
 </ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

@@ -54,8 +54,7 @@ Source: Lock5 text image
 
 -   **Relative frequency table** table showing proportion of cases in each category
 
-
-### Visualizations  :bar_chart:
+### Visualizations :bar_chart:
 
 -   **Bar chart** height of the bar shows the number (or proportion or percent) of cases in each category
 
@@ -67,15 +66,12 @@ Source: Lock5 text image
 tally(~LarkOwl, data = SleepStudy)
 ```
 
-
-
 ## Relative Frequency Table
 
 ```{r}
 tally(~LarkOwl, format = "proportion",
       margins = TRUE, data = SleepStudy)
 ```
-
 
 ## Bar Chart of Single Variable
 
@@ -84,7 +80,6 @@ gf_bar(~LarkOwl, data = SleepStudy)
 ```
 
 ## Bar Chart of Single Variable: with colors
-
 
 ```{r}
 gf_bar(~LarkOwl, fill = ~ LarkOwl, data = SleepStudy,
@@ -98,7 +93,6 @@ Frequency table used to look at the relationship between two categorical variabl
 -   Variable 1 categories: rows
 -   Variable 2 categories: columns
 -   Cell counts (frequencies): number of cases in corresponding row and column categories
-
 
 ## Two-Way Tables Example
 
@@ -115,14 +109,12 @@ tally(~EarlyClass + LarkOwl, margins = TRUE,
 -   What proportion of students without early classes are Larks?
 -   What proportion of Owls have early classes?
 
-
 ## Two-Way Tables Example with Proportions
 
 ```{r}
 tally(~EarlyClass + LarkOwl, margins = TRUE,
       format = "proportion", data = SleepStudy)
 ```
-
 
 ## Two-Way Tables Example with Conditional Proportions
 
@@ -133,16 +125,7 @@ tally(~EarlyClass | LarkOwl, margins = TRUE,
 
 $\Rightarrow$ Conditional proportions are useful for comparing groups but be sure to compute the proportions in the correct direction.
 
-
-## Bar Charts for Single Variables
-
-```{r, fig.height = 6}
-gf_bar( ~ LarkOwl, data = SleepStudy)
-```
-
-
-
-## Segmented Bar Charts for Two Variables
+## Segmented Bar Charts for Two Variables {.smaller}
 
 -   **Segmented bar chart** graphical display of a two-way table of counts
 
@@ -151,7 +134,6 @@ gf_bar( ~ LarkOwl, data = SleepStudy)
 ```{r}
 gf_bar(~ LarkOwl, fill = ~factor(EarlyClass), data = SleepStudy)
 ```
-
 
 ## Comparative Stacked Bar Charts Comparing Proportions
 
@@ -162,7 +144,6 @@ gf_bar(~LarkOwl, fill = ~factor(EarlyClass), data = SleepStudy,
 
 -   Note that the function `gf_props()` can also be used to plot proportions when working with categorical data.
 
-
 ## Side-by-Side Bar Charts
 
 -   **Side-by-side** height of each bar is the number of the corresponding cell in the two-way table
@@ -171,7 +152,6 @@ gf_bar(~LarkOwl, fill = ~factor(EarlyClass), data = SleepStudy,
 gf_bar(~LarkOwl, fill = ~factor(EarlyClass), 
        data = SleepStudy, position = "dodge")
 ```
-
 
 ## Aesthetic Mappings {.smaller}
 
@@ -189,3 +169,11 @@ gf_bar(~LarkOwl, fill = ~factor(EarlyClass),
 -   Each type of graph accepts only a subset of possible aesthetics.
 
 -   Using commands to create graphs makes it easy to reproduce or update them later.
+
+## Summary {.smaller}
+
+-   Descriptive statistics summarize and visualize categorical variables in frequency tables, proportions, and relative frequency tables.
+-   Bar charts are useful for visualizing single categorical variables.
+-   Two-way tables show the relationship between two categorical variables using frequency and proportion tables.
+-   Conditional proportions offer detailed comparisons by showing the proportion of one category within each level of another category.
+-   Segmented, stacked, and side-by-side bar charts offer insightful comparisons of categorical data across multiple variables.
