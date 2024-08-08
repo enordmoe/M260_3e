@@ -12,6 +12,7 @@ title-slide-attributes:
 from: markdown+emoji
 execute:
   echo: true
+  cache: true
 ---
 
 ```{r setup, include=FALSE}
@@ -21,7 +22,17 @@ library(Lock5Data)
 library(palmerpenguins)
 ```
 
-# Section 2.2  One Quantitative Variable: <br> Shape and Center {background-color="#FAD9C7"}
+## Describing Quantitative Variables
+
+Important characteristics of the *distribution* of quantitative variables
+
+-   **Shape**: What is the *shape* of the distribution?
+
+-   **Center**: Where are the data values *centered*?
+
+-   **Spread**: How do the data *vary*?
+
+# Section 2.2 One Quantitative Variable: <br> Shape and Center {background-color="#FAD9C7"}
 
 ## Dotplot
 
@@ -31,57 +42,109 @@ In a **dotplot**, each case of a quantitative variable is represented by a dot o
 
 -   Especially useful for relatively **small** datasets with repeated cases having the same value.
 
-## Dotplot: Example
+## Dotplot Example: Small Experiment {.smaller}
 
--   Example dotplot for **CaffeineTaps** data set ($n=20$):
+![](figs/tap.png){.absolute top="0" left="-200" height="100"}
 
-```{r,fig.height = 3}
-data(CaffeineTaps)
-gf_dotplot(~ Taps, data = CaffeineTaps)
+-   Example dotplot for **CaffeineTaps** data set ($n=20$ participants)
+
+-   Dots show number of finger taps for each study participant.
+
+```{r}
+gf_dotplot(~ Taps, dotsize = .5, data = CaffeineTaps)
 ```
 
-Note: There are problems with the construction of this plot under R and it is best done by hand. Note that the vertical axis label is meaningless here.
+## Dotplot Example: 3-Point Shots {.smaller}
 
-## Histogram
+![](figs/peter-berko-4ie4fXv7cX4-unsplash.jpg){.absolute top="0" left="-200" height="100"}
 
--   The height of each bar corresponds to the number of cases in the corresponding range of a quantiative variable.
+-   Example dotplot for **MiamiHeat** data set ($n=82$ games)
+
+-   Dots show number of 3-point shots made per game for the 82-game season.
+
+```{r}
+gf_dotplot(~ FG3, dotsize = .5, data = MiamiHeat)
+```
+
+## Dotplot: Comments
+
+-   The `dotsize` argument sets the size of the dots relative to the default value of 1 so `dotsize = .5` makes the dots 50% as large as the default size.
+
+-   Caution: Note that the $y$-axis is meaningless here and can be ignored (or removed).
+
+::: aside
+**Note**: If you really need to remove the $y$-axis, you can use this advanced technical command.
+
+```{r}
+#| eval: false
+gf_dotplot(~ FG3, dotsize = .5, data = MiamiHeat) %>% 
+  gf_refine(scale_y_continuous(NULL, breaks = NULL))
+```
+:::
+
+## Histogram {.smaller}
+
+![](figs/erik-jan-leusink-QTe-MHNUrz4-unsplash.jpg){.absolute top="0" right="-200" height="100"}
+
+-   The height of each bar corresponds to the number of cases in the corresponding range of a quantitative variable.
 
 -   Especially useful for relatively **large** datasets.
 
-```{r, fig.height = 3}
+```{r}
+#| fig-height: 4
 gf_histogram(~ WeekdaySleep, data = SleepStudy)
 ```
 
 ## Histogram vs Bar Chart {.smaller}
 
+::: columns
+::: {.column width="45%"}
 ### Bar chart
 
 -   Use for categorical data
 -   $x$-axis has no numerical scale
 -   The number of bars is the number of categories
+:::
 
+::: {.column width="45%"}
 ### Histogram
 
 -   Use for quantitative data
 -   $x$-axis is numeric (drawn to scale)
 -   The number of bars is set by judgement
 -   Appearance differs depending on interval width
+:::
+:::
 
 ## Shapes of Distributions
 
-|        Skewed Left         |        Skewed Right        |
-|:--------------------------:|:--------------------------:|
-| ![dist1](figs/shapes2.png) | ![dist2](figs/shapes1.png) |
+::: columns
+::: {.column width="50%"}
+### Skewed
 
-## Shapes of Distributions
+#### Skewed Left
 
-### Symmmetric bell-shaped
+![](figs/shapes2.png)
 
-![](figs/shapes3.png)
+#### Skewed Right
 
-### Symmetric not bell-shaped
+![](figs/shapes1.png)
+:::
 
-![](figs/shapes4.png)
+::: {.column width="50%"}
+::: {.fragment .fade-in}
+### Symmetric
+
+#### Bell-shaped
+
+![](figs/shapes3.png){width="274"}
+
+#### Not bell-shaped
+
+![](figs/shapes4.png){width="305"}
+:::
+:::
+:::
 
 ## Outlier
 
@@ -191,7 +254,7 @@ $$
 
 ## Illustration of 95% Rule
 
-```{r,echo=FALSE,fig.height=3,}
+```{r,echo=FALSE,fig.height=3}
 xbar=mean(~WeekdaySleep,data=SleepStudy)
 st.dev=sd(~WeekdaySleep,data=SleepStudy)
 epsilon=.001
@@ -311,3 +374,7 @@ IQR(~WeekdaySleep,data = SleepStudy)
 | Location       | $Q_1$, $Q_3$ |         Min, Max          |
 
 -   Note that extreme percentiles (such as the 1st or 99th percentiles would be non-resistant unless the sample size were very large).
+
+## Image Sources
+
+-   <a href="https://www.flaticon.com/free-icons/click-here" title="click here icons">Click here icons created by redempticon - Flaticon</a>

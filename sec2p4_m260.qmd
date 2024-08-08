@@ -1,0 +1,132 @@
+---
+title: "2.4 Boxplots and Quantitative/ Categorical Relationships"
+author: "Math 260 Applied Statistics"
+format:
+  revealjs:
+    chalkboard: true
+    theme: [default, custom.scss]
+    reveal-options:
+      slideNumber: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE,warning=FALSE)
+library(mosaic)
+library(Lock5Data)
+```
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+library(palmerpenguins)
+```
+
+## Agenda
+
+-   One more visual display: the boxplot
+
+-   Investigating relationships between quantitative and categorical relationships
+
+    -   Comparing quantitative variables across groups
+
+## Boxplot
+
+-   A **boxplot** is
+
+    -   A visual depiction of the 5-number summary.
+
+    -   Especially useful for a rough comparison of the center and spread of a variable across several sub-groups.
+
+## Constructing a Boxplot
+
+1)  Draw a numerical scale appropriate for the data.
+
+2)  Draw a box stretching from $Q_1$ to $Q_3$ representing the middle 50% of the data.
+
+3)  Divide the box with a line at the median.
+
+4)  Draw a line (whisker) from each quartile to the most extreme data value that is **not an outlier**.
+
+5)  Identify each outlier individually by plotting with a symbol such as an asterisk or dot.
+
+**Note:** Use side-by-side boxes to compare sub-groups.
+
+## Boxplot example comparing groups: Vertical
+
+```{r}
+gf_boxplot(Quetelet ~ Smoke, data = NutritionStudy)
+```
+
+## Boxplot example comparing groups: Horizontal
+
+```{r}
+gf_boxplot(Smoke ~ Quetelet, data = NutritionStudy)
+```
+
+## Outliers
+
+-   Often best identified using judgement by inspection of a visual data display.
+
+-   **Rule of Thumb** suspected outliers are data values more than 1.5 IQRs beyond the quartiles
+
+-   A data value is a **suspected outlier** if it is
+
+    -   Smaller than the **Lower Fence**= $Q_1$ - 1.5 (IQR)
+
+    -   Greater than the **Upper Fence**= $Q_3$ + 1.5 (IQR)
+
+
+# {background-color="#EA6820"}
+:::{#title-slide .center}
+<span style="font-size: 1.5em; font-weight: bold;">Your turn: Investigate Quetelet (BMI) by Prior Smoking Status (PriorSmoke)</span> 
+:::
+
+
+## Advanced Boxplot for RStudio Masters {.smaller}
+
+```{r,fig.height=3}
+gf_boxplot(factor(PriorSmoke) ~ Quetelet, data = NutritionStudy,
+           outlier.shape = NA, ylab = "Prior Smoking Status") %>%
+  gf_jitter(height = .1, alpha = .4) 
+```
+
+-   Overlays points using `jitter` on top of boxes to show more detail
+-   `alpha` used to make points transparent (between 0 and 1)
+-   Adds y label using `ylab`
+
+## Faceted Histograms: A more detailed comparison
+
+We can get side by side histograms using the vertical bar (`|`) to "condition" on the group variable.
+
+```{r}
+#| output-location: slide
+gf_histogram(~Quetelet | PriorSmoke ~ ., data = NutritionStudy)
+```
+
+## Comparing Numerical Statistics
+
+Use `favstats()` to compare numerical statistics for a *quantitative variable* across *categories* of a categorical variable:
+
+```{r}
+favstats(Calories ~ PriorSmoke, data = NutritionStudy)
+```
+
+## Quantitative and Categorical Relationships {.smaller}
+
+-   Compare the distribution of a quantitative variable across groups determined by the categorical variable(s).
+
+    -   Use side-by-side boxplots for an overview.
+
+    -   Use comparative histograms or dotplots to see more detail.
+
+-   Any of the statistics we use for a quantitative variable can be looked at separately for each level of a categorical variable.
+
+    -   Often interested in the **difference in means** $=\bar x_1- \bar x_2$
+
+More [details and examples](https://heroic-horse-92e142.netlify.app/describing_quantitative_variables_m260) in the R Resources on Moodle

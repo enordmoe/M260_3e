@@ -404,6 +404,15 @@ Math 260 Applied Statistics
 </div>
 
 </section>
+<section id="describing-quantitative-variables" class="slide level2">
+<h2>Describing Quantitative Variables</h2>
+<p>Important characteristics of the <em>distribution</em> of quantitative variables</p>
+<ul>
+<li><p><strong>Shape</strong>: What is the <em>shape</em> of the distribution?</p></li>
+<li><p><strong>Center</strong>: Where are the data values <em>centered</em>?</p></li>
+<li><p><strong>Spread</strong>: How do the data <em>vary</em>?</p></li>
+</ul>
+</section>
 <section>
 <section id="section-2.2-one-quantitative-variable-shape-and-center" class="title-slide slide level1 center" data-background-color="#FAD9C7">
 <h1>Section 2.2 One Quantitative Variable: <br> Shape and Center</h1>
@@ -417,37 +426,85 @@ Math 260 Applied Statistics
 <li><p>Especially useful for relatively <strong>small</strong> datasets with repeated cases having the same value.</p></li>
 </ul>
 </section>
-<section id="dotplot-example" class="slide level2">
-<h2>Dotplot: Example</h2>
+<section id="dotplot-example-small-experiment" class="slide level2 smaller">
+<h2>Dotplot Example: Small Experiment</h2>
+<p><img data-src="figs/tap.png" class="absolute" style="top: 0px; left: -200px; height: 100px; "></p>
 <ul>
-<li>Example dotplot for <strong>CaffeineTaps</strong> data set (<span class="math inline">\(n=20\)</span>):</li>
+<li><p>Example dotplot for <strong>CaffeineTaps</strong> data set (<span class="math inline">\(n=20\)</span> participants)</p></li>
+<li><p>Dots show number of finger taps for each study participant.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">data</span>(CaffeineTaps)</span>
-<span id="cb1-2"><a href=""></a><span class="fu">gf_dotplot</span>(<span class="sc">~</span> Taps, <span class="at">data =</span> CaffeineTaps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">gf_dotplot</span>(<span class="sc">~</span> Taps, <span class="at">dotsize =</span> .<span class="dv">5</span>, <span class="at">data =</span> CaffeineTaps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="sec2p23_m260_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
+</figure>
 </div>
-<img data-src="sec2p23_m260_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"><p>Note: There are problems with the construction of this plot under R and it is best done by hand. Note that the vertical axis label is meaningless here.</p>
+</div>
+</div>
 </section>
-<section id="histogram" class="slide level2">
-<h2>Histogram</h2>
+<section id="dotplot-example-3-point-shots" class="slide level2 smaller">
+<h2>Dotplot Example: 3-Point Shots</h2>
+<p><img data-src="figs/peter-berko-4ie4fXv7cX4-unsplash.jpg" class="absolute" style="top: 0px; left: -200px; height: 100px; "></p>
 <ul>
-<li><p>The height of each bar corresponds to the number of cases in the corresponding range of a quantiative variable.</p></li>
+<li><p>Example dotplot for <strong>MiamiHeat</strong> data set (<span class="math inline">\(n=82\)</span> games)</p></li>
+<li><p>Dots show number of 3-point shots made per game for the 82-game season.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">gf_dotplot</span>(<span class="sc">~</span> FG3, <span class="at">dotsize =</span> .<span class="dv">5</span>, <span class="at">data =</span> MiamiHeat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="sec2p23_m260_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="dotplot-comments" class="slide level2">
+<h2>Dotplot: Comments</h2>
+<ul>
+<li><p>The <code>dotsize</code> argument sets the size of the dots relative to the default value of 1 so <code>dotsize = .5</code> makes the dots 50% as large as the default size.</p></li>
+<li><p>Caution: Note that the <span class="math inline">\(y\)</span>-axis is meaningless here and can be ignored (or removed).</p></li>
+</ul>
+
+<aside><div>
+<p><strong>Note</strong>: If you really need to remove the <span class="math inline">\(y\)</span>-axis, you can use this advanced technical command.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">gf_dotplot</span>(<span class="sc">~</span> FG3, <span class="at">dotsize =</span> .<span class="dv">5</span>, <span class="at">data =</span> MiamiHeat) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href=""></a>  <span class="fu">gf_refine</span>(<span class="fu">scale_y_continuous</span>(<span class="cn">NULL</span>, <span class="at">breaks =</span> <span class="cn">NULL</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div></aside></section>
+<section id="histogram" class="slide level2 smaller">
+<h2>Histogram</h2>
+<p><img data-src="figs/erik-jan-leusink-QTe-MHNUrz4-unsplash.jpg" class="absolute" style="top: 0px; right: -200px; height: 100px; "></p>
+<ul>
+<li><p>The height of each bar corresponds to the number of cases in the corresponding range of a quantitative variable.</p></li>
 <li><p>Especially useful for relatively <strong>large</strong> datasets.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">gf_histogram</span>(<span class="sc">~</span> WeekdaySleep, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">gf_histogram</span>(<span class="sc">~</span> WeekdaySleep, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="sec2p23_m260_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+</figure>
 </div>
-<img data-src="sec2p23_m260_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+</div>
+</div>
+</section>
 <section id="histogram-vs-bar-chart" class="slide level2 smaller">
 <h2>Histogram vs Bar Chart</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
 <h3 id="bar-chart">Bar chart</h3>
 <ul>
 <li>Use for categorical data</li>
 <li><span class="math inline">\(x\)</span>-axis has no numerical scale</li>
 <li>The number of bars is the number of categories</li>
 </ul>
+</div><div class="column" style="width:45%;">
 <h3 id="histogram-1">Histogram</h3>
 <ul>
 <li>Use for quantitative data</li>
@@ -455,30 +512,27 @@ Math 260 Applied Statistics
 <li>The number of bars is set by judgement</li>
 <li>Appearance differs depending on interval width</li>
 </ul>
+</div></div>
 </section>
 <section id="shapes-of-distributions" class="slide level2">
 <h2>Shapes of Distributions</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th style="text-align: center;">Skewed Left</th>
-<th style="text-align: center;">Skewed Right</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;"><img data-src="figs/shapes2.png" alt="dist1"></td>
-<td style="text-align: center;"><img data-src="figs/shapes1.png" alt="dist2"></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="shapes-of-distributions-1" class="slide level2">
-<h2>Shapes of Distributions</h2>
-<h3 id="symmmetric-bell-shaped">Symmmetric bell-shaped</h3>
-<p><img data-src="figs/shapes3.png"></p>
-<h3 id="symmetric-not-bell-shaped">Symmetric not bell-shaped</h3>
-<p><img data-src="figs/shapes4.png"></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="skewed">Skewed</h3>
+<h4 id="skewed-left">Skewed Left</h4>
+<p><img data-src="figs/shapes2.png"></p>
+<h4 id="skewed-right">Skewed Right</h4>
+<p><img data-src="figs/shapes1.png"></p>
+</div><div class="column" style="width:50%;">
+<div class="fragment fade-in">
+<!-- -->
+<h3 id="symmetric">Symmetric</h3>
+<h4 id="bell-shaped">Bell-shaped</h4>
+<p><img data-src="figs/shapes3.png" width="274"></p>
+<h4 id="not-bell-shaped">Not bell-shaped</h4>
+<p><img data-src="figs/shapes4.png" width="305"></p>
+</div>
+</div></div>
 </section>
 <section id="outlier" class="slide level2">
 <h2>Outlier</h2>
@@ -505,7 +559,7 @@ Math 260 Applied Statistics
 <li>Mean of a single numerical variable:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">mean</span>(<span class="sc">~</span> WeekdaySleep, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">mean</span>(<span class="sc">~</span> WeekdaySleep, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.866008</code></pre>
 </div>
@@ -514,7 +568,7 @@ Math 260 Applied Statistics
 <li>Mean of a single numerical variable for each category of a categorical variable:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">mean</span>(WeekdaySleep<span class="sc">~</span> EarlyClass, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">mean</span>(WeekdaySleep<span class="sc">~</span> EarlyClass, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       0        1 
 8.238353 7.677619 </code></pre>
@@ -536,7 +590,7 @@ Math 260 Applied Statistics
 <li>Median of a single numerical variable:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">median</span>(<span class="sc">~</span> WeekdaySleep, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">median</span>(<span class="sc">~</span> WeekdaySleep, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.95</code></pre>
 </div>
@@ -545,7 +599,7 @@ Math 260 Applied Statistics
 <li>Median of a single numerical variable for each category of a categorical variable:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">median</span>(WeekdaySleep <span class="sc">~</span> EarlyClass, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">median</span>(WeekdaySleep <span class="sc">~</span> EarlyClass, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   0    1 
 8.25 7.73 </code></pre>
@@ -615,7 +669,7 @@ s=\sqrt{\frac{\sum_{i=1}^n (x_i-\bar x)^2}{n-1}}
 <section id="illustration-of-95-rule" class="slide level2">
 <h2>Illustration of 95% Rule</h2>
 
-<img data-src="sec2p23_m260_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"><ul>
+<img data-src="sec2p23_m260_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"><ul>
 <li>Despite skewness, about 95% of data lies in the shaded area, between 7.87-2(1.17) and 7.87+2*(1.17).<br>
 </li>
 <li>Note: For this data, the proportion within two standard deviations is actually 246/253=.972 for these data.</li>
@@ -634,14 +688,14 @@ s=\sqrt{\frac{\sum_{i=1}^n (x_i-\bar x)^2}{n-1}}
 <li>Illustrate using an idealized smoothed histogram:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">quantile</span>(<span class="sc">~</span>WeekdaySleep, <span class="at">data =</span> SleepStudy, <span class="at">probs =</span> <span class="fu">c</span>(.<span class="dv">8</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">quantile</span>(<span class="sc">~</span>WeekdaySleep, <span class="at">data =</span> SleepStudy, <span class="at">probs =</span> <span class="fu">c</span>(.<span class="dv">8</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  80% 
 8.762 </code></pre>
 </div>
 </div>
 
-<img data-src="sec2p23_m260_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<img data-src="sec2p23_m260_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
 <section id="the-z-score" class="slide level2">
 <h2>The z-Score</h2>
 <p>The <span class="math inline">\(z\)</span>-score for a data value, <span class="math inline">\(x\)</span>, from a sample mean mean <span class="math inline">\(\bar x\)</span> and standard deviation <span class="math inline">\(s\)</span> is defined to be <span class="math display">\[
@@ -671,17 +725,17 @@ z-\text{score}=\frac{x-\bar x}{s}
 </li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">favstats</span>(<span class="sc">~</span>DepressionScore, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">favstats</span>(<span class="sc">~</span>DepressionScore, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> min Q1 median Q3 max     mean       sd   n missing
    0  1      3  7  35 5.201581 6.000899 253       0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">favstats</span>(<span class="sc">~</span>AnxietyScore,<span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="fu">favstats</span>(<span class="sc">~</span>AnxietyScore,<span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> min Q1 median Q3 max     mean       sd   n missing
    0  1      4  8  26 5.371542 5.197327 253       0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>SleepStudy[<span class="dv">8</span>, <span class="fu">c</span>(<span class="st">"DepressionScore"</span>,<span class="st">"AnxietyScore"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a>SleepStudy[<span class="dv">8</span>, <span class="fu">c</span>(<span class="st">"DepressionScore"</span>,<span class="st">"AnxietyScore"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  DepressionScore AnxietyScore
 8               2            2</code></pre>
@@ -707,7 +761,7 @@ z-\text{score}=\frac{x-\bar x}{s}
 <li>The five number summary divides the dataset into fourths</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a><span class="fu">favstats</span>(<span class="sc">~</span>WeekdaySleep, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="fu">favstats</span>(<span class="sc">~</span>WeekdaySleep, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> min  Q1 median  Q3   max     mean       sd   n missing
    3 7.2   7.95 8.6 10.97 7.866008 1.167788 253       0</code></pre>
@@ -718,18 +772,18 @@ z-\text{score}=\frac{x-\bar x}{s}
 <h2>Other Measures of Spread</h2>
 <p><strong>Range</strong>= Max - Min</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="fu">range</span>(<span class="sc">~</span>WeekdaySleep, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">range</span>(<span class="sc">~</span>WeekdaySleep, <span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  3.00 10.97</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">diff</span>(<span class="fu">range</span>(<span class="sc">~</span>WeekdaySleep, <span class="at">data =</span> SleepStudy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">diff</span>(<span class="fu">range</span>(<span class="sc">~</span>WeekdaySleep, <span class="at">data =</span> SleepStudy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.97</code></pre>
 </div>
 </div>
 <p><strong>Interquartile Range (IQR)</strong>= <span class="math inline">\(Q_3-Q_1\)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">IQR</span>(<span class="sc">~</span>WeekdaySleep,<span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">IQR</span>(<span class="sc">~</span>WeekdaySleep,<span class="at">data =</span> SleepStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.4</code></pre>
 </div>
@@ -765,6 +819,12 @@ z-\text{score}=\frac{x-\bar x}{s}
 </table>
 <ul>
 <li>Note that extreme percentiles (such as the 1st or 99th percentiles would be non-resistant unless the sample size were very large).</li>
+</ul>
+</section>
+<section id="image-sources" class="slide level2">
+<h2>Image Sources</h2>
+<ul>
+<li><a href="https://www.flaticon.com/free-icons/click-here" title="click here icons">Click here icons created by redempticon - Flaticon</a></li>
 </ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
