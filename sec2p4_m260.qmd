@@ -15,25 +15,24 @@ execute:
   cache: true
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(message=FALSE,warning=FALSE)
-library(mosaic)
-library(Lock5Data)
-```
-
 ```{r, echo=F,message=FALSE}
 library(mosaic)
 library(Lock5Data)
-library(palmerpenguins)
 ```
 
 ## Agenda
 
--   One more visual display: the boxplot
+- **Introduction to Boxplots**  
+  - Definition and components of a boxplot
+  - Constructing boxplots: step-by-step 
 
--   Investigating relationships between quantitative and categorical relationships
+- **Analyzing Quantitative and Categorical Relationships**  
+  - Comparing distributions of quantitative variables across categorical groups
+  - Using boxplots for visual comparison
 
-    -   Comparing quantitative variables across groups
+- **Advanced Visualization**  
+  - Faceted plots: dotplots and histograms for group comparisons
+  - Overlaying data by jittering for more detail
 
 ## Boxplot
 
@@ -81,12 +80,11 @@ gf_boxplot(Smoke ~ Quetelet, data = NutritionStudy)
 
     -   Greater than the **Upper Fence**= $Q_3$ + 1.5 (IQR)
 
+#  {background-color="#EA6820"}
 
-# {background-color="#EA6820"}
-:::{#title-slide .center}
-<span style="font-size: 1.5em; font-weight: bold;">Your turn: Investigate Quetelet (BMI) by Prior Smoking Status (PriorSmoke)</span> 
+::: {#title-slide .center}
+[Your turn: Investigate Quetelet (BMI) by Prior Smoking Status (PriorSmoke)]{style="font-size: 1.5em; font-weight: bold;"}
 :::
-
 
 ## Advanced Boxplot for RStudio Masters {.smaller}
 
@@ -100,9 +98,26 @@ gf_boxplot(factor(PriorSmoke) ~ Quetelet, data = NutritionStudy,
 -   `alpha` used to make points transparent (between 0 and 1)
 -   Adds y label using `ylab`
 
-## Faceted Histograms: A more detailed comparison
+# Faceted plots for more detailed comparisons {background-color="#FAD9C7"}
 
-We can get side by side histograms using the vertical bar (`|`) to "condition" on the group variable.
+## Side-by-side Dotplots
+
+-   For small samples, we can get a detailed plot of hours exercised for for each `Year` (1 = First Years, ...)
+-   Use the vertical bar (`|`) to "condition" on the group variable.
+-   `Year ~ .` specifies `Year` as the explanatory variable.
+
+```{r}
+#| output-location: slide
+gf_dotplot(~Exercise | Year ~ ., data = ExerciseHours, dotsize = 0.5)
+```
+
+::: aside
+Note: We actually could specify two variables such as `Year ~ Sex` to get a matrix of plots. Here, the `.` serves as a placeholder.
+:::
+
+## Faceted Histograms
+
+For larger samples, we get side by side histograms of BMI (`Quetelet`) for each level of the `PriorSmoke` variable.
 
 ```{r}
 #| output-location: slide
@@ -117,7 +132,7 @@ Use `favstats()` to compare numerical statistics for a *quantitative variable* a
 favstats(Calories ~ PriorSmoke, data = NutritionStudy)
 ```
 
-## Quantitative and Categorical Relationships {.smaller}
+## Investigating Quantitative and Categorical Relationships  {.smaller}
 
 -   Compare the distribution of a quantitative variable across groups determined by the categorical variable(s).
 
@@ -130,3 +145,5 @@ favstats(Calories ~ PriorSmoke, data = NutritionStudy)
     -   Often interested in the **difference in means** $=\bar x_1- \bar x_2$
 
 More [details and examples](https://heroic-horse-92e142.netlify.app/describing_quantitative_variables_m260) in the R Resources on Moodle
+
+

@@ -1,0 +1,175 @@
+---
+title: "2.5 Two Quantitative Variables: Scatterplot and Correlation"
+author: "E. Nordmoe"
+date: "Math 260"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+```
+
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+```
+
+
+# Exploratory Data Analysis for Pairs of Quantitative Variables
+
+* Visual/Graphical
+
+    + Scatterplot
+   
+* Numerical
+
+    + Correlation coefficient
+   
+    + Linear regression (Section 2.6)
+
+---
+
+# Scatterplot 
+
+* A **scatterplot** is the graph of the relationship between two quantitative variables.
+
+* Describe the *association* between two variables by commenting on:  
+    + Form
+        - linear, curvilinear, clusters, patternless
+    + Direction (if applicable)
+        - Positive or negative
+    + Strength
+        - Strong, moderate, weak
+---
+
+# Association
+
+* A **positive** association means that values of one variable tend to be **higher** when values of the other variable are higher.
+
+* A **negative** association means that values of one variable tend to be **lower** when values of the other variable are higher.
+
+* Two variables are **not associated**  (independent) if knowing the value of one variable does not give you any information about the value of the other variable.
+
+---
+
+# Scatterplots with R: Example 1
+
+```{r,fig.height=4.5}
+gf_point(Alkalinity ~ pH,data = FloridaLakes, 
+         xlab = "Acidity (pH)")
+```
+
+---
+
+# Scatterplots with R: Example 2
+
+* Smoother useful for identifying nonlinear trends
+```{r,fig.height=4.5}
+gf_point(Alkalinity ~ pH,data = FloridaLakes,
+         xlab = "Acidity (pH)") |> 
+  gf_smooth()
+```
+
+---
+
+# Scatterplots with R: Example 3
+
+* Identify subgroups based on categorical variable using `color` or `shape`  
+```{r,fig.height=4.5}
+gf_point(WeekendSleep ~ WeekdaySleep, 
+         color = ~ factor(EarlyClass), data = SleepStudy)
+```
+
+---
+
+# Scatterplots with R: Example 4
+
+* Extreme points can be labeled and omitted if need be.  
+* `hjust=1` means right-justified, `hjust=0` means left-justified.
+
+```{r,fig.height=4}
+gf_point(Alcohol ~ Calories, data = NutritionStudy) +
+        annotate("text", x = 6600, y = 203, hjust = 1,
+                 label = "Case #62")
+```
+
+---
+
+## Scatterplots with R: Example 4 (cont'd)
+
+* Omit #62 and re-plot
+
+```{r,fig.height=4.5}
+gf_point(Alcohol ~ Calories, data = NutritionStudy[-c(62) , ])
+```
+
+---
+
+## Scatterplots with R: Example 4 (cont'd)
+
+* Create a subset first using the `filter()` function
+
+```{r,fig.height=4.5}
+NutritionStudy2 <- filter(NutritionStudy, Alcohol < 100)
+gf_point(Alcohol ~ Calories, data = NutritionStudy2)
+```
+
+---
+
+# Correlation
+
+The **correlation coefficient** is a numerical measure of the *strength and direction* of **linear** association between two quantitative variables.
+
+* Sample correlation coefficient: $r$
+* Population correlation coefficient: $\rho$
+
+---
+
+## Properties of the Correlation Coefficient
+
+1. $-1\le r\le 1$
+
+2. The sign of $r$ indicates the direction of association:
+    + positive linear association: $r>0$
+    + negative linear association: $r<0$
+    + no linear assocation: $r=0$
+   
+3. The closer $r$ is to $\pm 1$, the stronger the linear association.
+
+4. $r$ has no units and does not depend on the units of measurement. 
+
+5. Swapping $X$ and $Y$ does not change the correlation coefficient.
+
+
+---
+
+# Using R to Compute Correlations
+
+* Use the formula syntax:
+```{r}
+cor(Calories ~ Alcohol, data = NutritionStudy)
+cor(Calories ~ Alcohol, data = NutritionStudy[-c(62), ])
+```
+
+---
+
+# Correlation Cautions
+
+1. $r$ is **not resistant**.
+    + Correlation can be heavily affected by outliers. 
+    + Always plot your data!
+--
+
+2. $r = 0$ means no **linear** association.  The variables could still be otherwise associated.  
+    + Always plot your data!
+--
+
+3. Correlation does not imply causation!

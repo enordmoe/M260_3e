@@ -407,10 +407,20 @@ Math 260 Applied Statistics
 <section id="agenda" class="slide level2">
 <h2>Agenda</h2>
 <ul>
-<li><p>One more visual display: the boxplot</p></li>
-<li><p>Investigating relationships between quantitative and categorical relationships</p>
+<li><strong>Introduction to Boxplots</strong>
 <ul>
-<li>Comparing quantitative variables across groups</li>
+<li>Definition and components of a boxplot</li>
+<li>Constructing boxplots: step-by-step</li>
+</ul></li>
+<li><strong>Analyzing Quantitative and Categorical Relationships</strong>
+<ul>
+<li>Comparing distributions of quantitative variables across categorical groups</li>
+<li>Using boxplots for visual comparison</li>
+</ul></li>
+<li><strong>Advanced Visualization</strong>
+<ul>
+<li>Faceted plots: dotplots and histograms for group comparisons</li>
+<li>Overlaying data by jittering for more detail</li>
 </ul></li>
 </ul>
 </section>
@@ -481,16 +491,28 @@ Math 260 Applied Statistics
 <li><code>alpha</code> used to make points transparent (between 0 and 1)</li>
 <li>Adds y label using <code>ylab</code></li>
 </ul>
-</section>
-<section id="faceted-histograms-a-more-detailed-comparison" class="slide level2">
-<h2>Faceted Histograms: A more detailed comparison</h2>
-<p>We can get side by side histograms using the vertical bar (<code>|</code>) to “condition” on the group variable.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">gf_histogram</span>(<span class="sc">~</span>Quetelet <span class="sc">|</span> PriorSmoke <span class="sc">~</span> ., <span class="at">data =</span> NutritionStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+</section></section>
+<section>
+<section id="faceted-plots-for-more-detailed-comparisons" class="title-slide slide level1 center" data-background-color="#FAD9C7">
+<h1>Faceted plots for more detailed comparisons</h1>
 
 </section>
-<section id="faceted-histograms-a-more-detailed-comparison-output" class="slide level2 output-location-slide"><h2>Faceted Histograms: A more detailed comparison</h2><div class="cell output-location-slide">
+<section id="side-by-side-dotplots" class="slide level2">
+<h2>Side-by-side Dotplots</h2>
+<ul>
+<li>For small samples, we can get a detailed plot of hours exercised for for each <code>Year</code> (1 = First Years, …)</li>
+<li>Use the vertical bar (<code>|</code>) to “condition” on the group variable.</li>
+<li><code>Year ~ .</code> specifies <code>Year</code> as the explanatory variable.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">gf_dotplot</span>(<span class="sc">~</span>Exercise <span class="sc">|</span> Year <span class="sc">~</span> ., <span class="at">data =</span> ExerciseHours, <span class="at">dotsize =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+<aside><div>
+<p>Note: We actually could specify two variables such as <code>Year ~ Sex</code> to get a matrix of plots. Here, the <code>.</code> serves as a placeholder.</p>
+</div></aside></section>
+<section id="side-by-side-dotplots-output" class="slide level2 output-location-slide"><h2>Side-by-side Dotplots</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
@@ -498,11 +520,27 @@ Math 260 Applied Statistics
 </figure>
 </div>
 </div>
+</div></section><section id="faceted-histograms" class="slide level2">
+<h2>Faceted Histograms</h2>
+<p>For larger samples, we get side by side histograms of BMI (<code>Quetelet</code>) for each level of the <code>PriorSmoke</code> variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">gf_histogram</span>(<span class="sc">~</span>Quetelet <span class="sc">|</span> PriorSmoke <span class="sc">~</span> ., <span class="at">data =</span> NutritionStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="faceted-histograms-output" class="slide level2 output-location-slide"><h2>Faceted Histograms</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="sec2p4_m260_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
+</figure>
+</div>
+</div>
 </div></section><section id="comparing-numerical-statistics" class="slide level2">
 <h2>Comparing Numerical Statistics</h2>
 <p>Use <code>favstats()</code> to compare numerical statistics for a <em>quantitative variable</em> across <em>categories</em> of a categorical variable:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">favstats</span>(Calories <span class="sc">~</span> PriorSmoke, <span class="at">data =</span> NutritionStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">favstats</span>(Calories <span class="sc">~</span> PriorSmoke, <span class="at">data =</span> NutritionStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  PriorSmoke   min     Q1 median      Q3    max     mean       sd   n missing
 1          1 445.2 1324.0 1631.0 2038.50 4373.6 1713.387 592.1822 157       0
@@ -511,8 +549,8 @@ Math 260 Applied Statistics
 </div>
 </div>
 </section>
-<section id="quantitative-and-categorical-relationships" class="slide level2 smaller">
-<h2>Quantitative and Categorical Relationships</h2>
+<section id="investigating-quantitative-and-categorical-relationships" class="slide level2 smaller">
+<h2>Investigating Quantitative and Categorical Relationships</h2>
 <ul>
 <li><p>Compare the distribution of a quantitative variable across groups determined by the categorical variable(s).</p>
 <ul>
