@@ -80,7 +80,7 @@ gf_boxplot(Smoke ~ Quetelet, data = NutritionStudy)
 
     -   Greater than the **Upper Fence**= $Q_3$ + 1.5 (IQR)
 
-#  {background-color="#EA6820"}
+#  {background-color="#FAD9C7"}
 
 ::: {#title-slide .center}
 [Your turn: Investigate Quetelet (BMI) by Prior Smoking Status (PriorSmoke)]{style="font-size: 1.5em; font-weight: bold;"}
