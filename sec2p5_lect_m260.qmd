@@ -1,21 +1,19 @@
 ---
 title: "2.5 Two Quantitative Variables: Scatterplot and Correlation"
-author: "E. Nordmoe"
-date: "Math 260"
-output:
-  xaringan::moon_reader:
-    lib_dir: libs
-    css: xaringan-themer.css
-    nature:
-      highlightStyle: github
-      highlightLines: true
-      countIncrementalSlides: false
+author: "Math 260 Applied Statistics"
+format:
+  revealjs:
+    chalkboard: true
+    theme: [default, custom.scss]
+    reveal-options:
+      slideNumber: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: true
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
-```
-
 
 ```{r, echo=F,message=FALSE}
 library(mosaic)
@@ -23,7 +21,7 @@ library(Lock5Data)
 ```
 
 
-# Exploratory Data Analysis for Pairs of Quantitative Variables
+## Exploratory Data Analysis for Pairs of Quantitative Variables
 
 * Visual/Graphical
 
@@ -35,9 +33,8 @@ library(Lock5Data)
    
     + Linear regression (Section 2.6)
 
----
 
-# Scatterplot 
+## Scatterplot  {.smaller}
 
 * A **scatterplot** is the graph of the relationship between two quantitative variables.
 
@@ -48,9 +45,9 @@ library(Lock5Data)
         - Positive or negative
     + Strength
         - Strong, moderate, weak
----
 
-# Association
+
+## Association
 
 * A **positive** association means that values of one variable tend to be **higher** when values of the other variable are higher.
 
@@ -58,82 +55,66 @@ library(Lock5Data)
 
 * Two variables are **not associated**  (independent) if knowing the value of one variable does not give you any information about the value of the other variable.
 
----
 
-# Scatterplots with R: Example 1
+## Scatterplots with R: Example 1
 
-```{r,fig.height=4.5}
+```{r}
 gf_point(Alkalinity ~ pH,data = FloridaLakes, 
          xlab = "Acidity (pH)")
 ```
 
----
 
-# Scatterplots with R: Example 2
+## Scatterplots with R: Example 2 {.smaller}
 
 * Smoother useful for identifying nonlinear trends
-```{r,fig.height=4.5}
+```{r}
 gf_point(Alkalinity ~ pH,data = FloridaLakes,
          xlab = "Acidity (pH)") |> 
   gf_smooth()
 ```
 
----
 
-# Scatterplots with R: Example 3
+## Scatterplots with R: Example 3 {.smaller}
 
 * Identify subgroups based on categorical variable using `color` or `shape`  
-```{r,fig.height=4.5}
+```{r}
 gf_point(WeekendSleep ~ WeekdaySleep, 
          color = ~ factor(EarlyClass), data = SleepStudy)
 ```
 
----
 
-# Scatterplots with R: Example 4
+
+## Scatterplots with R: Example 4 {.smaller}
 
 * Extreme points can be labeled and omitted if need be.  
 * `hjust=1` means right-justified, `hjust=0` means left-justified.
 
-```{r,fig.height=4}
+```{r}
 gf_point(Alcohol ~ Calories, data = NutritionStudy) +
         annotate("text", x = 6600, y = 203, hjust = 1,
                  label = "Case #62")
 ```
 
----
 
-## Scatterplots with R: Example 4 (cont'd)
+## Scatterplots with R: Example 4 (cont'd) {.smaller}
 
-* Omit #62 and re-plot
+* Omit the outlier using the `filter()` function to include only cases with `Alcohol` less than 100.
 
-```{r,fig.height=4.5}
-gf_point(Alcohol ~ Calories, data = NutritionStudy[-c(62) , ])
-```
-
----
-
-## Scatterplots with R: Example 4 (cont'd)
-
-* Create a subset first using the `filter()` function
-
-```{r,fig.height=4.5}
+```{r}
 NutritionStudy2 <- filter(NutritionStudy, Alcohol < 100)
 gf_point(Alcohol ~ Calories, data = NutritionStudy2)
 ```
 
----
 
-# Correlation
+## Correlation
 
 The **correlation coefficient** is a numerical measure of the *strength and direction* of **linear** association between two quantitative variables.
 
 * Sample correlation coefficient: $r$
 * Population correlation coefficient: $\rho$
 
----
 
-## Properties of the Correlation Coefficient
+## Properties of the Correlation Coefficient {.smaller}
 
 1. $-1\le r\le 1$
 
@@ -144,32 +125,52 @@ The **correlation coefficient** is a numerical measure of the *strength and dire
    
 3. The closer $r$ is to $\pm 1$, the stronger the linear association.
 
-4. $r$ has no units and does not depend on the units of measurement. 
+4. The coefficient $r$ has no units and its value does not depend on the units of measurement. 
 
-5. Swapping $X$ and $Y$ does not change the correlation coefficient.
+5. Interchanging $X$ and $Y$ does not change the correlation coefficient.
 
 
----
 
-# Using R to Compute Correlations
+## Using R to Compute Correlations
 
 * Use the formula syntax:
 ```{r}
 cor(Calories ~ Alcohol, data = NutritionStudy)
-cor(Calories ~ Alcohol, data = NutritionStudy[-c(62), ])
+cor(Calories ~ Alcohol, data = filter(NutritionStudy, Alcohol < 100))
 ```
 
----
 
-# Correlation Cautions
+## Correlation Cautions
 
 1. $r$ is **not resistant**.
     + Correlation can be heavily affected by outliers. 
     + Always plot your data!
---
+
+. . . 
+
 
 2. $r = 0$ means no **linear** association.  The variables could still be otherwise associated.  
     + Always plot your data!
---
+    
+. . . 
+
 
 3. Correlation does not imply causation!
+
+## Summary {.smaller}
+
+- **Scatterplots** visualize relationships between two quantitative variables, focusing on form, direction, and strength of association.
+
+- **Association Types**
+  - Positive: Both variables increase together.
+  - Negative: One variable increases as the other decreases.
+  - None: No discernible pattern between variables.
+
+- **Correlation Coefficient ($r$)**
+  - Measures strength and direction of linear relationships.
+  - Ranges from -1 to 1: closer to $\pm 1$ indicates a stronger linear relationship.
+  - Not resistant to outliers and should always be accompanied by a scatterplot for context.
+
+- **Cautions**
+  - Always visualize data to check for patterns not captured by correlation.
+  - Remember that correlation does not imply causation.
