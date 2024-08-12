@@ -21,6 +21,15 @@ library(Lock5Data)
 library(palmerpenguins)
 ```
 
+## Outline
+
+-   Regression line
+-   Predicted values and residuals
+-   Least squares
+-   Interpreting slope and intercept
+-   R Commands
+-   Cautions
+
 
 #  {background-color="#FAD9C7"}
 
@@ -34,6 +43,7 @@ library(palmerpenguins)
 Obtain a scatterplot of the data to investigate the relationship between **ph** and **AvgMercury**.
 
 ```{r}
+#| output-location: slide
 gf_point(AvgMercury ~ pH,data=FloridaLakes, xlab = "Acidity (pH)", 
          ylab="Mercury (ppm)") %>%
   gf_smooth()
@@ -70,10 +80,9 @@ gf_point(AvgMercury ~ pH,data=FloridaLakes, xlab = "Acidity (pH)",
 
 #  {background-color="#FAD9C7"}
 
-::: {#title-slide .center}
+::: center
 [Try it yourself: [Rossman/Chance regression applet](http://www.rossmanchance.com/applets/RegShuffle.htm)]{style="font-size: 1.5em; font-weight: bold;"}
 :::
-
 
 ## Least Squares Line
 

@@ -1,3 +1,10 @@
+base
+methods
+datasets
+utils
+grDevices
+graphics
+stats
 lattice
 ggplot2
 Matrix
@@ -6,6 +13,3 @@ ggformula
 mosaicData
 mosaic
 Lock5Data
-palmerpenguins
-scales
-ggridges

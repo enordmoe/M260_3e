@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="sec2p6_m260_files/libs/clipboard/clipboard.min.js"></script>
-<script src="sec2p6_m260_files/libs/quarto-html/tabby.min.js"></script>
-<script src="sec2p6_m260_files/libs/quarto-html/popper.min.js"></script>
-<script src="sec2p6_m260_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="sec2p6_m260_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="sec2p6_m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="sec2p6_m260_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="sec2p6_m260_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="sec3p1__m260_files/libs/clipboard/clipboard.min.js"></script>
+<script src="sec3p1__m260_files/libs/quarto-html/tabby.min.js"></script>
+<script src="sec3p1__m260_files/libs/quarto-html/popper.min.js"></script>
+<script src="sec3p1__m260_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="sec3p1__m260_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="sec3p1__m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="sec3p1__m260_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="sec3p1__m260_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.52">
 
   <meta name="author" content="Math 260 Applied Statistics">
-  <title>2.6 Two Quantitative Variables: Linear Regression</title>
+  <title>3.1 Sampling Distributions</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="sec2p6_m260_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="sec2p6_m260_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="sec3p1__m260_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="sec3p1__m260_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -29,79 +29,14 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="sec2p6_m260_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="sec2p6_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="sec2p6_m260_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="sec2p6_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="sec2p6_m260_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="sec2p6_m260_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="sec2p6_m260_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="sec3p1__m260_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="sec3p1__m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="sec3p1__m260_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="sec3p1__m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="sec3p1__m260_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="sec3p1__m260_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="sec3p1__m260_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -393,7 +328,7 @@
     <div class="slides">
 
 <section id="title-slide" data-background-color="#EA6820" class="quarto-title-block center">
-  <h1 class="title">2.6 Two Quantitative Variables: Linear Regression</h1>
+  <h1 class="title">3.1 Sampling Distributions</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -407,198 +342,171 @@ Math 260 Applied Statistics
 <section id="outline" class="slide level2">
 <h2>Outline</h2>
 <ul>
-<li>Regression line</li>
-<li>Predicted values and residuals</li>
-<li>Least squares</li>
-<li>Interpreting slope and intercept</li>
-<li>R Commands</li>
-<li>Cautions</li>
+<li><p>Statistical inference</p></li>
+<li><p>Statistics versus parameters</p></li>
+<li><p>Sampling distributions</p></li>
+<li><p>Variability of the statistic: standard error</p></li>
+<li><p>Importance of sample size</p></li>
+<li><p>Importance of random sampling</p></li>
 </ul>
 </section>
-<section>
-<section id="section" class="title-slide slide level1 center" data-background-color="#FAD9C7">
-<h1></h1>
-<div id="title-slide" class="center">
-<p><span style="font-size: 1.5em; font-weight: bold;">Linear regression: predicting the value of one quantitative variable from another</span></p>
-</div>
+<section id="statistical-inference" class="slide level2">
+<h2>Statistical Inference</h2>
+<p><strong>Statistical inference</strong> is the process of drawing conclusions about the entire <em>population</em> based on information in a <em>sample</em>.</p>
+<p>A <strong>parameter</strong> is a number that describes some aspect of a <strong>population.</strong></p>
+<p>A <strong>statistic</strong> is a number that is computed from data in a <strong>sample.</strong></p>
 </section>
-<section id="plotting-the-data" class="slide level2">
-<h2>Plotting the Data</h2>
-<p>Obtain a scatterplot of the data to investigate the relationship between <strong>ph</strong> and <strong>AvgMercury</strong>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">gf_point</span>(AvgMercury <span class="sc">~</span> pH,<span class="at">data=</span>FloridaLakes, <span class="at">xlab =</span> <span class="st">"Acidity (pH)"</span>, </span>
-<span id="cb1-2"><a href=""></a>         <span class="at">ylab=</span><span class="st">"Mercury (ppm)"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-3"><a href=""></a>  <span class="fu">gf_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="parameter-vs-statistic" class="slide level2">
+<h2>Parameter vs Statistic</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Measure</th>
+<th style="text-align: center;"><strong>Parameter</strong></th>
+<th style="text-align: center;"><strong>Statistic</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mean</td>
+<td style="text-align: center;"><span class="math inline">\(\mu\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\bar x\)</span></td>
+</tr>
+<tr class="even">
+<td>Proportion</td>
+<td style="text-align: center;"><span class="math inline">\(p\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\hat p\)</span></td>
+</tr>
+<tr class="odd">
+<td>Std Dev</td>
+<td style="text-align: center;"><span class="math inline">\(\sigma\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(s\)</span></td>
+</tr>
+<tr class="even">
+<td>Correlation</td>
+<td style="text-align: center;"><span class="math inline">\(\rho\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(r\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>We use a <em>statistic</em> from a <em>sample</em> as a <strong>point estimate</strong> of the corresponding <em>population parameter</em>.</li>
+</ul>
+</section>
+<section id="important-points" class="slide level2">
+<h2>Important Points</h2>
+<ul>
+<li><p>Sample statistics vary from sample to sample.</p></li>
+<li><p><strong>Key Questions</strong> For a given sample statistic,</p>
+<ul>
+<li><p>What are plausible values for the population parameter?</p></li>
+<li><p>How much uncertainty is associated with the sample statistic?</p></li>
+</ul></li>
+<li><p><strong>Key Answer</strong> It depends on how much the statistic varies <em>from sample to sample</em>!</p></li>
+</ul>
+</section>
+<section id="sampling-variability-in-election-polling" class="slide level2">
+<h2>Sampling Variability in Election Polling</h2>
+<p><img data-src="images/polls_variability.png" width="720"></p>
 
+<aside><div>
+<p>Source: https://www.realclearpolitics.com/epolls/latest_polls/national_president/index.html</p>
+</div></aside></section>
+<section id="sampling-distribution" class="slide level2">
+<h2>Sampling Distribution</h2>
 <ul>
-<li>Can we use acidity to predict the mercury level of lake in Florida?</li>
-<li>Can we use a straight line to predict?</li>
-</ul>
-</section>
-<section id="plotting-the-data-output" class="slide level2 output-location-slide"><h2>Plotting the Data</h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="sec2p6_m260_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div></section><section id="the-regression-line" class="slide level2">
-<h2>The Regression Line</h2>
+<li><p>A <strong>sampling distribution</strong> is the distribution of sample statistics computed for different samples of the same size from the same population.</p>
 <ul>
-<li><p>The process of fitting a line to a set of data is called <strong>linear regression</strong> and the line of best fit is called the <strong>regression line</strong>.</p></li>
-<li><p>The estimated regression line is <span class="math display">\[
-\hat y = a +bx
-\]</span> where <span class="math inline">\(x\)</span> is the quantitative explanatory variable and <span class="math inline">\(\hat y\)</span> is the predicted quantitative response.</p></li>
-<li><p>The regression equation can be used to predict <span class="math inline">\(y\)</span> for a given value of <span class="math inline">\(x\)</span>.</p></li>
+<li>A sampling distribution shows us how the sample statistic varies <em>from sample to sample</em>.</li>
+</ul></li>
 </ul>
 </section>
-<section id="finding-the-regression-line" class="slide level2">
-<h2>Finding the Regression Line</h2>
+<section id="center-and-shape-of-sampling-distributions" class="slide level2">
+<h2>Center and Shape of Sampling Distributions</h2>
 <ul>
-<li><p>The <strong>observed response variable</strong>, <span class="math inline">\(y\)</span>, is the response value for a particular data point.</p></li>
-<li><p>The <strong>predicted response variable</strong>, <span class="math inline">\(\hat y\)</span>, is the reponse value that would be predicted for a given <span class="math inline">\(x\)</span> value based on a model.</p></li>
-<li><p>The best fitting line is the one which makes the predicted values closest to the actual values.</p></li>
+<li><p><strong>Center</strong>: If samples are randomly selected, the sampling distribution will be centered around the population parameter.</p></li>
+<li><p><strong>Shape</strong>: For most of the statistics we consider, if the sample size is large enough the sampling distribution will be <em>symmetric and bell-shaped</em>.</p></li>
 </ul>
+<p><strong>Caution</strong>: These results only hold for random samples and will not apply if the sampling method is biased.</p>
 </section>
-<section id="residuals" class="slide level2">
-<h2>Residuals</h2>
+<section id="standard-error" class="slide level2">
+<h2>Standard Error</h2>
 <ul>
-<li><p>The <strong>residual</strong> for each data point is <span class="math display">\[
-\text{observed}-\text{predicted}=y-\hat y
-\]</span></p></li>
-<li><p>The residual is also the <em>vertical</em> distance from each point to the fitted line.</p></li>
+<li><p>To assess uncertainty of a statistic, we need to know its <strong>sampling variability</strong>, how much it varies from sample to sample.</p></li>
+<li><p><strong>Standard error (SE)</strong> is the <em>standard deviation</em> of a sample statistic.</p></li>
+<li><p>The <strong>standard error</strong> measures how much the statistic varies from sample to sample.</p></li>
+<li><p>The standard error of a statistic is just the <strong>standard deviation of its sampling distribution.</strong></p></li>
 </ul>
-</section></section>
-<section>
-<section id="section-1" class="title-slide slide level1 center" data-background-color="#FAD9C7">
-<h1></h1>
-<div class="center">
-<p><span style="font-size: 1.5em; font-weight: bold;">Try it yourself: <a href="http://www.rossmanchance.com/applets/RegShuffle.htm">Rossman/Chance regression applet</a></span></p>
-</div>
 </section>
-<section id="least-squares-line" class="slide level2">
-<h2>Least Squares Line</h2>
+<section id="what-happens-to-sampling-variability-as-the-sample-size-gets-larger" class="slide level2">
+<h2>What Happens to Sampling Variability as the Sample Size Gets Larger?</h2>
 <ul>
-<li>The <strong>least squares line</strong> is the line which minimizes the sum of <strong>squared</strong> residuals:</li>
+<li><p>As the <strong>sample size</strong> <em>increases</em>, the variability of the sampling distribution <em>decreases</em>.</p></li>
+<li><p>As <span class="math inline">\(n\uparrow\)</span>, the statistic gets closer to the corresponding parameter.</p></li>
+<li><p>As <span class="math inline">\(n\uparrow\)</span>, <span class="math inline">\(\text{SE}\downarrow\)</span></p></li>
 </ul>
-<p><span class="math display">\[
-\text{sum of (residuals}^2)=\sum_{i=1}^n (y_i-\hat y_i)^2
-\]</span></p>
+</section>
+<section id="summary" class="slide level2 smaller">
+<h2>Summary</h2>
 <ul>
-<li>Use R to find the equation of the line.</li>
-</ul>
-<p><strong>Note</strong>: The “regression line” and the “least squares line” are the same thing.</p>
-</section>
-<section id="slope-and-intercept-interpretations" class="slide level2">
-<h2>Slope and Intercept Interpretations</h2>
-<p>The estimated regression line is <span class="math display">\[
-\hat y = a + bx
-\]</span></p>
+<li><strong>Statistical Inference</strong>
 <ul>
-<li><p><strong>Slope (<em>b</em>)</strong>: increase in predicted <span class="math inline">\(y\)</span> for every 1 unit increase in <span class="math inline">\(x\)</span>.</p></li>
-<li><p><strong>Intercept (<em>a</em>)</strong>: predicted <span class="math inline">\(y\)</span> value when <span class="math inline">\(x=0\)</span></p></li>
-</ul>
-<p>Note: In practice, interpretation of the slope is typically most important.</p>
-</section>
-<section id="using-r-to-find-and-graph-a-regression-line" class="slide level2">
-<h2>Using R to find and graph a regression line:</h2>
-<p>Use the <code>lm()</code> command to fit a <strong>l</strong>inear regression <strong>m</strong>odel with R.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">lm</span>(AvgMercury <span class="sc">~</span> pH, <span class="at">data =</span> FloridaLakes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = AvgMercury ~ pH, data = FloridaLakes)
-
-Coefficients:
-(Intercept)           pH  
-     1.5309      -0.1523  </code></pre>
-</div>
-</div>
-</section>
-<section id="finding-the-regression-equation-from-the-output" class="slide level2">
-<h2>Finding the regression equation from the output:</h2>
-<p>See the annotated output below: <img data-src="figs/annotated_reg_output.png"></p>
-<div class="fragment">
-<p>The least squares regression equation is <span class="math display">\[
-\widehat{\mbox{AvgMercury}} = 1.531 -0.152(\mbox{pH})
-\]</span></p>
-</div>
-</section>
-<section id="superimposing-the-regression-line-on-the-scatterplot" class="slide level2 smaller">
-<h2>Superimposing the Regression Line on the Scatterplot</h2>
-<p>Use R to plot the regression line on the scatterplot:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">gf_point</span>(AvgMercury <span class="sc">~</span> pH, <span class="at">data =</span> FloridaLakes, <span class="at">xlab =</span> <span class="st">"Acidity (pH)"</span>, <span class="at">ylab =</span> <span class="st">"Mercury (ppm)"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href=""></a>    <span class="fu">gf_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="sec2p6_m260_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"><ul>
-<li>Use <code>gf_smooth()</code> with <code>method="lm"</code> for <strong>l</strong>inear <strong>m</strong>odel</li>
+<li>Draw conclusions about a population from a sample.</li>
+<li>Parameters (e.g., <span class="math inline">\(\mu\)</span>, <span class="math inline">\(p\)</span>) describe populations.</li>
+<li>Statistics (e.g., <span class="math inline">\(\bar{x}\)</span>, <span class="math inline">\(\hat{p}\)</span>) describe samples.</li>
+</ul></li>
+<li><strong>Key Concepts</strong>
+<ul>
+<li>Sampling distributions show how statistics vary from sample to sample.</li>
+<li>Random samples result in sampling distributions centered around the population parameter.</li>
+<li>Large sample sizes often yield symmetric, bell-shaped sampling distributions.</li>
+</ul></li>
+<li><strong>Standard Error (SE)</strong>
+<ul>
+<li>SE quantifies sampling variability.</li>
+<li>SE decreases as sample size increases, indicating more precise estimates of the population parameter.</li>
+</ul></li>
 </ul>
 </section>
-<section id="using-r-to-obtain-residuals-and-predicted-values" class="slide level2">
-<h2>Using R to obtain residuals and predicted values</h2>
-<p>Add residuals and predicted values to the dataset</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="co"># fit and save the regression model with a name</span></span>
-<span id="cb5-2"><a href=""></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(AvgMercury <span class="sc">~</span> pH, <span class="at">data =</span> FloridaLakes)</span>
-<span id="cb5-3"><a href=""></a>FloridaLakes<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(model)</span>
-<span id="cb5-4"><a href=""></a>FloridaLakes<span class="sc">$</span>residuals <span class="ot">&lt;-</span> <span class="fu">resid</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="fragment">
-<p><br> <br></p>
-<div class="callout callout-important callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Important</strong></p>
-</div>
-<div class="callout-content">
-<p>You can use R to get the predicted values and residuals, but be sure you know how to compute them by hand calculator using the regression equation.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="regression-cautions" class="slide level2 smaller">
-<h2>Regression Cautions</h2>
-<div>
-<ol type="1">
-<li class="fragment"><p><strong>Do not extrapolate!</strong> Do not use the regression equation or line to predict outside the range of <span class="math inline">\(x\)</span> values available in your data.</p></li>
-<li class="fragment"><p>Only use the regession line if the association is <strong>approximately linear</strong>. <strong>Always plot your data!</strong></p></li>
-<li class="fragment"><p><strong>Beware of outliers!</strong> Outliers (especially values that are extreme on the <span class="math inline">\(x\)</span> axis) can be very influential on the regression line.</p></li>
-<li class="fragment"><p><strong>Correlation is not causation</strong> <span class="math inline">\(\ldots\)</span> and neither is regression! Higher values of <span class="math inline">\(x\)</span> may correspond to higher (or lower) predicted values of <span class="math inline">\(y\)</span>, but this does <strong>not</strong> mean that changing <span class="math inline">\(x\)</span> will <em>cause</em> <span class="math inline">\(y\)</span> to increase or decrease.</p></li>
-</ol>
-</div>
+<section id="summary-continued" class="slide level2 smaller">
+<h2>Summary (continued)</h2>
+<ul>
+<li><strong>Large samples…</strong>
+<ul>
+<li>Reduce the standard error.</li>
+<li>Provide more accurate estimates of population parameters.</li>
+</ul></li>
+<li><strong>Importance of Random Sampling</strong><br>
+Random sampling …
+<ul>
+<li>Ensures unbiased and representative samples.</li>
+<li>Is critical for valid inferences.</li>
+</ul></li>
+</ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="sec2p6_m260_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="sec3p1__m260_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="sec2p6_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="sec2p6_m260_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="sec2p6_m260_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="sec2p6_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="sec2p6_m260_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="sec2p6_m260_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="sec3p1__m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="sec3p1__m260_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="sec3p1__m260_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="sec3p1__m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="sec3p1__m260_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="sec3p1__m260_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="sec2p6_m260_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="sec2p6_m260_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="sec2p6_m260_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="sec2p6_m260_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="sec3p1__m260_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="sec3p1__m260_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="sec3p1__m260_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="sec3p1__m260_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
