@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="sec2p4_m260_files/libs/clipboard/clipboard.min.js"></script>
-<script src="sec2p4_m260_files/libs/quarto-html/tabby.min.js"></script>
-<script src="sec2p4_m260_files/libs/quarto-html/popper.min.js"></script>
-<script src="sec2p4_m260_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="sec2p4_m260_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="sec2p4_m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="sec2p4_m260_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="sec2p4_m260_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="sec3p3_4_lect_m260_files/libs/clipboard/clipboard.min.js"></script>
+<script src="sec3p3_4_lect_m260_files/libs/quarto-html/tabby.min.js"></script>
+<script src="sec3p3_4_lect_m260_files/libs/quarto-html/popper.min.js"></script>
+<script src="sec3p3_4_lect_m260_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="sec3p3_4_lect_m260_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="sec3p3_4_lect_m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="sec3p3_4_lect_m260_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="sec3p3_4_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.52">
 
   <meta name="author" content="Math 260 Applied Statistics">
-  <title>2.4 Boxplots and Quantitative/ Categorical Relationships</title>
+  <title>3.3-3.4 Constructing Bootstrap Confidence Intervals</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="sec2p4_m260_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="sec2p4_m260_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="sec3p3_4_lect_m260_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="sec3p3_4_lect_m260_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -29,79 +29,14 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="sec2p4_m260_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="sec2p4_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="sec2p4_m260_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="sec2p4_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="sec2p4_m260_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="sec2p4_m260_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="sec2p4_m260_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="sec3p3_4_lect_m260_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="sec3p3_4_lect_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="sec3p3_4_lect_m260_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="sec3p3_4_lect_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="sec3p3_4_lect_m260_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="sec3p3_4_lect_m260_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="sec3p3_4_lect_m260_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -393,7 +328,7 @@
     <div class="slides">
 
 <section id="title-slide" data-background-color="#EA6820" class="quarto-title-block center">
-  <h1 class="title">2.4 Boxplots and Quantitative/ Categorical Relationships</h1>
+  <h1 class="title">3.3-3.4 Constructing Bootstrap Confidence Intervals</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -404,165 +339,255 @@ Math 260 Applied Statistics
 </div>
 
 </section>
-<section id="agenda" class="slide level2">
-<h2>Agenda</h2>
-<ul>
-<li><strong>Introduction to Boxplots</strong>
-<ul>
-<li>Definition and components of a boxplot</li>
-<li>Constructing boxplots: step-by-step</li>
-</ul></li>
-<li><strong>Analyzing Quantitative and Categorical Relationships</strong>
-<ul>
-<li>Comparing distributions of quantitative variables across categorical groups</li>
-<li>Using boxplots for visual comparison</li>
-</ul></li>
-<li><strong>Advanced Visualization</strong>
-<ul>
-<li>Faceted plots: dotplots and histograms for group comparisons</li>
-<li>Overlaying data by jittering for more detail</li>
-</ul></li>
-</ul>
-</section>
-<section id="boxplot" class="slide level2">
-<h2>Boxplot</h2>
-<ul>
-<li><p>A <strong>boxplot</strong> is</p>
-<ul>
-<li><p>A visual depiction of the 5-number summary.</p></li>
-<li><p>Especially useful for a rough comparison of the center and spread of a variable across several sub-groups.</p></li>
-</ul></li>
-</ul>
-</section>
-<section id="constructing-a-boxplot" class="slide level2">
-<h2>Constructing a Boxplot</h2>
-<ol type="1">
-<li><p>Draw a numerical scale appropriate for the data.</p></li>
-<li><p>Draw a box stretching from <span class="math inline">\(Q_1\)</span> to <span class="math inline">\(Q_3\)</span> representing the middle 50% of the data.</p></li>
-<li><p>Divide the box with a line at the median.</p></li>
-<li><p>Draw a line (whisker) from each quartile to the most extreme data value that is <strong>not an outlier</strong>.</p></li>
-<li><p>Identify each outlier individually by plotting with a symbol such as an asterisk or dot.</p></li>
-</ol>
-<p><strong>Note:</strong> Use side-by-side boxes to compare sub-groups.</p>
-</section>
-<section id="boxplot-example-comparing-groups-vertical" class="slide level2">
-<h2>Boxplot example comparing groups: Vertical</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">gf_boxplot</span>(Quetelet <span class="sc">~</span> Smoke, <span class="at">data =</span> NutritionStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="sec2p4_m260_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
-<section id="boxplot-example-comparing-groups-horizontal" class="slide level2">
-<h2>Boxplot example comparing groups: Horizontal</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">gf_boxplot</span>(Smoke <span class="sc">~</span> Quetelet, <span class="at">data =</span> NutritionStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="sec2p4_m260_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
-<section id="outliers" class="slide level2">
-<h2>Outliers</h2>
-<ul>
-<li><p>Often best identified using judgement by inspection of a visual data display.</p></li>
-<li><p><strong>Rule of Thumb</strong> suspected outliers are data values more than 1.5 IQRs beyond the quartiles</p></li>
-<li><p>A data value is a <strong>suspected outlier</strong> if it is</p>
-<ul>
-<li><p>Smaller than the <strong>Lower Fence</strong>= <span class="math inline">\(Q_1\)</span> - 1.5 (IQR)</p></li>
-<li><p>Greater than the <strong>Upper Fence</strong>= <span class="math inline">\(Q_3\)</span> + 1.5 (IQR)</p></li>
-</ul></li>
-</ul>
-</section>
 <section>
-<section id="section" class="title-slide slide level1 center" data-background-color="#FAD9C7">
-<h1></h1>
-<div id="title-slide" class="center">
-<p><span style="font-size: 1.5em; font-weight: bold;">Your turn: Investigate Quetelet (BMI) by Prior Smoking Status (PriorSmoke)</span></p>
-</div>
-</section>
-<section id="advanced-boxplot-for-rstudio-masters" class="slide level2 smaller">
-<h2>Advanced Boxplot for RStudio Masters</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">gf_boxplot</span>(<span class="fu">factor</span>(PriorSmoke) <span class="sc">~</span> Quetelet, <span class="at">data =</span> NutritionStudy,</span>
-<span id="cb3-2"><a href=""></a>           <span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">ylab =</span> <span class="st">"Prior Smoking Status"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href=""></a>  <span class="fu">gf_jitter</span>(<span class="at">height =</span> .<span class="dv">1</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="constructing-bootstrap-confidence-intervals" class="title-slide slide level1 center" data-background-color="#FAD9C7">
+<h1>3.3 Constructing Bootstrap Confidence Intervals</h1>
 
-</div>
-<img data-src="sec2p4_m260_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"><ul>
-<li>Overlays points using <code>jitter</code> on top of boxes to show more detail</li>
-<li><code>alpha</code> used to make points transparent (between 0 and 1)</li>
-<li>Adds y label using <code>ylab</code></li>
+</section>
+<section id="review-from-last-time" class="slide level2">
+<h2>Review from Last Time</h2>
+<p>To create a 95% confidence interval for a parameter:</p>
+<ol type="1">
+<li><p>Take many random samples from the population.</p></li>
+<li><p>Compute the sample statistic for each sample.</p></li>
+<li><p>Compute the standard error (SE) as the standard deviation of these statistics.</p></li>
+<li><p>Compute the interval <span class="math inline">\(\text{statistic}\pm 2\cdot\text{SE}\)</span></p></li>
+</ol>
+<p><strong>But there’s one small problem…</strong></p>
+</section>
+<section id="the-problem" class="slide level2">
+<h2>The Problem</h2>
+<ul>
+<li><p>In reality, <strong>we only have one sample!</strong></p></li>
+<li><p>How do we know how much sample statistics vary, if we only have one sample?!?</p></li>
+</ul>
+<p><span class="math inline">\(\Rightarrow\)</span> Use the <strong>bootstrap!!</strong></p>
+</section>
+<section id="bootstrap" class="slide level2">
+<h2>Bootstrap?</h2>
+
+<img data-src="http://cdn.sheknows.com/articles/2013/01/Kori/Target_Fireman_Boot.jpg" class="r-stretch"></section>
+<section id="population" class="slide level2">
+<h2>Population</h2>
+<p>We don’t observe the population so imagine the population is many copies of the <strong>original sample</strong></p>
+</section>
+<section id="original-sample" class="slide level2">
+<h2>Original Sample</h2>
+
+<img data-src="figs/dw2d_orig.png" class="r-stretch"></section>
+<section id="population-1" class="slide level2">
+<h2>Population</h2>
+
+<img data-src="figs/dw2d_bsdiag.png" class="r-stretch"></section>
+<section id="sampling-with-replacement" class="slide level2">
+<h2>Sampling With Replacement</h2>
+<ul>
+<li><p>To simulate a sampling distribution, we can just take repeated random samples from this “population” made up of infinitely many copies of the sample but…</p></li>
+<li><p>In reality, we can’t make infinite copies of the sample…</p></li>
+<li><p>Instead, sample repeatedly <strong>with replacement</strong></p>
+<ul>
+<li>Each case can be selected more than once.</li>
+</ul></li>
+</ul>
+<p><strong>Note:</strong> This is reasonable because a good <strong>random sample</strong> is our buest guess at what the population looks like.</p>
+</section>
+<section id="bootstrap-sample" class="slide level2">
+<h2>Bootstrap Sample</h2>
+<ul>
+<li>Sample <strong>with</strong> replacement from the <strong>original sample</strong>, using the <strong>same sample size</strong></li>
+</ul>
+
+<img data-src="figs/dw2d_bs_sampling.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="bootstrap-1" class="slide level2">
+<h2>Bootstrap</h2>
+<ul>
+<li><p>A <strong>bootstrap sample</strong> is a random sample taken with replacement from the original sample, of the same size as the original sample.</p></li>
+<li><p>A <strong>bootstrap statistic</strong> is the statistic computed on a bootstrap sample (mean, proportion, difference in means, etc.)</p></li>
+<li><p>A <strong>bootstrap distribution</strong> is the distribution of many bootstrap statistics.</p></li>
 </ul>
 </section></section>
 <section>
-<section id="faceted-plots-for-more-detailed-comparisons" class="title-slide slide level1 center" data-background-color="#FAD9C7">
-<h1>Faceted plots for more detailed comparisons</h1>
+<section id="section" class="title-slide slide level1 center">
+<h1></h1>
 
+<img data-src="figs/bsdiagram.jpg" class="r-stretch"></section>
+<section id="golden-rule-of-bootstrapping" class="slide level2">
+<h2>Golden Rule of Bootstrapping</h2>
+<p>Bootstrap statistics are to the orginal sample statistic as the original sample statistic is to the population parameter.</p>
+<p>See figure <a href="http://people.kzoo.edu/enordmoe/math260/Lock5_lect/chap3/figs/hesterberg_fig.pdf">here</a></p>
 </section>
-<section id="side-by-side-dotplots" class="slide level2">
-<h2>Side-by-side Dotplots</h2>
+<section id="center" class="slide level2">
+<h2>Center</h2>
 <ul>
-<li>For small samples, we can get a detailed plot of hours exercised for for each <code>Year</code> (1 = First Years, …)</li>
-<li>Use the vertical bar (<code>|</code>) to “condition” on the group variable.</li>
-<li><code>Year ~ .</code> specifies <code>Year</code> as the explanatory variable.</li>
+<li><p>The <strong>sampling distribution</strong> of a statistic is centered around the corresponding population parameter but…</p></li>
+<li><p>The <strong>bootstrap distribution</strong> is centered around the observed sample statistic</p></li>
+<li><p>Luckily, we use the <strong>bootstrap distribution</strong> just to learn about <strong>variability</strong> (not the center)</p></li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">gf_dotplot</span>(<span class="sc">~</span>Exercise <span class="sc">|</span> Year <span class="sc">~</span> ., <span class="at">data =</span> ExerciseHours, <span class="at">dotsize =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-
-<aside><div>
-<p>Note: We actually could specify two variables such as <code>Year ~ Sex</code> to get a matrix of plots. Here, the <code>.</code> serves as a placeholder.</p>
-</div></aside></section>
-<section id="side-by-side-dotplots-output" class="slide level2 output-location-slide"><h2>Side-by-side Dotplots</h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="sec2p4_m260_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div></section><section id="faceted-histograms" class="slide level2">
-<h2>Faceted Histograms</h2>
-<p>For larger samples, we get side by side histograms of BMI (<code>Quetelet</code>) for each level of the <code>PriorSmoke</code> variable.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">gf_histogram</span>(<span class="sc">~</span>Quetelet <span class="sc">|</span> PriorSmoke <span class="sc">~</span> ., <span class="at">data =</span> NutritionStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+</section>
+<section id="standard-error" class="slide level2">
+<h2>Standard Error</h2>
+<ul>
+<li>The <strong>variability</strong> of the bootstrap statistics is similar to the variability of the sample statistics</li>
+</ul>
+<blockquote>
+<p>Use the standard deviation of the bootstrap distribution to estimate the SE of the statistic!</p>
+</blockquote>
+</section>
+<section id="what-statistics-can-we-bootstrap" class="slide level2">
+<h2>What statistics can we bootstrap?</h2>
+<ul>
+<li>Mean <span class="math inline">\((\bar x)\)</span><br>
+</li>
+<li>Proportion <span class="math inline">\((\hat p)\)</span><br>
+</li>
+<li>Difference in Means <span class="math inline">\((\bar x_1-\bar x_2)\)</span><br>
+</li>
+<li>Difference in Proportions <span class="math inline">\((\hat p_1-\hat p_2)\)</span><br>
+</li>
+<li>Correlation <span class="math inline">\((r)\)</span></li>
+<li>Regression slope <span class="math inline">\((b)\)</span></li>
+<li>Standard deviation <span class="math inline">\((s)\)</span> …</li>
+</ul>
+</section>
+<section id="bootstrapping-in-a-nutshell" class="slide level2">
+<h2>Bootstrapping in a Nutshell</h2>
+<ol type="1">
+<li><p>Generate samples with replacement</p></li>
+<li><p>Calculate sample statistic</p></li>
+<li><p>Repeat…</p></li>
+</ol>
+<p><span class="math inline">\(\Longrightarrow\)</span> Use the bootstrap distribution to estimate the SE of the statistic</p>
+</section>
+<section id="a-95-confidence-interval-using-a-bootstrap-standard-error" class="slide level2">
+<h2>A 95% Confidence Interval Using a Bootstrap Standard Error</h2>
+<blockquote>
+<p>When a bootstrap distribution for a sample statistic is symmetric and bell-shaped, we estimate a 95% confidence interval using <span class="math display">\[\text{Statistic}\pm 2\cdot \text{SE}\]</span> where SE denotes the standard error of the statistic estimated from the bootstrap distribution.</p>
+</blockquote>
+</section>
+<section id="summary" class="slide level2 smaller">
+<h2>Summary</h2>
+<ul>
+<li><p>To generate a bootstrap distribution, we:</p>
+<ol type="1">
+<li><p>Generate bootstrap samples by sampling with replacement from the original sample, using the same sample size.</p></li>
+<li><p>Compute the statistic of interest, a bootstrap statistic, for each of the bootstrap samples.</p></li>
+<li><p>Collect the statistics for many bootstrap samples to form a bootstrap distribution.</p></li>
+<li><p>If the bootstrap distribution is symmetric and bell-shaped, a 95% CI can be estimated by <span class="math inline">\(\text{Statistic}\pm 2\cdot \text{SE}\)</span> where SE can be estimated as the standard deviation of a bootstrap distribution.</p></li>
+</ol></li>
+</ul>
+</section></section>
+<section>
+<section id="bootstrap-confidence-intervals-using-percentiles" class="title-slide slide level1 center" data-background-color="#FAD9C7">
+<h1>3.4 Bootstrap Confidence Intervals using Percentiles</h1>
 
 </section>
-<section id="faceted-histograms-output" class="slide level2 output-location-slide"><h2>Faceted Histograms</h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="sec2p4_m260_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div></section><section id="comparing-numerical-statistics" class="slide level2">
-<h2>Comparing Numerical Statistics</h2>
-<p>Use <code>favstats()</code> to compare numerical statistics for a <em>quantitative variable</em> across <em>categories</em> of a categorical variable:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">favstats</span>(Calories <span class="sc">~</span> PriorSmoke, <span class="at">data =</span> NutritionStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  PriorSmoke   min     Q1 median      Q3    max     mean       sd   n missing
-1          1 445.2 1324.0 1631.0 2038.50 4373.6 1713.387 592.1822 157       0
-2          2 659.3 1386.1 1751.1 2290.20 3711.0 1861.184 643.5338 115       0
-3          3 784.4 1435.9 1662.7 2396.95 6662.2 1928.100 989.3975  43       0</code></pre>
-</div>
-</div>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
+<ul>
+<li><p>Confidence intervals based on bootstrap percentiles</p></li>
+<li><p>Different levels of confidence</p></li>
+<li><p>Impact of sample size and level of confidence on interval width</p></li>
+<li><p>Cautions for bootstrap intervals</p></li>
+</ul>
 </section>
-<section id="investigating-quantitative-and-categorical-relationships" class="slide level2 smaller">
-<h2>Investigating Quantitative and Categorical Relationships</h2>
+<section id="beyond-95-the-percentile-method" class="slide level2">
+<h2>Beyond 95%: The Percentile Method</h2>
+<blockquote>
+<p>If the bootstrap distribution is <strong>approximately symmetric</strong>, we can construct a confidence interval by finding the <strong>percentiles</strong> in the bootstrap distribution so that the proportion of bootstrap statistics <em>between</em> the percentiles matches the <em>desired confidence level.</em></p>
+</blockquote>
+</section>
+<section id="the-percentile-method" class="slide level2">
+<h2>The Percentile Method</h2>
 <ul>
-<li><p>Compare the distribution of a quantitative variable across groups determined by the categorical variable(s).</p>
+<li>For a P% confidence interval, keep the middle P% of bootstrap statistics.</li>
+</ul>
+
+<img data-src="images/percentile_interval.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="the-percentile-method-99-interval" class="slide level2">
+<h2>The Percentile Method: 99% Interval</h2>
 <ul>
-<li><p>Use side-by-side boxplots for an overview.</p></li>
-<li><p>Use comparative histograms or dotplots to see more detail.</p></li>
-</ul></li>
-<li><p>Any of the statistics we use for a quantitative variable can be looked at separately for each level of a categorical variable.</p>
+<li><p>For a 99% confidence interval, keep the middle 99%, leaving 0.5% in each tail.</p>
 <ul>
-<li>Often interested in the <strong>difference in means</strong> <span class="math inline">\(=\bar x_1- \bar x_2\)</span></li>
+<li>The 99% confidence interval would be <span class="math display">\[
+(0.5\text{th percentile}, 99.5\text{th percentile})
+\]</span> where the percentiles refer to the bootstrap distribution.</li>
 </ul></li>
 </ul>
-<p>More <a href="https://heroic-horse-92e142.netlify.app/describing_quantitative_variables_m260">details and examples</a> in the R Resources on Moodle</p>
+</section>
+<section id="level-of-confidence" class="slide level2">
+<h2>Level of Confidence</h2>
+<ul>
+<li>As confidence level <strong>increases</strong>, interval becomes <strong>wider</strong>
+<ul>
+<li>Why? To catch more plausible values.<br>
+</li>
+<li>A 99% confidence interval contains the middle 99% of the bootstrap distribution while a 90% interval would contain only the middle 90%.</li>
+</ul></li>
+<li>As sample size <span class="math inline">\((n)\)</span> <strong>increases</strong>, interval becomes <strong>narrower</strong>
+<ul>
+<li>Why? More precise estimate.</li>
+</ul></li>
+</ul>
+</section>
+<section id="two-approaches-to-a-bootstrap-confidence-interval" class="slide level2">
+<h2>Two Approaches to a Bootstrap Confidence Interval</h2>
+<ol type="1">
+<li><p><strong>Standard Error Method:</strong> Estimate the SE of the statistic by computing the standard deviation of the bootstrap distribution, and then generate a 95% confidence interval by <span class="math display">\[
+\text{Statistic}\pm 2\cdot\text{SE}
+\]</span></p></li>
+<li><p><strong>Percentile Method:</strong> Generate a P% confidence interval as the range for the middle P% of bootstrap statistics.</p></li>
+</ol>
+</section>
+<section id="two-methods" class="slide level2">
+<h2>Two Methods</h2>
+<ul>
+<li><p>Either the standard error method or the percentile method will give similar 95% confidence intervals.</p></li>
+<li><p>If a level of confidence other than 95% is desired, use the percentile method.</p></li>
+</ul>
+</section>
+<section id="cautions" class="slide level2">
+<h2>Cautions</h2>
+<div title="Cautions">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Cautions</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><p>These methods for creating a confidence interval only work if the bootstrap distribution is <strong>smooth and symmetric</strong></p></li>
+<li><p><strong>ALWAYS</strong> look at a plot of the bootstrap distribution!</p></li>
+<li><p>If the bootstrap distribution is <strong>highly skewed</strong> or looks <strong>“spiky” with gaps</strong>, you will need to go beyond intro stat to create a confidence interval.</p>
+<ul>
+<li>Example: Don’t use the bootstrap for the median or quartiles!</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="number-of-bootstrap-samples" class="slide level2">
+<h2>Number of Bootstrap Samples</h2>
+<ul>
+<li><p>When using bootstrapping, you may get a slightly different confidence interval each time. This is fine!</p></li>
+<li><p>The more bootstrap samples you use, the more precise your answer will be.</p></li>
+<li><p>For the purposes of this class, 1000 bootstrap samples is fine.</p>
+<ul>
+<li>In real life applications, you would likely take 10,000 or even 100,000 bootstrap samples.</li>
+</ul></li>
+</ul>
+</section>
+<section id="summary-1" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li><p>95% confidence intervals can be created using the <strong>standard error</strong> or the <strong>percentiles</strong> of a bootstrap distribution.</p></li>
+<li><p>For any other desired level of confidence, the <strong>percentile</strong> method may be used.</p></li>
+<li><p>A confidence interval from bootstrap percentiles can be created for any parameter, as long as the bootstrap distribution is approximately <strong>smooth and symmetric</strong>.</p></li>
+</ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -573,20 +598,20 @@ Math 260 Applied Statistics
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="sec2p4_m260_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="sec3p3_4_lect_m260_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="sec2p4_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="sec2p4_m260_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="sec2p4_m260_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="sec2p4_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="sec2p4_m260_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="sec2p4_m260_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="sec3p3_4_lect_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="sec3p3_4_lect_m260_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="sec3p3_4_lect_m260_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="sec3p3_4_lect_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="sec3p3_4_lect_m260_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="sec3p3_4_lect_m260_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="sec2p4_m260_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="sec2p4_m260_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="sec2p4_m260_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="sec2p4_m260_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="sec3p3_4_lect_m260_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="sec3p3_4_lect_m260_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="sec3p3_4_lect_m260_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="sec3p3_4_lect_m260_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

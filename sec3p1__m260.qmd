@@ -7,6 +7,7 @@ format:
     theme: [default, custom.scss]
     reveal-options:
       slideNumber: true
+    html-math-method: mathjax
 title-slide-attributes:
   data-background-color: "#EA6820"
 from: markdown+emoji
@@ -110,7 +111,7 @@ Source: https://www.realclearpolitics.com/epolls/latest_polls/national_president
 -   **Statistical Inference**
     -   Draw conclusions about a population from a sample.
     -   Parameters (e.g., $\mu$, $p$) describe populations.
-    -   Statistics (e.g., $\bar{x}$, $\hat{p}$) describe samples.
+    -   Statistics (e.g., $\bar{x}$, $\hat p$) describe samples.
 -   **Key Concepts**
     -   Sampling distributions show how statistics vary from sample to sample.
     -   Random samples result in sampling distributions centered around the population parameter.
