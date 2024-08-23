@@ -77,7 +77,7 @@ gf_dotplot(~ FG3, dotsize = .5, data = MiamiHeat)
 
 ```{r}
 #| eval: false
-gf_dotplot(~ FG3, dotsize = .5, data = MiamiHeat) %>% 
+gf_dotplot(~ FG3, dotsize = .5, data = MiamiHeat) |> 
   gf_refine(scale_y_continuous(NULL, breaks = NULL))
 ```
 :::

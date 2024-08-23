@@ -90,7 +90,7 @@ gf_boxplot(Smoke ~ Quetelet, data = NutritionStudy)
 
 ```{r,fig.height=3}
 gf_boxplot(factor(PriorSmoke) ~ Quetelet, data = NutritionStudy,
-           outlier.shape = NA, ylab = "Prior Smoking Status") %>%
+           outlier.shape = NA, ylab = "Prior Smoking Status") |>
   gf_jitter(height = .1, alpha = .4) 
 ```
 

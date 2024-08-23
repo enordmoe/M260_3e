@@ -44,8 +44,10 @@ Obtain a scatterplot of the data to investigate the relationship between **ph** 
 
 ```{r}
 #| output-location: slide
-gf_point(AvgMercury ~ pH,data=FloridaLakes, xlab = "Acidity (pH)", 
-         ylab="Mercury (ppm)") %>%
+gf_point(AvgMercury ~ pH,
+  data = FloridaLakes, xlab = "Acidity (pH)",
+  ylab = "Mercury (ppm)"
+) |>
   gf_smooth()
 ```
 
@@ -131,9 +133,11 @@ $$
 Use R to plot the regression line on the scatterplot:
 
 ```{r,tidy=TRUE}
-gf_point(AvgMercury ~ pH, data = FloridaLakes, 
-         xlab = "Acidity (pH)", ylab="Mercury (ppm)") %>%
-  gf_smooth(method="lm")
+gf_point(AvgMercury ~ pH,
+  data = FloridaLakes,
+  xlab = "Acidity (pH)", ylab = "Mercury (ppm)"
+) |>
+  gf_smooth(method = "lm")
 ```
 
 -   Use `gf_smooth()` with `method="lm"` for **l**inear **m**odel

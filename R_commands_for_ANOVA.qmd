@@ -76,7 +76,7 @@ gf_dotplot(~Ants | Filling ~ ., data = SandwichAnts, dotsize = 0.5)
 Can also overlay the mean on the dotplots, but things are getting pretty complicated now!
 
 ```{r}
-gf_jitter(Filling ~ Ants, data = SandwichAnts, height = 0.05) %>%
+gf_jitter(Filling ~ Ants, data = SandwichAnts, height = 0.05) |>
   gf_summary(fun.x=mean, geom = "point", shape = 18, size =3,
              color = "red")
 ```
@@ -154,7 +154,7 @@ The low $p$-value is evidence that mean pulse rates differ across groups, assumi
 **Figure 8.5**
 
 ```{r}
-gf_boxplot(Pulse ~ Award, data = StudentSurvey, outlier.shape = NA) %>%
+gf_boxplot(Pulse ~ Award, data = StudentSurvey, outlier.shape = NA) |>
   gf_jitter(width = .1)
 ```
 
@@ -213,7 +213,7 @@ favstats(Cost ~ Field, data = TextbookCosts)
 ```
 
 ```{r}
-gf_boxplot(Cost ~ Field, data = TextbookCosts, outlier.shape = NA) %>%
+gf_boxplot(Cost ~ Field, data = TextbookCosts, outlier.shape = NA) |>
   gf_jitter(width = 0.1)
 ```
 

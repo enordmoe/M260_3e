@@ -41,7 +41,7 @@ No plausible alternative explanation
 ## Life Expectancy and Internet
 
 ```{r, echo=FALSE, warning = FALSE}
-gf_point(LifeExpectancy ~ Internet, data = SampCountries) %>%
+gf_point(LifeExpectancy ~ Internet, data = SampCountries) |>
   gf_labs(x="Percent with Internet Access")  
 ```
 
@@ -89,7 +89,7 @@ Identify a possible confounding variable:
 ## Life Expectancy and Internet Revisited
 
 ```{r, echo=FALSE, warning=FALSE, fig.height = 6}
-gf_point(LifeExpectancy ~ Internet, color = ~ Developed, data = SampCountries) %>%
+gf_point(LifeExpectancy ~ Internet, color = ~ Developed, data = SampCountries) |>
   gf_labs(x="Percent with Internet Access")  
 ```
 

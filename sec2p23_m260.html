@@ -472,7 +472,7 @@ Math 260 Applied Statistics
 <aside><div>
 <p><strong>Note</strong>: If you really need to remove the <span class="math inline">\(y\)</span>-axis, you can use this advanced technical command.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">gf_dotplot</span>(<span class="sc">~</span> FG3, <span class="at">dotsize =</span> .<span class="dv">5</span>, <span class="at">data =</span> MiamiHeat) <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">gf_dotplot</span>(<span class="sc">~</span> FG3, <span class="at">dotsize =</span> .<span class="dv">5</span>, <span class="at">data =</span> MiamiHeat) <span class="sc">|&gt;</span> </span>
 <span id="cb3-2"><a href=""></a>  <span class="fu">gf_refine</span>(<span class="fu">scale_y_continuous</span>(<span class="cn">NULL</span>, <span class="at">breaks =</span> <span class="cn">NULL</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div></aside></section>

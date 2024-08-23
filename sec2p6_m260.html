@@ -426,9 +426,11 @@ Math 260 Applied Statistics
 <h2>Plotting the Data</h2>
 <p>Obtain a scatterplot of the data to investigate the relationship between <strong>ph</strong> and <strong>AvgMercury</strong>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">gf_point</span>(AvgMercury <span class="sc">~</span> pH,<span class="at">data=</span>FloridaLakes, <span class="at">xlab =</span> <span class="st">"Acidity (pH)"</span>, </span>
-<span id="cb1-2"><a href=""></a>         <span class="at">ylab=</span><span class="st">"Mercury (ppm)"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-3"><a href=""></a>  <span class="fu">gf_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">gf_point</span>(AvgMercury <span class="sc">~</span> pH,</span>
+<span id="cb1-2"><a href=""></a>  <span class="at">data =</span> FloridaLakes, <span class="at">xlab =</span> <span class="st">"Acidity (pH)"</span>,</span>
+<span id="cb1-3"><a href=""></a>  <span class="at">ylab =</span> <span class="st">"Mercury (ppm)"</span></span>
+<span id="cb1-4"><a href=""></a>) <span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a href=""></a>  <span class="fu">gf_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <ul>
@@ -531,7 +533,7 @@ Coefficients:
 <h2>Superimposing the Regression Line on the Scatterplot</h2>
 <p>Use R to plot the regression line on the scatterplot:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">gf_point</span>(AvgMercury <span class="sc">~</span> pH, <span class="at">data =</span> FloridaLakes, <span class="at">xlab =</span> <span class="st">"Acidity (pH)"</span>, <span class="at">ylab =</span> <span class="st">"Mercury (ppm)"</span>) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">gf_point</span>(AvgMercury <span class="sc">~</span> pH, <span class="at">data =</span> FloridaLakes, <span class="at">xlab =</span> <span class="st">"Acidity (pH)"</span>, <span class="at">ylab =</span> <span class="st">"Mercury (ppm)"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href=""></a>    <span class="fu">gf_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>

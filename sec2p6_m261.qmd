@@ -11,7 +11,7 @@ editor: visual
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
 ```{r, echo=F,message=FALSE}
@@ -27,8 +27,10 @@ library(palmerpenguins)
 Obtain a scatterplot of the data to investigate the relationship between **ph** and **AvgMercury**.
 
 ```{r}
-gf_point(AvgMercury ~ pH,data=FloridaLakes, xlab = "Acidity (pH)", 
-         ylab="Mercury (ppm)") %>%
+gf_point(AvgMercury ~ pH,
+  data = FloridaLakes, xlab = "Acidity (pH)",
+  ylab = "Mercury (ppm)"
+) %>%
   gf_smooth()
 ```
 
@@ -110,9 +112,11 @@ $$
 Use R to plot the regression line on the scatterplot:
 
 ```{r,tidy=TRUE}
-gf_point(AvgMercury ~ pH, data = FloridaLakes, 
-         xlab = "Acidity (pH)", ylab="Mercury (ppm)") %>%
-  gf_smooth(method="lm")
+gf_point(AvgMercury ~ pH,
+  data = FloridaLakes,
+  xlab = "Acidity (pH)", ylab = "Mercury (ppm)"
+) %>%
+  gf_smooth(method = "lm")
 ```
 
 -   Use `gf_smooth()` with `method="lm"` for **l**inear **m**odel
