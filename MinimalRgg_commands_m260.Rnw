@@ -1,0 +1,479 @@
+\documentclass[10pt]{report}
+
+\usepackage[landscape,margin=.40in,top=.30in,bottom=.30in,includehead,includefoot]{geometry}
+
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{longtable}
+
+\usepackage[utf8]{inputenc}
+
+%%%%  fancy family
+\usepackage{fancyvrb}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\chaptermark}[1]{\thispagestyle{fancy}\markboth{{#1}}{}}
+\renewcommand{\sectionmark}[1]{\markright{{#1}}{}}
+
+\chead{}
+\lhead[\sf \thepage]{\sf \leftmark}
+\rhead[\sf \leftmark]{\sf \thepage}
+
+\pagestyle{fancy}
+
+
+%%% some local defs
+
+\newcounter{myenumi}
+\newcommand{\saveenumi}{\setcounter{myenumi}{\value{enumi}}}
+\newcommand{\reuseenumi}{\setcounter{enumi}{\value{myenumi}}}
+
+\def\R{{\sf R}}
+\def\Rstudio{{\sf RStudio}}
+\def\RStudio{{\sf RStudio}}
+\def\term#1{\textbf{#1}}
+\def\tab#1{{\sf #1}}
+
+\providecommand{\variable}[1]{}
+\renewcommand{\variable}[1]{{\color{green!50!black}\texttt{#1}}}
+\providecommand{\dataframe}[1]{}
+\renewcommand{\dataframe}[1]{{\color{blue!80!black}\texttt{#1}}}
+\providecommand{\function}[1]{}
+\renewcommand{\function}[1]{{\color{purple!75!blue}\texttt{\StrSubstitute{#1}{()}{}()}}}
+\providecommand{\option}[1]{}
+\renewcommand{\option}[1]{{\color{brown!80!black}\texttt{#1}}}
+\providecommand{\pkg}[1]{}
+\renewcommand{\pkg}[1]{{\color{red!80!black}\texttt{#1}}}
+\providecommand{\code}[1]{}
+\renewcommand{\code}[1]{{\color{blue!80!black}\texttt{#1}}}
+
+\newcommand{\cran}{\href{http://www.R-project.org/}{CRAN}}
+\newcommand{\rterm}[1]{\textbf{#1}}
+
+\usepackage{textcomp}  % for \texttildelow
+\newcommand{\twiddle}{\raisebox{0.5ex}{\texttildelow}}
+
+
+\title{Applied Statistics: R Commands}
+
+\author{
+E. Nordmoe
+}
+
+%\date{\today}
+
+
+\begin{document}
+\parindent=0pt
+
+\chead{\sf \bfseries \Large R Commands for First Few Weeks}
+%\rhead{\date{\today}}
+\lhead{Math 260}
+
+<<setup,echo=FALSE,message=FALSE,include=FALSE>>=
+#source('setup.R')
+require(mosaic)
+require(parallel)
+require(ggformula)
+require(Lock5Data)
+options(digits=4)
+theme_set(theme_bw())
+trellis.par.set(theme=col.mosaic())
+set.seed(123)
+#knit_hooks$set(inline = function(x) {
+#	if (is.numeric(x)) return(knitr:::format_sci(x, 'latex'))
+#	x = as.character(x)
+#	h = knitr:::hilight_source(x, 'latex', list(prompt=FALSE, size='normalsize'))
+#	h = gsub("([_#$%&])", "\\\\\\1", h)
+#	h = gsub('(["\'])', '\\1{}', h)
+#	gsub('^\\\\begin\\{alltt\\}\\s*|\\\\end\\{alltt\\}\\s*$', '', h)
+#})
+knitr::opts_chunk$set(
+	dev="pdf",
+	eval=FALSE,
+	tidy=FALSE,
+	fig.align='center',
+	fig.show='hold',
+	message=FALSE, 
+	warning = FALSE
+	)
+@ 
+
+
+\let\oldchapter=\chapter
+\def\chapter{\setcounter{page}{1}\oldchapter}
+
+
+%\begin{center}
+%\section*{Enough R for Intro Stats}
+%\end{center}
+
+\def\opt#1{#1}
+\def\squeeze{\vspace*{-4ex}}
+
+\newpage
+
+\lhead{Math 260}
+%\rhead{\today}
+
+\begin{multicols}{3}
+
+\iftrue
+\subsection*{Help}
+<<>>=
+?command
+help(commandname)
+@
+\fi
+
+\subsection*{Basic Calculations}
+Basic calculation works like a calculator.
+<<>>=
+# basic ops: + - * / ^ ( )
+log(); exp(); sqrt()
+@
+\squeeze
+
+
+
+
+\subsection*{Formula Interface}
+The following syntax (often with 
+some parts omitted) is used for 
+graphical summaries, numerical summaries,
+and inference procedures.
+
+<<>>=
+goal(y ~ x | z, data = mydata, ...)
+@
+
+For plots:
+\begin{itemize}
+	\item
+		\texttt{y}: is y-axis variable
+	\item
+		\texttt{x}: is x-axis variable
+	\item
+		\texttt{z}: conditioning variable 
+		
+		(separate panels)
+\end{itemize}
+For other things:
+\medskip
+
+`\code{y \twiddle{} x | z}' can usually be
+read `\code{y} is modeled by (or depends on) \code{x} 
+differently for each \code{z}'.
+\medskip
+
+See the sampler for examples.
+
+\subsection*{Categorical Variable Description}
+
+<<>>=
+tally() 
+gf_bar()
+gf_props()
+@
+
+
+
+\subsection*{Numerical Summaries}
+These functions have 
+a formula interface to match plotting.
+%
+<<>>=
+favstats()  
+mean()      
+median()    
+sd()
+quantile()  
+IQR()  
+@
+
+\subsection*{Graphics}
+
+%\medskip
+
+
+<<>>=
+gf_bar()          
+gf_histogram()  
+gf_dotplot()        
+gf_boxplot()   
+gf_point()     
+gf_smooth()  # End previous gf_point()
+             # line with a  |>  sign
+annotate()   # End previous line with a + sign
+@
+\squeeze
+
+%\columnbreak
+
+\squeeze
+
+\subsection*{Correlation and Regression}
+%
+<<>>=
+cor()
+model <- lm()     
+summary(model)
+predict(model)
+resid(model)
+@
+
+
+\squeeze
+\subsection*{Data}
+<<>>=
+nrow() 
+dim()
+names()
+head()
+tail()
+View()
+@
+\squeeze
+
+\subsection*{Special Commands}
+<<>>=
+c()
+ |> # Pipe
++   # Continuation
+
+filter()               # Subset rows 
+slice()                # Select specific rows 
+mydata[-c(3,23,36), ]  # Remove specified rows
+mydata[, c(2,5)]       # Show specified columns
+mutate()               # Create new variables
+@
+\squeeze
+
+%\vfill
+
+\end{multicols}
+
+\newpage
+
+\chead{\sf \bfseries \Large R Sampler for Applied Statistics}
+
+\def\opt#1{#1}
+\def\squeeze{\vspace*{-4ex}}
+
+Here are a few examples. These are not exhaustive but should be seen as representative of the kinds of things we will be doing.
+
+<<more-hooks,eval=TRUE,echo=FALSE>>=
+knitr::opts_chunk$set(
+	eval=TRUE, 
+  size='small',
+	fig.width=4,
+	fig.height=1.9,
+	fig.align="center",
+	out.width=".25\\textwidth",
+	out.height=".125\\textwidth",
+	tidy=TRUE,
+	comment=NA,
+  tidy.opts=list(width.cutoff=30)
+)
+@
+
+\begin{multicols}{3}
+<<echo=FALSE>>=
+options(width=40)
+options(show.signif.stars=FALSE)
+@
+
+\subsection*{One Categorical}
+
+\vspace*{-.15in}
+
+<<tidy=TRUE>>=
+tally(~ Award, data = StudentSurvey)
+@
+\vspace*{-.20in}
+<<tidy=FALSE, tidy.opts=list(width.cutoff=30)>>=
+tally(~ Award, data = StudentSurvey,  
+      format = "percent")
+@
+\vspace*{-.20in}
+<<tidy = FALSE, tidy.opts=list(width.cutoff=30)>>=
+tally(~ Award, data = StudentSurvey, 
+      format = "proportion")
+@
+\vspace*{-.20in}
+<<tidy=FALSE>>=
+tally(~ Award, data = StudentSurvey,
+      format = "proportion", margins = TRUE)
+@
+\vspace*{-.20in}
+
+<<>>=
+gf_bar(~Award,data=StudentSurvey)
+@
+\columnbreak
+
+<<>>=
+gf_props(~Award,data=StudentSurvey, 
+         fill = "forestgreen")
+@
+
+\vspace*{-.15in}
+\subsection*{Two Categorical}
+
+
+<<>>=
+tally(~ Award + Smoke , data = StudentSurvey)
+@
+\vspace*{-.20in}
+<<tidy=FALSE>>=  
+tally(~ Award + Smoke , format = "proportion",
+      data = StudentSurvey)
+@
+\vspace*{-.20in}
+<<>>=  
+tally(~ Award + Smoke , format = "percent", 
+      margins = TRUE, data = StudentSurvey)
+@
+\vspace*{-.20in}
+
+<<tidy = FALSE>>=
+tally(~ Award | Smoke , data=StudentSurvey, 
+      format = "proportion")
+@
+\vspace*{-.20in}
+<<tidy = FALSE>>=
+tally(~ Award | Smoke , data=StudentSurvey, 
+      format = "percent")
+@
+\vspace*{-.20in}
+
+<<tidy = FALSE>>=
+tally(~ Award | Smoke, data=StudentSurvey, 
+      format = "proportion", margins = TRUE)
+@
+
+\end{multicols}
+\newpage
+\chead{\sf \bfseries \Large R Sampler for Applied Statistics (cont'd)}
+\begin{multicols}{3}
+<<echo=FALSE>>=
+options(width=40)
+options(show.signif.stars=FALSE)
+@
+
+<<>>=
+gf_bar(~Sex, fill = ~Award, data=StudentSurvey)
+@
+\vspace*{-.20in}
+<<>>=
+gf_props(~Sex, fill = ~Award, data=StudentSurvey)
+@
+\vspace*{-.20in}
+
+
+
+
+
+<<>>=
+gf_props(~Sex, fill = ~Award, position = "stack",
+         data=StudentSurvey)
+@
+\vspace*{-.20in}
+
+<<>>=
+gf_props(~Sex, fill = ~Award, 
+         position = "dodge", data=StudentSurvey)
+@
+%\vspace*{-.20in}
+\columnbreak
+<<>>=
+gf_props(~Sex, fill = ~Award, 
+         position = "fill", data=StudentSurvey)
+@
+\vspace*{-.20in}
+
+\subsection*{One Quantitative}
+%\columnbreak
+<<stu-hist1>>=
+gf_histogram(~ Height, data = StudentSurvey)
+@
+\vspace*{-.20in}
+<<stu-hist2, tidy = FALSE>>=
+gf_histogram(~ Height | Sex ~ .,
+             data = StudentSurvey, binwidth = 2)
+@
+%\columnbreak
+
+\subsection*{One Quantitative and One Categorical}
+\vspace*{-.15in}
+
+<<tally>>=
+favstats(TV ~ Sex, data = StudentSurvey)
+@
+\vspace*{-.15in}
+
+<<bwplot>>=
+gf_boxplot(TV ~ Sex, data = StudentSurvey)
+@
+\vspace*{-.15in}
+
+\subsection*{Two Quantitative}
+\vspace*{-.15in}
+
+%\columnbreak
+%\iffalse
+<<tidy=TRUE>>=
+gf_point(Weight ~ Height, data = StudentSurvey)
+@
+\vspace*{-.20in}
+<<tidy=TRUE, size = "footnotesize">>=
+gf_point(Weight ~ Height, data = StudentSurvey)  |>
+  gf_smooth()
+@
+\vspace*{-.20in}
+<<tidy=TRUE,  size = "footnotesize">>=
+gf_point(Weight ~ Height, data = StudentSurvey)  |>
+  gf_smooth(method = "lm")
+@
+\vspace*{-.20in}
+\end{multicols}
+
+\newpage
+\chead{\sf \bfseries \Large R Sampler for Applied Statistics (cont'd)}
+\begin{multicols}{2}
+<<echo=FALSE>>=
+options(width=40)
+options(show.signif.stars=FALSE)
+@
+
+<<tidy=TRUE>>=
+gf_point(Weight ~ Height, color = ~ Sex, data = StudentSurvey) 
+@
+\vspace*{-.20in}
+<<tidy=TRUE,  size = "footnotesize">>=
+gf_point(Weight ~ Height, color = ~ Sex, data = StudentSurvey)  |>
+  gf_smooth()
+@
+%\fi
+
+%\iffalse
+<<tidy=FALSE>>=
+model <- lm(Weight ~ Height, data = StudentSurvey) 
+summary(model)
+@
+%\fi
+
+
+%\vfill
+\end{multicols}
+
+
+
+
+\end{document}
+
+
+

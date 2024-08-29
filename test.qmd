@@ -1,0 +1,174 @@
+---
+title: "Math 260 R Commands for First Few Weeks"
+author: "Eric"
+format: pdf
+header-includes:
+  - \usepackage{amsmath}
+  - \usepackage{graphicx}
+  - \usepackage{booktabs}
+---
+
+# Help
+
+Use the following commands for help:
+
+```{r}
+?command
+help(commandname)
+```
+
+# Basic Calculations
+
+Basic calculation works like a calculator:
+
+```{r}
+# basic ops: + - * / ^ ( )
+log(); exp(); sqrt()
+```
+
+# Formula Interface
+
+The following syntax (often with some parts omitted) is used for graphical summaries, numerical summaries, and inference procedures.
+
+```{r}
+goal(y ~ x | z, data = mydata, ...)
+```
+
+- **y**: y-axis variable
+- **x**: x-axis variable
+- **z**: conditioning variable (separate panels)
+
+For other things: `y ~ x | z` can usually be read as "y is modeled by (or depends on) x differently for each z".
+
+# Categorical Variable Description
+
+```{r}
+tally()
+gf_bar()
+gf_props()
+```
+
+# Numerical Summaries
+
+These functions have a formula interface to match plotting:
+
+```{r}
+favstats()
+mean()
+median()
+sd()
+quantile()
+IQR()
+```
+
+# Graphics
+
+```{r}
+gf_bar()
+gf_histogram()
+gf_dotplot()
+gf_boxplot()
+gf_point()
+gf_smooth() # Add a smooth line
+annotate()  # Add annotations
+```
+
+# Correlation and Regression
+
+```{r}
+cor()
+model <- lm()
+summary(model)
+predict(model)
+resid(model)
+```
+
+# Data
+
+```{r}
+nrow()
+dim()
+names()
+head()
+tail()
+View()
+```
+
+# Special Commands
+
+```{r}
+c()
+|> # Pipe
++  # Continuation
+mydata[-c(3,23,36), ] # Remove rows
+mydata[, c(2,5)] # Show columns
+filter()
+mutate()
+```
+
+# Math 260 R Sampler for Applied Statistics
+
+Here are a few examples. These are representative of the kinds of things we will be doing:
+
+### One Categorical
+
+```{r}
+tally(~ Award, data = StudentSurvey)
+tally(~ Award, data = StudentSurvey, format = "percent")
+tally(~ Award, data = StudentSurvey, format = "proportion")
+tally(~ Award, data = StudentSurvey, format = "proportion", margins = TRUE)
+gf_bar(~Award, data=StudentSurvey)
+gf_props(~Award, data=StudentSurvey, fill = "forestgreen")
+```
+
+### Two Categorical
+
+```{r}
+tally(~ Award + Smoke, data = StudentSurvey)
+tally(~ Award + Smoke, format = "proportion", data = StudentSurvey)
+tally(~ Award + Smoke, format = "percent", margins = TRUE, data = StudentSurvey)
+tally(~ Award | Smoke, data=StudentSurvey, format = "proportion")
+tally(~ Award | Smoke, data=StudentSurvey, format = "percent")
+tally(~ Award | Smoke, data=StudentSurvey, format = "proportion", margins = TRUE)
+```
+
+### Graphics with Two Categorical Variables
+
+```{r}
+gf_bar(~Sex, fill = ~Award, data=StudentSurvey)
+gf_props(~Sex, fill = ~Award, data=StudentSurvey)
+gf_props(~Sex, fill = ~Award, position = "stack", data=StudentSurvey)
+gf_props(~Sex, fill = ~Award, position = "dodge", data=StudentSurvey)
+gf_props(~Sex, fill = ~Award, position = "fill", data=StudentSurvey)
+```
+
+### One Quantitative
+
+```{r}
+gf_histogram(~ Height, data = StudentSurvey)
+gf_histogram(~ Height | Sex ~ ., data = StudentSurvey, binwidth = 2)
+```
+
+### One Quantitative and One Categorical
+
+```{r}
+favstats(TV ~ Sex, data = StudentSurvey)
+gf_boxplot(TV ~ Sex, data = StudentSurvey)
+```
+
+### Two Quantitative
+
+```{r}
+gf_point(Weight ~ Height, data = StudentSurvey)
+gf_point(Weight ~ Height, data = StudentSurvey) |> gf_smooth()
+gf_point(Weight ~ Height, data = StudentSurvey) |> gf_smooth(method = "lm")
+gf_point(Weight ~ Height, color = ~Sex, data = StudentSurvey)
+gf_point(Weight ~ Height, color = ~Sex, data = StudentSurvey) |> gf_smooth()
+```
+
+### Regression Analysis
+
+```{r}
+model <- lm(Weight ~ Height, data = StudentSurvey)
+summary(model)
+```
