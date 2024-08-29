@@ -1,0 +1,91 @@
+---
+title: 'Regression with R'
+format: 
+    html: 
+      css: custom_doc.css
+      toc: true
+      html-math-method: katex
+      number-depth: 3
+      theme: flatly
+      self-contained: true
+execute:
+  warning: false
+editor: visual
+---
+
+```{r}
+#| label: setup
+#| include: false
+#| warning: false
+knitr::opts_chunk$set(echo = TRUE)
+options(digits=6)
+library(mosaic)
+library(Lock5Data)
+```
+
+
+# Purpose
+
+This brief handout provides examples of carrying out regression analysis with R. We illustrate methods using data from the **FloridaLakes** data of Example 2.45.
+
+
+#   Plotting the Data
+
+
+Obtain a scatterplot of the data to investigate the relationship between **ph** and **AvgMercury**. Include labels to provide units:  
+
+```{r}
+gf_point(AvgMercury ~ pH, data = FloridaLakes, xlab = "Acidity (pH)", ylab="Mercury (ppm)")
+```
+  
+  
+# Fitting the Regression Line
+
+Use the `lm()` command to fit a **l**inear regression **m**odel with R. We usually obtain the model fit with `lm(y ~ x, data = dataset_name)`.  Entering the name we gave to the model `lsmod` prints out the intercept (a) and slope (b) coefficients. Here, we save the model under the name *lsmod* though just about any name will do.
+
+```{r}
+lsmod <- lm(AvgMercury ~ pH, data = FloridaLakes)
+lsmod
+```
+
+
+# Superimposing the Regression Line on the Scatterplot
+
+It is often useful to superimpose the least squares regression line on the scatterplot of two quantitative variables. Here is an example of the command involved and associated output:  
+
+```{r}
+gf_point(AvgMercury ~ pH,data=FloridaLakes, xlab = "Acidity (pH)", ylab="Mercury (ppm)") |> 
+  gf_smooth(method="lm")
+```
+
+The `method="lm"` option means that we want the smoothed function for a **linear model**, the least squares regression model.  Note that this plot also includes a shaded region that is useful for describing the confidence with which we can make predictions from the model. The details of calculation of this region are beyond the scope of this course.
+
+# Predicted Values and Residuals Using R  
+
+
+We continue using the `FloridaLakes` data to illustrate regression procedures. Assume that we have already fit the regression model and saved it under some name, in this case `lsmod`. Then we can list the predicted and residuals command (assume the sample size is not too large) using the following. To save space, the output of these commands is not shown.  
+
+```{r, eval = FALSE}
+predict(lsmod)
+resid(lsmod) 
+```
+
+But suppose we are just interested in the residual and fitted values for a specific case (or several). Keeping in mind that these are **lists** rather than data frames (with rows *and* columns), we can use the bracket notation to list just those cases of interest. For example, suppose were were interested in just the predicted values and residuals for just Deer Point lake (in row 9). The required statements would be:  
+
+```{r}
+predict(lsmod)[9]
+resid(lsmod)[9]
+```
+
+Note that the first line gives the predicted value and second the residual.
+
+Suppose instead we were interested in  the residuals and predicted values for several lakes, say cases 3, 4, and 8. The required statements could be:
+
+```{r}
+resid(lsmod)[c(3,4,8)]
+predict(lsmod)[c(3,4,8)]
+```
+
+
+To obtain predicted values for $x$ values not in the data frame, we can simply plug the  $x$ of interest into the regression equation and calculate it manually. 
+
