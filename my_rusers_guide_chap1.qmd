@@ -1,0 +1,150 @@
+---
+title: "R Commands for Chapter 1"
+format: 
+    html: 
+      toc: true
+      html-math-method: katex
+      number-depth: 3
+      theme: flatly
+      self-contained: true
+execute:
+  warning: false
+editor: visual
+---
+
+```{r}
+#| label: setup
+#| include: false
+#| warning: false
+knitr::opts_chunk$set(echo = TRUE)
+options(digits=6)
+library(mosaic)
+library(Lock5Data)
+```
+
+
+#  Loading Data
+
+Load a dataset from the textbook:  
+
+```{r, eval = FALSE}
+library(Lock5Data)
+data(dataframe)
+```
+
+
+Quick entry of a single variable pasted in from spreadsheet:  
+
+```{r, eval = FALSE}
+#numerical only
+variablename <- scan()
+#character variable
+variablename <- scan(what="")
+
+```
+
+Note that any row started with the comment character ```#```  is recognized by R as a comment and ignored.  
+
+
+Enter a single variable at the command line:  
+
+```{r, eval = FALSE}
+variablename <- c(3.2, 3.3, 3.1)
+```
+
+
+
+```{r, eval = FALSE}
+
+```
+
+
+
+# Viewing Data
+
+Print the whole dataset, ```dataframe```:^[Actually, by default R will now only print the first 500 rows of a data frame.]
+
+```{r, eval=FALSE}
+dataframe
+```
+
+
+
+View a dataset in the dataframe previewer within RStudio:
+```{r, eval = FALSE}
+View(dataframe)
+```
+
+
+Print the first (or last) 6 rows of a dataset:  
+
+```{r, eval = FALSE}
+# First 6 rows
+head(dataframe)
+# Last 6 rows
+tail(dataframe)
+```
+
+
+Find the number of cases and/or variables in a dataset:  
+
+```{r, eval = FALSE}
+#Number of cases or rows:
+nrow(dataframe)
+#Number of variables
+ncol(dataframe)
+#Number of rows and columns
+dim(dataframe)
+```
+
+
+Get information about the textbook dataset ```dataframe```:
+```{r, eval = FALSE}
+?dataframe
+```
+
+# Variables
+
+List the variable names in a dataset:  
+
+```{r, eval = FALSE}
+names(dataframe)
+```
+
+
+Access a specific variable from a dataset:  
+
+```{r, eval = FALSE}
+dataframe$variablename
+```
+
+# Random Sampling  
+
+Generate $n$ random integers up to ```max```:
+
+```{r, eval = FALSE}
+sample(1:max, n)
+```
+
+Sample $n$ rows from a dataframe and store under dataset name `subsample`:  
+
+
+```{r, eval = FALSE}
+subsample <- sample(dataframe, n)
+```
+
+# Random Assignment for an Experiment  
+
+Use the command ```shuffle()``` to obtain a random shuffling of a data frame for the purpose of random assignment to treatment groups. For example, for a dataset with 30 rows, we randomly shuffle the dataset and assign 10 subjects to each group:  
+
+
+```{r, eval = FALSE}
+newdata <- shuffle(dataframe)
+# Use the slice(df, rows) command to select the corresponding rows
+group1 <- slice(newdata, 1:10)
+group2 <- slice(newdata, 11:20)
+group3 <- slice(newdata, 21:30)
+```
+
+
+
