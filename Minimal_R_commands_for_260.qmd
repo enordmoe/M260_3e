@@ -1,5 +1,5 @@
 ---
-title: "Applied Statistics R Commands"
+title: "Applied Stats R Commands"
 format: 
     html: 
       toc: true
@@ -132,7 +132,7 @@ View() # only use at the console command line
 
 
 # Special Commands  
-
+ 
 ```{r, eval = FALSE}
 c()
 % > % # Pipe
