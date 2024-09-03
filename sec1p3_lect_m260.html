@@ -96,6 +96,22 @@
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="sec1p3_lect_m260_files/libs/revealjs/dist/theme/quarto.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="sec1p3_lect_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="sec1p3_lect_m260_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="sec1p3_lect_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -408,7 +424,7 @@ Math 260 Applied Statistics
 <h2>A Quote</h2>
 <p><br></p>
 <blockquote>
-“The invalid assumption that correlation implies cause is probably among the two or three most serious and common errors of human reasoning.”
+<p>“The invalid assumption that correlation implies cause is probably among the two or three most serious and common errors of human reasoning.”</p>
 <footer>
 –Stephen Jay Gould
 </footer>
@@ -419,7 +435,7 @@ Math 260 Applied Statistics
 <ul>
 <li>Two variables are <strong>associated</strong> if values of one variable tend to be related to the values of the other variable.</li>
 </ul>
-<p>Two variables are <strong>causally associated</strong> if changing the value of one variable influences the value of the other variable. Temporal precedence Covariation (<span class="math inline">\(A\rightarrow B\)</span>, <span class="math inline">\(\tilde A \rightarrow\tilde B\)</span>) No plausible alternative explanation</p>
+<p>Two variables are <strong>causally associated</strong> if changing the value of one variable influences the value of the other variable. Temporal precedence Covariation (<span class="math inline">A\rightarrow B</span>, <span class="math inline">\tilde A \rightarrow\tilde B</span>) No plausible alternative explanation</p>
 </section>
 <section id="life-expectancy-and-internet" class="slide level2">
 <h2>Life Expectancy and Internet</h2>
@@ -488,10 +504,10 @@ Math 260 Applied Statistics
 <li><p>If the treatments are randomly assigned, the <strong>treatment groups</strong> should be similar.</p></li>
 </ul>
 </section>
-<section id="does-a-small-amount-of-exercise-raise-pulse-rates" class="slide level2">
+<section id="does-a-small-amount-of-exercise-raise-pulse-rates" class="slide level2 smaller">
 <h2>Does a Small Amount of Exercise Raise Pulse Rates?</h2>
 <p><strong>Question:</strong> Is just 10 or 20 seconds of exercise enough to increase pulse rate?</p>
-<ul>
+<ol type="1">
 <li><p><strong>Treatment groups</strong>: (1) seated, (2) exercise 10 seconds, (3) exercise 20 seconds</p></li>
 <li><p>Randomly divide the class into the three groups</p></li>
 <li><p>Obtain baseline pulse rate (beats per 30 seconds)</p></li>
@@ -503,15 +519,15 @@ Math 260 Applied Statistics
 <ul>
 <li>Compute response=change in pulse (after-before)</li>
 </ul></li>
-</ul>
+</ol>
 </section>
 <section id="using-r-to-randomly-assign-treatments" class="slide level2">
 <h2>Using R to Randomly Assign Treatments</h2>
 <ul>
-<li>Randomly assign students in <strong>myclass</strong></li>
+<li>Preview structure of <strong>myclass</strong> data frame</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">head</span>(myclass)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">head</span>(myclass, <span class="at">n =</span> <span class="dv">7</span>) <span class="co"># first 7 rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     lname        fname ID
 1    Adams         John  2
@@ -519,7 +535,8 @@ Math 260 Applied Statistics
 3   Arthur Chester Alan 21
 4 Buchanan        James 15
 5     Bush       George 41
-6     Bush    George W. 43</code></pre>
+6     Bush    George W. 43
+7   Carter        Jimmy 39</code></pre>
 </div>
 </div>
 </section>
@@ -533,13 +550,13 @@ Math 260 Applied Statistics
 <span id="cb3-2"><a href=""></a>newlist <span class="ot">&lt;-</span> <span class="fu">shuffle</span>(myclass)</span>
 <span id="cb3-3"><a href=""></a><span class="fu">head</span>(newlist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       lname               fname ID orig.id
-2      Adams         John Quincy  6       2
-19     Hayes Rutherford Birchard 19      19
-34    Reagan              Ronald 40      34
-12  Fillmore             Millard 13      12
-16   Harding           Warren G. 29      16
-36 Roosevelt            Theodore 26      36</code></pre>
+<pre><code>       lname       fname ID orig.id
+7     Carter       Jimmy 39       7
+15     Grant  Ulysses S. 18      15
+2      Adams John Quincy  6       2
+35 Roosevelt Franklin D. 32      35
+24   Johnson   Lyndon B. 36      24
+8  Cleveland      Grover 22       8</code></pre>
 </div>
 </div>
 </section>
@@ -551,11 +568,11 @@ Math 260 Applied Statistics
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="co"># Group 1</span></span>
-<span id="cb5-2"><a href=""></a>newlist[<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>,]</span>
+<span id="cb5-2"><a href=""></a><span class="fu">slice</span>(newlist, <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>)</span>
 <span id="cb5-3"><a href=""></a><span class="co"># Group 2</span></span>
-<span id="cb5-4"><a href=""></a>newlist[<span class="dv">16</span><span class="sc">:</span><span class="dv">30</span>,]</span>
+<span id="cb5-4"><a href=""></a><span class="fu">slice</span>(newlist, <span class="dv">16</span><span class="sc">:</span><span class="dv">30</span>)</span>
 <span id="cb5-5"><a href=""></a><span class="co"># Group 3</span></span>
-<span id="cb5-6"><a href=""></a>newlist[<span class="dv">31</span><span class="sc">:</span><span class="dv">45</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-6"><a href=""></a><span class="fu">slice</span>(newlist, <span class="dv">31</span><span class="sc">:</span><span class="dv">45</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="principles-of-statistical-design-of-experiments" class="slide level2">
@@ -605,7 +622,7 @@ Math 260 Applied Statistics
 <ol type="1">
 <li>Each participant gets both treatments in a random order OR…</li>
 </ol>
-<p>–</p>
+<div class="fragment">
 <ol start="2" type="1">
 <li>Participants are paired based on some identifiable characteristic and a randomly selected member of each pair gets each treatment.</li>
 </ol>
@@ -624,6 +641,7 @@ Math 260 Applied Statistics
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</div>
 </section>
 <section id="randomization-and-scope-of-inference" class="slide level2">
 <h2>Randomization and Scope of Inference</h2>
@@ -636,32 +654,36 @@ Math 260 Applied Statistics
 </section>
 <section id="principles-of-experimental-design" class="slide level2">
 <h2>Principles of Experimental Design</h2>
+<div>
 <ul>
-<li>Control</li>
+<li class="fragment">Control</li>
+<li class="fragment">Randomization</li>
+<li class="fragment">Replication</li>
 </ul>
-<p>–</p>
-<ul>
-<li>Randomization</li>
-</ul>
-<p>–</p>
-<ul>
-<li>Replication</li>
-</ul>
+</div>
 </section>
 <section id="effect-of-therapy-dogs" class="slide level2">
 <h2>Effect of Therapy Dogs</h2>
-<p>1. What was the research question?</p>
-<p>2. Who were the participants in the study?</p>
-<p>3. What was explanatory variable?</p>
-<p>4. Name at least two response variables?</p>
-<p>5. How were participants assigned to treatment groups? Why?</p>
+<div>
+<ol type="1">
+<li class="fragment"><p>What was the research question?</p></li>
+<li class="fragment"><p>Who were the participants in the study?</p></li>
+<li class="fragment"><p>What was explanatory variable?</p></li>
+<li class="fragment"><p>Name at least two response variables?</p></li>
+<li class="fragment"><p>How were participants assigned to treatment groups? Why?</p></li>
+</ol>
+</div>
 </section>
 <section id="effect-of-therapy-dogs-contd" class="slide level2">
 <h2>Effect of Therapy Dogs (cont’d)</h2>
-<p>6. Explain the importance of having a control group in this study.</p>
-<p>7. Is this a randomized comparative&nbsp;design or a matched pairs design experiment?</p>
-<p>8. What problems threatened the validity of the test results?</p>
-<p>9. What can be concluded from this experiment?</p>
+<div>
+<ol start="6" type="1">
+<li class="fragment"><p>Explain the importance of having a control group in this study.</p></li>
+<li class="fragment"><p>Is this a randomized comparative&nbsp;design or a matched pairs design experiment?</p></li>
+<li class="fragment"><p>What problems threatened the validity of the test results?</p></li>
+<li class="fragment"><p>What can be concluded from this experiment?</p></li>
+</ol>
+</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -685,7 +707,6 @@ Math 260 Applied Statistics
   <script src="sec1p3_lect_m260_files/libs/revealjs/plugin/notes/notes.js"></script>
   <script src="sec1p3_lect_m260_files/libs/revealjs/plugin/search/search.js"></script>
   <script src="sec1p3_lect_m260_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="sec1p3_lect_m260_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -853,27 +874,9 @@ Math 260 Applied Statistics
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom
