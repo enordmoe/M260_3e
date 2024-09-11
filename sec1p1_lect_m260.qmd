@@ -43,17 +43,23 @@ library(nycflights13)
 
 ## The Challenge of Categorization
 
--   **Race is a Social Construct**
-    -   To investigate systemic racism, we often need to categorize people by race.
-    -   How do we measure the effects of systemic racism using these categories?
-    -   How can we study disease risk factors across these socially constructed categories?
+-   **Race and Categorization in Research**
+    -   To understand systemic racism, we categorize people by race, even though race is a social construct.
+        -   We use statistics to measure the impacts of systemic racism within these socially constructed categories.
+    -   In studying health risks, we categorize by biological traits that may correlate with racial groups, helping to identify disease risk factors.
+
+
 
 ## Gender and Discrimination
 
--   **The [Gender Unicorn](https://www.transhealthsa.com/wp-content/uploads/2017/05/The-Gender-Unicorn.pdf)**
-    -   To measure salary discrimination, we need to classify individuals by sex/gender.
-    -   How do we accurately measure salary discrimination across diverse gender identities?
-    -   How do we estimate the incidence of various medical conditions considering sex/gender differences?
+-   **The [Gender Unicorn](https://www.transhealthsa.com/wp-content/uploads/2017/05/The-Gender-Unicorn.pdf)** 
+![](images/clipboard-1506884744.png){.absolute top="0" right="0" width="100"}
+
+    -   To measure salary discrimination, we classify individuals by sex/gender.
+        -   How do we accurately measure salary discrimination across diverse gender identities?
+    -   We consider biological characteristics to estimate the risk of sex-linked medical conditions.
+
+
 
 ## Ethical and Methodological Implications
 
@@ -102,7 +108,6 @@ knitr::kable(head(airports), digits = 2)
 ```
 
 # Explanatory and Response Variables
-
 
 ## Definitions
 
