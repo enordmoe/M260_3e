@@ -18,37 +18,36 @@ execute:
   echo: true
 ---
 
-## 1. Data Trends and Changes Over Time
+## 1. Data Trends Over Time
 
-Examine the trends in pedestrian fatalities over the years as presented in the report. What specific time periods show significant increases or decreases in pedestrian deaths? What factors might have contributed to these trends?
-
-::: {style="margin-top: 1.5in;"}
-:::
-
-## 2. Demographic Analysis
-
-Look at the breakdown of pedestrian deaths by age, gender, or other demographic categories in the report. Which demographic groups are most at risk for pedestrian fatalities? What insights can you gather from this data? How might public policies or interventions target these at-risk groups?
+What specific time period shows a significant increase in pedestrian deaths?
 
 ::: {style="margin-top: 1.5in;"}
 :::
 
-## 3. Geographical Disparities
+## 2. At-Risk Demographics
+Which demographic group has the highest rate of pedestrian deaths?
 
-Review the geographical data related to pedestrian deaths. Are certain regions or types of roads (e.g., urban vs. rural) more dangerous for pedestrians? What might explain these geographical differences, and how could this information be used to improve pedestrian safety in high-risk areas?
+
+::: {style="margin-top: 1.5in;"}
+:::
+
+## 3. Geographic Differences
+Are pedestrian deaths more common in urban or rural areas?
+
 
 ::: {style="margin-top: 1.5in;"}
 :::
 
 ## 4. Temporal Patterns
-
-Does the report provide any data on when pedestrian fatalities are more likely to occur (e.g., time of day, day of the week, or season)? How might this temporal data help in designing more effective safety measures, such as lighting improvements or traffic law enforcement?
+At what time of day do most pedestrian fatalities occur?
 
 ::: {style="margin-top: 1.5in;"}
 :::
 
-## 5. Identifying Primary Factors in Increased Deaths Over Time
+## 5. Identifying Causes
+What is one major factor contributing to the increase in pedestrian deaths over time?
 
-Looking at the trends, demographics, and factors such as vehicle types, infrastructure, and human behaviors, what do you believe are the primary causes of the increase in pedestrian deaths over time? Consider the possible roles of technology (e.g., smartphones), urbanization, vehicle design, and other contributing factors.
 
 ::: {style="margin-top: 1.5in;"}
 :::
