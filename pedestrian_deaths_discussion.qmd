@@ -1,0 +1,54 @@
+---
+title: "Sec 1.1 Pedestrian Deaths Discussion Questions"
+subtitle: Math 260
+author: "Group members: "
+editor: visual
+format:
+  html:
+    toc: true
+    toc_depth: 2
+    number-sections: false
+    number-depth: 2
+    theme: flatly
+    embed-resources: true
+    html-math-method: katex
+execute: 
+  warning: false
+  message: false
+  echo: true
+---
+
+## 1. Data Trends and Changes Over Time
+
+Examine the trends in pedestrian fatalities over the years as presented in the report. What specific time periods show significant increases or decreases in pedestrian deaths? What factors might have contributed to these trends?
+
+::: {style="margin-top: 1.5in;"}
+:::
+
+## 2. Demographic Analysis
+
+Look at the breakdown of pedestrian deaths by age, gender, or other demographic categories in the report. Which demographic groups are most at risk for pedestrian fatalities? What insights can you gather from this data? How might public policies or interventions target these at-risk groups?
+
+::: {style="margin-top: 1.5in;"}
+:::
+
+## 3. Geographical Disparities
+
+Review the geographical data related to pedestrian deaths. Are certain regions or types of roads (e.g., urban vs. rural) more dangerous for pedestrians? What might explain these geographical differences, and how could this information be used to improve pedestrian safety in high-risk areas?
+
+::: {style="margin-top: 1.5in;"}
+:::
+
+## 4. Temporal Patterns
+
+Does the report provide any data on when pedestrian fatalities are more likely to occur (e.g., time of day, day of the week, or season)? How might this temporal data help in designing more effective safety measures, such as lighting improvements or traffic law enforcement?
+
+::: {style="margin-top: 1.5in;"}
+:::
+
+## 5. Identifying Primary Factors in Increased Deaths Over Time
+
+Looking at the trends, demographics, and factors such as vehicle types, infrastructure, and human behaviors, what do you believe are the primary causes of the increase in pedestrian deaths over time? Consider the possible roles of technology (e.g., smartphones), urbanization, vehicle design, and other contributing factors.
+
+::: {style="margin-top: 1.5in;"}
+:::
