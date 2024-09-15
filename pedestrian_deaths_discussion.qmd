@@ -4,8 +4,8 @@ subtitle: Math 260
 author: "Group members: "
 editor: visual
 format:
-  html:
-    toc: true
+  docx:
+    toc: false
     toc_depth: 2
     number-sections: false
     number-depth: 2
@@ -26,28 +26,29 @@ What specific time period shows a significant increase in pedestrian deaths?
 :::
 
 ## 2. At-Risk Demographics
-Which demographic group has the highest rate of pedestrian deaths?
 
+Which demographic group has the highest rate of pedestrian deaths?
 
 ::: {style="margin-top: 1.5in;"}
 :::
 
 ## 3. Geographic Differences
-Are pedestrian deaths more common in urban or rural areas?
 
+Are pedestrian deaths more common in urban or rural areas?
 
 ::: {style="margin-top: 1.5in;"}
 :::
 
 ## 4. Temporal Patterns
+
 At what time of day do most pedestrian fatalities occur?
 
 ::: {style="margin-top: 1.5in;"}
 :::
 
 ## 5. Identifying Causes
-What is one major factor contributing to the increase in pedestrian deaths over time?
 
+What is one major factor contributing to the increase in pedestrian deaths over time?
 
 ::: {style="margin-top: 1.5in;"}
 :::
