@@ -22,6 +22,15 @@ library(Lock5Data)
 
 ## Outline
 
+- **The Big Picture**: The role of data description in statistics.
+- **Descriptive Statistics**: Summarizing and visualizing categorical variables.
+- **Numerical Summaries**: Frequency tables and proportions.
+- **Visual Summaries**: Bar charts and pie charts.
+- **Two-Way Tables**: Exploring relationships between two categorical variables.
+- **Graphical Comparisons**: Stacked and side-by-side bar charts.
+
+
+
 ## The Big Picture
 
 ![](figs/inference_with_data_description_p2.png){.absolute top="100" left="0"}
