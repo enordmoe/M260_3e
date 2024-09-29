@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.52">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Math 260 - Applied Statistics I">
+
+<title>Group Project: Applied Statistics Investigation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="poster_project_assgt_fa24_files/libs/clipboard/clipboard.min.js"></script>
+<script src="poster_project_assgt_fa24_files/libs/quarto-html/quarto.js"></script>
+<script src="poster_project_assgt_fa24_files/libs/quarto-html/popper.min.js"></script>
+<script src="poster_project_assgt_fa24_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="poster_project_assgt_fa24_files/libs/quarto-html/anchor.min.js"></script>
+<link href="poster_project_assgt_fa24_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="poster_project_assgt_fa24_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="poster_project_assgt_fa24_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="poster_project_assgt_fa24_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="poster_project_assgt_fa24_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Group Project: Applied Statistics Investigation</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Math 260 - Applied Statistics I </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p>In this group project, you and your peers will conduct an analysis to address a question of interest using the statistical methods learned throughout this course. This is your opportunity to explore data and apply your learning in a creative way.</p>
+<p>Your question should be substantive and interesting to the members of your group. As you think about your project and plan your data collection, try to identify at least 3 <strong>quantitative</strong> variables and 3 <strong>categorical</strong> variables, as these will form the foundation of your analysis. Having variables of both types will afford better opportunities to display mastery of the course material.</p>
+<p>You will have two options for the data you use:</p>
+<ol type="1">
+<li><p><strong>Collect your own data</strong> (e.g., sports statistics, survey results, movie information, etc.), or</p></li>
+<li><p><strong>Use an existing dataset</strong> from R, such as those available in the <strong>Lock5Data</strong> package or other relevant R packages.</p></li>
+</ol>
+<section id="project-schedule-and-details" class="level2">
+<h2 class="anchored" data-anchor-id="project-schedule-and-details">Project Schedule and Details</h2>
+<p>This project is broken down into several stages to help you build your investigation progressively. Below is the schedule with a detailed explanation of each step:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Task</th>
+<th style="text-align: center;">Due Date</th>
+<th style="text-align: center;">Points</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Team Formation</strong></td>
+<td style="text-align: center;">Monday, September 30</td>
+<td style="text-align: center;">10 pts</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Project Proposal and Methodology Submission</strong></td>
+<td style="text-align: center;">Friday, Week 4</td>
+<td style="text-align: center;">10 pts</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Preliminary Data Description</strong></td>
+<td style="text-align: center;">Friday, Week 7</td>
+<td style="text-align: center;">10 pts</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Poster Plan Meeting</strong></td>
+<td style="text-align: center;">Week 9</td>
+<td style="text-align: center;">10 pts</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Final Poster Submission</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">60 pts</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Peer Evaluations</strong></td>
+<td style="text-align: center;">Exam week Monday</td>
+<td style="text-align: center;">10 pts</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Peer Assessment at StatFest</strong></td>
+<td style="text-align: center;">Exam week Monday</td>
+<td style="text-align: center;">10 pts</td>
+</tr>
+</tbody>
+</table>
+<section id="step-1-team-formation-project-idea-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-team-formation-project-idea-10-points">Step 1: Team Formation &amp; Project Idea (10 points)</h3>
+<p><strong>Due Monday, September 30</strong></p>
+<p>Form a group of 2 or 3 students. Submit the names of your team members..</p>
+</section>
+<section id="step-2-project-proposal-and-methodology-submission-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-project-proposal-and-methodology-submission-10-points">Step 2: Project Proposal and Methodology Submission (10 points)</h3>
+<p><strong>Due Friday, Week 4</strong></p>
+<p>Submit a detailed description of your data collection plan. Depending on the approach you choose, this step will differ:</p>
+<ul>
+<li><strong>If conducting an experiment</strong>, describe the experimental design, including the procedure, the justification for your chosen design, and how data will be collected.</li>
+<li><strong>If conducting a survey</strong>, describe the population of interest, your sampling method, and include a copy of any questionnaire you intend to use. Be clear on why you chose this population and sampling method.</li>
+<li><strong>If using existing data</strong>, explain where and how you will obtain the dataset. Describe any preparations needed for the data analysis, such as cleaning or formatting. If working with a community organization, describe the data available to you or how you plan to collect additional data.</li>
+</ul>
+<p>This step helps ensure you have a well-thought-out plan for gathering your data, whether directly or from existing sources.</p>
+</section>
+<section id="step-3-preliminary-data-description-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-preliminary-data-description-10-points">Step 3: Preliminary Data Description (10 points)</h3>
+<p><strong>Due Friday, Week 7</strong></p>
+<p>Submit an annotated Quarto report that includes: - <strong>Descriptive Plots and Summary Statistics</strong>: Include visual summaries of your data such as histograms, scatterplots, bar charts, or box plots. - <strong>Initial Observations</strong>: Discuss any patterns, relationships, or interesting points that have emerged from your preliminary exploration. - <strong>Data Listing</strong>: Append a listing of your data (either handwritten or digital), unless it’s very large.</p>
+<p>This is your first step in summarizing your data and exploring it visually, helping you gain a better understanding of what story your data can tell.</p>
+</section>
+<section id="step-4-poster-plan-meeting-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-poster-plan-meeting-10-points">Step 4: Poster Plan Meeting (10 points)</h3>
+<p><strong>Due Wednesday, Week 9</strong></p>
+<p>Schedule an appointment with the instructor to discuss your poster. This meeting will be used to: - Outline the <strong>content and organization</strong> of your poster. - Present your <strong>interpretation of the data</strong>. - Get feedback on the best ways to display your results.</p>
+<p>This is a crucial opportunity to refine your analysis and get personalized guidance on effectively communicating your findings.</p>
+</section>
+<section id="step-5-final-poster-60-points" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-final-poster-60-points">Step 5: Final Poster (60 points)</h3>
+<p><strong>Due Monday, Exam Period</strong></p>
+<p>Create and submit a final version of your poster (24x36 inches) that must include:</p>
+<ul>
+<li><strong>Title</strong>: A catchy and descriptive title for your study.</li>
+<li><strong>Introduction</strong>: A brief introduction to the topic and its relevance.</li>
+<li><strong>Research Question</strong>: Clearly stated question(s) you are investigating.</li>
+<li><strong>Methodology</strong>: Details of how data was collected or sourced, along with analysis techniques.</li>
+<li><strong>Results</strong>: Key findings presented through appropriate graphs, tables, and narratives.</li>
+<li><strong>Discussion</strong>: Interpretation of the results and any implications.</li>
+</ul>
+<p>Posters should be submitted in both hard copy and digital formats (PowerPoint, Google Slides, or PDF). The grading rubric for the poster will be provided later in the term, and guidance on poster creation is available on Moodle.</p>
+</section>
+<section id="step-6-peer-evaluation-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="step-6-peer-evaluation-10-points">Step 6: Peer Evaluation (10 points)</h3>
+<p><strong>Due Monday, Exam Period</strong></p>
+<p>Each member will submit an evaluation of their groupmates’ contributions. Peer evaluations will be submitted anonymously, and each group member will be graded based on the average rating received from their peers. This is an important step to ensure fairness and accountability.</p>
+</section>
+<section id="step-7-peer-assessment-at-statfest-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="step-7-peer-assessment-at-statfest-10-points">Step 7: Peer Assessment at StatFest (10 points)</h3>
+<p><strong>Due Monday, Exam Period</strong></p>
+<p>As part of our <strong>StatFest Extravaganza</strong>, you will have the chance to assess other groups’ posters using a provided rubric. This activity will not only allow you to learn from your peers but also improve your understanding by assessing the quality of other analyses.</p>
+</section>
+</section>
+<section id="expectations-for-success" class="level2">
+<h2 class="anchored" data-anchor-id="expectations-for-success">Expectations for Success</h2>
+<ul>
+<li><strong>Mastery of Course Material</strong>: Use the appropriate statistical methods covered in class, including descriptive statistics, visual analysis, and inferential methods.</li>
+<li><strong>Teamwork</strong>: Work collaboratively with your group members. Active and equitable contribution is expected from all team members.</li>
+<li><strong>Creativity and Engagement</strong>: Select an intriguing topic and be creative in how you collect and analyze your data.</li>
+<li><strong>Clear Communication</strong>: Ensure that your poster is visually appealing and comprehensible to a general audience.</li>
+</ul>
+<section id="notes-on-data-requirements" class="level3">
+<h3 class="anchored" data-anchor-id="notes-on-data-requirements">Notes on Data Requirements</h3>
+<ul>
+<li>Your dataset should include <strong>at least 3 quantitative and 3 categorical variables</strong>.</li>
+<li>If collecting your own data, aim for at least <strong>50 cases</strong>.</li>
+<li>If using an existing dataset, strive for <strong>at least 100 cases</strong> to ensure robust analysis.</li>
+</ul>
+<p>Good luck! This project is your chance to show off the skills you’ve learned in a meaningful and interesting way. I can’t wait to see what you discover!</p>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

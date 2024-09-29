@@ -1,0 +1,29 @@
+---
+title: "Poster Presentation Evaluation Rubric"
+subtitle: "Fall 2024"
+author: "Dr. Nordmoe"
+course: "Math 260-01"
+theme: "materia"
+---
+
+# Poster Presentation Evaluation Rubric
+
+Below is the detailed evaluation rubric that will be used to assess your final poster presentation. This rubric outlines the criteria and the expectations for each aspect of your project. Please use this as a guide to ensure your poster meets the highest standards.
+
+| **Criterion**        | **Description**                                                                                       | **Points** |
+|----------------------|-------------------------------------------------------------------------------------------------------|-----------:|
+| **Content**          | The poster effectively presents the research question, background, methodology, and results. It includes all relevant information needed to understand the project and follows a logical progression. | 15 pts     |
+| **Clarity**          | The content is presented in a clear, concise, and logical manner. Key points are easy to understand, and the poster avoids unnecessary jargon. Text and visuals are well-balanced, and headings are used effectively to guide the viewer. | 15 pts     |
+| **Visual Appeal**    | The poster makes effective use of visual elements such as graphs, charts, and tables to enhance understanding. The color scheme, layout, and font size are well-chosen to make the poster visually engaging and easy to read. | 10 pts     |
+| **Engagement**       | The presentation is engaging, and the enthusiasm of the group is evident. The poster captures the interest of viewers and conveys the relevance of the research question. The presenters can answer questions and explain their project comfortably. | 10 pts     |
+| **Teamwork**         | Contributions from each team member are evident, and collaboration is demonstrated throughout the project. The group worked cohesively, and each member was able to effectively explain parts of the project. | 10 pts     |
+
+**Total Points Available: 60**
+
+### Guidelines for Evaluating Posters
+- **Content**: Judges whether the poster contains the essential information. Is the research question clear? Are the results well-supported by data analysis?
+- **Clarity**: Evaluates how understandable the presentation is. Is it easy to follow the sequence of information? Are the graphs and tables labeled clearly?
+- **Visual Appeal**: Reflects how the poster looks. Is it aesthetically pleasing? Does it avoid overcrowding and make good use of white space?
+- **Engagement**: Measures how well the team presents their work. Are they confident? Do they make the topic interesting?
+- **Teamwork**: Evaluates collaboration. Does every member of the group contribute? Can they all explain different parts of the research?
+
