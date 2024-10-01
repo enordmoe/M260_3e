@@ -1,6 +1,6 @@
 ---
 title: "Group Project: Applied Statistics Investigation"
-author: "Math 260 - Applied Statistics I"
+subtitle: "Math 260 - Applied Statistics I"
 theme: "materia"
 ---
 
