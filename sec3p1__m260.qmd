@@ -68,7 +68,7 @@ A **statistic** is a number that is computed from data in a **sample.**
 
 ## Sampling Variability in Election Polling
 
-![](images/polls_variability.png){width="720"}
+![](images/clipboard-237047201.png){width="513"}
 
 ::: aside
 Source: https://www.realclearpolitics.com/epolls/latest_polls/national_president/index.html
@@ -125,8 +125,7 @@ Source: https://www.realclearpolitics.com/epolls/latest_polls/national_president
 -   **Large samples...**
     -   Reduce the standard error.
     -   Provide more accurate estimates of population parameters.
-
--   **Importance of Random Sampling**  
-Random sampling ...
+-   **Importance of Random Sampling**\
+    Random sampling ...
     -   Ensures unbiased and representative samples.
     -   Is critical for valid inferences.
