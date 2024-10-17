@@ -1,308 +1,185 @@
 ---
-title: "An Example Quarto Document with LaTeX"
-format: 
-    html: 
-      toc: true
-      html-math-method: katex
-      number-depth: 3
-      theme: flatly
-      embed-resources: true
-execute:
-  warning: false
+title: "4.1-2 Introducing Hypothesis Tests and P-values"
+subtitle: "Math 261"
+format:
+  revealjs:
+#    css: custom.css
+    chalkboard: true
+    theme: default
 editor: visual
 ---
 
-```{r}
-#| label: setup
-#| include: false
-#| warning: false
-knitr::opts_chunk$set(echo = TRUE)
-options(digits=6)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE)
+```
+
+```{r, echo=F,message=FALSE}
 library(mosaic)
 library(Lock5Data)
 ```
 
-# Introduction
+## Some Questions to Consider
 
-This is a Quarto document. By studying the document source code file, compiling it, and observing the result, side-by-side with the source, you'll learn a lot about Quarto and the LaTeX mathematical typesetting language, and you'll be able to produce nice-looking documents with R input and output neatly formatted.
+![](images/clipboard-4164983454.png){.absolute top=0 left=1000 height="200"}
 
-Quarto is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using Quarto, see <https://quarto.org/docs/guide/>.
+::: incremental
+1.  Does a new anti-hypertension drug lower blood pressure more effectively than the current standard?
+2.  Is there a significant difference in cholesterol levels between individuals following a plant-based diet and those on a traditional diet?
+3.  Is the survival rate for patients on a new cancer treatment better than for those on the existing standard of care?
+4.  Is the diversity of plant species associate with the population of pollinator insects in a given ecosystem?
+5.  Are warming temperatures causing earlier flowering times in temperate zone plants?
+:::
 
-When you click the **Render** button in RStudio, a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+# Section 4.1 Introducing Hypothesis Tests {background-color="#EA6820"}
 
-```{r}
-summary(cars)
-```
+## Statistical Test
 
-You can also embed plots, for example:
+A **statistical test** is used to determine whether results from a sample are convincing enough to allow us to conclude something about the population.
 
-```{r}
-#| echo: false
-plot(cars)
-```
+> An outcome that would rarely happen if a claim were true is good evidence that the claim is not true.
 
-Note that the `#| echo: false` line was added to the code chunk to suppress printing of the R input code that generated the plot.
+## Statistical Hypotheses: Null
 
-# Key Formatting Constructs
+Statistical tests are framed formally in terms of two competing hypotheses:
 
-The key formatting constructs are discussed at <https://quarto.org/docs/authoring/markdown-basics.html>. You can see above how I constructed main section headings. Now I'm going to create a series of sections using secondary headings.
+-   **Null Hypothesis (**$H_0$) the statement being tested in a statistical test.
+    -   Statement we hope to reject\
+    -   Claim that there is no effect or difference
 
-## Emphasis
+## Statistical Hypotheses: Alternative
 
-This is *italic*. This is **bold**.
+-   **Alternative Hypothesis (**$H_a$) the statement we expect or hope to be true.
+    -   It is typically the research hypothesis\
+    -   Claim for which we seek evidence.
 
-## Superscripts and Subscripts
+## Statistical Hypotheses
 
-If you are not writing an equation but just need a quick subscript or superscript, you can use y^2^ or y~n~.
+-   The null and alternative hypotheses are competing claims about a population.
 
-## Lists
+-   The alternative hypothesis is established by observing evidence (data) that contradicts the null hypothesis and supports the alternative hypothesis.
 
-### Unordered
+## Points to Note
 
--   Item 1
--   Item 2
-    -   Item 2a
-    -   Item 2b
+-   Hypotheses are statements about **population parameters**.
 
-### Ordered
+    -   A **statistic** ($\hat p$, $\bar X$, etc.) should *never* appear in a hypothesis statement; only parameters ($p$, $\mu_1$, etc.) should appear.
 
-1.  Item 1
-2.  Item 2
-3.  Item 3
-    -   Item 3a
-    -   Item 3b
+-   The null hypothesis always contains an equality
 
-## Block Quotes
+-   The alternative hypothesis always contains an inequality ($<$, $>$, $\neq$)
 
-A friend once said:
+-   The direction of inequality in the alternative depends on the specifics of the research question of interest
 
-> It's always better to give than to receive.
+## Null Hypothesis
 
-## Displaying Blocks of Code Without Evaluating
+![](http://imgs.xkcd.com/comics/null_hypothesis.png)
 
-In some situations, you want to display R code but not evaluate it. Here is an example of how you format.
+## Evidence
 
-```         
-This text is displayed verbatim / preformatted
-```
+The goal of a hypothesis test is to determine whether the sample data provide enough evidence to refute the null hypothesis in favor of the alternative hypothesis.
 
-## Displaying R Code Inline in a Sentence
+## Topics to Come
 
-Sometimes, you need to include an R name or command inline in a sentence. Here is how your format it.
+-   How do we *quantify* the strength of evidence against $H_0$ and in favor of $H_a$?
 
-The `sqrt` function computes the square root of a number.
+. . .
 
-## Evaluating and Inserting R Code in a Sentence
+-   How do we know whether we have enough *evidence* to reject $H_0$ in favor of $H_a$?
 
-Sometimes, you want a result without showing the user that you used R to get it. Here is an example.
+## Summary
 
-The mean of the numbers 2, 3 and 4 is `r mean(c(2, 3, 4))`.
+-   Statistical tests use data from a sample to assess a claim about a population
 
-There are lots of ways you can exploit this capability. You can do more advanced calculations in a hidden code block, assign the results to variables, and then simply use the variable names to insert the results in a sentence.
+-   Statistical tests are usually formalized with competing hypotheses:
 
-In the following example, I compute the sum of the integers from 2 to 19 in a hidden code block. Then I display the result inline.
+    -   **Null hypothesis (**$H_0$): no effect or no difference\
+    -   **Alternative hypothesis (**$H_a$): what we seek evidence for
 
-```{r}
-#| echo: false
-x <- 2:19
-answer <- sum(x)
-```
+-   A hypothesis test examines whether sample data provide enough evidence to refute the null hypothesis and support the alternative hypothesis.
 
-The sum of the integers from 2 to 19 is `r answer`.
+# Section 4.2 Measuring Evidence with P-values {background-color="#EA6820"}
 
-# Typesetting Equations
+## Key Question
 
-## Inline vs. Display Material
+> How unusual is it to see a sample statistic as extreme as that observed, if $H_0$ were true?
 
-Equations can be formatted using LaTeX commands *inline* or as *displayed formulas*. In the latter case, they are centered and set off from the main text. In the former case, the mathematical material appears smoothly in the line of text.
+-   If it is very unusual, we have statistically significant evidence against the null hypothesis
 
-In order to fit neatly in a line, summation expressions (and similar constructs) are formatted slightly differently in their inline and display versions.
+. . .
 
-Inline mathematical material is set off by the use of single dollar-sign characters. Consequently, if you wish to use a dollar sign (for example, to indicate currency), you need to preface it with a backslash, `\`. The following examples, followed by their typeset versions, should make this clear. Study the input file to see how this is done.
+$\Longrightarrow$ But *how* do we measure how **unusual** a sample statistic is, if $H_0$ were true?
 
-```         
-This summation expression $\sum_{i=1}^n X_i$ appears inline.
-```
+## Quantifying Evidence Against the Null Hypothesis
 
-This summation expression $\sum_{i=1}^n X_i$ appears inline.
+> To see if a statistic provides evidence against $H_0$, we need to see what kind of sample statistics we would observe, just by *random chance*, **if** $H_0$ were true
 
-```         
-This summation expression is in display form.
+<!-- Spinning pennies 20 times and count number of heads. Randomization distribution -->
 
-$$\sum_{i=1}^n X_i$$
-```
+## Randomization Distribution
 
-This summation expression is in display form.
+-   A **randomization distribution** is a collection of statistics from samples simulated assuming the null hypothesis is true
 
-$$\sum_{i=1}^n X_i$$
+. . .
 
-## Some LaTeX Basics
+-   The randomization distribution shows what values of statistics would be observed, just by random chance, *if the null hypothesis were true*
 
-In this section, we show you some rudiments of the LaTeX typesetting language.
+## Key Question
 
-### Subscripts and Superscripts
+> How unusual is it to see a sample statistic as extreme as that observed, if $H_0$ is true?
 
-To indicate a subscript, use the underscore `_` character. To indicate a superscript, use a single caret character `^`. In LaTeX equations, a single caret indicates the superscript.
+-   A **randomization distribution** tells us what values of statistics we would see just by random chance, *if the null hypothesis were true*
 
-If the subscript or superscript has just one character, there is no need to delimit with braces. However, if there is more than one character, braces must be used.
+-   Use the distribution to assess how extreme the observed statistic is!
 
-The following examples illustrate:
+## p-value
 
-```         
-$$X_i$$
-$$X_{i}$$
-```
+-   The $p$-value is the chance of obtaining a sample statistic as extreme (or more extreme) than the observed sample statistic, *if the null hypothesis were true*
 
-$$X_i$$ $$X_{i}$$
+-   **Calculate** the $p$-value as the proportion of statistics in a randomization distribution that are as extreme (or more extreme) than the observed sample statistic
 
-Notice that in the above case, braces were not actually needed.
+## Calculating a p-value
 
-In this next example, however, failure to use braces creates an error, as LaTeX sets only the first character as a subscript
+1.  What kinds of statistics would we get, just by random chance, if the null hypothesis were true?
+    -   Randomization distribution
+2.  What proportion of these statistics are as extreme as our original sample statistic?
+    -   $p$-value
 
-```         
-$$X_{i,j}$$
-$$X_i,j$$
-```
+## Calculating a p-value: StatKey
 
-$$X_{i,j}$$ $$X_i,j$$
+![](figs/statkey_pval.png){fig-align="center"}
 
-Here is an expression that uses both subscripts and superscripts
+## Alternative Hypothesis
 
-```         
-$$X^2_{i,j}$$
-```
+-   A one-sided alternative contains either $>$ or $<$
 
-$$X^2_{i,j}$$
+-   A two-sided alternative contains $\neq$
 
-### Square Roots
+-   The $p$-value is the proportion **in the tail in the direction specified by** $H_a$
 
-We indicate a square root using the `\sqrt` operator.
+-   For a two-sided alternative, the $p$-value is **twice the proportion in the smallest tail**
 
-```         
-$$\sqrt{b^2 - 4ac}$$
-```
+## Estimating a P-value from a Randomization Distribution
 
-$$\sqrt{b^2 - 4ac}$$
+-   **One-tailed alternative**: Find the proportion of randomization samples that **equal or exceed** the original statistic in the direction (tail) indicated by the alternative hypothesis.
 
-### Fractions
+-   **Two-tailed alternative**: Find the proportion of randomization samples in the smaller tail **at or beyond the original** statistic and then **double the proportion** to account for the other tail.
 
-Displayed fractions are typeset using the `\frac` operator.
+## Guidelines for Thinking About p-values
 
-```         
-$$\frac{4z^3}{16}$$
-```
+When wording conclusions from a test of significance, you can consider:
 
-$$\frac{4z^3}{16}$$
+-   $.05\le p \le .10 \implies$ *slight* evidence
 
-### Summation Expressions
+-   $.01\le p \le .05 \implies$ *some* or *moderate* evidence
 
-These are indicated with the \`\sum' operator, followed by a subscript for the material appearing below the summation sign, and a superscript for any material appearing above the summation sign.
+-   $p \le .01 \implies$ *strong* or *convincing* evidence
 
-Here is an example.
+## Summary
 
-```         
-$$\sum_{i=1}^{n} X^3_i$$
-```
+-   The randomization distribution shows what types of statistics would be observed, just by random chance, *if the null hypothesis were true*
 
-$$\sum_{i=1}^{n} X^3_i$$
+-   A $p$-value is the chance of getting a statistic as extreme as that observed, *if* $H_0$ were true
 
-### Self-Sizing Parentheses
+-   A $p$-value can be calculated as the proportion of statistics in the randomization distribution *as extreme or more extreme than the observed sample statistic*
 
-In LaTeX, you can create parentheses, brackets, and braces which size themselves automatically to contain large expressions. You do this using the `\left` and `\right` operators. Here is an example
-
-```         
-$$\sum_{i=1}^{n}\left( \frac{X_i}{Y_i} \right)$$
-```
-
-$$\sum_{i=1}^{n}\left( \frac{X_i}{Y_i} \right)$$
-
-### Greek Letters
-
-Many statistical expressions use Greek letters. Much of the Greek alphabet is implemented in LaTeX, as indicated in the LaTeX cheat sheet available at the course website. There are both upper and lower case versions available for some letters.
-
-```         
-$$\alpha, \beta,  \gamma, \Gamma$$
-```
-
-$$\alpha, \beta,  \gamma, \Gamma$$
-
-### Special Symbols
-
-All common mathematical symbols are implemented, and you can find a listing on the LaTeX cheat sheet.
-
-Some examples. (Notice that, in the third example, I use the tilde character for a forced space. Generally LaTeX does spacing for you automatically, and unless you use the tilde character, R will ignore your attempts to add spaces.)
-
-```         
-$$a \pm b$$
-$$x \ge 15$$
-$$a_i \ge 0~~~\forall i$$
-```
-
-$$a \pm b$$ $$x \ge 15$$ $$a_i \ge 0~~~\forall i$$
-
-### Special Functions
-
-LaTeX typesets special functions in a different font from mathematical variables. These functions, such as $\sin$, $\cos$, and $\log$ etc. are indicated in LaTeX with a backslash. Here is an example that also illustrates how to typeset an integral.
-
-```         
-$$\int_0^{2\pi} \sin x~dx$$
-```
-
-$$\int_0^{2\pi} \sin x~dx$$
-
-Here is an example of an especially important function from Probability:
-
-```         
-$$\binom{n}{r} = \frac{n!}{r!(n-r)!} $$
-```
-
-$$\binom{n}{r} = \frac{n!}{r!(n-r)!} $$
-
-This is a *very* brief introduction but should be enough to get you started.
-
-## Stacked Expressions
-
-Occasionally it is helpful to be able to stack a series of expressions to show work, say, in deriving a confidence interval. The following shows how to accomplish this with LaTeX in Quarto. Note that the keywork `gather` is used and each line except the last ends with double-slash `\\`. The asterisk at the end prevents numbering each line of the equation.
-
-```         
-$$
-\begin{gather*}
-A&=B\\
- &=C \\
- &=D
-\end{gather*}
-$$
-```
-
-$$
-\begin{gather*}
-\hat p \pm z^* \sqrt{\hat p(1-\hat p)/n} \\
-.42 \pm 1.96 \sqrt{.42(1- .42)/200} \\
-.42 \pm .068 \\
- (.352, .488)
-\end{gather*}
-$$
-
-## Aligned Equations
-
-In other cases, especially working through a derviation or proof, we want a string of aligned equations. The following shows how to accomplish this with LaTeX in Quarto. First, note that the ampersand symbol `&` show where to align the equations and the double-slash `\\` shows the end of each equation. The double-slash is not needed at the end of the last equation.
-
-```         
-$$
-\begin{align*}
-A&=B\\
- &=C \\
- &=D
-\end{align*}
-$$
-```
-
-$$
-\begin{align*}
-A&=B\\
- &=C \\
- &=D
-\end{align*}
-$$
-
-<!-- Adapated from a document by James Steiger -->
+-   The smaller the *p*-value, the greater the evidence against $H_0$
