@@ -1,0 +1,158 @@
+---
+author: "Math 260 Applied Statistics"
+format:
+  revealjs:
+    pagetitle: "My title"
+    chalkboard: true
+    theme: [default, custom.scss]
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: true
+---
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+```
+
+#  {background-color="#EA6820"}
+
+::: {#title-slide .center}
+[Section 4.4 <br>A Closer Look at Testing]{style="font-size: 2em; font-weight: bold;"}
+:::
+
+## Section 4.4 Topics
+
+-   **Type I and Type II Errors**
+    -   Understand false positives (Type I) and false negatives (Type II) in hypothesis testing.
+-   **Multiple Testing & Publication Bias**
+    -   Explore how running multiple tests and selective reporting can lead to misleading conclusions.
+-   **Practical vs. Statistical Significance**
+    -   Differentiate between statistically significant results and results that are practically meaningful.
+
+## Type I and Type II Errors
+
+|                |      Reject $H_0$       |   Do not reject $H_0$   |
+|----------------|:-----------------------:|:-----------------------:|
+| $H_0$ is true  | Type I Error $(\alpha)$ |        No error         |
+| $H_0$ is false |        No error         | Type II Error $(\beta)$ |
+
+<br>
+
+### Type I Error $==>$ False positive
+
+<br>
+
+### Type II Error $==>$ False negative
+
+## Significance Level
+
+The significance level, $\alpha$, represents the tolerable probability of making a Type I error.
+
+## Multiple Testing
+
+-   When multiple hypothesis tests are conducted, the chance that **at** **least one test incorrectly rejects** a true null hypothesis increases with the number of tests.
+
+-   If the null hypotheses are all true, a proportion $\alpha$ of the tests will yield statistically significant results **just by random chance**.
+
+## 
+
+![](https://imgs.xkcd.com/comics/significant.png)
+
+## Publication Bias
+
+-   **Publication bias** refers to the fact that usually only the significant results get published.
+
+-   The one study that turns out significant gets published, and no one knows about all the insignificant results.
+
+-   This combined with the problem of multiple comparisons, can yield very misleading results.
+
+## Replicating Results
+
+By attempting to *replicate* significant results with another study, this second study can either:
+
+-   Reject $H_0$, providing further confirmation that $H_a$ is true
+
+OR
+
+-   Fail to reject $H_0$, suggesting that the first study may have yielded a Type I error.
+
+## Practical vs Statistical Significance
+
+-   With small sample sizes, even large differences or effects may not be significant.
+
+-   With large sample sizes, even a very small difference or effect can be significant.
+
+-   A statistically significant result is not always practically significant, especially with large sample sizes.
+
+#  {background-color="#EA6820"}
+
+::: center
+[Section 4.5 <br>Making Connections]{style="font-size: 2em; font-weight: bold;"}
+:::
+
+## Bootstrap and Randomization Distributions
+
+| Bootstrap Distributions | Randomization Distributions |
+|:---------------------------------:|:-----------------------------------:|
+| Our best guess at the distribution of sample statistics | Our best guess at the distribution of sample statistics, if $H_0$ were true |
+| Centered around the observed sample statistic | Centered around the null hypothesized value |
+| Simulate sampling from the population by resampling from the original sample | Simulate samples assuming $H_0$ were true |
+
+## Key difference {background-color="#FAD9C7"}
+
+<br> <br>
+
+. . .
+
+### Randomization distribution assumes $H_0$ true, <br> while a bootstrap distribution does *not*
+
+## Intervals and Tests
+
+<br>
+
+-   If a 95% CI **contains** the parameter in $H_0$, then a two-tailed test should **not reject** $H_0$ at the 5% significance level.
+
+. . .
+
+<br>
+
+-   If a 95% CI **misses** the parameter in $H_0$, then a two-tailed test should **reject** $H_0$ at the 5% significance level.
+
+## Intervals and Tests
+
+A confidence interval represents the **range of plausible values** for the population parameter:
+
+-   If the null hypothesized value is **not within** the CI, it is **not a plausible** value and **should be rejected.**
+
+. . .
+
+-   If the null hypothesized value is **within** the CI, it **is a plausible** value and **should not be rejected.**
+
+## Intervals and Tests
+
+-   **Confidence intervals** give you a range of plausible values for the parameter.
+
+. . .
+
+-   A **significance test** describes the plausibility of one specific value of the parameter (through the $p$-value).
+
+## Summary
+
+::: incremental
+-   If a null hypothesized value lies **inside** a 95% CI, a two-tailed test using $\alpha=.05$ would **not reject** $H_0$.
+
+<span style="display: block; height: 5px;"></span>
+
+-   If a null hypothesized value lies **outside** a 95% CI, a two-tailed test using $\alpha=.05$ would **reject** $H_0$.
+
+<span style="display: block; height: 5px;"></span>
+
+-   **Statistical significance** is not at all the same as **practical significance**.
+:::
