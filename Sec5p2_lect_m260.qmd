@@ -1,0 +1,76 @@
+---
+title: "Section 5.2 Confidence Intervals Using Normal Distributions"
+author: "Math 260 Applied Statistics"
+format:
+  revealjs:
+    chalkboard: true
+    theme: [default, custom.scss]
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: true
+---
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+```
+
+## Outline
+
+-   Confidence interval using a normal distribution
+
+## Example: Hearing Loss in Teenagers
+
+New York Times [report](http://www.nytimes.com/2010/08/24/health/research/24child.html?_r=0) on a study of hearing loss in teenagers:
+
+-   What proportion of Americans aged 12 to 19 have some hearing loss?
+
+    -   Give a 95% confidence interval.
+
+## Confidence Intervals Using Normal Distributions
+
+> If a bootstrap distribution is bell-shaped, a P% confidence interval can be found as the interval containing the middle P% of the normal distribution with mean equal to the observed sample statistic and standard deviation equal to the standard error of the statistic:
+
+$$
+N(\mbox{sample statistic}, \mbox{SE})
+$$
+
+## Confidence Intervals Using the Standard Normal
+
+-   If a statistic is normally distributed, we find a P% confidence interval for the parameter using
+
+$$\text{statistic} \pm z^* \text{SE} $$
+
+where $z^*$ is the *critical value* with area P% between $-z^*$ and $z^*$ in the standard normal distribution.
+
+-   Extends SE method to confidence levels beyond just 95%.
+
+## Use StatKey to Find the Critical Value $z^*$
+
+![](figs/statkey_with_zstar.png)
+
+## Chap 5 Summary: General Formulas
+
+### Confidence interval
+
+$$
+\text{Sample Statistic}\pm z^* \text{SE}
+$$
+
+### Hypothesis test statistic
+
+$$
+\frac{\text{Sample statistic}-\text{Null parameter}}{\text{SE}}
+$$
+
+## Looking ahead
+
+-   For now, the $\text{SE}$ comes from **resampling** methods (randomization or bootstrap).
+
+-   Beginning next class, we use classical model-based **formulas** to compute $\text{SE}$.
