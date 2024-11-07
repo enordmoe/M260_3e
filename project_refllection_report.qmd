@@ -1,0 +1,77 @@
+---
+title: "Individual Project Reflection Report"
+author: "Your name"
+date: "Due Monday 11/25/2024"
+format:
+  html:
+    toc: true
+    toc_depth: 2
+    number-sections: false
+    number-depth: 2
+    theme: yeti
+    embed-resources: true
+execute: 
+  warning: false
+  message: false
+  echo: true
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+
+
+```{r,include=FALSE}
+# These commands should always be near the top to ensure the libraries are loaded before the analysis.
+library(mosaic)
+```
+
+
+# Introduction
+
+This section provides a brief overview of the project, including its purpose, research questions, and key findings. Discuss why this project is relevant and what you aim to reflect on in this report.
+
+# Personal Contribution
+
+## Roles and Responsibilities
+Describe your specific role in the project, detailing tasks you were responsible for and how you contributed to the overall group effort.
+
+## Collaborative Efforts
+Reflect on your teamwork experience, discussing both the challenges and successes of collaborating with your group.
+
+# Key Statistical Findings
+
+## Summary of Findings
+Summarize 1-2 key findings from the project. Include an appropriate visualization or table below.
+
+```{r}
+# Insert your code here
+# If you are accessing your data be sure you have included the input code above
+
+```
+
+## Methods Applied
+Describe the statistical methods used in your analysis and discuss why they were suitable for your research questions.
+
+# Personal Learning and Reflection
+
+## Skills Acquired
+Discuss the new skills and concepts you learned during the project, focusing on statistical techniques and R programming.
+
+## Challenges Faced
+Reflect on the difficulties you encountered and how you addressed them.
+
+## Lessons Learned
+Explain how this project has shaped your understanding of statistics and data analysis.
+
+# Conclusion
+
+Summarize your reflections and discuss how the skills and knowledge gained will benefit you in future coursework or projects.
+
+# References
+If applicable, include any citations for external data sources, articles, or R data packages.
+
+
+# Appendix
+Include any additional graphs, tables, or analysis outputs here if necessary. The length of the report should not be more than 3 pages.
+
