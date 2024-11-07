@@ -20,7 +20,7 @@ library(Lock5Data)
 
 ## Some Questions to Consider
 
-![](images/clipboard-4164983454.png){.absolute top=0 left=1000 height="200"}
+![](images/clipboard-4164983454.png){.absolute top="0" left="1000" height="200"}
 
 ::: incremental
 1.  Does a new anti-hypertension drug lower blood pressure more effectively than the current standard?
