@@ -25,13 +25,10 @@ library(Lock5Data)
 
 -   Confidence interval using a normal distribution
 
-## Example: Hearing Loss in Teenagers
+## Example: News Sources
 
-New York Times [report](http://www.nytimes.com/2010/08/24/health/research/24child.html?_r=0) on a study of hearing loss in teenagers:
+A Survey conducted by the Pew Foundation found that 17% of a sample of 10,658 Americans get their news on TikTok. Find a 95% confidence interval for the corresponding parameter. Assume the SE is 0.6 percentage points.
 
--   What proportion of Americans aged 12 to 19 have some hearing loss?
-
-    -   Give a 95% confidence interval.
 
 ## Confidence Intervals Using Normal Distributions
 
