@@ -1,0 +1,179 @@
+---
+title: "6.2 Inference About a Single Mean"
+author: "Math 260 Applied Statistics"
+format:
+  revealjs:
+    chalkboard: true
+    theme: [default, custom.scss]
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: true
+---
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+```
+
+
+
+
+## Outline
+
+* Standard Error
+* Sampling Distribution
+* Hypothesis Test
+* Confidence Interval
+* Sample Size for Desired Margin of Error
+
+
+## Standard Error for Sample Means
+
+
+> For random samples of size $n$ from a population with mean $\mu$, the standard error of the sample mean $\bar x$ is 
+$$
+SE=\frac{\sigma}{\sqrt{n}}
+$$
+
+* The larger the sample size $n$, the smaller the SE.
+
+
+## The Central Limit Theorem for Sample Means
+
+
+If $n$ is sufficiently large,
+$$
+\bar x \sim N\left(\mu,\frac{\sigma}{\sqrt{n}}\right)
+$$
+
+* A normal distribution is usually a good approximation as long as $n\ge 30$
+
+* Smaller sample sizes may be sufficient for symmetric distributions, and 30 may not be sufficient for very skewed distributions or distributions with high outliers.
+
+
+
+## Standard Error of the Sample Mean in Practice
+
+Usually, we don’t know the population standard deviation $\sigma$, so estimate it with the sample standard deviation, $s$
+to get the estimated **standard error**
+$$
+\text{SE}=\frac{s}{\sqrt{n}}
+$$
+
+
+## t-Distribution
+
+* Replacing $\sigma$ with $s$ changes the distribution of the $z$-statistic from Normal to $t$.
+
+* The $t$ distribution is very similar to the standard normal $Z$, but with slightly thicker tails to reflect this added uncertainty.
+
+
+## Degrees of Freedom
+
+
+* The $t$-distribution is characterized by its **degrees of freedom** (df).
+
+* Degrees of freedom are calculated based on the sample size.
+
+* The greater the degrees of freedom, the closer the $t$-distribution is to the standard normal.
+ 
+
+## t-distribution
+
+
+* If a population with mean $\mu_0$ is approximately normal or if $n$ is large
+$(n \ge 30),$ the standardized statistic for a mean using the sample $s$ 
+follows a $t$-distribution with $n–1$ degrees of freedom:
+
+$$\frac{\bar x-\mu_0}{s/\sqrt{n}}\sim t_{n-1}$$
+
+
+## Normality Condition {.smaller}
+
+
+* Using the t-distribution requires that the data comes from a *normal distribution*
+
+*  Note: this assumption is about the population data, *not* the distribution of the statistic.
+
+* For large sample sizes we do not need to worry about this, because $s$ will be a very good estimate of $\sigma$ and $t$ will be very close to $N(0,1)$.
+
+* For small sample sizes $(n<30)$, we can only use the $t$-distribution if the distribution of the data is approximately normal.
+   + Problem: Hard to assess normality for small samples.
+
+
+## Small Samples
+
+
+* If sample sizes are small, only use the $t$-distribution if the data look reasonably symmetric and do not have any extreme outliers.
+
+* Even then, remember that the $t$ is just an approximation! 
+
+* In practice, if sample sizes are small, use simulation methods (bootstrapping and randomization).
+
+## t-test for a Single Mean {.smaller}
+
+The one-sample $t$ test statistic of $H_0:\mu=\mu_0$:
+
+$$t=\frac{\bar x-\mu_0}{s/\sqrt{n}}$$
+
+The $p$-value is the area in the tail(s) beyond $t$ for a $t$-distribution with $n–1$ degrees of freedom.
+
+* Conditions:
+
+1. Simple random sample
+
+2. Population distribution is approximately normal OR sample size is large $(n\ge 30)$
+
+
+## Confidence Interval for a Single Mean
+
+
+* The general formula for a confidence interval is statistic $\text{statistic}\pm z^* \text{SE}$
+
+* For means, replacing $\sigma$ with $s$ causes us to use the $t$-distribution instead of the standard normal
+
+
+## t-Distribution Confidence Interval for a Single Mean {.smaller}
+
+>  A confidence interval for a population $\mu$ is given by: $$\bar x \pm t^* \frac{s}{\sqrt{n}}$$
+>where $t^*$  is the critical value from a $t$-distribution with $n-1$ degrees of freedom.
+
+* Conditions:
+
+1. Simple random sample
+
+2. Population distribution is approximately normal OR sample size is large $(n\ge 30)$
+
+
+
+## Sample Size for Desired Margin of Error {.smaller}
+
+
+* To estimate a population mean $\mu$ to within a desired margin of error, ME, with a given level of confidence, select
+
+$$n=\left(\frac{z^*\cdot \tilde\sigma}{\text{ME}}\right)^2$$
+
+where $\tilde\sigma$ is an estimate of the population standard deviation.
+
+* Note that do not know $n$ so we cannot use a $t^*$ as it would depend on $n$ through the degrees of freedom. Instead we use $z^*$ to get an approximation.
+
+
+## Summary {.smaller}
+
+- **Standard Error & Central Limit Theorem**  
+  Standard error decreases with larger samples. Sample means follow a normal distribution if \(n \ge 30\).
+
+- **t-Distribution**  
+  Used when population standard deviation is unknown; has thicker tails than normal, adjusting for sample variability.
+
+- **Inference Methods**  
+  Hypothesis tests and confidence intervals for a single mean rely on the t-distribution, requiring normality or large \(n\).
+
+- **Sample Size Planning**  
+  Determine sample size for a desired margin of error using the z-distribution as an approximation.
