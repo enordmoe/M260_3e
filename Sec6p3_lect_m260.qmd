@@ -1,0 +1,127 @@
+---
+title: "6.3 Inference About Differences in Proportions"
+author: "Math 260 Applied Statistics"
+format:
+  revealjs:
+    chalkboard: true
+    theme: [default, custom.scss]
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: true
+---
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+```
+
+
+
+## Outline
+* Standard Error   
+* Sampling Distribution  
+* Confidence Interval  
+* Hypothesis Test  
+
+
+
+## Context: Inference about the Difference in Proportions {.smaller}  
+
+Comparison of proportions from two different (independent) populations.  
+
+Examples  
+
+  * Compare success proportion in Group A versus Group B   
+  * Compare survival for group getting Treatment A versus survival for group getting Treatment B   
+
+. . . 
+
+BUT NOT 
+
+  * Compare proportion of voters who prefer A to proportion who prefer B  
+    + This is a comparison of proportions within the same group.  
+
+
+
+## Standard Error for Difference in Proportions  
+
+The standard error for $\hat p_1-\hat p_2$ is
+$$
+\text{SE}=\sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}}
+$$
+
+
+
+## Central Limit Theorem for Difference in Proportions {.smaller}  
+
+If $n$ is sufficiently large:   
+
+$$
+\hat p_1-\hat p_2 \sim N\left(p_1-p_2, \sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}}\right)
+$$
+
+Conditions:  
+
+  * Independent random samples  
+  * Sufficiently large samples  
+    + $n_1 p_1\ge 10$ and $n_1(1-p_1)\ge 10$  
+    + $n_2 p_2\ge 10$ and $n_2(1-p_2)\ge 10$  
+
+
+
+## Confidence Interval for a Difference in Proportions  {.smaller}
+
+
+A confidence interval for $p_1-p_2$ can be computed as  
+
+$$
+(\hat p_1-\hat p_2) \pm z^* \sqrt{\frac{\hat p_1(1-\hat p_1)}{n_1}+\frac{\hat p_2(1-\hat p_2)}{n_2}}
+$$
+
+Conditions:  
+
+  * Independent random samples  
+  * Sufficiently large samples  
+    + At least 10 successes and failures in each group  
+
+
+## Test for Difference in Proportions   {.smaller}
+
+To test $H_0:p_1=p_2$, based on samples of size $n_1$ and $n_2$ from two groups, calculate  
+$$
+z=\frac{\hat p_1-\hat p_2}{\sqrt{\frac{\hat p(1-\hat p)}{n_1}+\frac{\hat p(1-\hat p)}{n_2}}}
+$$
+where $\hat p$ is the *pooled* proportion obtained by combining the two samples.  That is,  
+
+$$
+\hat p=\frac{\text{Total Successes}}{\text{Total Sample Size}}
+$$
+
+
+
+## Test for Difference in Proportions  (continued)  
+
+Conditions:  
+
+  * Independent random samples  
+  * Sufficiently large samples  
+    + At least 10 successes and failures in each group  
+
+
+
+## Test for Difference in Proportions: Simplified Formula
+
+The $z$-test statistic can be simplified by factoring:  
+
+$$
+z=\frac{\hat p_1-\hat p_2}{\sqrt{\hat p(1-\hat p)\left(\frac{1}{n_1}+\frac{1}{n_2}\right)}}
+$$
+where $\hat p$ is again the *pooled* proportion obtained by combining the two samples.  
+
+
