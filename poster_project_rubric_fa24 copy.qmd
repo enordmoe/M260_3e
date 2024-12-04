@@ -1,0 +1,48 @@
+---
+title: "Poster Presentation Evaluation Rubric"
+subtitle: "Fall 2024"
+course: "Math 260-01"
+theme: "materia"
+---
+
+
+Each group’s poster will be evaluated based on the following criteria. Use this rubric to guide your poster creation and for peer evaluation. The total score is out of 25 points.
+
+| **Criterion**         | **Description**                                                                                           | **Points** |
+|-----------------------|-----------------------------------------------------------------------------------------------------------|-----------:|
+| **Technical Content** | Accurate and thorough presentation of the research question, methodology, data analysis, and results.       |     /8     |
+| **Communication**     | Clear and logical presentation of key findings, with effective responses to questions.                     |     /7     |
+| **Visual Appeal**     | Engaging visuals (graphs, charts, tables) with a clean and professional layout.                            |     /5     |
+| **Engagement**        | Captures interest, shows enthusiasm, and communicates the importance of the research topic.                |     /3     |
+| **Teamwork**          | Evidence of collaboration and equal contribution, with all members able to explain parts of the project.    |     /2     |
+| **Total**             | **Sum of points for all categories**                                                                       |    **/25** |
+
+---
+
+### **Detailed Guidelines for Each Criterion**
+
+1. **Technical Content (8 points)**:
+   - Is the research question well-defined and justified?
+   - Are the methods and data analysis appropriate and correctly applied?
+   - Do the results clearly address the research question and are they well-supported by the data?
+
+2. **Communication (7 points)**:
+   - Is the poster organization logical and easy to follow?
+   - Are the key points and findings explained effectively?
+   - Do group members respond confidently and accurately to questions?
+
+3. **Visual Appeal (5 points)**:
+   - Are graphs, charts, and tables clear, professional, and relevant?
+   - Is the layout aesthetically pleasing, with good use of white space, color, and font sizes?
+
+4. **Engagement (3 points)**:
+   - Does the poster hold the audience’s attention?
+   - Is the significance of the research conveyed effectively?
+   - Does the team present in an engaging and enthusiastic manner?
+
+5. **Teamwork (2 points)**:
+   - Did all team members contribute meaningfully?
+   - Can each member explain and discuss aspects of the project when asked?
+
+---
+

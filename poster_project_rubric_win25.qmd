@@ -1,0 +1,47 @@
+---
+title: "Poster Presentation Evaluation Rubric"
+subtitle: "Winter 2025"
+course: "Math 260-01"
+theme: "materia"
+---
+
+
+Each group’s poster will be evaluated based on the following criteria. Use this rubric to guide your poster creation and for peer evaluation. The total score is out of 25 points.
+
+| **Criterion**         | **Description**                                                                                                                        | **Points** |
+|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------|-----------:|
+| **Technical Content** | Accurate and thorough presentation of the research question, statistical inference methods, data analysis, and interpretation.          |     /8     |
+| **Communication**     | Clear, logical presentation of findings, with proper emphasis on statistical results and interpretations. Effective responses to questions. |     /7     |
+| **Visual Appeal**     | Effective and accurate use of R visualizations studied this term (graphs, charts, tables) within a clean, professional layout.            |     /5     |
+| **Engagement**        | Captures interest, demonstrates enthusiasm, and effectively communicates the importance of the research topic.                           |     /3     |
+| **Teamwork**          | Evidence of collaboration and equitable contributions; all members can explain and discuss methods and findings competently.              |     /2     |
+| **Total**             | **Sum of points for all categories**                                                                                                   |    **/25** |
+
+---
+
+### Detailed Guidelines for Each Criterion
+
+1. **Technical Content (8 points)**:
+   - Does the poster clearly state and justify the research question?
+   - Are appropriate methods of statistical inference applied (e.g., confidence intervals, hypothesis tests, p-values)?
+   - Is the data analysis thorough, with clear connections between evidence and conclusions?
+
+2. **Communication (7 points)**:
+   - Is the poster organized and easy to follow?
+   - Are statistical methods and findings clearly explained and contextualized?
+   - Do group members demonstrate a strong understanding of statistical techniques by accurately and confidently responding to questions?
+
+3. **Visual Appeal (5 points)**:
+   - Are **R visualizations studied this term** (e.g., bar charats, histograms, boxplots and scatterplots) used correctly and effectively to summarize data and results? Is faceting used when needed?
+   - Are all graphs and charts properly labeled, formatted, and essential to the narrative of the research?
+   - Is the layout balanced and visually appealing, with appropriate use of white space, colors, and fonts?
+
+4. **Engagement (3 points)**:
+   - Does the poster effectively capture and maintain the audience’s interest?
+   - Is the significance of the research question and findings communicated in an engaging manner?
+   - Does the team present with enthusiasm and confidence?
+
+5. **Teamwork (2 points)**:
+   - Did all team members meaningfully contribute to the project and presentation?
+   - Can each member competently explain the statistical methods, visualizations, and findings during the presentation?
+
