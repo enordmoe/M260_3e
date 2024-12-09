@@ -27,9 +27,11 @@ In this group project, you and your peers will conduct an analysis to address a 
 
 You will have two options for the data you use:
 
-1.  **Collect your own data** (e.g., sports statistics, survey results, movie information, etc.), or
+1.  **Collect your own data** (e.g., sports statistics from a reliable web-based source, movie information from IMDB, etc.), or
 
 2.  **Use an existing dataset** from R, such as those available in the **Lock5Data** package or other relevant R packages.
+
+I **strongly discourage** you from carrying out custom surveys on campus because of the difficulty in getting a representative sample and very low response rates.
 
 # Project Schedule and Details
 
@@ -37,36 +39,36 @@ This project is worth a total of 140 points broken down into several stages to h
 
 | Task                                  |         Due Date         | Points |
 |:--------------------------------------|:------------------------:|:------:|
-| **Team Formation**                    |   Monday, September 30   | 10 pts |
-| **Proposal and Detailed Methodology** |      Friday, Week 4      | 10 pts |
-| **Preliminary Data Description**      |      Monday, Week 8      | 10 pts |
-| **Poster Plan Meeting**               |          Week 9          | 10 pts |
-| **Final Poster Submission**           | Exam Week Monday 1:30 pm | 60 pts |
-| **Individual Reflection Report**      | Exam Week Monday 1:30 pm | 20 pts |
-| **Peer Evaluations**                  | Exam Week Monday 1:30 pm | 10 pts |
-| **Peer Assessment at StatFest**       | Exam Week Monday 1:30 pm | 10 pts |
+| **Team Formation**                    |   Friday, Week 2          | 10 pts |
+| **Proposal and Detailed Methodology** |      Wednesday, Week 4    | 10 pts |
+| **Preliminary Data Description**      |      Friday, Week 7       | 10 pts |
+| **Poster Plan Meeting**               |          Week 9           | 10 pts |
+| **Final Poster Submission**           | Exam Week Tuesday 1:30 pm | 60 pts |
+| **Individual Reflection Report**      | Exam Week Tuesday 1:30 pm | 20 pts |
+| **Peer Evaluations**                  | Exam Week Tuesday 1:30 pm | 10 pts |
+| **Peer Assessment at StatFest**       | Exam Week Tuesday 1:30 pm | 10 pts |
 
 ## Step 1: Team Formation (10 points)
 
-**Due Monday, September 30**
+**Due Friday, January 17**
 
 Form a group of 2 or 3 students to work together on the project. Submit the names of your team members.
 
 ## Step 2: Proposal and Detailed Methodology (10 points)
 
-**Due Friday, Week 4**
+**Due Wednesday, Week 4**
 
-Chooose a creative name for your group and describe the question of interest you wish to answer and your data collection plan. Your question should be substantive and interesting to the members of your group. Try to identify at least 3 **quantitative** variables and 3 **categorical** variables, as these will form the foundation of your analysis. Submit a detailed description of your data collection plan. Depending on the approach you choose, this step will differ:
+Choose a creative name for your group and describe the question of interest you wish to answer and your data collection plan. Your question should be substantive and interesting to the members of your group. Try to identify at least 3 **quantitative** variables and 3 **categorical** variables, as these will form the foundation of your analysis. Submit a detailed description of your data collection plan. Depending on the approach you choose, this step will differ:
 
 -   **If using existing data**, explain where and how you will obtain the dataset. Describe any preparations needed for the data analysis, such as cleaning or formatting. If working with a community organization, describe the data available to you or how you plan to collect additional data.
 -   **If conducting an experiment**, describe the experimental design, including the procedure, the justification for your chosen design, and how data will be collected.
--   **If conducting a survey**, describe the population of interest, your sampling method, and include a copy of any questionnaire you intend to use. Be clear on why you chose this population and sampling method.
+-   **If conducting a survey**, describe the population of interest, your sampling method, and include a copy of any questionnaire you intend to use. Be clear on why you chose this population, how you will obtain a random sample and how you will ensure a good response rate.
 
 This step helps ensure you have a well-thought-out plan for gathering your data, whether directly or from existing sources. While IRB approval is not necessary for a class project, be sure to follow ethical and responsible practices for any research involving human participants.
 
 ## Step 3: Preliminary Data Description (10 points)
 
-**Due Monday, Week 8**
+**Due Friday, Week 7**
 
 Submit an annotated Quarto report that includes:
 
@@ -90,7 +92,7 @@ This is a crucial opportunity to refine your analysis and get personalized guida
 
 ## Step 5: Final Poster (60 points)
 
-**Due Monday, Exam Period**
+**Due Tuesday, Exam Period**
 
 Create and submit a final version of your poster (24x36 inches) that includes:
 
@@ -107,21 +109,21 @@ Posters will be submitted in both hard copy and digital formats (PowerPoint, Goo
 
 ## Step 6: Individual Reflection Report (20 points)
 
-**Due Monday, Exam Period**
+**Due Tuesday, Exam Period**
 
-Each student will write an individual reflection report with **Quarto**, about **three pages** in length, using **R** for any relevant analysis and visualizations. This report will summarize the project’s findings, describe your personal contribution, and highlight what you have learned through this experience. Include one or two key graphs or tables generated with **R** to illustrate significant findings. This report allows you to demonstrate your understanding of the statistical techniques used, your role in the group, and your personal learning journey. A more detailed outline of the components of the report will be available on Moodle.
+Each student will write an individual reflection report with **Quarto**, about **five pages** in length, using **R** for any relevant analysis and visualizations. This report will summarize the project’s findings, describe your personal contribution, and highlight what you have learned through this experience. Include one or two key graphs or tables generated with **R** to illustrate significant findings. This report allows you to demonstrate your understanding of the statistical techniques used, your role in the group, and your personal learning journey. A more detailed outline of the components of the report will be available on Moodle.
 
 ## Step 7: Peer Evaluation (10 points)
 
-**Due Monday, Exam Period**
+**Due Tuesday, Exam Period**
 
 Each member will evaluate their groupmates’ contributions. Peer evaluations will be submitted anonymously, and each group member will be assessed based on the ratings received from their peers. This is an important step to ensure fairness and accountability.
 
 ## Step 8: Peer Assessment at StatFest (10 points)
 
-**Due Monday, Exam Period**
+**Due Tuesday, Exam Period**
 
-As part of our **StatFest Extravaganza**, you will have the chance to critique other groups' posters using a provided rubric. This activity will not only allow you to learn from your peers but also improve your understanding by assessing the quality of other analyses.
+As part of our **StatFest Extravaganza**, you will asseess other groups' posters using a provided rubric. This activity will not only allow you to learn from your peers but also improve your understanding by assessing the quality of other analyses.
 
 # Expectations for Success
 
