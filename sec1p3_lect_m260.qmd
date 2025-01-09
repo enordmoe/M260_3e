@@ -62,6 +62,14 @@ Identify a possible confounding variable:
 
 -   More umbrellas sold correlate with an increase in car accidents.
 
+:::
+
+## Examples of Confounding Variables (continued)
+
+Identify a possible confounding variable:
+
+::: incremental
+
 -   People who vacation in Europe have fewer cavities.
 
 -   Children who take music lessons perform better in school.
