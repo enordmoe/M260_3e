@@ -43,16 +43,6 @@ gf_point(LifeExpectancy ~ Internet, data = SampCountries) |>
   gf_labs(x="Percent with Internet Access")  
 ```
 
-## Association or Causation?
-
-Does the statement imply causation or just association without causation?
-
-1.  If you study more, your grade will improve in this course.
-
-2.  Want to lose weight? Drink tea!
-
-3.  People who chew sugar free gum have fewer cavities.
-
 ## Confounding
 
 **Definition:** A third variable that is associated with *both* the explanatory variable and the response variable is called a **confounding variable**
@@ -65,13 +55,19 @@ Does the statement imply causation or just association without causation?
 
 Identify a possible confounding variable:
 
+::: incremental
 -   More ice cream sales have been linked to more deaths by drowning.
 
 -   The total amount of beef consumed and the total amount of pork consumed worldwide are closely related over the past 100 years.
 
--   People who own a yacht are more likely to buy a sports car.
+-   More umbrellas sold correlate with an increase in car accidents.
 
--   People with shorter hair tend to be taller.
+-   People who vacation in Europe have fewer cavities.
+
+-   Children who take music lessons perform better in school.
+
+-   People who smoke are more likely to get lung cancer (???)
+:::
 
 ## Life Expectancy and Internet Revisited
 
@@ -105,23 +101,58 @@ Eliminate confounding factors by **randomization**
 
 -   If the treatments are randomly assigned, the **treatment groups** should be similar.
 
-## Does a Small Amount of Exercise Raise Pulse Rates? {.smaller}
 
-**Question:** Is just 10 or 20 seconds of exercise enough to increase pulse rate?
+## Principles of Statistical Design of Experiments
 
-1.  **Treatment groups**: (1) seated, (2) exercise 10 seconds, (3) exercise 20 seconds
+1.  Random allocation into experimental groups
 
-2.  Randomly divide the class into the three groups
+2.  Control the effect of outside variables
 
-3.  Obtain baseline pulse rate (beats per 30 seconds)
+    -   A **control group** is a group of subjects from which the treatment of interest is withheld.
 
-4.  Administer the treatment
+3.  Replication on many subjects to reduce chance variation
 
-    -   Run in place for 10 or 20 seconds.
+## More Control Mechanisms
 
-5.  Measure pulse after treatment (rate in beats per 30 seconds)
+-   **Placebo** a fake treatment that simulates the idea of a treatment of interest
 
-    -   Compute response=change in pulse (after-before)
+    -   Placebo effect: people experience the effect they think they should be experiencing, even if they aren’t actually receiving the treatment
+
+-   **Double-blind study** neither the participant nor the evaluator knows the participant's treatment
+
+::: notes
+use CNN dog study to discuss principles
+:::
+
+## Two Types of Randomized Experiments
+
+1.  In a **randomized comparative experiment**, we randomly assign cases to different treatment groups and then compare results on the response variable(s).
+
+2.  In a **matched pairs experiment**, each case gets both treatments in random order (or cases get paired up in some other obvious way), and we examine individual differences in the response variable between the two treatments.
+
+## Matched Pairs
+
+**Matched pairs** designs have at least two different forms:
+
+1.  Each participant gets both treatments in a random order OR...
+
+. . .
+
+2.  Participants are paired based on some identifiable characteristic and a randomly selected member of each pair gets each treatment.
+
+::: notes
+Migraine study:
+
+trigger point injections vs botox injections (and a placebo)
+
+Design 1: each person gets both; Design 2: paired based on severity and frequency of headache and each given 1
+:::
+
+## Randomization and Scope of Inference
+
+```{r, out.width = "700px",echo=FALSE}
+knitr::include_graphics("figs/statistics1e_fig_01_03.jpg")
+```
 
 ## Using R to Randomly Assign Treatments
 
@@ -158,90 +189,4 @@ slice(newlist, 16:30)
 slice(newlist, 31:45)
 ```
 
-## Principles of Statistical Design of Experiments
 
-1.  Random allocation into experimental groups
-
-2.  Control the effect of outside variables
-
-    -   A **control group** is a group of subjects from which the treatment of interest is withheld.
-
-3.  Replication on many subjects to reduce chance variation
-
-## More Control Mechanisms
-
--   **Placebo** a fake treatment that simulates the idea of a treatment of interest
-
-    -   Placebo effect: people experience the effect they think they should be experiencing, even if they aren’t actually receiving the treatment
-
--   **Double-blind study** neither the participant nor the evaluator knows the participant's treatment
-
-::: notes
-Use knee surgery study to motivate additional control mechanisms
-:::
-
-## Two Types of Randomized Experiments
-
-1.  In a **randomized comparative experiment**, we randomly assign cases to different treatment groups and then compare results on the response variable(s).
-
-2.  In a **matched pairs experiment**, each case gets both treatments in random order (or cases get paired up in some other obvious way), and we examine individual differences in the response variable between the two treatments.
-
-## Matched Pairs
-
-**Matched pairs** designs have at least two different forms:
-
-1.  Each participant gets both treatments in a random order OR...
-
-. . .
-
-2.  Participants are paired based on some identifiable characteristic and a randomly selected member of each pair gets each treatment.
-
-::: notes
-Migraine study:
-
-trigger point injections vs botox injections (and a placebo)
-
-Design 1: each person gets both; Design 2: paired based on severity and frequency of headache and each given 1
-:::
-
-## Randomization and Scope of Inference
-
-```{r, out.width = "700px",echo=FALSE}
-knitr::include_graphics("figs/statistics1e_fig_01_03.jpg")
-```
-
-# For Class
-
-## Principles of Experimental Design
-
-::: incremental
--   Control
--   Randomization
--   Replication
-:::
-
-## Effect of Therapy Dogs
-
-::: incremental
-1.  What was the research question?
-
-2.  Who were the participants in the study?
-
-3.  What was explanatory variable?
-
-4.  Name at least two response variables?
-
-5.  How were participants assigned to treatment groups? Why?
-:::
-
-## Effect of Therapy Dogs (cont'd)
-
-::: incremental
-6.  Explain the importance of having a control group in this study.
-
-7.  Is this a randomized comparative design or a matched pairs design experiment?
-
-8.  What problems threatened the validity of the test results?
-
-9.  What can be concluded from this experiment?
-:::

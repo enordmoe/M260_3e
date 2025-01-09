@@ -8,7 +8,7 @@
 <link href="sec1p3_lect_m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="sec1p3_lect_m260_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="sec1p3_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.52">
+  <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Math 260 Applied Statistics">
   <title>1.3 Experiments and Observational Studies</title>
@@ -441,15 +441,6 @@ Math 260 Applied Statistics
 <h2>Life Expectancy and Internet</h2>
 
 <img data-src="sec1p3_lect_m260_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
-<section id="association-or-causation" class="slide level2">
-<h2>Association or Causation?</h2>
-<p>Does the statement imply causation or just association without causation?</p>
-<ol type="1">
-<li><p>If you study more, your grade will improve in this course.</p></li>
-<li><p>Want to lose weight? Drink tea!</p></li>
-<li><p>People who chew sugar free gum have fewer cavities.</p></li>
-</ol>
-</section>
 <section id="confounding" class="slide level2">
 <h2>Confounding</h2>
 <p><strong>Definition:</strong> A third variable that is associated with <em>both</em> the explanatory variable and the response variable is called a <strong>confounding variable</strong></p>
@@ -461,12 +452,16 @@ Math 260 Applied Statistics
 <section id="examples-of-confounding-variables" class="slide level2">
 <h2>Examples of Confounding Variables</h2>
 <p>Identify a possible confounding variable:</p>
+<div>
 <ul>
-<li><p>More ice cream sales have been linked to more deaths by drowning.</p></li>
-<li><p>The total amount of beef consumed and the total amount of pork consumed worldwide are closely related over the past 100 years.</p></li>
-<li><p>People who own a yacht are more likely to buy a sports car.</p></li>
-<li><p>People with shorter hair tend to be taller.</p></li>
+<li class="fragment"><p>More ice cream sales have been linked to more deaths by drowning.</p></li>
+<li class="fragment"><p>The total amount of beef consumed and the total amount of pork consumed worldwide are closely related over the past 100 years.</p></li>
+<li class="fragment"><p>More umbrellas sold correlate with an increase in car accidents.</p></li>
+<li class="fragment"><p>People who vacation in Europe have fewer cavities.</p></li>
+<li class="fragment"><p>Children who take music lessons perform better in school.</p></li>
+<li class="fragment"><p>People who smoke are more likely to get lung cancer (???)</p></li>
 </ul>
+</div>
 </section>
 <section id="life-expectancy-and-internet-revisited" class="slide level2">
 <h2>Life Expectancy and Internet Revisited</h2>
@@ -504,77 +499,6 @@ Math 260 Applied Statistics
 <li><p>If the treatments are randomly assigned, the <strong>treatment groups</strong> should be similar.</p></li>
 </ul>
 </section>
-<section id="does-a-small-amount-of-exercise-raise-pulse-rates" class="slide level2 smaller">
-<h2>Does a Small Amount of Exercise Raise Pulse Rates?</h2>
-<p><strong>Question:</strong> Is just 10 or 20 seconds of exercise enough to increase pulse rate?</p>
-<ol type="1">
-<li><p><strong>Treatment groups</strong>: (1) seated, (2) exercise 10 seconds, (3) exercise 20 seconds</p></li>
-<li><p>Randomly divide the class into the three groups</p></li>
-<li><p>Obtain baseline pulse rate (beats per 30 seconds)</p></li>
-<li><p>Administer the treatment</p>
-<ul>
-<li>Run in place for 10 or 20 seconds.</li>
-</ul></li>
-<li><p>Measure pulse after treatment (rate in beats per 30 seconds)</p>
-<ul>
-<li>Compute response=change in pulse (after-before)</li>
-</ul></li>
-</ol>
-</section>
-<section id="using-r-to-randomly-assign-treatments" class="slide level2">
-<h2>Using R to Randomly Assign Treatments</h2>
-<ul>
-<li>Preview structure of <strong>myclass</strong> data frame</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">head</span>(myclass, <span class="at">n =</span> <span class="dv">7</span>) <span class="co"># first 7 rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     lname        fname ID
-1    Adams         John  2
-2    Adams  John Quincy  6
-3   Arthur Chester Alan 21
-4 Buchanan        James 15
-5     Bush       George 41
-6     Bush    George W. 43
-7   Carter        Jimmy 39</code></pre>
-</div>
-</div>
-</section>
-<section id="using-r-to-randomly-assign-treatments-contd" class="slide level2">
-<h2>Using R to Randomly Assign Treatments (cont’d)</h2>
-<ul>
-<li>Use the <code>shuffle()</code> function from mosaic to randomly shuffle rows</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">library</span>(mosaic)</span>
-<span id="cb3-2"><a href=""></a>newlist <span class="ot">&lt;-</span> <span class="fu">shuffle</span>(myclass)</span>
-<span id="cb3-3"><a href=""></a><span class="fu">head</span>(newlist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       lname       fname ID orig.id
-7     Carter       Jimmy 39       7
-15     Grant  Ulysses S. 18      15
-2      Adams John Quincy  6       2
-35 Roosevelt Franklin D. 32      35
-24   Johnson   Lyndon B. 36      24
-8  Cleveland      Grover 22       8</code></pre>
-</div>
-</div>
-</section>
-<section id="using-r-to-randomly-assign-treatments-contd-1" class="slide level2">
-<h2>Using R to Randomly Assign Treatments (cont’d)</h2>
-<ul>
-<li>Assign the first third to group 1, second third to group 2,…<br>
-</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="co"># Group 1</span></span>
-<span id="cb5-2"><a href=""></a><span class="fu">slice</span>(newlist, <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>)</span>
-<span id="cb5-3"><a href=""></a><span class="co"># Group 2</span></span>
-<span id="cb5-4"><a href=""></a><span class="fu">slice</span>(newlist, <span class="dv">16</span><span class="sc">:</span><span class="dv">30</span>)</span>
-<span id="cb5-5"><a href=""></a><span class="co"># Group 3</span></span>
-<span id="cb5-6"><a href=""></a><span class="fu">slice</span>(newlist, <span class="dv">31</span><span class="sc">:</span><span class="dv">45</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
 <section id="principles-of-statistical-design-of-experiments" class="slide level2">
 <h2>Principles of Statistical Design of Experiments</h2>
 <ol type="1">
@@ -596,7 +520,7 @@ Math 260 Applied Statistics
 <li><p><strong>Double-blind study</strong> neither the participant nor the evaluator knows the participant’s treatment</p></li>
 </ul>
 <aside class="notes">
-<p>Use knee surgery study to motivate additional control mechanisms</p>
+<p>use CNN dog study to discuss principles</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -647,49 +571,65 @@ Math 260 Applied Statistics
 <h2>Randomization and Scope of Inference</h2>
 
 <img data-src="figs/statistics1e_fig_01_03.jpg" width="700" class="r-stretch"></section>
-<section>
-<section id="for-class" class="title-slide slide level1 center">
-<h1>For Class</h1>
-
-</section>
-<section id="principles-of-experimental-design" class="slide level2">
-<h2>Principles of Experimental Design</h2>
-<div>
+<section id="using-r-to-randomly-assign-treatments" class="slide level2">
+<h2>Using R to Randomly Assign Treatments</h2>
 <ul>
-<li class="fragment">Control</li>
-<li class="fragment">Randomization</li>
-<li class="fragment">Replication</li>
+<li>Preview structure of <strong>myclass</strong> data frame</li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">head</span>(myclass, <span class="at">n =</span> <span class="dv">7</span>) <span class="co"># first 7 rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     lname        fname ID
+1    Adams         John  2
+2    Adams  John Quincy  6
+3   Arthur Chester Alan 21
+4 Buchanan        James 15
+5     Bush       George 41
+6     Bush    George W. 43
+7   Carter        Jimmy 39</code></pre>
+</div>
 </div>
 </section>
-<section id="effect-of-therapy-dogs" class="slide level2">
-<h2>Effect of Therapy Dogs</h2>
-<div>
-<ol type="1">
-<li class="fragment"><p>What was the research question?</p></li>
-<li class="fragment"><p>Who were the participants in the study?</p></li>
-<li class="fragment"><p>What was explanatory variable?</p></li>
-<li class="fragment"><p>Name at least two response variables?</p></li>
-<li class="fragment"><p>How were participants assigned to treatment groups? Why?</p></li>
-</ol>
+<section id="using-r-to-randomly-assign-treatments-contd" class="slide level2">
+<h2>Using R to Randomly Assign Treatments (cont’d)</h2>
+<ul>
+<li>Use the <code>shuffle()</code> function from mosaic to randomly shuffle rows</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">library</span>(mosaic)</span>
+<span id="cb3-2"><a href=""></a>newlist <span class="ot">&lt;-</span> <span class="fu">shuffle</span>(myclass)</span>
+<span id="cb3-3"><a href=""></a><span class="fu">head</span>(newlist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      lname     fname ID orig.id
+6      Bush George W. 43       6
+17 Harrison  Benjamin 23      17
+25  Kennedy   John F. 35      25
+9   Clinton      Bill 42       9
+13     Ford Gerald R. 38      13
+26  Lincoln   Abraham 16      26</code></pre>
+</div>
 </div>
 </section>
-<section id="effect-of-therapy-dogs-contd" class="slide level2">
-<h2>Effect of Therapy Dogs (cont’d)</h2>
-<div>
-<ol start="6" type="1">
-<li class="fragment"><p>Explain the importance of having a control group in this study.</p></li>
-<li class="fragment"><p>Is this a randomized comparative&nbsp;design or a matched pairs design experiment?</p></li>
-<li class="fragment"><p>What problems threatened the validity of the test results?</p></li>
-<li class="fragment"><p>What can be concluded from this experiment?</p></li>
-</ol>
+<section id="using-r-to-randomly-assign-treatments-contd-1" class="slide level2">
+<h2>Using R to Randomly Assign Treatments (cont’d)</h2>
+<ul>
+<li>Assign the first third to group 1, second third to group 2,…<br>
+</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="co"># Group 1</span></span>
+<span id="cb5-2"><a href=""></a><span class="fu">slice</span>(newlist, <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>)</span>
+<span id="cb5-3"><a href=""></a><span class="co"># Group 2</span></span>
+<span id="cb5-4"><a href=""></a><span class="fu">slice</span>(newlist, <span class="dv">16</span><span class="sc">:</span><span class="dv">30</span>)</span>
+<span id="cb5-5"><a href=""></a><span class="co"># Group 3</span></span>
+<span id="cb5-6"><a href=""></a><span class="fu">slice</span>(newlist, <span class="dv">31</span><span class="sc">:</span><span class="dv">45</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
