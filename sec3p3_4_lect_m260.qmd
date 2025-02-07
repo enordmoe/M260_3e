@@ -91,12 +91,6 @@ We don't observe the population so imagine the population is many copies of the 
 
 ![](figs/bsdiagram.jpg)
 
-## Golden Rule of Bootstrapping
-
-Bootstrap statistics are to the orginal sample statistic as the original sample statistic is to the population parameter.
-
-See figure [here](http://people.kzoo.edu/enordmoe/math260/Lock5_lect/chap3/figs/hesterberg_fig.pdf)
-
 ## Center
 
 -   The **sampling distribution** of a statistic is centered around the corresponding population parameter but...
