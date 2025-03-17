@@ -1,5 +1,5 @@
 ---
-title: "Group Project: Applied Statistics Investigation"
+title: "Group Project: Applied Statistics Investigation "
 subtitle: "Math 260 - Applied Statistics I"
 format:
   html:
