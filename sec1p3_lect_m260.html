@@ -434,8 +434,13 @@ Math 260 Applied Statistics
 <h2>Association is not Causation!</h2>
 <ul>
 <li>Two variables are <strong>associated</strong> if values of one variable tend to be related to the values of the other variable.</li>
+<li>Two variables are <strong>causally associated</strong> if changing the value of one variable influences the value of the other variable.
+<ul>
+<li>Temporal precedence</li>
+<li>Covariation (<span class="math inline">A\rightarrow B</span>, <span class="math inline">\tilde A \rightarrow\tilde B</span>)</li>
+<li>No plausible alternative explanation</li>
+</ul></li>
 </ul>
-<p>Two variables are <strong>causally associated</strong> if changing the value of one variable influences the value of the other variable. Temporal precedence Covariation (<span class="math inline">A\rightarrow B</span>, <span class="math inline">\tilde A \rightarrow\tilde B</span>) No plausible alternative explanation</p>
 </section>
 <section id="life-expectancy-and-internet" class="slide level2">
 <h2>Life Expectancy and Internet</h2>
@@ -608,13 +613,13 @@ Math 260 Applied Statistics
 <span id="cb3-2"><a href=""></a>newlist <span class="ot">&lt;-</span> <span class="fu">shuffle</span>(myclass)</span>
 <span id="cb3-3"><a href=""></a><span class="fu">head</span>(newlist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      lname      fname ID orig.id
-1     Adams       John  2       1
-20   Hoover    Herbert 31      20
-12 Fillmore    Millard 13      12
-15    Grant Ulysses S. 18      15
-6      Bush  George W. 43       6
-28 McKinley    William 25      28</code></pre>
+<pre><code>        lname     fname ID orig.id
+41      Tyler      John 10      41
+5        Bush    George 41       5
+7      Carter     Jimmy 39       7
+11 Eisenhower Dwight D. 34      11
+13       Ford Gerald R. 38      13
+34     Reagan    Ronald 40      34</code></pre>
 </div>
 </div>
 </section>

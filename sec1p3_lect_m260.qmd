@@ -33,8 +33,10 @@ library(nycflights13)
 ## Association is not Causation!
 
 -   Two variables are **associated** if values of one variable tend to be related to the values of the other variable.
-
-Two variables are **causally associated** if changing the value of one variable influences the value of the other variable. Temporal precedence Covariation ($A\rightarrow B$, $\tilde A \rightarrow\tilde B$) No plausible alternative explanation
+-   Two variables are **causally associated** if changing the value of one variable influences the value of the other variable.
+    -   Temporal precedence
+    -   Covariation ($A\rightarrow B$, $\tilde A \rightarrow\tilde B$)
+    -   No plausible alternative explanation
 
 ## Life Expectancy and Internet
 
@@ -61,7 +63,6 @@ Identify a possible confounding variable:
 -   The total amount of beef consumed and the total amount of pork consumed worldwide are closely related over the past 100 years.
 
 -   More umbrellas sold correlate with an increase in car accidents.
-
 :::
 
 ## Examples of Confounding Variables (continued)
@@ -69,7 +70,6 @@ Identify a possible confounding variable:
 Identify a possible confounding variable:
 
 ::: incremental
-
 -   People who vacation in Europe have fewer cavities.
 
 -   Children who take music lessons perform better in school.
@@ -108,7 +108,6 @@ Eliminate confounding factors by **randomization**
 -   Randomly assign a different treatment to each group.
 
 -   If the treatments are randomly assigned, the **treatment groups** should be similar.
-
 
 ## Principles of Statistical Design of Experiments
 
@@ -196,5 +195,3 @@ slice(newlist, 16:30)
 # Group 3
 slice(newlist, 31:45)
 ```
-
-
