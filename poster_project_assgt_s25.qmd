@@ -35,28 +35,21 @@ I **strongly discourage** you from carrying out custom surveys on campus because
 
 # Project Schedule and Details
 
-This project is worth a total of 140 points broken down into several stages to help you build your investigation progressively. Below is the schedule, with a detailed explanation of each step:
+This project is worth a total of 130 points broken down into several stages to help you build your investigation progressively. Below is the schedule, with a detailed explanation of each step:
 
-| Task                                  |         Due Date         | Points |
-|:--------------------------------------|:------------------------:|:------:|
-| **Team Formation**                    |   Friday, Week 2          | 10 pts |
-| **Proposal and Detailed Methodology** |      Monday, Week 4    | 10 pts |
-| **Preliminary Data Description**      |      Monday, Week 7       | 10 pts |
-| **Poster Plan Meeting**               |          Week 9           | 10 pts |
-| **Final Poster Submission**           | Friday Week 10  | 60 pts |
-| **Individual Reflection Report**      | Friday Week 10  | 20 pts |
-| **Peer Evaluations**                  | Friday Week 10  | 10 pts |
-| **Peer Assessment at StatFest**       | Friday Week 10  | 10 pts |
+| Task                                  |    Due Date    | Points |
+|:--------------------------------------|:--------------:|:------:|
+| **Proposal and Detailed Methodology** | Friday, Week 4 | 10 pts |
+| **Preliminary Data Description**      | Monday, Week 7 | 10 pts |
+| **Poster Plan Meeting**               |     Week 9     | 10 pts |
+| **Final Poster Submission**           | Friday Week 10 | 60 pts |
+| **Individual Reflection Report**      | Friday Week 10 | 20 pts |
+| **Peer Evaluations**                  | Friday Week 10 | 10 pts |
+| **Peer Assessment at StatFest**       | Friday Week 10 | 10 pts |
 
-## Step 1: Team Formation (10 points)
+## Step 1: Proposal and Detailed Methodology (10 points)
 
-**Due Friday, April 11**
-
-Form a group of 2 or 3 students to work together on the project. Submit the names of your team members.
-
-## Step 2: Proposal and Detailed Methodology (10 points)
-
-**Due Monday, Week 4**
+**Due Friday, Week 4**
 
 Choose a creative name for your group and describe the question of interest you wish to answer and your data collection plan. Your question should be substantive and interesting to the members of your group. Try to identify at least 3 **quantitative** variables and 3 **categorical** variables, as these will form the foundation of your analysis. Submit a detailed description of your data collection plan. Depending on the approach you choose, this step will differ:
 
@@ -66,7 +59,7 @@ Choose a creative name for your group and describe the question of interest you 
 
 This step helps ensure you have a well-thought-out plan for gathering your data, whether directly or from existing sources. While IRB approval is not necessary for a class project, be sure to follow ethical and responsible practices for any research involving human participants.
 
-## Step 3: Preliminary Data Description (10 points)
+## Step 2: Preliminary Data Description (10 points)
 
 **Due Monday, Week 7**
 
@@ -78,7 +71,7 @@ Submit an annotated Quarto report that includes:
 
 This is your first step in summarizing your data and exploring it visually, helping you gain a better understanding of what story your data can tell.
 
-## Step 4: Poster Plan Meeting (10 points)
+## Step 3: Poster Plan Meeting (10 points)
 
 **During Week 9**
 
@@ -99,8 +92,8 @@ Create and submit a final version of your poster (24x36 inches) that includes:
 -   **Title**: An engaging title for your study.
 -   **Introduction**: A brief introduction to the topic and its relevance.
 -   **Research Question**: Clearly stated question(s) you are investigating.
--   **Methodology**: Details of how data was collected or sourced, along with statistical techniques used. 
--   **Results**: Key findings presented through appropriate graphs, tables, and narratives. Use R to create any graphs you wish to include. 
+-   **Methodology**: Details of how data was collected or sourced, along with statistical techniques used.
+-   **Results**: Key findings presented through appropriate graphs, tables, and narratives. Use R to create any graphs you wish to include.
 -   **Discussion**: Interpretation of the results and any implications.
 
 Please note that your project **must** demonstrate mastery of the course material including the proper use of inference procedures (e.g., confidence intervals and hypothesis tests) as well as R procedures and visualizations (graphs) we have studied. A poster that uses only descriptive statistics and does not include visualizations we have learned about will not meet these requirements.
