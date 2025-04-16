@@ -145,22 +145,21 @@ gf_point(AvgMercury ~ pH,
 
 ## Using R to obtain residuals and predicted values
 
-Add residuals and predicted values to the dataset
+Obtain and print all predictions and residuals after fitting the model:
 
 ```{r}
 #| eval: false
-# fit and save the regression model with a name
-model <- lm(AvgMercury ~ pH, data = FloridaLakes)
-FloridaLakes$predicted <- predict(model)
-FloridaLakes$residuals <- resid(model)
+# fit and save the regression model with a name such as lsmod
+lsmod <- lm(AvgMercury ~ pH, data = FloridaLakes)
+predict(lsmod)
+resid(lsmod)
 ```
 
 . . .
 
-<br> <br>
 
 ::: callout-important
-You can use R to get the predicted values and residuals, but be sure you know how to compute them by hand calculator using the regression equation.
+You can use R to get the predicted values and residuals, but be sure you know how to compute them by hand calculator using the regression equation. See the [regression help sheet](https://heroic-horse-92e142.netlify.app/regression_with_r) for more details.
 :::
 
 ## Regression Cautions {.smaller}

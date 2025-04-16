@@ -8,7 +8,7 @@
 <link href="sec2p6_m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="sec2p6_m260_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="sec2p6_m260_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.52">
+  <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Math 260 Applied Statistics">
   <title>2.6 Two Quantitative Variables: Linear Regression</title>
@@ -543,15 +543,14 @@ Coefficients:
 </section>
 <section id="using-r-to-obtain-residuals-and-predicted-values" class="slide level2">
 <h2>Using R to obtain residuals and predicted values</h2>
-<p>Add residuals and predicted values to the dataset</p>
+<p>Obtain and print all predictions and residuals after fitting the model:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="co"># fit and save the regression model with a name</span></span>
-<span id="cb5-2"><a href=""></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(AvgMercury <span class="sc">~</span> pH, <span class="at">data =</span> FloridaLakes)</span>
-<span id="cb5-3"><a href=""></a>FloridaLakes<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(model)</span>
-<span id="cb5-4"><a href=""></a>FloridaLakes<span class="sc">$</span>residuals <span class="ot">&lt;-</span> <span class="fu">resid</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="co"># fit and save the regression model with a name such as lsmod</span></span>
+<span id="cb5-2"><a href=""></a>lsmod <span class="ot">&lt;-</span> <span class="fu">lm</span>(AvgMercury <span class="sc">~</span> pH, <span class="at">data =</span> FloridaLakes)</span>
+<span id="cb5-3"><a href=""></a><span class="fu">predict</span>(lsmod)</span>
+<span id="cb5-4"><a href=""></a><span class="fu">resid</span>(lsmod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
-<p><br> <br></p>
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -561,7 +560,7 @@ Coefficients:
 <p><strong>Important</strong></p>
 </div>
 <div class="callout-content">
-<p>You can use R to get the predicted values and residuals, but be sure you know how to compute them by hand calculator using the regression equation.</p>
+<p>You can use R to get the predicted values and residuals, but be sure you know how to compute them by hand calculator using the regression equation. See the <a href="https://heroic-horse-92e142.netlify.app/regression_with_r">regression help sheet</a> for more details.</p>
 </div>
 </div>
 </div>
