@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="sec2p4_m260_files/libs/clipboard/clipboard.min.js"></script>
-<script src="sec2p4_m260_files/libs/quarto-html/tabby.min.js"></script>
-<script src="sec2p4_m260_files/libs/quarto-html/popper.min.js"></script>
-<script src="sec2p4_m260_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="sec2p4_m260_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="sec2p4_m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="sec2p4_m260_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="Sec6p3_lect_m260 copy_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Sec6p3_lect_m260 copy_files/libs/quarto-html/tabby.min.js"></script>
+<script src="Sec6p3_lect_m260 copy_files/libs/quarto-html/popper.min.js"></script>
+<script src="Sec6p3_lect_m260 copy_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="Sec6p3_lect_m260 copy_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Sec6p3_lect_m260 copy_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="Sec6p3_lect_m260 copy_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.6.42">
 
   <meta name="author" content="Math 260 Applied Statistics">
-  <title>2.4 Boxplots and Quantitative/ Categorical Relationships</title>
+  <title>6.3 Inference About Differences in Proportions</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="sec2p4_m260_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="sec2p4_m260_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="Sec6p3_lect_m260 copy_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="Sec6p3_lect_m260 copy_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -28,79 +28,14 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="sec2p4_m260_files/libs/revealjs/dist/theme/quarto-1246092c7357598352506a630e966e2e.css">
-  <link href="sec2p4_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="sec2p4_m260_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="sec2p4_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="sec2p4_m260_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="sec2p4_m260_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="sec2p4_m260_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="Sec6p3_lect_m260 copy_files/libs/revealjs/dist/theme/quarto-1246092c7357598352506a630e966e2e.css">
+  <link href="Sec6p3_lect_m260 copy_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="Sec6p3_lect_m260 copy_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="Sec6p3_lect_m260 copy_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="Sec6p3_lect_m260 copy_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="Sec6p3_lect_m260 copy_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="Sec6p3_lect_m260 copy_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -194,7 +129,7 @@
     <div class="slides">
 
 <section id="title-slide" data-background-color="#EA6820" class="quarto-title-block center">
-  <h1 class="title">2.4 Boxplots and Quantitative/ Categorical Relationships</h1>
+  <h1 class="title">6.3 Inference About Differences in Proportions</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -205,167 +140,107 @@ Math 260 Applied Statistics
 </div>
 
 </section>
-<section id="agenda" class="slide level2">
-<h2>Agenda</h2>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
 <ul>
-<li><strong>Introduction to Boxplots</strong>
+<li>Standard Error<br>
+</li>
+<li>Sampling Distribution<br>
+</li>
+<li>Confidence Interval<br>
+</li>
+<li>Hypothesis Test</li>
+</ul>
+</section>
+<section id="context-inference-about-the-difference-in-proportions" class="slide level2 smaller">
+<h2>Context: Inference about the Difference in Proportions</h2>
+<p>Comparison of proportions from two different (independent) populations.</p>
+<p>Examples</p>
 <ul>
-<li>Definition and components of a boxplot</li>
-<li>Constructing boxplots: step-by-step</li>
+<li>Compare success proportion in Group A versus Group B<br>
+</li>
+<li>Compare survival for group getting Treatment A versus survival for group getting Treatment B</li>
+</ul>
+<div class="fragment">
+<p>BUT NOT</p>
+<ul>
+<li>Compare proportion of voters who prefer A to proportion who prefer B
+<ul>
+<li>This is a comparison of proportions within the same group.</li>
 </ul></li>
-<li><strong>Analyzing Quantitative and Categorical Relationships</strong>
+</ul>
+</div>
+</section>
+<section id="standard-error-for-difference-in-proportions" class="slide level2">
+<h2>Standard Error for Difference in Proportions</h2>
+<p>The standard error for <span class="math inline">\(\hat p_1-\hat p_2\)</span> is <span class="math display">\[
+\text{SE}=\sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}}
+\]</span></p>
+</section>
+<section id="central-limit-theorem-for-difference-in-proportions" class="slide level2 smaller">
+<h2>Central Limit Theorem for Difference in Proportions</h2>
+<p>If <span class="math inline">\(n\)</span> is sufficiently large:</p>
+<p><span class="math display">\[
+\hat p_1-\hat p_2 \sim N\left(p_1-p_2, \sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}}\right)
+\]</span></p>
+<p>Conditions:</p>
 <ul>
-<li>Comparing distributions of quantitative variables across categorical groups</li>
-<li>Using boxplots for visual comparison</li>
-</ul></li>
-<li><strong>Advanced Visualization</strong>
+<li>Independent random samples<br>
+</li>
+<li>Sufficiently large samples
 <ul>
-<li>Faceted plots: dotplots and histograms for group comparisons</li>
-<li>Overlaying data by jittering for more detail</li>
+<li><span class="math inline">\(n_1 p_1\ge 10\)</span> and <span class="math inline">\(n_1(1-p_1)\ge 10\)</span><br>
+</li>
+<li><span class="math inline">\(n_2 p_2\ge 10\)</span> and <span class="math inline">\(n_2(1-p_2)\ge 10\)</span></li>
 </ul></li>
 </ul>
 </section>
-<section id="boxplot" class="slide level2">
-<h2>Boxplot</h2>
+<section id="confidence-interval-for-a-difference-in-proportions" class="slide level2 smaller">
+<h2>Confidence Interval for a Difference in Proportions</h2>
+<p>A confidence interval for <span class="math inline">\(p_1-p_2\)</span> can be computed as</p>
+<p><span class="math display">\[
+(\hat p_1-\hat p_2) \pm z^* \sqrt{\frac{\hat p_1(1-\hat p_1)}{n_1}+\frac{\hat p_2(1-\hat p_2)}{n_2}}
+\]</span></p>
+<p>Conditions:</p>
 <ul>
-<li><p>A <strong>boxplot</strong> is</p>
+<li>Independent random samples<br>
+</li>
+<li>Sufficiently large samples
 <ul>
-<li><p>A visual depiction of the 5-number summary.</p></li>
-<li><p>Especially useful for a rough comparison of the center and spread of a variable across several sub-groups.</p></li>
+<li>At least 10 successes and failures in each group</li>
 </ul></li>
 </ul>
 </section>
-<section id="constructing-a-boxplot" class="slide level2">
-<h2>Constructing a Boxplot</h2>
-<ol type="1">
-<li><p>Draw a numerical scale appropriate for the data.</p></li>
-<li><p>Draw a box stretching from <span class="math inline">\(Q_1\)</span> to <span class="math inline">\(Q_3\)</span> representing the middle 50% of the data.</p></li>
-<li><p>Divide the box with a line at the median.</p></li>
-<li><p>Draw a line (whisker) from each quartile to the most extreme data value that is <strong>not an outlier</strong>.</p></li>
-<li><p>Identify each outlier individually by plotting with a symbol such as an asterisk or dot.</p></li>
-</ol>
-<p><strong>Note:</strong> Use side-by-side boxes to compare sub-groups.</p>
+<section id="test-for-difference-in-proportions" class="slide level2 smaller">
+<h2>Test for Difference in Proportions</h2>
+<p>To test <span class="math inline">\(H_0:p_1=p_2\)</span>, based on samples of size <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> from two groups, calculate<br>
+<span class="math display">\[
+z=\frac{\hat p_1-\hat p_2}{\sqrt{\frac{\hat p(1-\hat p)}{n_1}+\frac{\hat p(1-\hat p)}{n_2}}}
+\]</span> where <span class="math inline">\(\hat p\)</span> is the <em>pooled</em> proportion obtained by combining the two samples. That is,</p>
+<p><span class="math display">\[
+\hat p=\frac{\text{Total Successes}}{\text{Total Sample Size}}
+\]</span></p>
 </section>
-<section id="boxplot-example-comparing-groups-vertical" class="slide level2">
-<h2>Boxplot example comparing groups: Vertical</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">gf_boxplot</span>(Quetelet <span class="sc">~</span> Smoke, <span class="at">data =</span> NutritionStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="sec2p4_m260_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
-<section id="boxplot-example-comparing-groups-horizontal" class="slide level2">
-<h2>Boxplot example comparing groups: Horizontal</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">gf_boxplot</span>(Smoke <span class="sc">~</span> Quetelet, <span class="at">data =</span> NutritionStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="sec2p4_m260_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
-<section id="outliers" class="slide level2">
-<h2>Outliers</h2>
+<section id="test-for-difference-in-proportions-continued" class="slide level2">
+<h2>Test for Difference in Proportions (continued)</h2>
+<p>Conditions:</p>
 <ul>
-<li><p>Often best identified using judgement by inspection of a visual data display.</p></li>
-<li><p><strong>Rule of Thumb</strong> suspected outliers are data values more than 1.5 IQRs beyond the quartiles</p></li>
-<li><p>A data value is a <strong>suspected outlier</strong> if it is</p>
+<li>Independent random samples<br>
+</li>
+<li>Sufficiently large samples
 <ul>
-<li><p>Smaller than the <strong>Lower Fence</strong>= <span class="math inline">\(Q_1\)</span> - 1.5 (IQR)</p></li>
-<li><p>Greater than the <strong>Upper Fence</strong>= <span class="math inline">\(Q_3\)</span> + 1.5 (IQR)</p></li>
+<li>At least 10 successes and failures in each group</li>
 </ul></li>
 </ul>
 </section>
-<section>
-<section id="section" class="title-slide slide level1 center" data-background-color="#FAD9C7">
-<h1></h1>
-<div id="title-slide" class="center">
-<p><span style="font-size: 1.5em; font-weight: bold;">Your turn: Investigate Quetelet (BMI) by Prior Smoking Status (PriorSmoke)</span></p>
-</div>
-</section>
-<section id="advanced-boxplot-for-rstudio-masters" class="slide level2 smaller">
-<h2>Advanced Boxplot for RStudio Masters</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">gf_boxplot</span>(<span class="fu">factor</span>(PriorSmoke) <span class="sc">~</span> Quetelet, <span class="at">data =</span> NutritionStudy,</span>
-<span id="cb3-2"><a href=""></a>           <span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">ylab =</span> <span class="st">"Prior Smoking Status"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href=""></a>  <span class="fu">gf_jitter</span>(<span class="at">height =</span> .<span class="dv">1</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="sec2p4_m260_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"><ul>
-<li>Overlays points using <code>jitter</code> on top of boxes to show more detail</li>
-<li><code>alpha</code> used to make points transparent (between 0 and 1)</li>
-<li>Adds y label using <code>ylab</code></li>
-</ul>
-</section></section>
-<section>
-<section id="faceted-plots-for-more-detailed-comparisons" class="title-slide slide level1 center" data-background-color="#FAD9C7">
-<h1>Faceted plots for more detailed comparisons</h1>
+<section id="test-for-difference-in-proportions-simplified-formula" class="slide level2">
+<h2>Test for Difference in Proportions: Simplified Formula</h2>
+<p>The <span class="math inline">\(z\)</span>-test statistic can be simplified by factoring:</p>
+<p><span class="math display">\[
+z=\frac{\hat p_1-\hat p_2}{\sqrt{\hat p(1-\hat p)\left(\frac{1}{n_1}+\frac{1}{n_2}\right)}}
+\]</span> where <span class="math inline">\(\hat p\)</span> is again the <em>pooled</em> proportion obtained by combining the two samples.</p>
 
 </section>
-<section id="side-by-side-dotplots" class="slide level2">
-<h2>Side-by-side Dotplots</h2>
-<ul>
-<li>For small samples, we can get a detailed plot of hours exercised for for each <code>Year</code> (1 = First Years, …)</li>
-<li>Use the vertical bar (<code>|</code>) to “condition” on the group variable.</li>
-<li><code>Year ~ .</code> specifies <code>Year</code> as the explanatory variable.</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">gf_dotplot</span>(<span class="sc">~</span>Exercise <span class="sc">|</span> Year <span class="sc">~</span> ., <span class="at">data =</span> ExerciseHours, <span class="at">dotsize =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-
-<aside><div>
-<p>Note: We actually could specify two variables such as <code>Year ~ Sex</code> to get a matrix of plots. Here, the <code>.</code> serves as a placeholder.</p>
-</div></aside></section>
-<section id="side-by-side-dotplots-output" class="slide level2 output-location-slide"><h2>Side-by-side Dotplots</h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="sec2p4_m260_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div></section><section id="faceted-histograms" class="slide level2">
-<h2>Faceted Histograms</h2>
-<p>For larger samples, we get side by side histograms of BMI (<code>Quetelet</code>) for each level of the <code>PriorSmoke</code> variable.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">gf_histogram</span>(<span class="sc">~</span>Quetelet <span class="sc">|</span> PriorSmoke <span class="sc">~</span> ., <span class="at">data =</span> NutritionStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section>
-<section id="faceted-histograms-output" class="slide level2 output-location-slide"><h2>Faceted Histograms</h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="sec2p4_m260_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div></section><section id="comparing-numerical-statistics" class="slide level2">
-<h2>Comparing Numerical Statistics</h2>
-<p>Use <code>favstats()</code> to compare numerical statistics for a <em>quantitative variable</em> across <em>categories</em> of a categorical variable:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">favstats</span>(Calories <span class="sc">~</span> PriorSmoke, <span class="at">data =</span> NutritionStudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  PriorSmoke   min     Q1 median      Q3    max     mean       sd   n missing
-1          1 445.2 1324.0 1631.0 2038.50 4373.6 1713.387 592.1822 157       0
-2          2 659.3 1386.1 1751.1 2290.20 3711.0 1861.184 643.5338 115       0
-3          3 784.4 1435.9 1662.7 2396.95 6662.2 1928.100 989.3975  43       0</code></pre>
-</div>
-</div>
-</section>
-<section id="investigating-quantitative-and-categorical-relationships" class="slide level2 smaller">
-<h2>Investigating Quantitative and Categorical Relationships</h2>
-<ul>
-<li><p>Compare the distribution of a quantitative variable across groups determined by the categorical variable(s).</p>
-<ul>
-<li><p>Use side-by-side boxplots for an overview.</p></li>
-<li><p>Use comparative histograms or dotplots to see more detail.</p></li>
-</ul></li>
-<li><p>Any of the statistics we use for a quantitative variable can be looked at separately for each level of a categorical variable.</p>
-<ul>
-<li>Often interested in the <strong>difference in means</strong> <span class="math inline">\(=\bar x_1- \bar x_2\)</span></li>
-</ul></li>
-</ul>
-<p>More <a href="https://heroic-horse-92e142.netlify.app/describing_quantitative_variables_m260">details and examples</a> in the R Resources on Moodle</p>
-
-</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
@@ -374,20 +249,20 @@ Math 260 Applied Statistics
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="sec2p4_m260_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="Sec6p3_lect_m260 copy_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="sec2p4_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="sec2p4_m260_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="sec2p4_m260_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="sec2p4_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="sec2p4_m260_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="sec2p4_m260_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="Sec6p3_lect_m260 copy_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="Sec6p3_lect_m260 copy_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="Sec6p3_lect_m260 copy_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="Sec6p3_lect_m260 copy_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="Sec6p3_lect_m260 copy_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="Sec6p3_lect_m260 copy_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="sec2p4_m260_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="sec2p4_m260_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="sec2p4_m260_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="sec2p4_m260_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="Sec6p3_lect_m260 copy_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="Sec6p3_lect_m260 copy_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="Sec6p3_lect_m260 copy_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="Sec6p3_lect_m260 copy_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
