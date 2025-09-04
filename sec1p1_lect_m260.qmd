@@ -48,18 +48,13 @@ library(nycflights13)
         -   We use statistics to measure the impacts of systemic racism within these socially constructed categories.
     -   In studying health risks, we categorize by biological traits that may correlate with racial groups, helping to identify disease risk factors.
 
-
-
 ## Gender and Discrimination
 
--   **The [Gender Unicorn](https://www.transhealthsa.com/wp-content/uploads/2017/05/The-Gender-Unicorn.pdf)** 
-![](images/clipboard-1506884744.png){.absolute top="0" right="0" width="100"}
+-   **The [Gender Unicorn](https://www.transhealthsa.com/wp-content/uploads/2017/05/The-Gender-Unicorn.pdf)** ![](images/clipboard-1506884744.png){.absolute top="0" right="0" width="100"}
 
     -   To measure salary discrimination, we classify individuals by sex/gender.
         -   How do we accurately measure salary discrimination across diverse gender identities?
     -   We consider biological characteristics to estimate the risk of sex-linked medical conditions.
-
-
 
 ## Ethical and Methodological Implications
 
