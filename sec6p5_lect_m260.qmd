@@ -28,17 +28,6 @@ library(Lock5Data)
 -   Inference for paired data
 -   Conditions
 
-## Context: Inference about the Difference in Means for Paired Data
-
-**Paired data** includes the following:
-
--   Two measurements on each unit\
-    :white_check_mark: Same unit measured under different experimental conditions
-
--   Measurements on a pair of units that go together
-
-    -   Twin studies\
-    -   Partner studies
 
 ## Context: Inference about the Difference in Means for Paired Data
 
