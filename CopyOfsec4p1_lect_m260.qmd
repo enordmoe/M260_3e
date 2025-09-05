@@ -1,0 +1,92 @@
+---
+title: "4.1 Introducing Hypothesis Tests"
+author: "Math 260 Applied Statistics"
+format:
+  revealjs:
+    chalkboard: true
+    theme: [default, custom.scss]
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: true
+---
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+```
+
+
+
+## Statistical Test
+
+A **statistical test** is used to determine whether results from a sample are convincing enough to allow us to conclude something about the population.
+
+> An outcome that would rarely happen if a claim were true is good evidence that the claim is not true.
+
+## Statistical Hypotheses: Null
+
+Statistical tests are framed formally in terms of two competing hypotheses:
+
+-   **Null Hypothesis (**$H_0$) the statement being tested in a statistical test.
+    -   Statement we hope to reject\
+    -   Claim that there is no effect or difference
+
+## Statistical Hypotheses: Alternative
+
+-   **Alternative Hypothesis (**$H_a$) the statement we expect or hope to be true.
+    -   It is typically the research hypothesis\
+    -   Claim for which we seek evidence.
+
+## Statistical Hypotheses
+
+-   The null and alternative hypotheses are competing claims about a population.
+
+-   The alternative hypothesis is established by observing evidence (data) that contradicts the null hypothesis and supports the alternative hypothesis.
+
+## Points to Note
+
+-   Hypotheses are statements about **population parameters**.
+
+    -   A **statistic** ($\hat p$, $\bar X$, etc.) should *never* appear in a hypothesis statement; only parameters ($p$, $\mu_1$, etc.) should appear.
+
+-   The null hypothesis always contains an equality
+
+-   The alternative hypothesis always contains an inequality ($<$, $>$, $\neq$)
+
+-   The direction of inequality in the alternative depends on the specifics of the research question of interest
+
+## Null Hypothesis
+
+![](http://imgs.xkcd.com/comics/null_hypothesis.png)
+
+## Evidence
+
+The goal of a hypothesis test is to determine whether the sample data provide enough evidence to refute the null hypothesis in favor of the alternative hypothesis.
+
+## Topics to Come
+
+-   How do we *quantify* the strength of evidence against $H_0$ and in favor of $H_a$?
+
+. . .
+
+-   How do we know whether we have enough *evidence* to reject $H_0$ in favor of $H_a$?
+
+## Summary
+
+-   Statistical tests use data from a sample to assess a claim about a population
+
+-   Statistical tests are usually formalized with competing hypotheses:
+
+    -   **Null hypothesis (**$H_0$): no effect or no difference\
+    -   **Alternative hypothesis (**$H_a$): what we seek evidence for
+
+-   A hypothesis test examines whether sample data provide enough evidence to refute the null hypothesis and support the alternative hypothesis.
+
+
+
