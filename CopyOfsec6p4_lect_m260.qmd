@@ -1,0 +1,119 @@
+---
+title: "6.4 Inference About Differences in Means"
+author: "Math 260 Applied Statistics"
+format:
+  revealjs:
+    chalkboard: true
+    theme: [default, custom.scss]
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: true
+---
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+```
+
+## Outline
+
+-   Standard Error\
+-   Sampling Distribution\
+-   Confidence Interval\
+-   Hypothesis Test
+
+## Context: Inference about the Difference in Means {.smaller}
+
+-   Comparison of means from two different (independent) populations.\
+-   Examples
+    -   **Experiment**: Compare average blood pressure in treatment versus control group\
+    -   **Observational**: Compare average test scores for students from families below versus above the poverty line
+
+. . .
+
+-   BUT NOT
+    -   Compare blood pressure before and after implementing an exercise regimen (This is a *matched pairs* comparison.)
+
+## Standard Error for Difference in Means
+
+The standard error for $\bar x_1-\bar x_2$ is
+
+$$
+SE=\sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}
+$$
+
+-   The larger the sample sizes, the smaller the SE
+
+## Central Limit Theorem for Difference in Means
+
+If $n_1$ and $n_2$ are sufficiently large,
+
+$$
+\bar x_1-\bar x_2 \sim N\left(\mu_1-\mu_2, \sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}\right)
+$$
+
+Conditions:
+
+1.  Independent random samples\
+2.  Population distributions are approximately normal OR sample sizes are large $(n_1\ge 30$ and $n_2\ge 30)$
+
+## Estimated Standard Error
+
+Usually, we don’t know the population standard deviations $\sigma_1$ and $\sigma_2$, so we estimate them with the sample standard deviations to get the **standard error**
+
+$$
+\text{SE}=\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}
+$$
+
+## t-test for the Difference in Means
+
+-   Test $H_0: \mu_1=\mu_2$ using
+
+$$
+t=\frac{\bar x_1-\bar x_2}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}
+$$
+
+## t-Distribution Confidence Interval for the Difference in Means
+
+A confidence interval for the difference in population means $\mu_1-\mu_2$ is given by:
+
+$$
+(\bar x_1-\bar x_2) \pm t^* \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}
+$$
+
+where $t^*$ is the critical value from the appropriate $t$-distribution.
+
+## Degrees of Freedom for t Approximation {.smaller}
+
+Degrees of freedom for the $t$ distribution are:
+
+-   Smaller of $n_1-1$ and $n_2-1$ when doing calculations by hand (conservative)
+
+-   Given in the display below if done using R or other technology (more accurate)
+
+$$
+{\text{df}} = \frac{{{{\left( {\frac{{s_1^2}}{{{n_1}}} + \frac{{s_2^2}}{{{n_2}}}} \right)}^2}}}{{\frac{1}{{{n_1} - 1}}{{\left( {\frac{{s_1^2}}{{{n_1}}}} \right)}^2} + \frac{1}{{{n_2} - 1}}\left( {\frac{{s_2^2}}{{{n_2}}}} \right)^2}}
+$$
+
+<br>
+<br>
+
+**Note**: Do NOT memorize this formula.
+
+
+
+## Conditions for t-Inference for the Difference in Means
+
+Conditions:
+
+1.  Independent random samples
+
+2.  Population distributions are approximately normal OR sample sizes are large $(n_1\ge 30$ and $n_2\ge 30)$
+
+

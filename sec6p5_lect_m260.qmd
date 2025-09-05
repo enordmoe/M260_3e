@@ -1,0 +1,99 @@
+---
+title: "6.5 Paired Difference in Means"
+author: "Math 260 Applied Statistics"
+format:
+  revealjs:
+    chalkboard: true
+    theme: [default, custom.scss]
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: true
+---
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+```
+
+## Outline
+
+-   Paired data\
+-   Analyzing paired data\
+-   Inference for paired data
+-   Conditions
+
+## Context: Inference about the Difference in Means for Paired Data
+
+**Paired data** includes the following:
+
+-   Two measurements on each unit\
+    :white_check_mark: Same unit measured under different experimental conditions
+
+-   Measurements on a pair of units that go together
+
+    -   Twin studies\
+    -   Partner studies
+
+## Context: Inference about the Difference in Means for Paired Data
+
+**Paired data** can arise in several ways:
+
+-   Two measurements taken on the **same unit**\
+    :white_check_mark: Before vs. after an intervention\
+    :white_check_mark: Same individual under two experimental conditions
+
+-   Measurements on **matched units**\
+    :white_check_mark: Twin/sibling studies\
+    :white_check_mark: Spouses or partners\
+    :white_check_mark: Case–control pairs (matched by age or background for example)
+
+## Analyzing Paired Data: One-Sample $t$
+
+-   For a matched pairs experiment, we look at the difference between responses for each unit (pair), rather than just the average difference between treatment groups.
+
+-   Get a new variable of the differences, and do inference for the difference as you would for a single mean.
+
+-   Rather than doing inference for a **difference in means**, do inference for the **mean difference**.
+
+## Inference for Paired Data
+
+To analyze the differences, we use the same formulas we already learned for a single mean:
+
+| Standard Error | Confidence Interval | Hypothesis Test |
+|:-------------------:|:----------------------:|:--------------------------:|
+| $\text{SE}= \frac{s_d}{\sqrt{n_d}}$ | $\bar x_d \pm t^* \frac{s_d}{\sqrt{n_d}}$ | $t=\displaystyle\frac{\bar x_d}{s_d/\sqrt{n_d}}$ |
+
+where
+
+-   $\bar x_d$ is the average difference
+-   $s_d$ is the standard deviation of the differences and
+-   $n_d$ is the number of differences (pairs)
+
+------------------------------------------------------------------------
+
+### Conditions for t-Inference for Matched Pairs
+
+::: incremental
+1.  Simple random sample of differences\
+2.  Population of differences is...
+    -   approximately normal OR
+
+    -   sample size of differences is large $(n_d\ge 30)$\
+:::
+
+
+## Summary: Paired Difference in Means
+
+
+1. **Paired data** arise when two measurements come from the same unit or from matched units.  
+
+2. **Key idea**: Reduce paired data to a single set of *differences* and analyze those.  
+
+3. **Inference**: Apply one-sample $t$ methods to the differences, checking usual conditions.  
+
