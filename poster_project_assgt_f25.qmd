@@ -1,0 +1,137 @@
+---
+title: "Group Project: Applied Statistics Investigation "
+subtitle: "Math 260 - Applied Statistics I"
+format:
+  html:
+    math: katex
+    toc: true
+    toc_depth: 2
+    number-sections: false
+    number-depth: 2
+    theme: materia
+    embed-resources: true
+execute: 
+  warning: false
+  message: false
+  echo: true
+---
+
+```{r, setup, include=FALSE}
+# These commands should always be near the top to ensure the libraries are loaded before the analysis.
+library(mosaic)
+```
+
+# Overview
+
+In this group project, you and your peers will conduct an analysis to address a question of interest using the statistical methods learned throughout this course. This is your opportunity to explore data and apply your learning in a creative way. But be sure to remember that the primary purpose of the project is to demonstrate mastery of the course material including inference procedures (e.g., confidence intervals and hypothesis tests) as well as R procedures and visualizations (graphs) we have studied.
+
+You will have two options for the data you use:
+
+1.  **Collect your own data** (e.g., sports statistics from a reliable web-based source, movie information from IMDB, etc.), or
+
+2.  **Use an existing dataset** from R, such as those available in the **Lock5Data** package or other relevant R packages.
+
+I **strongly discourage** you from carrying out custom surveys on campus because of the difficulty in getting a representative sample and very low response rates.
+
+# Project Schedule and Details
+
+This project is worth a total of 130 points broken down into several stages to help you build your investigation progressively. Below is the schedule, with a detailed explanation of each step:
+
+| Task                                  |     Due Date      | Points |
+|:--------------------------------------|:-----------------:|:------:|
+| **Proposal and Detailed Methodology** |  Friday, Week 4   | 10 pts |
+| **Preliminary Data Description**      | Wednesday, Week 7 | 10 pts |
+| **Poster Plan Meeting**               |      Week 9       | 10 pts |
+| **Final Poster Submission**           |  Friday, Week 10  | 60 pts |
+| **Peer Assessment at StatFest**       |  Friday, Week 10  | 10 pts |
+| **Individual Reflection Report**      | Monday, Exam Week | 20 pts |
+| **Peer Evaluations**                  | Monday, Exam Week | 10 pts |
+
+## Step 1: Proposal and Detailed Methodology (10 points)
+
+**Due Friday, Week 4**
+
+Choose a creative name for your group and describe the question of interest you wish to answer and your data collection plan. Your question should be substantive and interesting to the members of your group. Try to identify at least 3 **quantitative** variables and 3 **categorical** variables, as these will form the foundation of your analysis. Submit a detailed description of your data collection plan. Depending on the approach you choose, this step will differ:
+
+-   **If using existing data**, explain where and how you will obtain the dataset. Describe any preparations needed for the data analysis, such as cleaning or formatting. If working with a community organization, describe the data available to you or how you plan to collect additional data.
+-   **If conducting an experiment**, describe the experimental design, including the procedure, the justification for your chosen design, and how data will be collected.
+-   **If conducting a survey**, describe the population of interest, your sampling method, and include a copy of any questionnaire you intend to use. Be clear on why you chose this population, how you will obtain a random sample and how you will ensure a good response rate.
+
+This step helps ensure you have a well-thought-out plan for gathering your data, whether directly or from existing sources. While IRB approval is not necessary for a class project, be sure to follow ethical and responsible practices for any research involving human participants.
+
+## Step 2: Preliminary Data Description (10 points)
+
+**Due Monday, Week 7**
+
+Submit an annotated Quarto report that includes:
+
+-   **Descriptive Plots and Summary Statistics**: Include visual summaries of your data such as histograms, scatterplots, bar charts, or box plots.
+-   **Initial Observations**: Discuss any patterns, relationships, or interesting points that have emerged from your preliminary exploration.
+-   **Data File**: Include with your submission a csv including your data.
+
+This is your first step in summarizing your data and exploring it visually, helping you gain a better understanding of what story your data can tell.
+
+## Step 3: Poster Plan Meeting (10 points)
+
+**During Week 9**
+
+Schedule an appointment with the instructor to share your poster plan with me. This meeting will for you to get feedback on the following:
+
+-   Your outline of the **content and organization** of your poster.
+
+-   Your **interpretation of the data**.
+
+This is a crucial opportunity to refine your analysis and get personalized guidance on effectively communicating your findings.
+
+## Step 5: Final Poster (60 points)
+
+**Due Friday, Week 10**
+
+Create and submit a final version of your poster (24x36 inches) that includes:
+
+-   **Title**: An engaging title for your study.
+-   **Introduction**: A brief introduction to the topic and its relevance.
+-   **Research Question**: Clearly stated question(s) you are investigating.
+-   **Methodology**: Details of how data was collected or sourced, along with statistical techniques used.
+-   **Results**: Key findings presented through appropriate graphs, tables, and narratives. Use R to create any graphs you wish to include.
+-   **Discussion**: Interpretation of the results and any implications.
+
+Please note that your project **must** demonstrate mastery of the course material including the proper use of inference procedures (e.g., confidence intervals and hypothesis tests) as well as R procedures and visualizations (graphs) we have studied. A poster that uses only descriptive statistics and does not include visualizations we have learned about will not meet these requirements.
+
+Posters will be submitted in both hard copy and digital formats (PowerPoint, Google Slides, or PDF). The grading rubric for the poster and guidance on poster creation will be available soon on Moodle.
+
+## Step 6: Peer Assessment at StatFest (10 points)
+
+**Due Friday, Week 10**
+
+As part of our **StatFest Extravaganza**, you will assess other groups' posters using a provided rubric. This activity will not only allow you to learn from your peers but also improve your understanding by assessing the quality of other analyses.
+
+
+
+## Step 7: Individual Reflection Report (20 points)
+
+**Due Monday, Exam Week**
+
+Each student will write an individual reflection report with **Quarto**, about **five pages** in length, using **R** for any relevant analysis and visualizations. This report will summarize the project’s findings, describe your personal contribution, and highlight what you have learned through this experience. Include one or two key graphs or tables generated with **R** to illustrate significant findings. This report allows you to demonstrate your understanding of the statistical techniques used, your role in the group, and your personal learning journey. A more detailed outline of the components of the report will be available on Moodle.
+
+## Step 8: Peer Evaluation (10 points)
+
+**Due Monday, Exam Week**
+
+Each member will evaluate their fellow group members' contributions. Peer evaluations will be submitted anonymously, and each group member will be assessed based on the ratings received from their peers. This is an important step to ensure fairness and accountability.
+
+
+# Expectations for Success
+
+-   **Mastery of Course Material**: Use the appropriate statistical methods covered in class, including descriptive statistics, visual analysis, and inferential methods.
+-   **Teamwork**: Work collaboratively with your group members. Active and equitable contribution is expected from all team members.
+-   **Creativity and Engagement**: Select an intriguing topic and be creative in how you collect and analyze your data.
+-   **Clear Communication**: Ensure that your poster is visually appealing and comprehensible to a general audience. Be sure to practice presenting your poster before StatFest.
+
+# Notes on Data Requirements
+
+-   Your dataset should include **at least 3 quantitative and 3 categorical variables**.
+-   If collecting your own data, aim for at least **50 cases**.
+-   If using an existing dataset, strive for **at least 100 cases** to ensure robust analysis.
+
+Good luck! This project is your chance to show off the skills you've learned in a meaningful and interesting way. I'm looking forward to seeing what you learn from your data!
