@@ -23,7 +23,7 @@ library(mosaic)
 
 # Overview
 
-In this group project, you and your peers will conduct an analysis to address a question of interest using the statistical methods learned throughout this course. This is your opportunity to explore data and apply your learning in a creative way. But be sure to remember that the primary purpose of the project is to demonstrate mastery of the course material including inference procedures (e.g., confidence intervals and hypothesis tests) as well as R procedures and visualizations (graphs) we have studied.
+In this group project, you and your peers will conduct an analysis to address a question of interest using the statistical methods learned throughout this course. This is your opportunity to explore data and apply your learning in a creative way. But be sure to remember that the primary purpose of the project is to demonstrate mastery of the course material including inference procedures (e.g., confidence intervals and hypothesis tests) as well as R procedures and visualizations (graphs) we have studied. Your group must have **2-3 members**. You cannot work by yourself on this collaborative project.
 
 You will have two options for the data you use:
 
