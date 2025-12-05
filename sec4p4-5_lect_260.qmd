@@ -1,8 +1,8 @@
 ---
+title: "4.4-4.5 More about Hypothesis Tests"
 author: "Math 260 Applied Statistics"
 format:
   revealjs:
-    pagetitle: "My title"
     chalkboard: true
     theme: [default, custom.scss]
     reveal-options:
@@ -20,6 +20,8 @@ execute:
 library(mosaic)
 library(Lock5Data)
 ```
+
+
 
 #  {background-color="#EA6820"}
 
