@@ -1,0 +1,173 @@
+---
+title: "Poster Project Preparation Guide"
+subtitle: "Applied Statistics I – Math 260"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: false
+---
+
+## 1. What Your Poster Must Include
+
+Use this checklist as you build your poster. You should be able to check **every** item before submitting your final version.
+
+### 1.1 Research Question and Context
+
+-   [ ] A clear, concise research question is stated near the top of the poster.
+-   [ ] The context of the problem is briefly explained (what topic or field is this about?).
+-   [ ] The dataset is described, including:
+    -   [ ] Source of the data (where it came from).
+    -   [ ] Variables used in the analysis (with units when appropriate).
+    -   [ ] Sample size (number of observations).
+
+### 1.2 Methods
+
+-   [ ] The statistical methods used are named correctly (for example, "two-sample $t$-test", "bootstrap confidence interval for proportion", "randomization test for correlation", etc.).
+-   [ ] The choice of methods is briefly justified (why this method is appropriate for the data and question).
+-   [ ] Any important conditions are mentioned in plain language (for example, "we are assuming the samples are independent").
+
+### 1.3 Analysis
+
+-   [ ] The poster includes **at least two** clearly labeled graphs or tables.
+-   [ ] Graphs use appropriate plot types for the variables (for example, bar charts for categorical variables, histograms or box plots for quantitative variables, "faceted" plots to compare groups). 
+-   [ ] Axes, legends, and titles are readable and correctly labeled.
+-   [ ] Numerical summaries are reported as needed, such as:
+    -   [ ] Proportions or percentages (for categorical data).
+    -   [ ] Means or medians, standard deviations or IQR (for quantitative data).
+    -   [ ] Test statistics and $p$-values (for hypothesis tests).
+    -   [ ] Confidence intervals, with confidence level stated.
+    -   [ ] Avoid including R numerical output directly.
+
+### 1.4 Results
+
+-   [ ] Results are stated in terms of the original research question.
+-   [ ] Statistical language is used correctly (for example, avoid "prove" or claiming "cause" unless appropriate).
+-   [ ] The direction and size of effects are described (for example, "Group A had a mean score 5 points *higher* than Group B").
+-   [ ] The uncertainty in the results is acknowledged (for example, via p-values or confidence intervals).
+
+### 1.5 Conclusions
+
+-   [ ] A clear, concise conclusion summarizes the main finding(s).
+-   [ ] The conclusion is supported by the data and analysis.
+-   [ ] At least one limitation of the study is mentioned (for example, sample size, sampling method, measurement issues, confounding variable()).
+-   [ ] At least one possible follow-up question or future direction is suggested.
+
+------------------------------------------------------------------------
+
+## 2. Poster Design Guidelines
+
+Good posters are **readable, focused, visual, and organized**. Use the tips below to make your poster easier for your audience to understand.
+
+### 2.1 Readability
+
+-   Use large, readable fonts. As a rule of thumb:
+    -   Dimensions: 
+    -   Main title: around 44 pt
+    -   Section headings: around 32 pt
+    -   Body text: at least 20–24 pt
+-   Choose high-contrast colors (for example, dark text on a light background).
+-   Avoid long paragraphs. Short paragraphs and bullet points are easier to view.
+
+### 2.2 Focus
+
+-   Put the **research question** and **conclusions** where they are easy to see.
+-   Keep text concise. Ask: “Does this sentence help the viewer understand the story?”
+-   Use bullets and short phrases instead of full essays.
+-   Highlight important numbers or phrases using bold text or highlighting.
+
+### 2.3 Visuals
+
+-   Let graphs and tables tell the story where possible.
+-   Each graph or table should have:
+    -   A clear title explaining what it shows.
+    -   Labeled axes (with units, if applicable). (Ask if you need help with this.) 
+    -   A brief caption or interpretation if needed.
+-   Avoid decorative images or backgrounds that make text or graphs harder to read.
+
+### 2.4 Organization
+
+-   Arrange content in a logical flow, usually:
+    1.  Title and authors
+    2.  Research question and context
+    3.  Data and methods
+    4.  Results (graphs and tables)
+    5.  Conclusions and limitations (or Discussion)
+-   Use headings and subheadings to guide the reader.
+-   Leave some white space so the poster does not feel crowded.
+
+------------------------------------------------------------------------
+
+## 3. Presentation Expectations
+
+During the poster session, you will both **stand by your poster** and **explain your project** to viewers. This includes the instructor and classmates.
+
+### 3.1 Basic Expectations
+
+-   Your group should give a **3–4 minute walkthrough** of your project.
+-   Every group member should speak at least briefly.
+-   You should be prepared to answer questions about:
+    -   Your research question and why it is interesting.
+    -   How your data were collected.
+    -   What statistical methods you used and why.
+    -   What your graphs show.
+    -   What your results mean in context.
+
+### 3.2 Suggested Structure for Your Walkthrough
+
+You might structure your spoken explanation like this:
+
+1.  **Introduction (about 1 minute)**
+    -   Introduce yourselves.
+    -   State your research question.
+    -   Briefly describe your data and where it came from.
+2.  **Methods and Analysis (about 1–2 minutes)**
+    -   Explain which statistical methods you used.
+    -   Point to your graphs/tables and describe the main patterns.
+3.  **Results and Conclusions (about 1 minute)**
+    -   State your main findings in plain language.
+    -   Mention any important limitations.
+    -   Share one possible next step or follow-up question.
+
+### 3.3 Q&A Tips
+
+-   Listen carefully to each question.
+-   It is fine to pause for a moment to think.
+-   If you are unsure, you can say something like:
+    -   "I'm not completely sure, but based on our analysis, it seems that …"
+-   Try to connect your answer back to your graphs, numerical summaries, or methods.
+
+------------------------------------------------------------------------
+
+## 4. How You Will Be Graded (Rubric Overview)
+
+Your poster and presentation will be graded using a rubric with a total of **60 points**. The main categories are:
+
+| Category | Points | Brief Description |
+|----------------------------|:----------------:|--------------------------|
+| Technical Content | 20 | Correct and appropriate use of statistical methods and analysis. |
+| Communication | 17 | Clear explanation and logical organization on the poster and in speech. |
+| Visual Appeal | 12 | Professional, readable, and well-designed graphs and layout. |
+| Engagement | 7 | Interest, enthusiasm, and ability to explain the importance of the project. |
+| Teamwork | 4 | Evidence that all members contributed and understand the project. |
+
+A more detailed rubric will be provided separately. You should use both this guide and the rubric to check your work before the poster session.
+
+------------------------------------------------------------------------
+
+## 5. Final Checklist Before the Poster Session
+
+Use this as a last-minute review:
+
+-   [ ] Our research question is clear and visible.
+-   [ ] We have described our dataset (source, variables, sample size).
+-   [ ] We have correctly named and explained our statistical methods.
+-   [ ] Our graphs/tables are labeled, readable, and appropriate.
+-   [ ] Our results directly address the research question.
+-   [ ] Our conclusions are supported by the data and acknowledge uncertainty.
+-   [ ] The poster is readable from a few feet away.
+-   [ ] Each group member knows what they will say during the walkthrough.
+-   [ ] We have practiced explaining at least one graph/table each.
+-   [ ] We have looked at the rubric and believe we meet the expectations.
+
+Good luck, and have fun sharing what you discovered with your data!
