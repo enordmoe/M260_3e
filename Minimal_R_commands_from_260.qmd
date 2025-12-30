@@ -1,0 +1,268 @@
+---
+title: "Applied Statistics R Commands"
+format: 
+    html: 
+      toc: true
+      html-math-method: katex
+      number-depth: 3
+      theme: flatly
+      self-contained: true
+execute:
+  warning: false
+editor: visual
+---
+
+```{r}
+#| label: setup
+#| include: false
+#| warning: false
+knitr::opts_chunk$set(echo = TRUE)
+options(digits=6)
+library(mosaic)
+library(tree)
+library(Lock5Data)
+set.seed(123)
+```
+
+# Help
+
+```{r, eval = FALSE}
+?command
+help(commandname)
+```
+
+# Sampling and Randomization
+
+```{r, eval = FALSE}
+sample() 
+shuffle()
+```
+
+# Basic calculation works like a calculator
+
+```{r, eval = FALSE}
+# basic math operators: + - * / ^ ( )
+log(); exp(); sqrt()
+```
+
+# Formula Interface
+
+The following syntax (often with some parts omitted) is used for graphical summaries, numerical summaries, and inference procedures.
+
+```         
+goal(y ~ x | z, data = mydata, ...)
+```
+
+For plots:\
+\* `y`: is $y$-axis variable\
+\* `x`: is $x$-axis variable\
+\* `z`: is conditioning variable (separate panels)
+
+For other things:
+
+`y ~ x | z` can usually be read $y$ is modeled by (or depends on) $x$ for each value of $z$.
+
+See the sampler for examples.
+
+# Categorical Variable Description
+
+```{r, eval = FALSE}
+tally() 
+gf_bar()
+gf_props()
+```
+
+# Numerical Summaries
+
+These functions have a formula interface to match plotting.
+
+```{r, eval = FALSE}
+favstats()  
+mean()      
+median()    
+sd()
+quantile()  
+IQR()  
+```
+
+# Graphics
+
+```{r, eval = FALSE}
+gf_bar()          
+gf_histogram()  
+gf_dotplot()        
+gf_boxplot()   
+gf_point()     
+gf_smooth()  # End previous gf_point()
+             # line with %>% sign
+annotate()   # End previous line with a + sign
+```
+
+# Correlation and Regression
+
+```{r, eval = FALSE}
+cor()
+model <- lm()     
+summary(model)
+predict(model)
+resid(model)
+```
+
+# Data
+
+```{r, eval=FALSE}
+nrow() 
+dim()
+names()
+head()
+tail()
+View() # only use at the console command line
+```
+
+# Special Commands
+
+```{r, eval = FALSE}
+c()
+%>%  # Old Pipe operator
+|>   # New Pipe operator
++    # Continuation
+
+filter()               # Subset rows 
+slice(2:5)             # Select specified rows 
+mydata[-c(3,23,36), ]  # Remove specified rows
+mydata[, c(2,5)]       # Show only specified columns
+mutate()               # Create new variables
+```
+
+------------------------------------------------------------------------
+
+# Examples
+
+Here are a few examples. These are not exhaustive but should be seen as representative of the kinds of things done in Applied Statistics. These commands require that the packages **mosaic** and **Lock5Data** be installed (and loaded using the `library()` command) for these examples to work on your computer. For completeness, the following chunk shows how these packages are loaded:
+
+```{r}
+# Load the packages required for the following examples.
+library(mosaic)
+library(Lock5Data)
+```
+
+## One Categorical
+
+```{r}
+tally(~ Award, data = StudentSurvey)
+```
+
+```{r}
+tally(~ Award, data = StudentSurvey,  
+      format = "percent")
+```
+
+```{r}
+tally(~ Award, data = StudentSurvey, 
+      format = "proportion")
+```
+
+```{r}
+tally(~ Award, data = StudentSurvey,
+      format = "proportion", margins = TRUE)
+```
+
+```{r}
+gf_bar(~Award,data=StudentSurvey)
+```
+
+```{r}
+gf_props(~Award,data=StudentSurvey, 
+         fill = "forestgreen")
+```
+
+## Two Categorical
+
+```{r}
+tally(~ Award + Smoke , data = StudentSurvey)
+tally(~ Award + Smoke , format = "proportion",
+      data = StudentSurvey)
+tally(~ Award + Smoke , format = "percent", 
+      margins = TRUE, data = StudentSurvey)
+tally(~ Award | Smoke , data=StudentSurvey, 
+      format = "proportion")
+tally(~ Award | Smoke , data=StudentSurvey, 
+      format = "percent")
+tally(~ Award | Smoke, data=StudentSurvey, 
+      format = "proportion", margins = TRUE)
+```
+
+```{r}
+gf_bar(~Sex, fill = ~Award, data=StudentSurvey)
+```
+
+```{r}
+gf_props(~Sex, fill = ~Award, data=StudentSurvey)
+```
+
+```{r}
+gf_props(~Sex, fill = ~Award, position = "stack",
+         data=StudentSurvey)
+```
+
+```{r}
+gf_props(~Sex, fill = ~Award, 
+         position = "dodge", data=StudentSurvey)
+```
+
+```{r}
+gf_props(~Sex, fill = ~Award, 
+         position = "fill", data=StudentSurvey)
+```
+
+## One Quantitative
+
+```{r}
+gf_histogram(~ Height, data = StudentSurvey)
+```
+
+```{r}
+gf_histogram(~ Height | Sex ~ .,
+             data = StudentSurvey, binwidth = 2)
+```
+
+## One Quantitative and One Categorical
+
+```{r}
+favstats(TV ~ Sex, data = StudentSurvey)
+```
+
+```{r}
+gf_boxplot(TV ~ Sex, data = StudentSurvey)
+```
+
+## Two Quantitative
+
+```{r}
+gf_point(Weight ~ Height, data = StudentSurvey)
+```
+
+```{r}
+gf_point(Weight ~ Height, data = StudentSurvey) |>
+  gf_smooth()
+```
+
+```{r}
+gf_point(Weight ~ Height, data = StudentSurvey) |>
+  gf_smooth(method = "lm")
+```
+
+```{r}
+gf_point(Weight ~ Height, color = ~ Sex, data = StudentSurvey) 
+```
+
+```{r}
+gf_point(Weight ~ Height, color = ~ Sex, data = StudentSurvey) |>
+  gf_smooth()
+```
+
+## Regression
+
+```{r}
+lm(Weight ~ Height, data = StudentSurvey) 
+```
