@@ -93,11 +93,22 @@ gf_point(LifeExpectancy ~ Internet, color = ~ Developed, data = SampCountries) |
 ```
 
 
+# Experiments
+
+## Two Primary Methods of Data Collection
+
+-   **Observational study** observing individuals and measuring variables of interest without attempting to influence responses.
+    -   Purpose: descriptive, study of associations
+-   **Experiment** a study in which the researcher **actively controls** one or more of the explanatory variables.
+    -   Purpose: investigate cause-and-effect relationships
+
+
 ## Randomization
 
 Eliminate confounding factors by **randomization**
 
 -   Randomly assign values of the explanatory variable in an experiment.
+
 
 ## Randomized Experiment
 
