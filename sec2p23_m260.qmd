@@ -272,13 +272,6 @@ The **p**$^\text{th}$ percentile is the value which is greather than p% of the d
 
 -   A test score in the 80th percentile is greater than at least 80% of the scores on the test.
 
-## Example: 80th Percentile
-
--   Illustrate using an idealized smoothed histogram:
-
-```{r}
-quantile(~WeekdaySleep, data = SleepStudy, probs = c(.8))
-```
 
 ```{r,echo=FALSE,fig.height=3}
 #  calculate quantiles
@@ -320,12 +313,11 @@ $$
 
 ## z-Scores: Your turn
 
--   Is student 8 relatively more extreme on `DepressionScore` or `AnxietyScore`?\
+-   Student 8 has a value of 2 for both the Depression and Anxiety scores. Which score is relatively more extreme according to its $z$-score?
 
 ```{r}
 favstats(~DepressionScore, data = SleepStudy)
 favstats(~AnxietyScore,data = SleepStudy)
-SleepStudy[8, c("DepressionScore","AnxietyScore")]
 ```
 
 ## Other Measures of Location
