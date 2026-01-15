@@ -21,7 +21,7 @@ library(mosaic)
 library(Lock5Data)
 ```
 
-## Agenda
+## Agenda {.smaller}
 
 - **Introduction to Boxplots**  
   - Definition and components of a boxplot
@@ -65,6 +65,8 @@ gf_boxplot(Quetelet ~ Smoke, data = NutritionStudy)
 
 ## Boxplot example comparing groups: Horizontal
 
+Just interchange the $X$ and $Y$ variables:
+
 ```{r}
 gf_boxplot(Smoke ~ Quetelet, data = NutritionStudy)
 ```
@@ -95,6 +97,7 @@ gf_boxplot(factor(PriorSmoke) ~ Quetelet, data = NutritionStudy,
   gf_jitter(height = .1, alpha = .4) 
 ```
 
+-   Use `factor(PriorSmoke)` to tell R to treat *PriorSmoke* numbers (1, 2, 3) as categories.
 -   Overlays points using `jitter` on top of boxes to show more detail
 -   `alpha` used to make points transparent (between 0 and 1)
 -   Adds y label using `ylab`

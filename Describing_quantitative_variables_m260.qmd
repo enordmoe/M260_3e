@@ -84,18 +84,16 @@ By default, R produces histograms in each case because the variable *Systolic* i
 
 ## Boxplots
 
-Another plot often of interest is a `boxplot`, which is a graphical depiction of the five number summary (min, $Q_1$, median, $Q_3$, maximum) with outliers, if present, plotted separately. Here is an example using `gf_boxplot()`:
+Another plot often of interest is a `boxplot`, which is a graphical depiction of the five number summary (min, $Q_1$, median, $Q_3$, maximum) with outliers, if present, plotted separately. Here is an example using `gf_boxplot()`. Since *Status* is a 0-1 variable, we need to use the `factor()` function to tell R to treat the 0 and 1 as categories.
 
 ```{r}
-# Since Status is a 0-1 variable, we need to use the `factor()` function to tell R it's 
-# actually categorical
 # vertical boxplots
 gf_boxplot(Systolic ~ factor(Status), data = ICUAdmissions)
 ```
 
 Note that the command closely follows the `goal(y~x, data = mydata)` template. The `y` variable is the quantitative response variable and the `x` is the categorical factor or grouping variable. The command produces one box for every category of the `x` variable. Note below that reversing the variables changes the graph from vertical to horizontal.
 
-```{r,eval=FALSE,tidy=FALSE}
+```{r, tidy=FALSE}
 # horizontal boxplots
 gf_boxplot(factor(Status) ~ Systolic, data = ICUAdmissions, ylab = "Systolic (mm Hg)")
 # Three variables in one boxplot is sometimes helpful
