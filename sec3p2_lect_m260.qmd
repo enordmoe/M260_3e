@@ -47,15 +47,34 @@ $$
 \text{statistic} \pm \text{margin of error}
 $$ where the **margin of error** quantifies the precision of the sample statistic as a *point estimator* of the parameter.
 
-## Using SE to Find MOE
 
--   **Question** How do we determine the margin of error (MOE)?
 
--   **Answer** Use the *SE* of the sampling distribution.
+## How MOE Connects to SE {.smaller}
+
+* **Goal:** Pick MOE so
+$$
+  \text{statistic} \pm \text{MOE}
+$$
+**captures the unknown parameter about 95% of the time** across many samples.
+  
+::: {.fragment}
+* **Key idea:**
+$$
+  \text{MOE} = c \times \text{SE}
+$$
+  where **(c)** is “how many SEs” you need to go out to cover the **middle 95%** of the sampling distribution.  
+  
+:::
+
+::: {.fragment}
+> Key Point: **MOE isn’t the SE.** It’s **“how many SEs”** you need for ~95% capture.
+
+:::
+
 
 ## Confidence Interval
 
--   A **confidence interval** for a parameter is an interval computed from *sample data* by a method that will capture the parameter for a *specified proportion* of all samples.
+-   A **confidence interval** for a parameter is an interval computed from *sample data* by a method that will capture the parameter for a *specified percent* of all samples.
 
 -   The success rate is known as the **confidence level**
 
@@ -73,7 +92,7 @@ would capture the parameter for 95% of all samples?
 
 ## 95% Confidence Interval
 
-If the sampling distribution is relatively symmetric and bell-shaped, a 95% confidence interval can be estimated using
+Because the middle 95% of symmetric bell-shaped sampling distributions spans about 2 SEs from the center, we define a 95% interval as 
 
 $$
 \text{statistic} \pm 2\text{SE}
@@ -132,7 +151,7 @@ Stay tuned...
 -   **Margin of Error (MOE)**: Calculated using the standard error (SE) to quantify precision.
 -   **Confidence Interval**: Captures parameter with specified confidence level (e.g., 95%).
 -   **Calculation**:
-    -   Interval $\Rightarrow \text{statistic} \pm 2\cdot \text{SE}$ for symmetric, bell-shaped distributions.
+    -  95%  Interval $\Rightarrow \text{statistic} \pm 2\cdot \text{SE}$ for symmetric, bell-shaped distributions.
 -   **Misconceptions**:
     -   CI does not contain 95% of the data.
     -   CI is not about the sample mean but the population parameter.
