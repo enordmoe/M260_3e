@@ -24,7 +24,7 @@ library(Lock5Data)
 set.seed(123)
 ```
 
-# Help  
+# Help
 
 ```{r, eval = FALSE}
 ?command
@@ -38,42 +38,33 @@ sample()
 shuffle()
 ```
 
-
-# Basic calculation works like a calculator  
-
+# Basic calculation works like a calculator
 
 ```{r, eval = FALSE}
 # basic ops: + - * / ^ ( )
 log(); exp(); sqrt()
 ```
 
+# Formula Interface
 
+The following syntax (often with some parts omitted) is used for graphical summaries, numerical summaries, and inference procedures.
 
-# Formula Interface  
-
-The following syntax (often with 
-some parts omitted) is used for 
-graphical summaries, numerical summaries,
-and inference procedures.  
-
-```
+```         
 goal(y ~ x | z, data = mydata, ...)
 ```
 
-For plots:  
-* `y`: is $y$-axis variable  
-* `x`: is $x$-axis variable  
-* `z`: is conditioning variable (separate panels)  
+For plots:\
+\* `y`: is $y$-axis variable\
+\* `x`: is $x$-axis variable\
+\* `z`: is conditioning variable (separate panels)
 
-For other things:  
+For other things:
 
-
-`y ~ x | z` can usually be read $y$ is modeled by
-(or depends on) $x$  for each value of $z$.  
+`y ~ x | z` can usually be read $y$ is modeled by (or depends on) $x$ for each value of $z$.
 
 See the sampler for examples.
 
-# Categorical Variable Description  
+# Categorical Variable Description
 
 ```{r, eval = FALSE}
 tally() 
@@ -81,12 +72,10 @@ gf_bar()
 gf_props()
 ```
 
+# Numerical Summaries
 
+These functions have a formula interface to match plotting.
 
-# Numerical Summaries  
-
-These functions have 
-a formula interface to match plotting.
 ```{r, eval = FALSE}
 favstats()  
 mean()      
@@ -96,7 +85,7 @@ quantile()
 IQR()  
 ```
 
-# Graphics  
+# Graphics
 
 ```{r, eval = FALSE}
 gf_bar()          
@@ -109,7 +98,7 @@ gf_smooth()  # End previous gf_point()
 annotate()   # End previous line with a + sign
 ```
 
-# Correlation and Regression  
+# Correlation and Regression
 
 ```{r, eval = FALSE}
 cor()
@@ -119,7 +108,7 @@ predict(model)
 resid(model)
 ```
 
-# Data  
+# Data
 
 ```{r, eval=FALSE}
 nrow() 
@@ -130,9 +119,8 @@ tail()
 View() # only use at the console command line
 ```
 
+# Special Commands
 
-# Special Commands  
- 
 ```{r, eval = FALSE}
 c()
 % > % # Pipe
@@ -145,9 +133,9 @@ mydata[, c(2,5)]       # Show specified columns
 mutate()               # Create new variables
 ```
 
-****************************************  
+------------------------------------------------------------------------
 
-# Examples  
+# Examples
 
 Here are a few examples. These are not exhaustive but should be seen as representative of the kinds of things we will be doing. You will need to have the packages **mosaic** and **Lock5Data** installed (and loaded using the `library()` command) for these examples to work on your computer. For completeness, the following chunk shows how these packages are loaded:
 
@@ -157,8 +145,7 @@ library(mosaic)
 library(Lock5Data)
 ```
 
-
-## One Categorical  
+## One Categorical
 
 ```{r}
 tally(~ Award, data = StudentSurvey)
@@ -179,11 +166,9 @@ tally(~ Award, data = StudentSurvey,
       format = "proportion", margins = TRUE)
 ```
 
-
 ```{r}
 gf_bar(~Award,data=StudentSurvey)
 ```
-
 
 ```{r}
 gf_props(~Award,data=StudentSurvey, 
@@ -191,7 +176,6 @@ gf_props(~Award,data=StudentSurvey,
 ```
 
 ## Two Categorical
-
 
 ```{r}
 tally(~ Award + Smoke , data = StudentSurvey)
@@ -206,6 +190,7 @@ tally(~ Award | Smoke , data=StudentSurvey,
 tally(~ Award | Smoke, data=StudentSurvey, 
       format = "proportion", margins = TRUE)
 ```
+
 ```{r}
 gf_bar(~Sex, fill = ~Award, data=StudentSurvey)
 ```
@@ -229,9 +214,7 @@ gf_props(~Sex, fill = ~Award,
          position = "fill", data=StudentSurvey)
 ```
 
-
-
-## One Quantitative  
+## One Quantitative
 
 ```{r}
 gf_histogram(~ Height, data = StudentSurvey)
@@ -242,8 +225,7 @@ gf_histogram(~ Height | Sex ~ .,
              data = StudentSurvey, binwidth = 2)
 ```
 
-
-## One Quantitative and One Categorical  
+## One Quantitative and One Categorical
 
 ```{r}
 favstats(TV ~ Sex, data = StudentSurvey)
@@ -253,8 +235,7 @@ favstats(TV ~ Sex, data = StudentSurvey)
 gf_boxplot(TV ~ Sex, data = StudentSurvey)
 ```
 
-## Two Quantitative  
-
+## Two Quantitative
 
 ```{r}
 gf_point(Weight ~ Height, data = StudentSurvey)
@@ -279,13 +260,8 @@ gf_point(Weight ~ Height, color = ~ Sex, data = StudentSurvey) |>
   gf_smooth()
 ```
 
-
-
-## Regression 
+## Regression
 
 ```{r}
 lm(Weight ~ Height, data = StudentSurvey) 
 ```
-
-
-
