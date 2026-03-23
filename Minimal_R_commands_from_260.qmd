@@ -94,7 +94,7 @@ gf_dotplot()
 gf_boxplot()   
 gf_point()     
 gf_smooth()  # End previous gf_point()
-             # line with %>% sign
+             # line with |>  sign
 annotate()   # End previous line with a + sign
 ```
 
