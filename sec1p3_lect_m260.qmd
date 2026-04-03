@@ -30,6 +30,14 @@ library(nycflights13)
     -   Purpose: investigate cause-and-effect relationships
 
 
+## Observational Data: Life Expectancy and Internet
+
+```{r, echo=FALSE, warning = FALSE}
+gf_point(LifeExpectancy ~ Internet, data = SampCountries) |>
+  gf_labs(x="Percent with Internet Access")  
+```
+
+
 ## A Quote
 
 <br>
@@ -46,12 +54,6 @@ library(nycflights13)
     -   Covariation ($A\rightarrow B$, $\tilde A \rightarrow\tilde B$)
     -   No plausible alternative explanation
 
-## Life Expectancy and Internet
-
-```{r, echo=FALSE, warning = FALSE}
-gf_point(LifeExpectancy ~ Internet, data = SampCountries) |>
-  gf_labs(x="Percent with Internet Access")  
-```
 
 ## Confounding
 

@@ -6,8 +6,8 @@
 <script src="sec1p3_lect_m260_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="sec1p3_lect_m260_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="sec1p3_lect_m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="sec1p3_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="sec1p3_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Math 260 Applied Statistics">
   <title>1.3 Experiments and Observational Studies</title>
@@ -95,7 +95,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="sec1p3_lect_m260_files/libs/revealjs/dist/theme/quarto-10df59a5396271df04a2ae28b52f1741.css">
+  <link rel="stylesheet" href="sec1p3_lect_m260_files/libs/revealjs/dist/theme/quarto-db0616c77ffbe90acb66a837277fc918.css">
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
@@ -235,6 +235,10 @@ Math 260 Applied Statistics
 </ul></li>
 </ul>
 </section>
+<section id="observational-data-life-expectancy-and-internet" class="slide level2">
+<h2>Observational Data: Life Expectancy and Internet</h2>
+
+<img data-src="sec1p3_lect_m260_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
 <section id="a-quote" class="slide level2">
 <h2>A Quote</h2>
 <p><br></p>
@@ -257,10 +261,6 @@ Math 260 Applied Statistics
 </ul></li>
 </ul>
 </section>
-<section id="life-expectancy-and-internet" class="slide level2">
-<h2>Life Expectancy and Internet</h2>
-
-<img data-src="sec1p3_lect_m260_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
 <section id="confounding" class="slide level2">
 <h2>Confounding</h2>
 <p><strong>Definition:</strong> A third variable that is associated with <em>both</em> the explanatory variable and the response variable is called a <strong>confounding variable</strong></p>
@@ -406,7 +406,7 @@ Math 260 Applied Statistics
 <li>Preview structure of <strong>myclass</strong> data frame</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">head</span>(myclass, <span class="at">n =</span> <span class="dv">7</span>) <span class="co"># first 7 rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">head</span>(myclass, <span class="at">n =</span> <span class="dv">7</span>) <span class="co"># first 7 rows</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     lname        fname ID
 1    Adams         John  2
@@ -425,17 +425,17 @@ Math 260 Applied Statistics
 <li>Use the <code>shuffle()</code> function from mosaic to randomly shuffle rows</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">library</span>(mosaic)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">library</span>(mosaic)</span>
 <span id="cb3-2"><a href=""></a>newlist <span class="ot">&lt;-</span> <span class="fu">shuffle</span>(myclass)</span>
-<span id="cb3-3"><a href=""></a><span class="fu">head</span>(newlist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-3"><a href=""></a><span class="fu">head</span>(newlist)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       lname        fname ID orig.id
-22 Jefferson       Thomas  3      22
-31     Obama       Barack 44      31
-3     Arthur Chester Alan 21       3
-30     Nixon   Richard M. 37      30
-12  Fillmore      Millard 13      12
-4   Buchanan        James 15       4</code></pre>
+<pre><code>      lname     fname ID orig.id
+28 McKinley   William 25      28
+31    Obama    Barack 44      31
+34   Reagan    Ronald 40      34
+25  Kennedy   John F. 35      25
+6      Bush George W. 43       6
+9   Clinton      Bill 42       9</code></pre>
 </div>
 </div>
 </section>
@@ -446,12 +446,12 @@ Math 260 Applied Statistics
 </li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="co"># Group 1</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="co"># Group 1</span></span>
 <span id="cb5-2"><a href=""></a><span class="fu">slice</span>(newlist, <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>)</span>
 <span id="cb5-3"><a href=""></a><span class="co"># Group 2</span></span>
 <span id="cb5-4"><a href=""></a><span class="fu">slice</span>(newlist, <span class="dv">16</span><span class="sc">:</span><span class="dv">30</span>)</span>
 <span id="cb5-5"><a href=""></a><span class="co"># Group 3</span></span>
-<span id="cb5-6"><a href=""></a><span class="fu">slice</span>(newlist, <span class="dv">31</span><span class="sc">:</span><span class="dv">45</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-6"><a href=""></a><span class="fu">slice</span>(newlist, <span class="dv">31</span><span class="sc">:</span><span class="dv">45</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section></section>
@@ -739,13 +739,14 @@ Math 260 Applied Statistics
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
