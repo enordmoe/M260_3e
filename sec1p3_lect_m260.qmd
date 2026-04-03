@@ -112,6 +112,40 @@ Eliminate confounding factors by **randomization**
 -   Randomly assign values of the explanatory variable in an experiment.
 
 
+## {.smaller}
+### Three Famous Experiments 
+
+:::  {.columns}
+
+::: {.column width="33%"}
+### 💉 Salk Polio Trial (1954)
+**1.8M children** · randomized · double-blind
+
+- 80–90% effective against paralytic polio  
+- Church bells rang on announcement day
+:::
+
+::: {.column width="33%"}
+### 💊 Physicians' Health Study (1988)
+**22,071 male doctors** · randomized
+
+- 44% fewer heart attacks in aspirin group
+- Stopped *early* — too effective to continue  
+- No mortality benefit; "take daily aspirin" advice later reversed
+:::
+
+::: {.column width="33%"}
+### 🎵 Mozart Effect (1993)
+**36 students** · published in *Nature*
+
+- Spatial reasoning boost lasted ~15 minutes  
+- Spawned Baby Einstein industry and state legislation  
+- Any enjoyable music works
+:::
+
+:::
+
+
 ## Randomized Experiment
 
 -   The different levels of the explanatory variable are known as **treatments**
