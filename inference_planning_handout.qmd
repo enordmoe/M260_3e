@@ -1,0 +1,165 @@
+---
+title: "Two Questions to Answer Before You Choose an Analysis"
+subtitle: "Poster Project &middot; Applied Statistics"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 2
+    code-copy: true
+    embed-resources: true
+---
+
+Your project must include inference --- confidence intervals and hypothesis
+tests --- not just description. But inference only means something when you can
+say *who or what you are inferring about* and your variables fit the tools we
+have. Work through both questions below with your group, and be ready to defend
+your answers at the poster plan meeting.
+
+## Question 1: What population does your inference describe?
+
+Look at your data and ask: what does one row represent, and how did the rows
+get into this dataset? You are probably in one of three situations.
+
+-   **A sample from something larger.** The rows were sampled from a bigger
+    group (2,500 of 32,000 marathon finishers). Your CI and test have their
+    usual meaning --- but state the population precisely. Is it all
+    marathoners, or only runners fast enough to qualify for Boston?
+
+-   **A self-selected or filtered group.** Rows had to opt in or pass a cutoff
+    to appear (salaries people chose to report; games that sold at least
+    100,000 copies). Inference is still legitimate, but the population is
+    narrower than the topic suggests. Name the group your data can actually
+    speak for, and say who is missing.
+
+-   **Essentially the whole population.** You have every US county or every
+    country. There is no larger group to generalize to, so what would a
+    confidence interval even estimate? Here a randomization test is often the
+    more meaningful tool: it asks whether the association you see is stronger
+    than what random chance alone would produce. If you use one this way,
+    interpret it that way --- not as a statement about sampling.
+
+Whichever situation you are in, your Methodology section should say so in one
+or two honest sentences. Vague claims ("we can generalize to all movies") will
+cost you more than a candid limitation will.
+
+## Question 2: Do your variables fit the tools we have?
+
+Our inference procedures compare *two* means or *two* proportions, or examine
+one mean, one proportion, or one correlation. Many categorical variables have
+five, ten, or thirty categories. You cannot feed a 12-level variable into a
+two-group comparison --- but you can reshape the question. Legitimate moves (R
+templates for each are in the next section):
+
+-   **Choose two groups to compare** and subset to them. Pick the pair for a
+    substantive reason, decided *before* you look at the results --- not
+    because they gave the most exciting difference.
+
+-   **Collapse categories into two meaningful ones.** One level vs. all others
+    ("Nintendo vs. other publishers"), or a sensible grouping ("Europe vs.
+    elsewhere"). Define the grouping in your methodology.
+
+-   **Create a binary variable.** From a category ("is the genre Action?") or
+    from a quantitative variable ("profitable: gross exceeds budget?"). A
+    defensible cutoff, stated in advance, turns many questions into a
+    proportion.
+
+**One warning:** do not run comparisons for every possible pair of categories
+and report the one with the smallest p-value. Testing many pairs practically
+guarantees that something looks "significant" by chance alone. Choose your
+comparison first; then test it.
+
+## R templates: reshaping a variable for two-group inference
+
+Replace the `CAPITALIZED` placeholders with names from your own dataset. Keep
+the quotation marks.
+
+After `library(mosaic)`, the verbs `filter()` and `mutate()` below are ready to
+use. Each template changes your data and saves the result with `<-` ; nothing
+changes unless you save it. Category names inside quotes must match your data
+exactly --- spelling, capitals, and spaces. When in doubt, run
+`tally(~ CATVAR, data = MYDATA)` first to see the exact names and counts.
+
+### 1 &middot; Keep only two groups
+
+``` r
+MYDATA2 <- MYDATA |>
+  filter(CATVAR %in% c("Level A", "Level B"))
+```
+
+``` r
+games2 <- video_games |>
+  filter(genre %in% c("Action", "Sports"))
+```
+
+*Example: keep only Action and Sports games, saved as a new dataset `games2`.*
+
+### 2 &middot; One category vs. everything else
+
+``` r
+MYDATA <- MYDATA |>
+  mutate(NEWVAR = ifelse(CATVAR == "Level A", "Level A", "Other"))
+```
+
+``` r
+video_games <- video_games |>
+  mutate(maker = ifelse(publisher == "Nintendo", "Nintendo", "Other"))
+```
+
+*Example: a new variable `maker` with exactly two values, Nintendo and Other.*
+
+### 3 &middot; Collapse several categories into two groups
+
+``` r
+MYDATA <- MYDATA |>
+  mutate(NEWVAR = ifelse(CATVAR %in% c("Level A", "Level B"),
+                         "Group 1", "Group 2"))
+```
+
+``` r
+hollywood <- hollywood |>
+  mutate(audience = ifelse(rating %in% c("G", "PG"),
+                           "Family", "Mature"))
+```
+
+*Example: G and PG films become Family; PG-13 and R become Mature.*
+
+### 4 &middot; Binary variable from a quantitative variable
+
+``` r
+MYDATA <- MYDATA |>
+  mutate(NEWVAR = ifelse(QUANTVAR > CUTOFF, "High", "Low"))
+```
+
+``` r
+hollywood <- hollywood |>
+  mutate(profitable = ifelse(worldwide_gross > budget, "Yes", "No"))
+```
+
+*Example: the cutoff can be another variable, as here, or a number you chose in
+advance.*
+
+### Check your work, then use the new variable
+
+``` r
+tally(~ NEWVAR, data = MYDATA)
+```
+
+The tally should show exactly two groups with sensible counts --- if you see a
+third group or a count of zero, a name inside your quotes doesn't match the
+data. Once it checks out, use the new variable anywhere the original would go:
+in `gf_boxplot()`, in StatKey, or in a two-group interval or test. Remember to
+state in your methodology how and why you defined the grouping.
+
+## Before the poster plan meeting
+
+For each inference you plan: (1) name the population or chance process it
+describes, (2) name the parameter (a mean? a difference in proportions? a
+correlation?), and (3) explain how you reduced any many-category variable to a
+form our tools handle. If you can answer all three, you have an analysis plan.
+
+------------------------------------------------------------------------
+
+::: {style="font-size: 0.85em; color: #595959;"}
+E. Nordmoe &middot; Math 260 &middot; Kalamazoo College
+:::
