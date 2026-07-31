@@ -1,0 +1,677 @@
+---
+title: "R Commands for Applied Statistics"
+subtitle: "Math 260"
+format: 
+  html:
+    toc: true
+    toc-depth: 2
+    toc-title: "Jump to"
+    theme: flatly
+    embed-resources: true
+    code-copy: true
+execute:
+  warning: false
+  message: false
+editor: visual
+---
+
+```{r}
+#| label: setup
+#| include: false
+knitr::opts_chunk$set(echo = TRUE)
+options(digits = 4)
+library(mosaic)
+library(Lock5Data)
+set.seed(123)
+```
+
+```{=html}
+<div id="filter-bar">
+  <input type="text" id="cmd-filter" placeholder="Type to search — try histogram, average, spread, boxplot…" autocomplete="off" spellcheck="false">
+  <span id="filter-count"></span>
+</div>
+<p id="filter-empty">Nothing matches that. Try a shorter word, or clear the box to see everything.</p>
+<style>
+:root {
+  --k-green: #5A7A5E;
+  --k-green-dark: #46603F;
+  --k-tint: #E8F0E9;
+}
+h1.title { color: var(--k-green); }
+.subtitle { color: #7b8a8b; font-weight: 400; }
+#title-block-header { 
+  border-bottom: 3px solid var(--k-green); 
+  padding-bottom: 0.5rem; margin-bottom: 0.5rem;
+}
+main h1 {
+  color: var(--k-green); font-size: 1.5rem;
+  border-bottom: 2px solid var(--k-green);
+  padding-bottom: 0.2rem; margin-top: 2.5rem;
+}
+main h2 { color: var(--k-green-dark); font-size: 1.15rem; margin-top: 1.6rem; }
+div.sourceCode { border-left: 3px solid var(--k-green); }
+.callout-note { 
+  background: var(--k-tint) !important; 
+  border-left-color: var(--k-green) !important; 
+}
+#filter-bar {
+  position: sticky; top: 0; z-index: 50;
+  background: #fff; padding: 0.75rem 0;
+  border-bottom: 2px solid var(--k-green); margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 0.75rem;
+}
+#cmd-filter {
+  flex: 1; font-size: 1rem; padding: 0.55rem 0.8rem;
+  border: 1px solid #b7bfc6; border-radius: 4px;
+  font-family: inherit; color: #2c3e50;
+}
+#cmd-filter:focus {
+  outline: 2px solid var(--k-green); outline-offset: 1px; border-color: transparent;
+}
+#filter-count { font-size: 0.85rem; color: var(--k-green-dark); white-space: nowrap; }
+#filter-empty { display: none; color: #7b8a8b; font-style: italic; }
+.kw { display: none; }
+@media print {
+  #filter-bar, #filter-empty, #TOC, .toc-active { display: none !important; }
+  section.level2 { break-inside: avoid; }
+}
+</style>
+```
+
+::: callout-note
+## How to read a command
+
+Almost everything below follows one pattern:
+
+```         
+goal(y ~ x, data = mydata)
+```
+
+The `~` is read **"described by"** or **"depends on"**. When there is only one variable, leave the left side off: `~ x`.
+
+For plots, the left side of `~` is the **vertical** axis and the right side is the **horizontal** axis. Remember that **x** is the e**X**planatory variable, so it goes on the right.
+
+Use `|>` to send a plot into another plotting command. You will see `%>%` in older code and in answers from AI assistants — it does the same thing, but use `|>` in this course.
+:::
+
+# Getting started
+
+## Load the packages you need
+
+Put this at the top of every Quarto file. Without it, R will not know what `favstats()` or `gf_histogram()` mean.
+
+```{r}
+#| eval: false
+library(mosaic)
+library(Lock5Data)
+```
+
+[packages, library, load, mosaic, ggformula, start]{.kw}
+
+## Get help on a command
+
+```{r}
+#| eval: false
+?favstats
+help(gf_histogram)
+```
+
+[help, documentation, arguments, options, stuck]{.kw}
+
+## See how big a dataset is
+
+```{r}
+dim(StudentSurvey)
+```
+
+The first number is rows (cases), the second is columns (variables). Use `nrow()` if you want only the row count.
+
+```{r}
+nrow(StudentSurvey)
+```
+
+[dimensions, size, how many rows, how many columns, cases, dim, nrow]{.kw}
+
+## See what is in a dataset
+
+```{r}
+names(StudentSurvey)
+```
+
+```{r}
+head(StudentSurvey)
+```
+
+`View(StudentSurvey)` opens a spreadsheet view. Type it at the console — do not put it in a code chunk.
+
+[variables, columns, look at data, dataset, view, head, names]{.kw}
+
+# One categorical variable
+
+## Count how many are in each category
+
+```{r}
+tally(~ Award, data = StudentSurvey)
+```
+
+[table, frequency, counts, how many]{.kw}
+
+## Show percents or proportions instead of counts
+
+```{r}
+tally(~ Award, data = StudentSurvey, 
+      format = "percent")
+```
+
+```{r}
+tally(~ Award, data = StudentSurvey, 
+      format = "proportion")
+```
+
+Add `margins = TRUE` to include a total row.
+
+[percent, proportion, relative frequency, share]{.kw}
+
+## Bar chart of counts
+
+```{r}
+gf_bar(~ Award, data = StudentSurvey)
+```
+
+[bar graph, bar chart, categorical plot]{.kw}
+
+## Bar chart of proportions
+
+```{r}
+gf_props(~ Award, data = StudentSurvey, 
+         fill = "forestgreen")
+```
+
+Use `gf_props()` for proportions rather than modifying `gf_bar()`.
+
+[proportion bar chart, percent bar graph]{.kw}
+
+## Turn a bar chart sideways
+
+```{r}
+gf_bar(~ Award, data = StudentSurvey) |>
+  gf_refine(coord_flip())
+```
+
+Long category names are much easier to read this way.
+
+[horizontal, flip, sideways, rotate, coord_flip, long labels]{.kw}
+
+# Two categorical variables
+
+## Two-way table
+
+```{r}
+tally(~ Award + Smoke, data = StudentSurvey)
+```
+
+[cross tabulation, contingency table, two way, crosstab]{.kw}
+
+## Conditional proportions
+
+The `|` means "for each value of". This gives proportions **within** each smoking group.
+
+```{r}
+tally(~ Award | Smoke, data = StudentSurvey, 
+      format = "proportion")
+```
+
+[conditional, given, within group, row percent, column percent]{.kw}
+
+## Grouped bar chart
+
+```{r}
+gf_props(~ Sex, fill = ~ Award, 
+         position = "dodge", 
+         data = StudentSurvey)
+```
+
+[side by side, grouped bars, compare groups, dodge]{.kw}
+
+## Segmented bar chart
+
+```{r}
+gf_props(~ Sex, fill = ~ Award, 
+         position = "fill", 
+         data = StudentSurvey)
+```
+
+`position = "fill"` makes every bar the same height so you compare proportions rather than counts. Use `"stack"` if you want the raw counts stacked instead.
+
+[stacked, segmented, fill, stack, proportions by group]{.kw}
+
+# One quantitative variable
+
+## All the summary statistics at once
+
+```{r}
+favstats(~ Height, data = StudentSurvey)
+```
+
+This gives the minimum, quartiles, median, maximum, mean, standard deviation, sample size, and number of missing values. The IQR is not shown — subtract Q1 from Q3.
+
+[mean, median, average, standard deviation, sd, quartiles, five number summary, min, max, center, spread, typical, IQR, missing]{.kw}
+
+## One statistic at a time
+
+```{r}
+#| eval: false
+mean(~ Height, data = StudentSurvey)
+median(~ Height, data = StudentSurvey)
+sd(~ Height, data = StudentSurvey)
+IQR(~ Height, data = StudentSurvey)
+quantile(~ Height, data = StudentSurvey)
+```
+
+[mean, median, sd, IQR, quantile, percentile, single statistic]{.kw}
+
+## Histogram
+
+```{r}
+gf_histogram(~ Height, data = StudentSurvey)
+```
+
+[shape, distribution, skew, symmetric, plot one variable]{.kw}
+
+## Histogram with a bin width you choose
+
+```{r}
+gf_histogram(~ Height, data = StudentSurvey, 
+             binwidth = 2)
+```
+
+R picks a bin width if you do not. Changing it can change what the shape appears to be, so it is worth trying more than one.
+
+[binwidth, bins, bars, width, resolution]{.kw}
+
+## Dotplot
+
+```{r}
+gf_dotplot(~ Height, data = StudentSurvey, 
+           dotsize = 0.25)
+```
+
+Every dot is one observation, which makes this a good choice for small datasets. Adjust `dotsize` until the dots look reasonable — the default is often far too large.
+
+[dot plot, small data, individual values, dotsize]{.kw}
+
+## Boxplot of one variable
+
+```{r}
+gf_boxplot(~ Height, data = StudentSurvey) |>
+  gf_refine(coord_flip())
+```
+
+[box plot, five number summary, outliers, whiskers, horizontal]{.kw}
+
+# Comparing groups
+
+## Summary statistics for each group
+
+```{r}
+favstats(TV ~ Sex, data = StudentSurvey)
+```
+
+Read `TV ~ Sex` as "TV hours described by sex".
+
+[by group, compare, split, grouped statistics, two groups]{.kw}
+
+## Side-by-side boxplots (horizontal)
+
+```{r}
+gf_boxplot(Sex ~ TV, data = StudentSurvey)
+```
+
+**Why the categorical variable comes first here.** The left side of `~` is always the vertical axis. In a horizontal boxplot the groups run down the side, so the categorical variable is the vertical-axis variable and goes on the left. Horizontal is the better default: group labels stay readable, and comparing centers left-to-right is easier than comparing them up-and-down.
+
+Note that this is the opposite order from `favstats(TV ~ Sex, ...)`, where the formula describes a relationship rather than a pair of axes.
+
+[compare groups, box plot by group, horizontal, side by side, which variable first]{.kw}
+
+## Stacked histograms for comparing groups
+
+```{r}
+gf_histogram(~ Height | Sex ~ ., data = StudentSurvey, 
+             binwidth = 2)
+```
+
+The `| Sex ~ .` puts each group in its own panel, stacked **vertically**. Stacking is what makes the comparison work: the panels share one horizontal scale, so centers and spreads line up directly above one another. Panels placed side by side do not let you do that.
+
+**Why the dot?** The part after `|` is a small formula describing the *layout* of the panels — read it as **rows \~ columns**. Putting `Sex` on the left makes one row per group, so the panels stack. The `.` is a placeholder meaning "nothing here": there is no second variable splitting the columns, but the layout formula still needs both sides. Writing `. ~ Sex` would arrange the groups side by side in columns instead, and plain `| Sex` lets R choose the arrangement for you.
+
+Setting `binwidth` matters here too — without it the panels may not use the same bins.
+
+[faceted, panels, separate plots, vertical, stacked, by group histogram, conditioning, compare distributions, dot, layout, rows, columns]{.kw}
+
+# Two quantitative variables
+
+## Scatterplot
+
+```{r}
+gf_point(Weight ~ Height, data = StudentSurvey)
+```
+
+Read `Weight ~ Height` as "weight as a function of height". The response goes on the left; **x** is the e**X**planatory variable and goes on the right.
+
+[scatter plot, association, relationship, x y plot, explanatory, response]{.kw}
+
+## Scatterplot with a regression line
+
+```{r}
+gf_point(Weight ~ Height, data = StudentSurvey) |>
+  gf_smooth(method = "lm")
+```
+
+Use `gf_smooth(method = "lm")` for a straight line. Leaving out `method` gives a curve that follows the data instead.
+
+[regression line, line of best fit, trend line, add line, lm]{.kw}
+
+## Color the points by a categorical variable
+
+```{r}
+gf_point(Weight ~ Height, color = ~ Sex, 
+         data = StudentSurvey)
+```
+
+Note the `~` in front of `Sex`. Without it, R looks for a color named "Sex".
+
+[color by group, third variable, groups on scatterplot]{.kw}
+
+## Correlation
+
+```{r}
+cor(Weight ~ Height, data = StudentSurvey, 
+    use = "complete.obs")
+```
+
+Without `use = "complete.obs"` this returns `NA`, because some students did not report both height and weight. That argument tells R to use only the cases that have both values. Check the `missing` column of `favstats()` if you are not sure whether a variable has missing values.
+
+[correlation, r, strength, linear association, NA, missing, complete.obs]{.kw}
+
+# Making a plot presentable
+
+## Label the axes and add a title
+
+```{r}
+gf_point(Weight ~ Height, data = StudentSurvey) |>
+  gf_labs(title = "Weight versus height",
+          x = "Height (inches)",
+          y = "Weight (pounds)")
+```
+
+This works with any `gf_` plot. Variable names are rarely good axis labels — this is where units belong. Anything you hand in or put on a poster should have real labels.
+
+[axis labels, title, units, caption, gf_labs, label axes, presentable]{.kw}
+
+## Label one or two particular points
+
+Sometimes one point is obviously unusual and you want to say what it is — the classic example is the Palm Beach County point on a plot of Florida's 2000 presidential vote. Read the point's position off the plot, then place text beside it:
+
+```{r}
+gf_point(Weight ~ Height, data = StudentSurvey) |>
+  gf_refine(annotate("text", 
+                     x = 78, y = 220, 
+                     label = "unusually tall"))
+```
+
+`x` and `y` are the coordinates where the **text** goes, in the units of your axes. Start with the point's own position, then shift one of them until the label sits beside the point instead of on top of it.
+
+`annotate()` comes from ggplot2, so it has to be wrapped in `gf_refine()` to work inside a `|>` chain — the same wrapper used for `coord_flip()`.
+
+To draw a circle around the point as well, add a second annotation:
+
+```{r}
+#| eval: false
+gf_point(Weight ~ Height, data = StudentSurvey) |>
+  gf_refine(annotate("text", 
+                     x = 78, y = 220, 
+                     label = "unusually tall"),
+            annotate("point", 
+                     x = 79, y = 200, 
+                     shape = 1, size = 6, color = "red"))
+```
+
+[label a point, annotate, text on plot, name a point, identify, which point is that, arrow, circle, mark, palm beach]{.kw}
+
+# Regression
+
+## Fit a model and see the coefficients
+
+```{r}
+mymodel <- lm(Weight ~ Height, data = StudentSurvey)
+mymodel
+```
+
+Printing the model object by name gives you the intercept and slope. That is all you need in this course.
+
+[lm, linear model, slope, intercept, fit, equation]{.kw}
+
+## Predicted values
+
+```{r}
+predict(mymodel)[1:5]
+```
+
+The `[1:5]` shows just the first five. Leave it off to see all of them.
+
+[prediction, fitted values, y hat, predicted]{.kw}
+
+## Residuals
+
+```{r}
+resid(mymodel)[1:5]
+```
+
+[residual, error, leftover, observed minus predicted]{.kw}
+
+# Collecting data
+
+## Take a random sample
+
+```{r}
+#| eval: false
+sample(StudentSurvey, 25)
+```
+
+[random sample, sampling, select cases, survey]{.kw}
+
+## Randomly assign subjects to treatment groups
+
+First shuffle the roster into a random order:
+
+```{r}
+myclass <- data.frame(
+  student = c("Ava", "Ben", "Cara", 
+              "Dan", "Eve", "Finn", 
+              "Gia", "Hal", "Ivy")
+)
+
+newlist <- shuffle(myclass)
+head(newlist)
+```
+
+Then take the first third, the second third, and so on:
+
+```{r}
+# Group 1
+slice(newlist, 1:3)
+```
+
+```{r}
+# Group 2
+slice(newlist, 4:6)
+```
+
+```{r}
+# Group 3
+slice(newlist, 7:9)
+```
+
+The shuffle is what makes the assignment random — the slicing afterward is just bookkeeping. Putting `set.seed(123)` before `shuffle()` makes the result repeatable, which is useful when you want the same groups every time you render.
+
+[random assignment, experiment, treatment groups, shuffle, slice, randomize, set.seed, experimental design]{.kw}
+
+## Send data to StatKey
+
+StatKey needs a CSV file. This writes one into your project folder, which you then upload.
+
+```{r}
+#| eval: false
+write.csv(StudentSurvey, "mydata.csv", 
+          row.names = FALSE)
+```
+
+[statkey, csv, export, upload, bootstrap, randomization test, save data]{.kw}
+
+# Inference
+
+## Confidence interval and test for one mean
+
+```{r}
+t.test(~ Height, data = StudentSurvey)
+```
+
+[t test, confidence interval, one mean, CI, p-value]{.kw}
+
+## Comparing two means
+
+```{r}
+t.test(TV ~ Sex, data = StudentSurvey)
+```
+
+If you have subsetted the data first with `filter()`, add `droplevels()` before running this or R may complain about groups that are no longer there.
+
+[two sample t test, difference in means, compare two groups, droplevels]{.kw}
+
+# Working with your data
+
+## Keep only some rows
+
+```{r}
+smokers <- filter(StudentSurvey, Smoke == "Yes")
+nrow(smokers)
+```
+
+Use `==` for "is equal to", not a single `=`.
+
+[filter, subset, select rows, only, exclude, condition]{.kw}
+
+## Create a new variable
+
+```{r}
+#| eval: false
+StudentSurvey <- mutate(StudentSurvey, 
+                        TVperDay = TV / 7)
+```
+
+[mutate, new column, compute, transform, add variable]{.kw}
+
+## Basic calculation
+
+R works as a calculator at the console: `+ - * / ^ ( )` along with `log()`, `exp()`, and `sqrt()`.
+
+[calculator, arithmetic, square root, log, exponent]{.kw}
+
+# When something goes wrong
+
+## "could not find function"
+
+You did not load the package. Run `library(mosaic)` and try again. In a Quarto file, that line has to be in a chunk **above** the one you are running.
+
+[error, could not find function, package not loaded, library]{.kw}
+
+## "object 'Height' not found"
+
+You left out `data =`. R looked for a loose variable named `Height` instead of a column in your dataset.
+
+[error, object not found, data argument, variable name]{.kw}
+
+## "unexpected symbol" or "unexpected ')'"
+
+Usually a missing comma between arguments, or an unmatched parenthesis or quotation mark.
+
+[error, syntax, unexpected, comma, parenthesis, typo]{.kw}
+
+## The answer came out as `NA`
+
+Your variable has missing values, and the command refused to guess what to do about them. For `cor()`, add `use = "complete.obs"`. For `mean()` and similar, add `na.rm = TRUE`.
+
+[NA, missing, not available, na.rm, complete.obs, no answer]{.kw}
+
+## The console shows `+` and will not respond
+
+R is waiting for you to finish a command. Press **Esc** to cancel and start over.
+
+[stuck, plus sign, console, hanging, escape]{.kw}
+
+## No plot appeared
+
+Check whether you saved it to a name — `p <- gf_histogram(...)` stores the plot instead of showing it. Type `p` to display it.
+
+[plot missing, nothing happened, no output, blank]{.kw}
+
+## A warning about rows being removed
+
+Your variable has missing values. That is usually fine — it just means those cases were left out of the plot.
+
+[warning, removed rows, missing values, incomplete cases]{.kw}
+
+```{=html}
+<script>
+(function () {
+  var box = document.getElementById('cmd-filter');
+  var count = document.getElementById('filter-count');
+  var empty = document.getElementById('filter-empty');
+  var entries = Array.prototype.slice.call(document.querySelectorAll('section.level2'));
+  var groups = Array.prototype.slice.call(document.querySelectorAll('section.level1'));
+  var toc = document.getElementById('TOC');
+
+  function apply() {
+    var q = box.value.toLowerCase().trim();
+    var shown = 0;
+
+    entries.forEach(function (e) {
+      var hit = q === '' || e.textContent.toLowerCase().indexOf(q) !== -1;
+      e.style.display = hit ? '' : 'none';
+      if (hit) shown++;
+    });
+
+    groups.forEach(function (g) {
+      var kids = Array.prototype.slice.call(g.querySelectorAll('section.level2'));
+      var any = kids.length === 0
+        ? (q === '' || g.textContent.toLowerCase().indexOf(q) !== -1)
+        : kids.some(function (k) { return k.style.display !== 'none'; });
+      g.style.display = any ? '' : 'none';
+    });
+
+    if (q === '') {
+      count.textContent = '';
+      empty.style.display = 'none';
+      if (toc) toc.style.display = '';
+    } else {
+      count.textContent = shown + (shown === 1 ? ' match' : ' matches');
+      empty.style.display = shown === 0 ? 'block' : 'none';
+      if (toc) toc.style.display = 'none';
+    }
+  }
+
+  box.addEventListener('input', apply);
+
+  box.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { box.value = ''; apply(); box.blur(); }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === '/' && document.activeElement !== box) {
+      e.preventDefault();
+      box.focus();
+    }
+  });
+})();
+</script>
+```
