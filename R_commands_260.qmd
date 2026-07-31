@@ -202,6 +202,20 @@ Long category names are much easier to read this way.
 
 [horizontal, flip, sideways, rotate, coord_flip, long labels]{.kw}
 
+## When the categories are stored as numbers
+
+Some variables are categories even though they are recorded as `0` and `1`, or as `1, 2, 3`. `tally()` counts them correctly either way, but **plots and grouped summaries** treat them as quantitative. Wrap the variable in `factor()`:
+
+```{r}
+gf_bar(~ factor(Status), data = ICUAdmissions)
+```
+
+Without `factor()` the bars sit on a numbered axis, as though the codes were measurements. Wrap the variable **every time it appears** — including inside `fill =` and `color =`, and in the grouped plots later in this document.
+
+Signs you forgot: bars on a numbered axis rather than one bar per category, a boxplot with a single box instead of one per group, or a legend showing a continuous color gradient instead of separate colors.
+
+[factor, 0 1 variable, indicator, coded as numbers, numeric categorical, treat as category, as.factor, dummy, gradient legend, one box]{.kw}
+
 # Two categorical variables
 
 ## Two-way table
@@ -303,9 +317,10 @@ Every dot is one observation, which makes this a good choice for small datasets.
 ## Boxplot of one variable
 
 ```{r}
-gf_boxplot(~ Height, data = StudentSurvey) |>
-  gf_refine(coord_flip())
+gf_boxplot(~ Height, data = StudentSurvey)
 ```
+
+This is already horizontal: with nothing on the left of `~`, *Height* goes on the horizontal axis. No `coord_flip()` needed — adding one would stand the box on end. The numbers on the vertical axis are meaningless here; there is only one box.
 
 [box plot, five number summary, outliers, whiskers, horizontal]{.kw}
 
@@ -331,7 +346,9 @@ gf_boxplot(Sex ~ TV, data = StudentSurvey)
 
 Note that this is the opposite order from `favstats(TV ~ Sex, ...)`, where the formula describes a relationship rather than a pair of axes.
 
-[compare groups, box plot by group, horizontal, side by side, which variable first]{.kw}
+If your grouping variable is coded as numbers rather than words, wrap it in `factor()`: `gf_boxplot(factor(Status) ~ Systolic, data = ICUAdmissions)`.
+
+[compare groups, box plot by group, horizontal, side by side, which variable first, factor]{.kw}
 
 ## Stacked histograms for comparing groups
 
@@ -410,33 +427,38 @@ This works with any `gf_` plot. Variable names are rarely good axis labels — t
 
 ## Label one or two particular points
 
-Sometimes one point is obviously unusual and you want to say what it is — the classic example is the Palm Beach County point on a plot of Florida's 2000 presidential vote. Read the point's position off the plot, then place text beside it:
+Sometimes one point is obviously unusual and you want to say what it is — the classic example is the Palm Beach County point on a plot of Florida's 2000 presidential vote.
+
+Start by reading the point's coordinates off the plot. Those coordinates are what you annotate with:
 
 ```{r}
 gf_point(Weight ~ Height, data = StudentSurvey) |>
   gf_refine(annotate("text", 
-                     x = 78, y = 220, 
-                     label = "unusually tall"))
+                     x = 80, y = 150, 
+                     label = "unusually tall", 
+                     hjust = 1.2))
 ```
 
-`x` and `y` are the coordinates where the **text** goes, in the units of your axes. Start with the point's own position, then shift one of them until the label sits beside the point instead of on top of it.
+`x` and `y` are the point's own position. `hjust = 1.2` pushes the label to the **left** of that spot so it does not sit on top of the dot — use `hjust = -0.2` to put it on the right, or `vjust = -1` to put it above. Adjusting the justification rather than the coordinates keeps the label tied to the point it describes.
 
 `annotate()` comes from ggplot2, so it has to be wrapped in `gf_refine()` to work inside a `|>` chain — the same wrapper used for `coord_flip()`.
 
-To draw a circle around the point as well, add a second annotation:
+To circle the point as well, add a second annotation **at the same coordinates**:
 
 ```{r}
-#| eval: false
 gf_point(Weight ~ Height, data = StudentSurvey) |>
-  gf_refine(annotate("text", 
-                     x = 78, y = 220, 
-                     label = "unusually tall"),
-            annotate("point", 
-                     x = 79, y = 200, 
-                     shape = 1, size = 6, color = "red"))
+  gf_refine(annotate("point", 
+                     x = 80, y = 150, 
+                     shape = 1, size = 6, color = "red"),
+            annotate("text", 
+                     x = 80, y = 150, 
+                     label = "unusually tall", 
+                     hjust = 1.2, color = "red"))
 ```
 
-[label a point, annotate, text on plot, name a point, identify, which point is that, arrow, circle, mark, palm beach]{.kw}
+`shape = 1` is an open circle, so the original dot still shows through it.
+
+[label a point, annotate, text on plot, name a point, identify, which point is that, circle, mark, hjust, vjust, palm beach]{.kw}
 
 # Regression
 
@@ -602,6 +624,12 @@ Usually a missing comma between arguments, or an unmatched parenthesis or quotat
 Your variable has missing values, and the command refused to guess what to do about them. For `cor()`, add `use = "complete.obs"`. For `mean()` and similar, add `na.rm = TRUE`.
 
 [NA, missing, not available, na.rm, complete.obs, no answer]{.kw}
+
+## A boxplot has one box, or a color legend is a gradient
+
+Your grouping variable is stored as numbers (`0`/`1`, or `1, 2, 3`), so R is treating it as quantitative. Wrap it in `factor()` everywhere it appears, including inside `fill =` and `color =`.
+
+[factor, one box, gradient legend, categorical as number, 0 1, groups not separating]{.kw}
 
 ## The console shows `+` and will not respond
 

@@ -616,14 +616,16 @@ IQR(~ Y, data = df)</code></pre>
              binwidth = 2)</code></pre>
 <pre><code>gf_dotplot(~ Y, data = df,
            dotsize = 0.25)</code></pre>
-<pre><code>gf_boxplot(~ Y, data = df) |&gt;
-  gf_refine(coord_flip())</code></pre>
+<pre><code>gf_boxplot(~ Y, data = df)</code></pre>
+<p><em>already horizontal — no <code>coord_flip()</code></em></p>
 </section>
 <section id="comparing-groups" class="blk">
 <h3 class="anchored">Comparing groups</h3>
 <pre><code>favstats(Y ~ A, data = df)</code></pre>
 <pre><code>gf_boxplot(A ~ Y, data = df)</code></pre>
 <p><em><strong>categorical first</strong> = horizontal boxes</em></p>
+<pre><code>gf_boxplot(factor(G) ~ Y, data = df)</code></pre>
+<p><em><strong>wrap in <code>factor()</code></strong> if groups are coded <code>0</code>/<code>1</code> or <code>1,2,3</code> — every time the variable appears, including <code>fill =</code></em></p>
 <pre><code>gf_histogram(~ Y | A ~ .,
              data = df,
              binwidth = 2)</code></pre>
@@ -649,9 +651,10 @@ IQR(~ Y, data = df)</code></pre>
 <pre><code>gf_point(Y ~ X, data = df) |&gt;
   gf_refine(
     annotate(&quot;text&quot;,
-             x = 78, y = 220,
-             label = &quot;Palm Beach&quot;))</code></pre>
-<p><em>x, y = where the <strong>text</strong> goes</em></p>
+             x = 80, y = 150,
+             label = &quot;Palm Beach&quot;,
+             hjust = 1.2))</code></pre>
+<p><em>use the <strong>point’s own</strong> x, y; shift the label off it with <code>hjust</code> / <code>vjust</code></em></p>
 </section>
 <section id="regression" class="blk">
 <h3 class="anchored">Regression</h3>
@@ -696,13 +699,14 @@ slice(newlist, 16:30)</code></pre>
 <p><strong>object ‘Y’ not found</strong> — you left out <code>data =</code></p>
 <p><strong>unexpected symbol</strong> — missing comma or parenthesis</p>
 <p><strong>answer is <code>NA</code></strong> — missing values; add <code>use = &quot;complete.obs&quot;</code> or <code>na.rm = TRUE</code></p>
+<p><strong>boxplot has one box, or legend is a color gradient</strong> — grouping variable coded as numbers; wrap in <code>factor()</code></p>
 <p><strong>console stuck on <code>+</code></strong> — press <strong>Esc</strong></p>
 <p><strong>no plot appeared</strong> — you saved it to a name; type the name</p>
 </section>
 </div>
 <footer class="card-foot">
   <span>Math 260 · Applied Statistics · Kalamazoo College</span>
-  <span><a href="https://heroic-horse-92e142.netlify.app/R_commands_260">Full searchable version</a></span>
+  <span><a href="https://heroic-horse-92e142.netlify.app/r_commands_260">Full searchable version</a></span>
 </footer>
 
 <script id="quarto-html-after-body" type="application/javascript">

@@ -210,9 +210,10 @@ gf_dotplot(~ Y, data = df,
 ```
 
 ```
-gf_boxplot(~ Y, data = df) |>
-  gf_refine(coord_flip())
+gf_boxplot(~ Y, data = df)
 ```
+
+*already horizontal — no `coord_flip()`*
 :::
 
 ::: blk
@@ -227,6 +228,12 @@ gf_boxplot(A ~ Y, data = df)
 ```
 
 ***categorical first** = horizontal boxes*
+
+```
+gf_boxplot(factor(G) ~ Y, data = df)
+```
+
+***wrap in `factor()`** if groups are coded `0`/`1` or `1,2,3` — every time the variable appears, including `fill =`*
 
 ```
 gf_histogram(~ Y | A ~ .,
@@ -276,11 +283,12 @@ gf_point(Y ~ X, data = df) |>
 gf_point(Y ~ X, data = df) |>
   gf_refine(
     annotate("text",
-             x = 78, y = 220,
-             label = "Palm Beach"))
+             x = 80, y = 150,
+             label = "Palm Beach",
+             hjust = 1.2))
 ```
 
-*x, y = where the **text** goes*
+*use the **point's own** x, y; shift the label off it with `hjust` / `vjust`*
 :::
 
 ::: blk
@@ -377,6 +385,8 @@ droplevels(df)
 
 **answer is `NA`** — missing values; add `use = "complete.obs"` or `na.rm = TRUE`
 
+**boxplot has one box, or legend is a color gradient** — grouping variable coded as numbers; wrap in `factor()`
+
 **console stuck on `+`** — press **Esc**
 
 **no plot appeared** — you saved it to a name; type the name
@@ -386,6 +396,6 @@ droplevels(df)
 ```{=html}
 <footer class="card-foot">
   <span>Math 260 · Applied Statistics · Kalamazoo College</span>
-  <span><a href="https://heroic-horse-92e142.netlify.app/R_commands_260">Full searchable version</a></span>
+  <span><a href="https://heroic-horse-92e142.netlify.app/r_commands_260">Full searchable version</a></span>
 </footer>
 ```
