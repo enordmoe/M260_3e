@@ -1,0 +1,391 @@
+---
+title: "R Commands for Applied Statistics"
+subtitle: "Math 260"
+format:
+  html:
+    embed-resources: true
+    toc: false
+    theme: none
+---
+
+```{=html}
+<style>
+:root {
+  --green: #5A7A5E;
+  --green-dark: #46603F;
+  --tint: #E8F0E9;
+  --ink: #23282a;
+  --muted: #6b7573;
+}
+
+@page { size: letter portrait; margin: 0.4in; }
+
+body {
+  font-family: "Lato", "Calibri", "Helvetica Neue", Arial, sans-serif;
+  font-size: 8.2pt;
+  line-height: 1.3;
+  color: var(--ink);
+  margin: 0 auto;
+  padding: 0.4in;
+  max-width: 8.5in;
+  background: #fff;
+}
+
+header#title-block-header {
+  border-bottom: 2.5pt solid var(--green);
+  padding-bottom: 4pt;
+  margin-bottom: 8pt;
+}
+h1.title { font-size: 14pt; margin: 0; color: var(--green); font-weight: 700; }
+p.subtitle { font-size: 8pt; color: var(--muted); margin: 1pt 0 0; }
+
+/* the formula reminder at the top */
+.spine {
+  background: var(--tint);
+  border-left: 3pt solid var(--green);
+  padding: 5pt 8pt;
+  margin-bottom: 8pt;
+  font-size: 8pt;
+}
+.spine strong { color: var(--green-dark); }
+
+/* three-column body */
+.cols { column-count: 3; column-gap: 14pt; }
+.blk  { break-inside: avoid; margin-bottom: 7pt; }
+
+/* block headings */
+.blk h3 {
+  font-size: 8pt;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+  background: var(--green);
+  margin: 0 0 3pt;
+  padding: 1.5pt 5pt;
+  border-radius: 2pt;
+  font-weight: 700;
+}
+
+/* code blocks: tight, no chrome */
+.blk pre {
+  margin: 0 0 2pt;
+  padding: 0;
+  background: none;
+  border: none;
+  white-space: pre;
+  overflow: visible;
+}
+.blk pre code,
+.blk code {
+  font-family: "SF Mono", "Consolas", "DejaVu Sans Mono", monospace;
+  font-size: 8pt;
+  color: var(--ink);
+  background: none;
+  padding: 0;
+}
+.blk p { margin: 0 0 4pt; color: var(--muted); font-style: italic; }
+.blk p strong { color: var(--green-dark); font-style: normal; }
+
+footer.card-foot {
+  margin-top: 6pt; padding-top: 4pt;
+  border-top: 1pt solid var(--green);
+  font-size: 7.2pt; color: var(--muted);
+  display: flex; justify-content: space-between;
+}
+
+footer.card-foot a { color: var(--green-dark); text-decoration: underline; }
+
+@media screen {
+  body { box-shadow: 0 0 14px rgba(0,0,0,.12); margin: 14px auto; }
+}
+</style>
+```
+
+::: spine
+**Everything follows one pattern:** `goal(y ~ x, data = mydata)` — read `~` as **"described by."** In plots the left of `~` is the **vertical** axis, the right is the **horizontal** axis (**x** = e**X**planatory). One variable only? Drop the left side: `~ x`. Chain plot layers with `|>`, never `%>%`.
+:::
+
+::: cols
+::: blk
+### Setup & first look
+
+```
+library(mosaic)
+library(Lock5Data)
+```
+
+```
+?favstats
+```
+
+*help on any command*
+
+```
+dim(df)
+names(df)
+head(df)
+```
+
+*size · variable names · first rows*
+:::
+
+::: blk
+### One categorical variable
+
+```
+tally(~ A, data = df)
+```
+
+```
+tally(~ A, data = df,
+      format = "percent")
+```
+
+```
+gf_bar(~ A, data = df)
+```
+
+```
+gf_props(~ A, data = df)
+```
+
+```
+gf_bar(~ A, data = df) |>
+  gf_refine(coord_flip())
+```
+
+*sideways — for long labels*
+:::
+
+::: blk
+### Two categorical variables
+
+```
+tally(~ A + B, data = df)
+```
+
+```
+tally(~ A | B, data = df,
+      format = "proportion")
+```
+
+*`|` means "for each"*
+
+```
+gf_props(~ A, fill = ~ B,
+         position = "dodge",
+         data = df)
+```
+
+```
+gf_props(~ A, fill = ~ B,
+         position = "fill",
+         data = df)
+```
+:::
+
+::: blk
+### One quantitative variable
+
+```
+favstats(~ Y, data = df)
+```
+
+*everything at once*
+
+```
+mean(~ Y, data = df)
+sd(~ Y, data = df)
+IQR(~ Y, data = df)
+```
+
+```
+gf_histogram(~ Y, data = df,
+             binwidth = 2)
+```
+
+```
+gf_dotplot(~ Y, data = df,
+           dotsize = 0.25)
+```
+
+```
+gf_boxplot(~ Y, data = df) |>
+  gf_refine(coord_flip())
+```
+:::
+
+::: blk
+### Comparing groups
+
+```
+favstats(Y ~ A, data = df)
+```
+
+```
+gf_boxplot(A ~ Y, data = df)
+```
+
+***categorical first** = horizontal boxes*
+
+```
+gf_histogram(~ Y | A ~ .,
+             data = df,
+             binwidth = 2)
+```
+
+*layout is **rows ~ columns**; the `.` means "nothing here," so panels stack*
+:::
+
+::: blk
+### Two quantitative variables
+
+```
+gf_point(Y ~ X, data = df)
+```
+
+```
+gf_point(Y ~ X, data = df) |>
+  gf_smooth(method = "lm")
+```
+
+```
+gf_point(Y ~ X, color = ~ A,
+         data = df)
+```
+
+```
+cor(Y ~ X, data = df,
+    use = "complete.obs")
+```
+
+*`use =` needed when values are missing*
+:::
+
+::: blk
+### Making a plot presentable
+
+```
+gf_point(Y ~ X, data = df) |>
+  gf_labs(title = "...",
+          x = "... (units)",
+          y = "... (units)")
+```
+
+```
+gf_point(Y ~ X, data = df) |>
+  gf_refine(
+    annotate("text",
+             x = 78, y = 220,
+             label = "Palm Beach"))
+```
+
+*x, y = where the **text** goes*
+:::
+
+::: blk
+### Regression
+
+```
+mymodel <- lm(Y ~ X, data = df)
+mymodel
+```
+
+*intercept and slope*
+
+```
+predict(mymodel)
+resid(mymodel)
+```
+:::
+
+::: blk
+### Collecting data
+
+```
+sample(df, 25)
+```
+
+*random sample of 25 rows*
+
+```
+newlist <- shuffle(myclass)
+slice(newlist, 1:15)
+slice(newlist, 16:30)
+```
+
+*shuffle, then take thirds*
+
+```
+set.seed(123)
+```
+
+*makes random results repeatable*
+:::
+
+::: blk
+### Inference
+
+```
+t.test(~ Y, data = df)
+```
+
+*one mean*
+
+```
+t.test(Y ~ A, data = df)
+```
+
+*two means*
+
+```
+write.csv(df, "mydata.csv",
+          row.names = FALSE)
+```
+
+*then upload to StatKey*
+:::
+
+::: blk
+### Working with your data
+
+```
+filter(df, A == "Yes")
+```
+
+*note the double `==`*
+
+```
+mutate(df, new = Y / 7)
+```
+
+```
+droplevels(df)
+```
+
+*after filtering, before `t.test`*
+:::
+
+::: blk
+### When something breaks
+
+**could not find function** — run `library(mosaic)` first
+
+**object 'Y' not found** — you left out `data =`
+
+**unexpected symbol** — missing comma or parenthesis
+
+**answer is `NA`** — missing values; add `use = "complete.obs"` or `na.rm = TRUE`
+
+**console stuck on `+`** — press **Esc**
+
+**no plot appeared** — you saved it to a name; type the name
+:::
+:::
+
+```{=html}
+<footer class="card-foot">
+  <span>Math 260 · Applied Statistics · Kalamazoo College</span>
+  <span><a href="https://heroic-horse-92e142.netlify.app/R_commands_card">Full searchable version</a></span>
+</footer>
+```
