@@ -1,6 +1,6 @@
 ---
 title: "R Commands for Applied Statistics"
-subtitle: "Math 260"
+subtitle: "Math 260 · mosaic and ggformula graphcs"
 format:
   html:
     embed-resources: true
@@ -49,12 +49,19 @@ p.subtitle { font-size: 8pt; color: var(--muted); margin: 1pt 0 0; }
 }
 .spine strong { color: var(--green-dark); }
 
-/* three-column body */
-.cols { column-count: 3; column-gap: 14pt; }
+/* three-column body: explicit flex columns, not CSS multicol.
+   Safari's print engine mishandles column-count; flex prints reliably. */
+.cols { display: flex; gap: 14pt; align-items: flex-start; }
+
+/* stack on narrow screens and at high zoom (WCAG 1.4.10 reflow) */
+@media screen and (max-width: 700px) {
+  .cols { flex-direction: column; }
+}
+.col  { flex: 1 1 0; min-width: 0; }
 .blk  { break-inside: avoid; margin-bottom: 7pt; }
 
 /* block headings */
-.blk h3 {
+.blk h2 {
   font-size: 8pt;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -93,8 +100,6 @@ footer.card-foot {
   display: flex; justify-content: space-between;
 }
 
-footer.card-foot a { color: var(--green-dark); text-decoration: underline; }
-
 @media screen {
   body { box-shadow: 0 0 14px rgba(0,0,0,.12); margin: 14px auto; }
 }
@@ -103,11 +108,14 @@ footer.card-foot a { color: var(--green-dark); text-decoration: underline; }
 
 ::: spine
 **Everything follows one pattern:** `goal(y ~ x, data = mydata)` — read `~` as **"described by."** In plots the left of `~` is the **vertical** axis, the right is the **horizontal** axis (**x** = e**X**planatory). One variable only? Drop the left side: `~ x`. Chain plot layers with `|>`, never `%>%`.
+
+**Swap in your own names:** `A`/`B` = categorical, `X`/`Y` = quantitative, `df` = your dataset — e.g. `favstats(Y ~ A, data = df)` becomes `favstats(TV ~ Sex, data = StudentSurvey)`.
 :::
 
 ::: cols
+::: col
 ::: blk
-### Setup & first look
+## Setup & first look
 
 ```
 library(mosaic)
@@ -130,7 +138,7 @@ head(df)
 :::
 
 ::: blk
-### One categorical variable
+## One categorical variable
 
 ```
 tally(~ A, data = df)
@@ -158,18 +166,18 @@ gf_bar(~ A, data = df) |>
 :::
 
 ::: blk
-### Two categorical variables
+## Two categorical variables
 
 ```
 tally(~ A + B, data = df)
 ```
 
 ```
-tally(~ A | B, data = df,
+tally(A ~ B, data = df,
       format = "proportion")
 ```
 
-*`|` means "for each"*
+*proportions of A **within** each B group — same `y ~ x` order*
 
 ```
 gf_props(~ A, fill = ~ B,
@@ -185,7 +193,30 @@ gf_props(~ A, fill = ~ B,
 :::
 
 ::: blk
-### One quantitative variable
+## Working with your data
+
+```
+filter(df, A == "Yes")
+```
+
+*note the double `==`*
+
+```
+mutate(df, new = Y / 7)
+```
+
+```
+droplevels(df)
+```
+
+*after filtering, before `t.test`*
+:::
+
+:::
+
+::: col
+::: blk
+## One quantitative variable
 
 ```
 favstats(~ Y, data = df)
@@ -217,7 +248,7 @@ gf_boxplot(~ Y, data = df)
 :::
 
 ::: blk
-### Comparing groups
+## Comparing groups
 
 ```
 favstats(Y ~ A, data = df)
@@ -245,7 +276,7 @@ gf_histogram(~ Y | A ~ .,
 :::
 
 ::: blk
-### Two quantitative variables
+## Two quantitative variables
 
 ```
 gf_point(Y ~ X, data = df)
@@ -270,7 +301,26 @@ cor(Y ~ X, data = df,
 :::
 
 ::: blk
-### Making a plot presentable
+## Regression
+
+```
+mymodel <- lm(Y ~ X, data = df)
+mymodel
+```
+
+*intercept and slope*
+
+```
+predict(mymodel)
+resid(mymodel)
+```
+:::
+
+:::
+
+::: col
+::: blk
+## Making a plot presentable
 
 ```
 gf_point(Y ~ X, data = df) |>
@@ -292,23 +342,7 @@ gf_point(Y ~ X, data = df) |>
 :::
 
 ::: blk
-### Regression
-
-```
-mymodel <- lm(Y ~ X, data = df)
-mymodel
-```
-
-*intercept and slope*
-
-```
-predict(mymodel)
-resid(mymodel)
-```
-:::
-
-::: blk
-### Collecting data
+## Collecting data
 
 ```
 sample(df, 25)
@@ -332,7 +366,7 @@ set.seed(123)
 :::
 
 ::: blk
-### Inference
+## Inference
 
 ```
 t.test(~ Y, data = df)
@@ -355,27 +389,7 @@ write.csv(df, "mydata.csv",
 :::
 
 ::: blk
-### Working with your data
-
-```
-filter(df, A == "Yes")
-```
-
-*note the double `==`*
-
-```
-mutate(df, new = Y / 7)
-```
-
-```
-droplevels(df)
-```
-
-*after filtering, before `t.test`*
-:::
-
-::: blk
-### When something breaks
+## When something breaks
 
 **could not find function** — run `library(mosaic)` first
 
@@ -392,10 +406,11 @@ droplevels(df)
 **no plot appeared** — you saved it to a name; type the name
 :::
 :::
+:::
 
 ```{=html}
 <footer class="card-foot">
   <span>Math 260 · Applied Statistics · Kalamazoo College</span>
-  <span><a href="https://heroic-horse-92e142.netlify.app/r_commands_260">Full searchable version</a></span>
+    <span><a href="https://heroic-horse-92e142.netlify.app/r_commands_260">Full searchable version</a></span> 
 </footer>
 ```

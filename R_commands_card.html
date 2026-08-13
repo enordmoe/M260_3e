@@ -481,7 +481,7 @@ margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
 
 <header id="title-block-header">
 <h1 class="title">R Commands for Applied Statistics</h1>
-<p class="subtitle">Math 260</p>
+<p class="subtitle">Math 260 · mosaic and ggformula graphcs</p>
 
 </header>
 
@@ -522,10 +522,15 @@ font-size: 8pt;
 }
 .spine strong { color: var(--green-dark); }
 
-.cols { column-count: 3; column-gap: 14pt; }
+.cols { display: flex; gap: 14pt; align-items: flex-start; }
+
+@media screen and (max-width: 700px) {
+.cols { flex-direction: column; }
+}
+.col { flex: 1 1 0; min-width: 0; }
 .blk { break-inside: avoid; margin-bottom: 7pt; }
 
-.blk h3 {
+.blk h2 {
 font-size: 8pt;
 text-transform: uppercase;
 letter-spacing: 0.06em;
@@ -561,17 +566,18 @@ border-top: 1pt solid var(--green);
 font-size: 7.2pt; color: var(--muted);
 display: flex; justify-content: space-between;
 }
-footer.card-foot a { color: var(--green-dark); text-decoration: underline; }
 @media screen {
 body { box-shadow: 0 0 14px rgba(0,0,0,.12); margin: 14px auto; }
 }
 </style>
 <div class="spine">
 <p><strong>Everything follows one pattern:</strong> <code>goal(y ~ x, data = mydata)</code> — read <code>~</code> as <strong>“described by.”</strong> In plots the left of <code>~</code> is the <strong>vertical</strong> axis, the right is the <strong>horizontal</strong> axis (<strong>x</strong> = e<strong>X</strong>planatory). One variable only? Drop the left side: <code>~ x</code>. Chain plot layers with <code>|&gt;</code>, never <code>%&gt;%</code>.</p>
+<p><strong>Swap in your own names:</strong> <code>A</code>/<code>B</code> = categorical, <code>X</code>/<code>Y</code> = quantitative, <code>df</code> = your dataset — e.g. <code>favstats(Y ~ A, data = df)</code> becomes <code>favstats(TV ~ Sex, data = StudentSurvey)</code>.</p>
 </div>
 <div class="cols">
+<div class="col">
 <section id="setup-first-look" class="blk">
-<h3 class="anchored">Setup &amp; first look</h3>
+<h2 class="anchored">Setup &amp; first look</h2>
 <pre><code>library(mosaic)
 library(Lock5Data)</code></pre>
 <pre><code>?favstats</code></pre>
@@ -582,7 +588,7 @@ head(df)</code></pre>
 <p><em>size · variable names · first rows</em></p>
 </section>
 <section id="one-categorical-variable" class="blk">
-<h3 class="anchored">One categorical variable</h3>
+<h2 class="anchored">One categorical variable</h2>
 <pre><code>tally(~ A, data = df)</code></pre>
 <pre><code>tally(~ A, data = df,
       format = &quot;percent&quot;)</code></pre>
@@ -593,11 +599,11 @@ head(df)</code></pre>
 <p><em>sideways — for long labels</em></p>
 </section>
 <section id="two-categorical-variables" class="blk">
-<h3 class="anchored">Two categorical variables</h3>
+<h2 class="anchored">Two categorical variables</h2>
 <pre><code>tally(~ A + B, data = df)</code></pre>
-<pre><code>tally(~ A | B, data = df,
+<pre><code>tally(A ~ B, data = df,
       format = &quot;proportion&quot;)</code></pre>
-<p><em><code>|</code> means “for each”</em></p>
+<p><em>proportions of A <strong>within</strong> each B group — same <code>y ~ x</code> order</em></p>
 <pre><code>gf_props(~ A, fill = ~ B,
          position = &quot;dodge&quot;,
          data = df)</code></pre>
@@ -605,8 +611,18 @@ head(df)</code></pre>
          position = &quot;fill&quot;,
          data = df)</code></pre>
 </section>
+<section id="working-with-your-data" class="blk">
+<h2 class="anchored">Working with your data</h2>
+<pre><code>filter(df, A == &quot;Yes&quot;)</code></pre>
+<p><em>note the double <code>==</code></em></p>
+<pre><code>mutate(df, new = Y / 7)</code></pre>
+<pre><code>droplevels(df)</code></pre>
+<p><em>after filtering, before <code>t.test</code></em></p>
+</section>
+</div>
+<div class="col">
 <section id="one-quantitative-variable" class="blk">
-<h3 class="anchored">One quantitative variable</h3>
+<h2 class="anchored">One quantitative variable</h2>
 <pre><code>favstats(~ Y, data = df)</code></pre>
 <p><em>everything at once</em></p>
 <pre><code>mean(~ Y, data = df)
@@ -620,7 +636,7 @@ IQR(~ Y, data = df)</code></pre>
 <p><em>already horizontal — no <code>coord_flip()</code></em></p>
 </section>
 <section id="comparing-groups" class="blk">
-<h3 class="anchored">Comparing groups</h3>
+<h2 class="anchored">Comparing groups</h2>
 <pre><code>favstats(Y ~ A, data = df)</code></pre>
 <pre><code>gf_boxplot(A ~ Y, data = df)</code></pre>
 <p><em><strong>categorical first</strong> = horizontal boxes</em></p>
@@ -632,7 +648,7 @@ IQR(~ Y, data = df)</code></pre>
 <p><em>layout is <strong>rows ~ columns</strong>; the <code>.</code> means “nothing here,” so panels stack</em></p>
 </section>
 <section id="two-quantitative-variables" class="blk">
-<h3 class="anchored">Two quantitative variables</h3>
+<h2 class="anchored">Two quantitative variables</h2>
 <pre><code>gf_point(Y ~ X, data = df)</code></pre>
 <pre><code>gf_point(Y ~ X, data = df) |&gt;
   gf_smooth(method = &quot;lm&quot;)</code></pre>
@@ -642,8 +658,18 @@ IQR(~ Y, data = df)</code></pre>
     use = &quot;complete.obs&quot;)</code></pre>
 <p><em><code>use =</code> needed when values are missing</em></p>
 </section>
+<section id="regression" class="blk">
+<h2 class="anchored">Regression</h2>
+<pre><code>mymodel &lt;- lm(Y ~ X, data = df)
+mymodel</code></pre>
+<p><em>intercept and slope</em></p>
+<pre><code>predict(mymodel)
+resid(mymodel)</code></pre>
+</section>
+</div>
+<div class="col">
 <section id="making-a-plot-presentable" class="blk">
-<h3 class="anchored">Making a plot presentable</h3>
+<h2 class="anchored">Making a plot presentable</h2>
 <pre><code>gf_point(Y ~ X, data = df) |&gt;
   gf_labs(title = &quot;...&quot;,
           x = &quot;... (units)&quot;,
@@ -656,16 +682,8 @@ IQR(~ Y, data = df)</code></pre>
              hjust = 1.2))</code></pre>
 <p><em>use the <strong>point’s own</strong> x, y; shift the label off it with <code>hjust</code> / <code>vjust</code></em></p>
 </section>
-<section id="regression" class="blk">
-<h3 class="anchored">Regression</h3>
-<pre><code>mymodel &lt;- lm(Y ~ X, data = df)
-mymodel</code></pre>
-<p><em>intercept and slope</em></p>
-<pre><code>predict(mymodel)
-resid(mymodel)</code></pre>
-</section>
 <section id="collecting-data" class="blk">
-<h3 class="anchored">Collecting data</h3>
+<h2 class="anchored">Collecting data</h2>
 <pre><code>sample(df, 25)</code></pre>
 <p><em>random sample of 25 rows</em></p>
 <pre><code>newlist &lt;- shuffle(myclass)
@@ -676,7 +694,7 @@ slice(newlist, 16:30)</code></pre>
 <p><em>makes random results repeatable</em></p>
 </section>
 <section id="inference" class="blk">
-<h3 class="anchored">Inference</h3>
+<h2 class="anchored">Inference</h2>
 <pre><code>t.test(~ Y, data = df)</code></pre>
 <p><em>one mean</em></p>
 <pre><code>t.test(Y ~ A, data = df)</code></pre>
@@ -685,16 +703,8 @@ slice(newlist, 16:30)</code></pre>
           row.names = FALSE)</code></pre>
 <p><em>then upload to StatKey</em></p>
 </section>
-<section id="working-with-your-data" class="blk">
-<h3 class="anchored">Working with your data</h3>
-<pre><code>filter(df, A == &quot;Yes&quot;)</code></pre>
-<p><em>note the double <code>==</code></em></p>
-<pre><code>mutate(df, new = Y / 7)</code></pre>
-<pre><code>droplevels(df)</code></pre>
-<p><em>after filtering, before <code>t.test</code></em></p>
-</section>
 <section id="when-something-breaks" class="blk">
-<h3 class="anchored">When something breaks</h3>
+<h2 class="anchored">When something breaks</h2>
 <p><strong>could not find function</strong> — run <code>library(mosaic)</code> first</p>
 <p><strong>object ‘Y’ not found</strong> — you left out <code>data =</code></p>
 <p><strong>unexpected symbol</strong> — missing comma or parenthesis</p>
@@ -704,9 +714,10 @@ slice(newlist, 16:30)</code></pre>
 <p><strong>no plot appeared</strong> — you saved it to a name; type the name</p>
 </section>
 </div>
+</div>
 <footer class="card-foot">
   <span>Math 260 · Applied Statistics · Kalamazoo College</span>
-  <span><a href="https://heroic-horse-92e142.netlify.app/r_commands_260">Full searchable version</a></span>
+    <span><a href="https://heroic-horse-92e142.netlify.app/r_commands_260">Full searchable version</a></span> 
 </footer>
 
 <script id="quarto-html-after-body" type="application/javascript">

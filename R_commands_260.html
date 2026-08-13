@@ -2299,7 +2299,7 @@ vertical-align: -.125em;
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">R Commands for Applied Statistics</h1>
-<p class="subtitle lead">Math 260</p>
+<p class="subtitle lead">Math 260 · mosaic and ggformula graphics</p>
 </div>
 
 
@@ -2376,6 +2376,7 @@ section.level2 { break-inside: avoid; }
 <p>The <code>~</code> is read <strong>“described by”</strong> or <strong>“depends on”</strong>. When there is only one variable, leave the left side off: <code>~ x</code>.</p>
 <p>For plots, the left side of <code>~</code> is the <strong>vertical</strong> axis and the right side is the <strong>horizontal</strong> axis. Remember that <strong>x</strong> is the e<strong>X</strong>planatory variable, so it goes on the right.</p>
 <p>Use <code>|&gt;</code> to send a plot into another plotting command. You will see <code>%&gt;%</code> in older code and in answers from AI assistants — it does the same thing, but use <code>|&gt;</code> in this course.</p>
+<p>You will see <code>|</code> inside a formula later in this document (for example <code>~ Height | Sex ~ .</code>) — that is a different thing entirely. It only shows up when splitting a plot of a <strong>quantitative</strong> variable into panels by group. For two categorical variables, stick with <code>y ~ x</code>.</p>
 </div>
 </div>
 <section id="getting-started" class="level1">
@@ -2567,9 +2568,9 @@ Award      No Yes
 </section>
 <section id="conditional-proportions" class="level2">
 <h2 class="anchored" data-anchor-id="conditional-proportions">Conditional proportions</h2>
-<p>The <code>|</code> means “for each value of”. This gives proportions <strong>within</strong> each smoking group.</p>
+<p>Put the variable you want proportions <strong>of</strong> on the left and the variable you want to condition <strong>on</strong> on the right — the same <code>y ~ x</code> pattern as everywhere else. This gives the distribution of <code>Award</code> <strong>within</strong> each <code>Smoke</code> group.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tally</span>(<span class="sc">~</span> Award <span class="sc">|</span> Smoke, <span class="at">data =</span> StudentSurvey, </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tally</span>(Award <span class="sc">~</span> Smoke, <span class="at">data =</span> StudentSurvey, </span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">format =</span> <span class="st">&quot;proportion&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Smoke
@@ -2579,6 +2580,7 @@ Award          No     Yes
   Olympic 0.50470 0.48837</code></pre>
 </div>
 </div>
+<p>Each column sums to 1. Read a column top to bottom to see the breakdown of <code>Award</code> for that one <code>Smoke</code> group.</p>
 <p><span class="kw">conditional, given, within group, row percent, column percent</span></p>
 </section>
 <section id="grouped-bar-chart" class="level2">

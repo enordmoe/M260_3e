@@ -1,6 +1,6 @@
 ---
 title: "R Commands for Applied Statistics"
-subtitle: "Math 260"
+subtitle: "Math 260 · mosaic and ggformula graphics"
 format: 
   html:
     toc: true
@@ -92,6 +92,8 @@ The `~` is read **"described by"** or **"depends on"**. When there is only one v
 For plots, the left side of `~` is the **vertical** axis and the right side is the **horizontal** axis. Remember that **x** is the e**X**planatory variable, so it goes on the right.
 
 Use `|>` to send a plot into another plotting command. You will see `%>%` in older code and in answers from AI assistants — it does the same thing, but use `|>` in this course.
+
+You will see `|` inside a formula later in this document (for example `~ Height | Sex ~ .`) — that is a different thing entirely. It only shows up when splitting a plot of a **quantitative** variable into panels by group. For two categorical variables, stick with `y ~ x`.
 :::
 
 # Getting started
@@ -228,12 +230,14 @@ tally(~ Award + Smoke, data = StudentSurvey)
 
 ## Conditional proportions
 
-The `|` means "for each value of". This gives proportions **within** each smoking group.
+Put the variable you want proportions **of** on the left and the variable you want to condition **on** on the right — the same `y ~ x` pattern as everywhere else. This gives the distribution of `Award` **within** each `Smoke` group.
 
 ```{r}
-tally(~ Award | Smoke, data = StudentSurvey, 
+tally(Award ~ Smoke, data = StudentSurvey, 
       format = "proportion")
 ```
+
+Each column sums to 1. Read a column top to bottom to see the breakdown of `Award` for that one `Smoke` group.
 
 [conditional, given, within group, row percent, column percent]{.kw}
 
