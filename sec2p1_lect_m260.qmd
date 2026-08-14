@@ -25,7 +25,7 @@ library(Lock5Data)
 - **The Big Picture**: The role of data description in statistics.
 - **Descriptive Statistics**: Summarizing and visualizing categorical variables.
 - **Numerical Summaries**: Frequency tables and proportions.
-- **Visual Summaries**: Bar charts and pie charts.
+- **Visual Summaries**: Bar charts, proportion charts, and pie charts.
 - **Two-Way Tables**: Exploring relationships between two categorical variables.
 - **Graphical Comparisons**: Stacked and side-by-side bar charts.
 
@@ -95,6 +95,16 @@ gf_bar(~LarkOwl, fill = ~ LarkOwl, data = SleepStudy,
        show.legend = FALSE)
 ```
 
+## Proportion Bar Charts 
+
+-   `gf_props()` plots **proportions** directly — no need for `position = "fill"`.
+
+```{r}
+gf_props(~LarkOwl, data = SleepStudy)
+```
+
+-   Same idea as `gf_bar()`, but the y-axis is already a proportion.
+
 ## Summarizing Two Categorical Variables: Two-Way Tables
 
 Frequency table used to look at the relationship between two categorical variables
@@ -103,7 +113,7 @@ Frequency table used to look at the relationship between two categorical variabl
 -   Variable 2 categories: columns
 -   Cell counts (frequencies): number of cases in corresponding row and column categories
 
-## Two-Way Tables Example
+## Two-Way Tables Example {.smaller}
 
 Cross classify two categorical variables to investigate their relationship:
 
@@ -112,31 +122,45 @@ tally(~EarlyClass + LarkOwl, margins = TRUE,
       data=SleepStudy)
 ```
 
-## Note: For *EarlyClass*, 0 = "No" and 1 = "Yes"
-
--   What proportion of students with early classes are Larks?
--   What proportion of students without early classes are Larks?
--   What proportion of Owls have early classes?
-
-## Two-Way Tables Example with Proportions
+<small>Note: For *EarlyClass*, 0 = "No" and 1 = "Yes"</small>
+ 
+::: {.fragment}
+#### Questions  
+::: {.incremental}
+-   What proportion of students with early classes are Larks?  
+-   What proportion of students without early classes are Larks?  
+-   What proportion of Owls have early classes?  
+:::
+:::
+## Two-Way Tables Example with Proportions {.smaller}
 
 ```{r}
 tally(~EarlyClass + LarkOwl, margins = TRUE,
       format = "proportion", data = SleepStudy)
 ```
 
-## Two-Way Tables Example with Conditional Proportions
+<br>
+
+**Note:** Proportions here are based on total sample.  
+
+## Two-Way Tables Example with Conditional Proportions {.smaller}
 
 ```{r}
-tally(~EarlyClass | LarkOwl, margins = TRUE,
+tally(EarlyClass ~ LarkOwl, margins = TRUE,
       format = "proportion", data = SleepStudy)
 ```
 
-$\Rightarrow$ Conditional proportions are useful for comparing groups but be sure to compute the proportions in the correct direction.
+<div style="height:0.5em;"></div>
 
-## Segmented Bar Charts for Two Variables {.smaller}
+-   Read `A ~ B` as "A, broken down by B"
+    - The proportion of *EarlyClass* within **each level of** *LarkOwl* (columns sum to 1).   
+-   Conditional proportions are useful for comparing groups
+    - ⚠️  Be sure you know which direction you're conditioning in.
 
--   **Segmented bar chart** graphical display of a two-way table of counts
+
+## Stacked Bar Charts for Two Variables {.smaller}
+
+-   **Stacked bar chart** graphical display of a two-way table of counts
 
     -   Note use of `factor()` to treat *EarlyClass* as categorical.
 
@@ -144,14 +168,16 @@ $\Rightarrow$ Conditional proportions are useful for comparing groups but be sur
 gf_bar(~ LarkOwl, fill = ~factor(EarlyClass), data = SleepStudy)
 ```
 
-## Comparative Stacked Bar Charts Comparing Proportions
+## Segmented Bar Chart: Comparing Proportions {.smaller}
 
 ```{r}
-gf_bar(~LarkOwl, fill = ~factor(EarlyClass), data = SleepStudy, 
-       position = "fill")
+gf_props(~LarkOwl, fill = ~factor(EarlyClass), data = SleepStudy, 
+          position = "fill")
 ```
 
--   Note that the function `gf_props()` can also be used to plot proportions when working with categorical data.
+-   `position = "fill"` makes every bar the same height, so you compare **proportions** rather than counts.
+
+
 
 ## Side-by-Side Bar Charts
 
@@ -179,10 +205,33 @@ gf_bar(~LarkOwl, fill = ~factor(EarlyClass),
 
 -   Using commands to create graphs makes it easy to reproduce or update them later.
 
+## Choosing the Right Table or Chart {.smaller}
+
+```{=html}
+<style>
+.chart-table table { table-layout: fixed; width: 100%; }
+.chart-table code { white-space: nowrap; font-size: 0.62em; }
+.chart-table th:first-child, .chart-table td:first-child { width: 26%; }
+.chart-table th:not(:first-child), .chart-table td:not(:first-child) { width: 37%; }
+</style>
+```
+
+::: {.chart-table}
+| Goal | Table (`tally()`) | Chart (`gf_`) |
+|---|---|---|
+| One variable, counts | `tally(~ A)` | `gf_bar(~ A)` |
+| One variable, proportions | `tally(~ A, format = "proportion")` | `gf_props(~ A)` |
+| Two variables, joint counts | `tally(~ A + B)` | `gf_bar(~ A, fill = ~ B)` |
+| Two variables, conditional proportions | `tally(B ~ A, format = "proportion")` | `gf_props(~ A, fill = ~ B, position = "fill")` |
+| Two variables, side-by-side comparison | — | `gf_props(~ A, fill = ~ B, position = "dodge")` |
+:::
+
+
+
 ## Summary {.smaller}
 
 -   Descriptive statistics summarize and visualize categorical variables in frequency tables, proportions, and relative frequency tables.
--   Bar charts are useful for visualizing single categorical variables.
+-   Bar charts (`gf_bar()`) visualize counts; `gf_props()` visualizes proportions directly.
 -   Two-way tables show the relationship between two categorical variables using frequency and proportion tables.
 -   Conditional proportions offer detailed comparisons by showing the proportion of one category within each level of another category.
 -   Segmented, stacked, and side-by-side bar charts offer insightful comparisons of categorical data across multiple variables.
