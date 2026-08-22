@@ -12,6 +12,16 @@ execute:
 editor: visual
 ---
 
+```{r}
+#| label: setup
+#| include: false
+#| warning: false
+knitr::opts_chunk$set(echo = TRUE)
+options(digits=6)
+library(mosaic)
+library(Lock5Data)
+```
+
 # 1. Welcome
 
 This tutorial takes you through the steps to get R and RStudio up and running on your Windows PC or Mac.
@@ -32,33 +42,7 @@ The remainder of this tutorial will lead you through the steps to install R and 
 
 # 2. Installing R and RStudio
 
-R and RStudio are two separate pieces of software, and (unlike a couple years ago) there is no longer a single Posit page that walks you through installing both — so follow the two steps below **in order**.
-
-> Install R first, then RStudio. RStudio is just the dashboard; it needs the R engine installed on your computer to work.
-
-**Step 1: Install R**
-
-Go to <https://cran.r-project.org/> and click the link for your operating system:
-
-- **Windows:** "Download R for Windows" → "base" → the big **Download R-4.6.1 for Windows** link.
-- **Mac:** "Download R for macOS" → choose the `.pkg` file that matches your Mac:
-  - **Apple Silicon** (M1/M2/M3/M4 — most Macs bought since late 2020): the `R-4.6.1-arm64.pkg` link.
-  - **Intel Mac** (older): the `R-4.6.1-x86_64.pkg` link.
-  - Not sure which chip you have? Apple menu → **About This Mac** and look for "Chip" or "Processor."
-
-Run the installer with all default options. You do not need to open the R application itself when it's done — you'll only ever launch RStudio.
-
-**Step 2: Install RStudio Desktop**
-
-Go to <https://posit.co/downloads> and click **Download** under **RStudio Desktop** (the free, Open Source edition — not RStudio Desktop Pro). This takes you to a documentation page with direct download links; pick the file for your system (Windows `.exe` or macOS `.dmg`) and run the installer with default options.
-
-**Mac security note:** if you see "cannot be opened because the developer cannot be verified," go to **System Settings → Privacy & Security**, scroll down, and click **Open Anyway** next to the RStudio message.
-
-**Step 3: Confirm it worked**
-
-Open RStudio (not R itself). You should see four panels. Click in the Console pane (usually bottom-left), type `R.version.string`, and press Enter. You should see something like `"R version 4.6.1 (2026-06-24)"`. If RStudio opens and this runs without an error, R and RStudio are installed correctly and RStudio has found your R installation automatically.
-
-Install the **most recent version of the software that is compatible with your computer**, which may be newer than the version numbers above — as of writing (August 2026), the latest R release is 4.6.1 and the latest RStudio is 2026.08.1. If you have any questions at this stage, feel free to reach out to me.
+To install R and RStudio on your own computer, go to the site <https://posit.co/download/rstudio-desktop/> and follow the instructions [in the video](https://kzoo-my.sharepoint.com/:v:/g/personal/eric_nordmoe_kzoo_edu/EfpeXTMptt9Iv9wkW3DZtE0Bw4EDu4I9yy4ntXyn4zoKrQ?e=lDVdBi). Installation instructions focus on procedures for a Mac (if you have a Windows computer, here is the URL of a fairly recent YouTube video that demonstrates the installation of R and RStudio on a Windows computer: <https://youtu.be/YrEe2TLr3MI>). Install the **most recent version of the software that is compatible with your computer** which may be newer than what you see in the video. Please note that as of March 23, 2026, the latest version of R was 4.5.3 and the latest version of RStudio is 2026.01.1+403. If you have any questions at this stage, feel free to reach out to me.
 
 # 3. Installing R Packages
 
