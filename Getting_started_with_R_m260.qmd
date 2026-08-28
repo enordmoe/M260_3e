@@ -1,5 +1,6 @@
 ---
 title: "Getting Started with R"
+subtitle: "Math 260: Applied Statistics"
 format: 
     html: 
       toc: true
@@ -7,6 +8,34 @@ format:
       number-depth: 3
       theme: flatly
       self-contained: true
+      code-copy: true
+      include-in-header:
+        text: |
+          <style>
+          body {
+            font-family: Calibri, "Segoe UI", system-ui, -apple-system, sans-serif;
+            color: #333333;
+            line-height: 1.6;
+          }
+          h1, h2, h3, h4, h5,
+          h1.title, .quarto-title-block .subtitle {
+            font-family: Georgia, "Times New Roman", serif;
+            color: #5A7A5E;
+          }
+          a { color: #1A5276; }
+          a:hover { color: #10344f; }
+          /* R script boxes: friendly copy-and-paste blocks */
+          div.sourceCode {
+            border-left: 4px solid #5A7A5E;
+            border-radius: 4px;
+          }
+          pre.sourceCode code,
+          code { font-family: Consolas, "DejaVu Sans Mono", ui-monospace, monospace; }
+          blockquote {
+            border-left: 4px solid #5A7A5E;
+            color: #555555;
+          }
+          </style>
 execute:
   warning: false
 editor: visual
@@ -15,6 +44,12 @@ editor: visual
 # 1. Welcome
 
 This tutorial takes you through the steps to get R and RStudio up and running on your Windows PC or Mac.
+
+::: callout-tip
+## ▶ Watch the screencast
+
+Prefer to follow along on video? This entire tutorial is also available as a screencast: [**click here to watch**](SCREENCAST-LINK-TBD). Feel free to keep this page open and pause the video as you go.
+:::
 
 ![R logo](figures/R_logo.svg.png){alt="R logo" width="75"} is the statistical programming language.
 
@@ -28,11 +63,15 @@ knitr::include_graphics("figures/engine-dashboard.png")
 
 Source: <http://moderndive.com>
 
-The remainder of this tutorial will lead you through the steps to install R and the RStudio IDE. These steps apply if you have either a Mac or Windows PC. If you have a Chromebook or Linux computer, please contact me right away for help getting set up with R.
+The remainder of this tutorial will lead you through the steps to install R and the RStudio IDE. These steps apply whether you have a Mac or a Windows PC.
+
+::: callout-important
+If you don't have a Windows or Mac lapto but instead use an **iPad or** **Chromebook**, please email me as soon as possible so we can set up browser-based access. That option may take a couple extra days to arrange so please let me know earlier rather than later.
+:::
 
 # 2. Installing R and RStudio
 
-R and RStudio are two separate pieces of software, and (unlike a couple years ago) there is no longer a single Posit page that walks you through installing both — so follow the two steps below **in order**.
+R and RStudio are two separate pieces of software so two separate installations are required.Follow the two steps below **in order** to bet **both** installed on your computer.
 
 > Install R first, then RStudio. RStudio is just the dashboard; it needs the R engine installed on your computer to work.
 
@@ -46,26 +85,50 @@ Go to <https://cran.r-project.org/> and click the link for your operating system
   - **Intel Mac** (older): the `R-4.6.1-x86_64.pkg` link.
   - Not sure which chip you have? Apple menu → **About This Mac** and look for "Chip" or "Processor."
 
-Run the installer with all default options. You do not need to open the R application itself when it's done — you'll only ever launch RStudio.
+Run the installer with all default options. You do not need to open the R application itself when it's done. We'll always just launch RStudio, which uses R as the engine automatically in the background.
 
 **Step 2: Install RStudio Desktop**
 
-Go to <https://posit.co/downloads> and click **Download** under **RStudio Desktop** (the free, Open Source edition — not RStudio Desktop Pro). This takes you to a documentation page with direct download links; pick the file for your system (Windows `.exe` or macOS `.dmg`) and run the installer with default options.
+Go to <https://posit.co/download/rstudio-desktop/> and click **Download** under **RStudio Desktop** (the free, Open Source edition, not RStudio Server or a paid Pro/Team edition). This takes you to a page with direct download links; pick the file for your system (Windows `.exe` or macOS `.dmg`) and run the installer with default options.
 
 **Mac security note:** if you see "cannot be opened because the developer cannot be verified," go to **System Settings → Privacy & Security**, scroll down, and click **Open Anyway** next to the RStudio message.
 
 **Step 3: Confirm it worked**
 
-Open RStudio (not R itself). You should see four panels. Click in the Console pane (usually bottom-left), type `R.version.string`, and press Enter. You should see something like `"R version 4.6.1 (2026-06-24)"`. If RStudio opens and this runs without an error, R and RStudio are installed correctly and RStudio has found your R installation automatically.
+Open RStudio (not R itself). You should see several panes, including a **Console** pane (usually bottom-left) with a `>` prompt. Click into the Console, type `R.version.string`, and press **Enter**. You should see something like `"R version 4.6.1 (2026-06-24)"`. If RStudio opens and this runs without an error, R and RStudio are installed correctly, and RStudio has found your R installation automatically.
 
 Install the **most recent version of the software that is compatible with your computer**, which may be newer than the version numbers above — as of writing (August 2026), the latest R release is 4.6.1 and the latest RStudio is 2026.08.1. If you have any questions at this stage, feel free to reach out to me.
 
 # 3. Installing R Packages
 
-Once you will need to install a couple R *packages*. R packages are collections of functions and data sets developed by R users that increase the power of R by improving existing base R functions, add new functions, or bundle multiple datasets into a convenient "package."
+Next you'll install a few R *packages*. R packages are collections of functions and data sets developed by R users that increase the power of R by improving existing base R functions, adding new functions, or bundling multiple datasets into a convenient "package."
 
-The next video ([click here to access](https://kzoo-my.sharepoint.com/:v:/g/personal/eric_nordmoe_kzoo_edu/IQD2Q_LAa7oqS7Dzz292lgnfASCiRXa40cRDLxYjkgCqJrM?e=NjZmm9&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)) takes you through the steps to install the two R packages we will use most: **mosaic** and **Lock5Data**. Package installation is a one-time operation. Once a package is installed, you do not need to re-install it each time you use R. But you do need to "load" packages at the beginning of your session and the templates you will use for homework assignments will already include lines that do that.
+This course uses a few add-on packages beyond base R. In RStudio, click into the **Console** pane (bottom-left, with the `>` prompt), paste the line below, and press **Enter**:
 
-# 4. Next Steps
+``` r
+install.packages(c("mosaic", "ggformula", "Lock5Data"))
+```
 
-Now that you have completed these installations, you are ready to go. If you have run into problems or have questions, please contact me by Teams or email.
+This may take a minute or two and will print a lot of text. That just means it's working. If you're asked whether to install from source or to compile packages that need updating, it's fine to choose **No**. We'll install a few additional packages later in the term as we need them.
+
+Package installation is a **one-time** operation. Once a package is installed, you don't need to re-install it each time you use R — but you do need to "load" it at the start of each session. The homework templates you'll use already include the lines that do that for you.
+
+## Verify everything works
+
+Still in the Console, type the following and press **Enter**:
+
+``` r
+library(mosaic)
+```
+
+If you see some introductory messages but no red **Error** text, you're all set. If you instead see `Error in library(mosaic) : there is no package called 'mosaic'`, go back and re-run the `install.packages()` line above.
+
+# 4. Troubleshooting
+
+- **Installer blocked by your computer's security settings?** Right-click the installer and choose **Open**, or check your Downloads folder settings. (On a Mac, see the security note in Step 2 above.)
+- **Package installation fails with a compiler error (Mac)?** You likely need Xcode Command Line Tools — RStudio will usually prompt you to install these automatically the first time you need them.
+- **Still stuck?** Bring your laptop to office hours or email me a screenshot of the error — this is a very common first-week hiccup and easiest to fix in person. Even better sometimes is just to reach out on Teams and we can work through it together.
+
+# 5. Next Steps
+
+Now that you've completed these installations, you're ready to go. If you ran into problems or have questions, please contact me by Teams or email.
