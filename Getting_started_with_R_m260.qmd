@@ -48,7 +48,7 @@ This tutorial takes you through the steps to get R and RStudio up and running on
 ::: callout-tip
 ## ▶ Watch the screencast
 
-Prefer to follow along on video? This entire tutorial is also available as a screencast: [**click here to watch**](SCREENCAST-LINK-TBD). Feel free to keep this page open and pause the video as you go.
+Prefer to follow along on video? This entire tutorial is also available as a screencast: [**click here to watch**](https://kzoo-my.sharepoint.com/:v:/g/personal/eric_nordmoe_kzoo_edu/IQBzzy-Fy1rbT6t6YA7Ia4oxAY20n91XTJY-2drs-Uc-4yQ?e=WIqn0Z). Feel free to keep this page open and pause the video as you go.
 :::
 
 ![R logo](figures/R_logo.svg.png){alt="R logo" width="75"} is the statistical programming language.
