@@ -89,7 +89,7 @@ Run the installer with all default options. You do not need to open the R applic
 
 **Step 2: Install RStudio Desktop**
 
-Go to [(https://posit.co/downloads](https://posit.co/downloads) and click **Download** under **RStudio Desktop** (the free, Open Source edition, not RStudio Server or a paid Pro/Team edition). This takes you to a page with direct download links; pick the file for your system (Windows `.exe` or macOS `.dmg`) and run the installer with default options.
+Go to [https://posit.co/downloads](https://posit.co/downloads) and click **Download** under **RStudio Desktop** (the free, Open Source edition, not RStudio Server or a paid Pro/Team edition). This takes you to a page with direct download links; pick the file for your system (Windows `.exe` or macOS `.dmg`) and run the installer with default options.
 
 **Mac security note:** if you see "cannot be opened because the developer cannot be verified," go to **System Settings → Privacy & Security**, scroll down, and click **Open Anyway** next to the RStudio message.
 
