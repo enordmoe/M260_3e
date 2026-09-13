@@ -1,0 +1,65 @@
+---
+title: "Applied Statistics I"
+subtitle: "Pre‑Class Survey Summary"
+author: "Math 260"
+format:
+  revealjs:
+    chalkboard: true
+    theme: [default, custom.scss]
+    toc: false
+    toc-depth: 1
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+    incremental: false
+    transition: fade
+    preview-links: auto
+    notes: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: true
+editor:
+  markdown:
+    wrap: 72
+---
+
+
+## Why you’re here
+
+*   Required for pre‑health and STEM
+*   Required for economics, psychology, ANSO
+*   Many of you want to get deeper statistics understanding
+*   Important real-world applications
+
+
+## Common worries
+
+*   “I’m not good at math” or it’s been a while since your last math class
+*   The class moving too fast or falling behind
+*   Applying concepts and learning R
+*   Time management
+*   Balancing workload: class work, job, extracurriculars, and family responsibilities
+*   SIP term
+
+
+## What Helps You Succeed
+
+
+*   Step‑by‑step problem solving
+*   HW feedback in class
+*   Practice problems with solutions
+*   Visualizations
+
+
+
+## Our Approach
+
+*   Using your uniquely human intelligence (HI)
+*   Active participation
+*   New ideas will come with **worked examples and practice**
+*   Acknowledge struggle is normal in statistics.
+*   Support is built in: class time, office hours, peers, MPC
+
