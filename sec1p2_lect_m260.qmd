@@ -31,14 +31,14 @@ library(nycflights13)
 ## Warm-Up: Screen Time {.smaller}
 
 In December 2024, Harmony Healthcare IT surveyed **1,001 U.S. adults**
-about daily smartphone screen time. Average reported: **5 hrs 16
+about daily smartphone screen time. They reported an average of **5 hrs 16
 min/day**.
 
 ::: {.fragment}
 **Turn and talk (60 sec):**   
-* Who did this survey actually talk to?  
-* Who is it trying to describe?  
-* Are these the same group?  
+1. Who did this survey actually talk to?  
+2. Who is it trying to describe?  
+3. Are these the same group?  
 :::
 
 ::: notes
@@ -57,20 +57,25 @@ better once they've already felt the gap between "who we asked" and
     learn about the population.
 :::
 
-## Screen time revisited
-
+## Screen time revisited {.smaller}
+ 
 ::: {.fragment}
-**Sample:** the 1,001 U.S. adults who reported their screen time.
+**Sample:**
+
+<div style="margin-top: 1.3em;">________________________________________________</div>
 :::
 
 ::: {.fragment}
-**Population:** all U.S. adults.
+**Population:**
+
+<div style="margin-top: 1.3em;">________________________________________________</div>
 :::
 
 ::: {.fragment}
-**Quantitative or categorical?** Quantitative! Screen time is measured in hours.
-:::
+**Quantitative or categorical?**
 
+<div style="margin-top: 1.3em;">________________________________</div>
+:::
 ::: {.fragment}
 * This **gap** between sample and population is the reason **how** you get
 your sample matters.   
@@ -90,26 +95,12 @@ done this? Does it matter that 30,000 is a huge sample?
 
 ::: notes
 Push on the "30,000 is huge though" instinct here — this is the spot
-to land that sample size and sampling bias are separate problems.
+to land that sample size and sampling bias are separate problems.  
+(a) people with strong opinions are more likely to respond  
+(b) it just gives a more precise wrong answer  
+(c) no — only to the ones who felt strongly enough to click  
 :::
 
-## No! Why Not? {.smaller}
-
-::: {.fragment}
-* People who respond to an online poll are not a random
-cross-section of drivers  
-    — People with strong opinions are **more likely** to respond.  
-:::
-
-::: {.fragment}
-* Increasing the sample size doesn't fix a *biased* collection method   
-    — it just gives a more precise wrong answer.  
-:::
-
-::: {.fragment}
-* Can we generalize to *all cnn.com visitors*?   
-    — No, only to the ones who felt strongly enough to click.
-:::
 
 ## Bias vs Sampling Bias
 
@@ -129,10 +120,6 @@ cross-section of drivers
 drivers whose results you could generalize to all drivers?
 :::
 
-::: {.fragment}
-The answer  applies to nearly every data collection problem
-we'll see this term.
-:::
 
 ## Simple Random Sample
 
@@ -183,7 +170,7 @@ sampling bias is bias, not every bias is sampling bias.
 
 ::: {.fragment}
 **The difference**: did the problem happen *while choosing* who's in the
-sample (undercoverage, voluntary response) — or *after* a sample was selected, once you tried to collect data from them?
+sample (undercoverage, voluntary response), or *after* a sample was selected, once you tried to collect data from them?
 :::
 
 ::: notes
@@ -200,55 +187,28 @@ You want to estimate how many hours a week students at your
 university spend studying. For each method, is it **representative**,
 or a specific kind of bias?
 
-## (a) {.smaller}
-
-Ask students leaving the dining hall around dinner time on a Tuesday.
-
 ::: {.fragment}
-→ **Undercoverage** (misses students who eat elsewhere or at other
-times)
+**(a)** Ask students leaving the dining hall around dinner time on a Tuesday.
 :::
 
-## (b) {.smaller}
-
-Ask the students in Organic Chemistry.
-
 ::: {.fragment}
-→ **Undercoverage** (skews toward pre-med / STEM-heavy study habits)
+**(b)** Ask the students in Organic Chemistry.
 :::
 
-## (c) {.smaller}
-
-Ask all the students on the basketball team.
-
 ::: {.fragment}
-→ **Undercoverage** (athletes' schedules may not resemble the
-student body's)
+**(c)** Ask all the students on the basketball team.
 :::
 
-## (d) {.smaller}
-
-Email all students, use whoever replies.
-
 ::: {.fragment}
-→ **Nonresponse bias**
+**(d)** Email all students, use whoever replies.
 :::
 
-## (e) {.smaller}
-
-Ask friends on social media to re-share the survey link.
-
 ::: {.fragment}
-→ **Voluntary response bias** (and undercoverage of anyone outside
-that social network)
+**(e)** Ask friends on social media to re-share the survey link.
 :::
 
-## (f) {.smaller}
-
-Ask a random sample of students.
-
 ::: {.fragment}
-→ **Representative** — this is the one that works.
+**(f)** Ask a random sample of students.
 :::
 
 ::: notes
@@ -266,41 +226,33 @@ type, and demographics. The **Current Employment Statistics (CES)**
 survey samples 140,000 nonfarm businesses and government agencies and
 records payroll jobs, pay rates, and related info for each firm.
 
-## (a) Population Check {.smaller}
-
-What is the population in the CPS survey? In the CES survey?
+## Employment Surveys: Questions {.smaller}
 
 ::: {.fragment}
-**CPS:** all US residents. **CES:** all nonfarm US
-businesses/agencies (jobs, not people).
+**(a)** What is the population in the CPS survey? In the CES survey?
+
+<br><br>**CPS:** ________________________  **CES:** ________________________
 :::
-
-## (b) {.smaller}
-
-Which survey would answer: *do larger companies tend to pay more?*
 
 ::: {.fragment}
-→ **CES** (its cases are businesses, with pay data)
+**(b)** Which survey would answer: *do larger companies tend to pay more?*
+
+<br>________________________________________________
 :::
 
-## (c) {.smaller}
-
-Which survey would answer: *what percent of Americans are
+::: {.fragment}
+**(c)** Which survey would answer: *what percent of Americans are
 self-employed?*
 
-::: {.fragment}
-→ **CPS** (its cases are people, with employment status)
+<br>________________________________________________
 :::
 
-## (d) {.smaller}
-
-Which survey would answer: *are married men more or less likely to
+::: {.fragment}
+**(d)** Which survey would answer: *are married men more or less likely to
 be employed than single men?*
 
-::: {.fragment}
-→ **CPS** (needs individual demographics)
+<br>________________________________________________
 :::
-
 
 ## Data Collection and Bias
 
@@ -318,23 +270,14 @@ from a class of 30:
 numbers?
 :::
 
-::: columns
-::: {.column width="50%"}
 ```{r}
 #| eval: false
 library(mosaic)
 sample(1:30, 5)
 ```
-:::
 
-::: {.column width="50%"}
-::: fragment
-```{r}
-#| echo: false
-sample(1:30, 5)
-```
-:::
-:::
+::: {.fragment}
+*(We'll run it together — twice — and see.)*
 :::
 
 ## Sampling from an R Data Frame {.smaller}
@@ -391,4 +334,25 @@ knitr::kable(sample(StudentSurvey, 3))
 :::
 :::
 :::
+:::
+
+
+## Summary: Sampling & Bias {.smaller}
+
+::: incremental
+-   A sample is only useful for inference if it **represents** the
+    population   
+    — that depends on *how* it was collected, not how
+    *large* it is.
+-   **Sampling bias** happens *during* selection; **nonresponse,
+    response, and wording bias** can happen *after* selection, even with a
+    random sampling method.
+-   A **simple random sample** protects against sampling bias   
+— but
+    not against those other kinds of bias.
+-   A bigger sample size doesn't fix a biased collection method  
+— it
+    just gives a more precise wrong answer.
+-   Before trusting any data: ask who was included, who was left out,
+    and why.
 :::
