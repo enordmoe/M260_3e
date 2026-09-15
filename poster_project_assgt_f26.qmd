@@ -28,12 +28,11 @@ In this group project, you and your peers will conduct an analysis to address a 
 
 You will have two options for the data you use:
 
-1.  **Collect your own data** (e.g., sports statistics from a reliable web-based source, movie information from IMDB, etc.), or
+1. **Use a dataset from the course's `math260projdata` package**. This is a curated collection of real-world datasets (e.g., `coasters`, `happiness`, `wind_projects`, `house_2022`, `volcanoes`) prepared specifically for this course. These are already cleaned and ready to use in R and fit the recommended requirements for data to use. Accessing this package is described in more detail below
 
-2.  **Use an existing dataset** from R, such as those available in the **Lock5Data** package or other relevant R packages.
+2. **Collect your own data** (e.g., sports statistics from a reliable web-based source, movie information from IMDB, etc.), or use another existing dataset from R, such as those in the **Lock5Data** package or other relevant R packages.
 
 I **strongly discourage** you from carrying out custom surveys on campus because of the difficulty in getting a representative sample and very low response rates.
-
 
 
 # Project Schedule and Details
@@ -42,28 +41,29 @@ This project is worth a total of 140 points broken down into several stages to h
 
 | Task                                  |         Due Date         | Points |
 |:--------------------------------------|:------------------------:|:------:|
-| **Team Formation**                    |   Friday, April 10        | 10 pts |
-| **Proposal and Detailed Methodology** |      Monday, April 27     | 10 pts |
-| **Preliminary Data Description**      |      Friday, May 15       | 10 pts |
+| **Team Formation**                    |   Friday, Week 2        | 10 pts |
+| **Proposal and Detailed Methodology** |      Friday, Week 4     | 10 pts |
+| **Preliminary Data Description**      |      Wednesday, Week 7       | 10 pts |
 | **Poster Plan Meeting**               |   Week 9        | 10 pts |
-| **Final Poster Submission**           |    Friday, June 5         | 60 pts |
-| **Individual Reflection Report**      |    Sunday, June 7         | 20 pts |
-| **Peer Evaluations**                  |    Sunday, June 7         | 10 pts |
-| **Peer Assessment at StatFest**       |    Friday, June 5         | 10 pts |
+| **Final Poster Submission**           |    Friday, Nov 20         | 60 pts |
+| **Peer Assessment at StatFest**       |    Friday, Nov 20         | 10 pts |
+| **Individual Reflection Report**      |    Sunday, Nov 22         | 20 pts |
+| **Peer Evaluations**                  |    Sunday, Nov 22         | 10 pts |
 
 ## Step 1: Team Formation (10 points)
 
-**Due Friday, April 10**
+**Due Friday, September 25**
 
 Form a group of 2 or 3 students to work together on the project. Submit the names of your team members.
 
 ## Step 2: Proposal and Detailed Methodology (10 points)
 
-**Due Monday, April 27**
+**Due Friday, October 9**
 
 Choose a creative name for your group and describe the question of interest you wish to answer and your data collection plan. Your question should be substantive and interesting to the members of your group. Try to identify at least 3 **quantitative** variables and 3 **categorical** variables, as these will form the foundation of your analysis. Submit a detailed description of your data collection plan. Depending on the approach you choose, this step will differ:
 
--   **If using existing data**, explain where and how you will obtain the dataset. Describe any preparations needed for the data analysis, such as cleaning or formatting. If working with a community organization, describe the data available to you or how you plan to collect additional data.
+-   **If using a math260projdata dataset**, briefly note which dataset you're using and confirm you've reviewed its documentation (variable descriptions, units, any known limitations). Minimal additional cleaning should be needed, but describe any preliminary steps you expect to prepare it for your specific analysis.
+-   **If using other existing data**, explain where and how you will obtain the dataset. Describe any preparations needed for the data analysis, such as cleaning or formatting. If working with a community organization, describe the data available to you or how you plan to collect additional data.
 -   **If conducting an experiment**, describe the experimental design, including the procedure, the justification for your chosen design, and how data will be collected.
 -   **If conducting a survey** (not recommended), describe the population of interest, your sampling method, and include a copy of any questionnaire you intend to use. Be clear on why you chose this population, how you will obtain a random sample and how you will ensure a good response rate.
 
@@ -71,7 +71,7 @@ This step helps ensure you have a well-thought-out plan for gathering your data,
 
 ## Step 3: Preliminary Data Description (10 points)
 
-**Due Friday, May 15**
+**Due Wednesday, October 28**
 
 Submit an annotated Quarto report that includes:
 
@@ -83,7 +83,7 @@ This is your first step in summarizing your data and exploring it visually, help
 
 ## Step 4: Poster Plan Meeting (10 points)
 
-**During Week 9 (no later than May 29)**
+**During Week 9 (no later than November 13)**
 
 Schedule an appointment with the instructor to share your poster plan with me. This meeting will for you to get feedback on the following:
 
@@ -95,7 +95,7 @@ This is a crucial opportunity to refine your analysis and get personalized guida
 
 ## Step 5: Final Poster (60 points)
 
-**Due Friday, June 5** of your poster (24x36 inches) that includes:
+**Due Friday, November 20** submission of your poster (24x36 inches) that includes:
 
 -   **Title**: An engaging title for your study.
 -   **Introduction**: A brief introduction to the topic and its relevance.
@@ -110,19 +110,19 @@ Posters will be submitted in both hard copy and digital formats (PowerPoint, Goo
 
 ## Step 6: Peer Assessment at StatFest (10 points)
 
-**Due Friday, June 5**
+**Due Friday, November 20**
 
 As part of our **StatFest Extravaganza**, you will assess other groups' posters using a provided rubric. This activity will not only allow you to learn from your peers but also improve your understanding by assessing the quality of other analyses.
 
 ## Step 7: Individual Reflection Report (20 points)
 
-**Due Sunday, June 7**
+**Due Sunday, November 22**
 
 Each student will write an individual reflection report with **Quarto**, about **five pages** in length, using **R** for any relevant analysis and visualizations. This report will summarize the project’s findings, describe your personal contribution, and highlight what you have learned through this experience. Include one or two key graphs or tables generated with **R** to illustrate significant findings. This report allows you to demonstrate your understanding of the statistical techniques used, your role in the group, and your personal learning journey. A more detailed outline of the components of the report will be available on Moodle.
 
 ## Step 8: Peer Evaluation (10 points)
 
-**Due Sunday, June 7**
+**Due Sunday, November 22**
 
 Each member will evaluate their groupmates’ contributions. Peer evaluations will be submitted anonymously, and each group member will be assessed based on the ratings received from their peers. This is an important step to ensure fairness and accountability.
 
@@ -147,10 +147,10 @@ Each member will evaluate their groupmates’ contributions. Peer evaluations wi
 
 ### The Course Dataset Package: `math260projdata` (recommended)
 
-The easiest place to find a suitable dataset is the course package
-**[math260projdata](https://github.com/enordmoe/math260projdata)**, 23
-datasets curated specifically for this project. Every dataset already meets the
-data requirements above, has been cleaned and checked for data-quality
+The most convenient place to find a suitable dataset is the course R package
+**[math260projdata](https://github.com/enordmoe/math260projdata)** which includes 23
+datasets on a variety of topics selected specifically for this project. Every dataset already meets the
+data requirements above, has been cleaned and checked for data quality
 problems, and comes with a help page documenting what each row represents,
 every variable, and where the data came from. Topics range from movies,
 music, and roller coasters to volcanoes, elections, and world happiness.
@@ -187,7 +187,7 @@ If your group prefers to find its own data, these are good starting points:
 - U.S. Government data portals: [data.gov](https://data.gov)
 - Your own experimental data (if approved in advance)
 
-Outside datasets often hide problems — missing-value codes like `-1` or
+Outside datasets often have problems — missing-value codes like `-1` or
 `-9999`, repeated measures, or variables that look quantitative but aren't —
 so you **must** discuss any dataset from these sources with me before
 submitting a proposal to ensure it's suitable for inference using tools from
