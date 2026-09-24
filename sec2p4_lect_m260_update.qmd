@@ -37,7 +37,6 @@ library(Lock5Data)
 
 - **Advanced Visualization**  
   - Faceted plots: dotplots and histograms for group comparisons
-  - Overlaying data by jittering for more detail
 
 ## Warm-Up: Picturing Five Numbers {.smaller}
 
