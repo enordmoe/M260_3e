@@ -1,0 +1,74 @@
+---
+title: "Group Project: Proposal and Detailed Methodology"
+subtitle: "Math 260 - Applied Statistics I, Fall 2026"
+author: "Group Name Here"
+format:
+  html:
+    math: katex
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    number-depth: 2
+    theme: materia
+    embed-resources: true
+execute: 
+  warning: false
+  message: false
+  echo: true
+---
+
+## Team Members
+
+List all group members.
+
+**Answer:**
+
+## Research Question
+
+State the question your group wants to investigate. Aim for a question that is specific enough to answer with data, but interesting enough that your group actually wants to know the answer.
+
+**Answer:**
+
+## Data Source and Methodology
+
+You have two options for your data:
+
+1.  **A dataset from the course package `math260projdata` (recommended).** These 23 datasets are cleaned, documented, and pre-approved for the project.
+2.  **Data from another source:** another existing dataset, or data you collect yourself through an experiment or survey. These must be discussed with me **before** you submit this proposal.
+
+To browse the course package datasets, run the following in the Console:
+
+``` r
+install.packages("remotes")                          # first time only
+remotes::install_github("enordmoe/math260projdata")  # first time only
+
+library(math260projdata)
+?math260projdata     # overview of all 23 datasets
+?coffee              # help page for any one dataset
+```
+
+Describe your data plan below, following the instructions that apply to your group's approach.
+
+-   **Using a `math260projdata` dataset:** Name the dataset. Based on its help page, describe what one row represents and briefly explain how the data was originally collected (e.g., survey, government records, web scrape).
+
+-   **Using another existing dataset:** Explain where the data comes from, how you will obtain it, and what cleaning or reformatting it will need before analysis.
+
+-   **Conducting an experiment:** Describe the experimental design and procedure, why you chose this design, and how data will be recorded.
+
+-   **Conducting a survey (not recommended):** Describe your population of interest, sampling method, and how you'll obtain a random sample with a good response rate. Attach your questionnaire.
+
+**Answer:**
+
+## Variables of Interest
+
+Identify at least 3 **quantitative** and 3 **categorical** variables from your data source above that you expect to use. For each, note what it measures and, if relevant, its units.
+
+**Quantitative variables:**
+
+**Categorical variables:**
+
+## Anticipated Challenges
+
+Briefly note anything you're unsure about: data access, sample size, messiness, or feasibility of the analysis you have in mind.
+
+**Answer:**
