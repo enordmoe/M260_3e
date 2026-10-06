@@ -6,8 +6,8 @@
 <script src="sec3p2_lect_m260_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="sec3p2_lect_m260_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="sec3p2_lect_m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="sec3p2_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="sec3p2_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Math 260 Applied Statistics">
   <title>3.2 Understanding and Interpreting Confidence Intervals</title>
@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="sec3p2_lect_m260_files/libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="sec3p2_lect_m260_files/libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -29,7 +32,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="sec3p2_lect_m260_files/libs/revealjs/dist/theme/quarto-10df59a5396271df04a2ae28b52f1741.css">
+  <link rel="stylesheet" href="sec3p2_lect_m260_files/libs/revealjs/dist/theme/quarto-fe1b06afc5958099a575323cff4e8791.css">
   <link href="sec3p2_lect_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="sec3p2_lect_m260_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="sec3p2_lect_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -123,6 +126,15 @@
       margin-right: 0; 
     }
   </style>
+  <style>
+  .reveal .ws   { height: 2.5em; }
+  .reveal .ws-l { height: 5em; }
+  .reveal table.fillin { border-collapse: collapse; margin: 0.4em 0 0.8em 0; }
+  .reveal table.fillin th, .reveal table.fillin td {
+    border: 1px solid #888 !important; text-align: center; vertical-align: middle;
+    padding: 0.2em 0.5em; width: 5.5em; height: 2.4em; }
+  .reveal table.fillin .lab { width: auto; font-weight: bold; }
+  </style>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -154,6 +166,19 @@ Math 260 Applied Statistics
 <section id="interval-estimate" class="slide level2">
 <h2>Interval Estimate</h2>
 <p>An <strong>interval estimate</strong> gives a range of plausible values for a population parameter.</p>
+<aside class="notes">
+<p>Lead-in to the activity: so far (3.1) we saw that a single sample statistic bounces around from sample to sample. An interval estimate admits that bounce instead of reporting one number.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="margin-of-error" class="slide level2">
 <h2>Margin of Error</h2>
@@ -163,6 +188,71 @@ Math 260 Applied Statistics
 <p><span class="math display">\[
 \text{statistic} \pm \text{margin of error}
 \]</span> where the <strong>margin of error</strong> quantifies the precision of the sample statistic as a <em>point estimator</em> of the parameter.</p>
+</section>
+<section id="activity-coin-flipping" class="slide level2 smaller">
+<h2>Activity: Coin Flipping</h2>
+<p>Flip a coin <strong>25 times</strong>. Record the number of heads and tails:</p>
+<table class="fillin">
+<tbody><tr>
+<th>
+Heads
+</th>
+<th>
+Tails
+</th>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+</tr>
+</tbody></table>
+<p>Sample proportion of heads: <span class="math inline">\(\hat{p} =\)</span> _____________</p>
+<p>If you did this many, many times, describe the <strong>shape</strong> and <strong>center</strong> of the sampling distribution of sample proportions of heads in 25 flips of a coin.</p>
+<div class="ws-l">
+
+</div>
+<aside class="notes">
+<p>Have students flip (or use a coin app) and record on the printed handout. Collect each student’s <span class="math inline">\(\hat{p}\)</span> on the board or in a quick dotplot while they write.</p>
+<p>Answer: roughly symmetric, bell-shaped, centered at the true proportion 0.5. (Spread, for later: SE = sqrt(0.5 * 0.5 / 25) = 0.10, so the 0.20 margin of error on the next slide is exactly 2 SEs.)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="activity-an-interval-estimate-for-the-proportion-of-heads" class="slide level2 smaller">
+<h2>Activity: An Interval Estimate for the Proportion of Heads</h2>
+<p>Recall: your sample proportion was <span class="math inline">\(\hat{p}\)</span> = _________.</p>
+<p>The margin of error for a sample proportion in this situation is known to be <strong>0.20</strong>. (We’ll see how to find this later in the course.)</p>
+<p>Use this margin of error to find an interval estimate for the true proportion of heads in flipping a coin.</p>
+<p>Interval estimate is: ________________ to ________________</p>
+<div class="ws">
+
+</div>
+<p>Does your interval estimate contain the true proportion of 0.5? _________</p>
+<aside class="notes">
+<p>Interval: <span class="math inline">\(\hat{p} \pm 0.20\)</span>. For example, <span class="math inline">\(\hat{p}\)</span> = 0.44 gives 0.24 to 0.64, which contains 0.5.</p>
+<p>Class tally (do this on the board): how many of our intervals contain 0.5? An interval misses only if the number of heads is 7 or fewer, or 18 or more. For a fair coin the chance an interval captures 0.5 is about 0.957, so in a class of 30 expect roughly 1 or 2 misses. This sets up the “95% of all samples” idea on the next definition slide.</p>
+<p>Turn and talk (30 sec, optional): if you had flipped 250 times instead of 25, would you expect your interval to be wider or narrower? Why?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="how-moe-connects-to-se" class="slide level2 smaller">
 <h2>How MOE Connects to SE</h2>
@@ -183,6 +273,19 @@ Math 260 Applied Statistics
 <p>Key Point: <strong>MOE isn’t the SE.</strong> It’s <strong>“how many SEs”</strong> you need for ~95% capture.</p>
 </blockquote>
 </div>
+<aside class="notes">
+<p>Tie back to the activity: the 0.20 margin of error was 2 SEs, because the SE for 25 flips is 0.10.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="confidence-interval" class="slide level2">
 <h2>Confidence Interval</h2>
@@ -194,6 +297,62 @@ Math 260 Applied Statistics
 </ul></li>
 </ul>
 </section>
+<section id="example-1-margin-of-error-a-b" class="slide level2 smaller">
+<h2>Example 1: Margin of Error (a, b)</h2>
+<p>A survey of 1,000 American adults conducted between Sept.&nbsp;1-17, 2026 found that just 34% “approve of the way the Supreme Court is handling its job.” The survey goes on to say that “The margin of sampling error is +/- 4 percentage points with a 95% level of confidence.”</p>
+<p>a) What is the relevant sample statistic? Give appropriate notation and the value of the statistic.</p>
+<div class="ws">
+
+</div>
+<p>b) What population parameter are we estimating with this sample statistic?</p>
+<div class="ws">
+
+</div>
+<aside class="notes">
+<ol type="a">
+<li><p><span class="math inline">\(\hat{p} = 0.34\)</span> (34% of the 1,000 sampled adults approve).</p></li>
+<li><p><span class="math inline">\(p\)</span>, the proportion of <em>all</em> American adults who approve of the way the Supreme Court is handling its job (at that time).</p></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-1-margin-of-error-c-d" class="slide level2 smaller">
+<h2>Example 1: Margin of Error (c, d)</h2>
+<p>Recall: <span class="math inline">\(\hat{p} = 0.34\)</span>, margin of error = 0.04, 95% confidence.</p>
+<p>c) Use the margin of error to give a confidence interval for the estimate.</p>
+<div class="ws">
+
+</div>
+<p>d) Is 0.37 a plausible value of the population proportion? Is 0.50 a plausible value?</p>
+<div class="ws-l">
+
+</div>
+<aside class="notes">
+<ol start="3" type="a">
+<li><p>0.34 ± 0.04 = 0.30 to 0.38 (30% to 38%). We are 95% confident the proportion of all American adults who approve is between 30% and 38%.</p></li>
+<li><p>0.37 is inside the interval, so it is a plausible value; 0.50 is well outside, so it is not plausible. Point out that “plausible” means “consistent with the data at this confidence level,” not “impossible.”</p></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="sampling-distributions-and-margins-of-error" class="slide level2">
 <h2>Sampling Distributions and Margins of Error</h2>
 <p>If you had access to the sampling distribution, how would you find the margin of error to ensure that intervals of the form</p>
@@ -201,6 +360,9 @@ Math 260 Applied Statistics
 \text{statistic} \pm \text{margin of error}
 \]</span></p>
 <p>would capture the parameter for 95% of all samples?</p>
+<div class="fragment">
+<p><strong>Turn and talk (30–60 sec):</strong> Where on the sampling distribution would you put the cut-offs so that the middle 95% of sample statistics is between them?</p>
+</div>
 </section>
 <section id="confidence-interval-1" class="slide level2">
 <h2>95% Confidence Interval</h2>
@@ -209,16 +371,260 @@ Math 260 Applied Statistics
 \text{statistic} \pm 2\text{SE}
 \]</span></p>
 </section>
+<section id="example-2-hollywood-budgets-a" class="slide level2 smaller">
+<h2>Example 2: Hollywood Budgets (a)</h2>
+<p>A sampling distribution is shown for the mean budget (in millions of dollars) of Hollywood movies released in 2018, using samples of size <span class="math inline">\(n = 30\)</span>. The standard error is about <strong>9.3</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/sec3p2_hollywood2018_sampdist.png" class="quarto-figure quarto-figure-center" style="width:85.0%"></p>
+</figure>
+</div>
+<p>a) What margin of error gives a 95% interval of the form <span class="math inline">\(\bar{x} \pm \text{MOE}\)</span>?</p>
+<div class="ws">
+
+</div>
+
+<aside class="notes">
+<p>Margin of error = 2 × SE = 2 × 9.3 = <strong>18.6</strong> million dollars.</p>
+<p>Figure: 2,000 random samples of size 30 from the 137 movies released in 2018 that have a budget; each dot is one sample mean. The orange triangle marks the true population mean (51.70). SE from the simulation = 9.3 (Python, not run in R). To reproduce in R:</p>
+<p><code>mov &lt;- HollywoodMovies2018 |&gt; filter(Year == 2018, !is.na(Budget))</code></p>
+<p><code>sampdist &lt;- do(2000) * mean(~Budget, data = sample(mov, 30))</code></p>
+<p><code>sd(~mean, data = sampdist)</code></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Data: HollywoodMovies2018 (Lock5Data), 2018 releases with a known budget.</p>
+</div></aside></section>
+<section id="example-2-hollywood-budgets-b" class="slide level2 smaller">
+<h2>Example 2: Hollywood Budgets (b)</h2>
+<p>Recall: SE = 9.3 and the true mean budget of all 137 movies is <strong>51.70 million dollars</strong>.</p>
+<p>b) Use the SE to find the 95% confidence interval for each sample mean below, and indicate which intervals capture the true mean of 51.70.</p>
+<table class="fillin" style="width:100%">
+<tbody><tr>
+<th style="width:22%">
+Sample mean
+</th>
+<th style="width:48%">
+95% confidence interval
+</th>
+<th style="width:30%">
+Captures 51.70?
+</th>
+</tr>
+<tr>
+<td class="lab">
+<span class="math inline">\(\bar{x} = 40\)</span>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td class="lab">
+<span class="math inline">\(\bar{x} = 65\)</span>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td class="lab">
+<span class="math inline">\(\bar{x} = 75\)</span>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+</tbody></table>
+<aside class="notes">
+<p>Margin of error = 2 × 9.3 = 18.6.</p>
+<ul>
+<li>40: 21.4 to 58.6, captures 51.70.</li>
+<li>65: 46.4 to 83.6, captures 51.70.</li>
+<li>75: 56.4 to 93.6, does <strong>not</strong> capture 51.70.</li>
+</ul>
+<p>Capture happens exactly when the sample mean is within 2 SEs (18.6) of the truth. 40 is 11.7 away, 65 is 13.3 away, 75 is 23.3 away. In the simulation about 1% of sample means were 75 or more (a rare sample, far in the right tail) and about 3.5% were more than 18.6 from 51.70, in line with “95% of intervals capture.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="self-quiz-constructing-cis" class="slide level2 smaller">
+<h2>Self-Quiz: Constructing CIs</h2>
+<p>For each of the following, use the information to construct a 95% confidence interval and give notation for the quantity being estimated.</p>
+<table class="fillin" style="width:100%">
+<tbody><tr>
+<th style="width:7%">
+</th>
+<th style="width:38%">
+Information
+</th>
+<th style="width:30%">
+95% confidence interval
+</th>
+<th style="width:25%">
+Quantity estimated
+</th>
+</tr>
+<tr>
+<td class="lab">
+a)
+</td>
+<td>
+<span class="math inline">\(\hat{p} = 0.72\)</span>, SE = 0.04
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td class="lab">
+b)
+</td>
+<td>
+<span class="math inline">\(\bar{x} = 27\)</span>, SE = 3.2
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td class="lab">
+c)
+</td>
+<td>
+<span class="math inline">\(\hat{p}_1 - \hat{p}_2 = 0.05\)</span>, margin of error for 95% confidence = 0.02
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+</tbody></table>
+<aside class="notes">
+<ol type="a">
+<li><p>0.72 ± 2(0.04) = 0.72 ± 0.08 = <strong>0.64 to 0.80</strong>; estimating <span class="math inline">\(p\)</span>.</p></li>
+<li><p>27 ± 2(3.2) = 27 ± 6.4 = <strong>20.6 to 33.4</strong>; estimating <span class="math inline">\(\mu\)</span>.</p></li>
+<li><p>The margin of error is given, so no doubling: 0.05 ± 0.02 = <strong>0.03 to 0.07</strong>; estimating <span class="math inline">\(p_1 - p_2\)</span>.</p></li>
+</ol>
+<p>Watch for students doubling the 0.02 in part c.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="interpreting-a-confidence-interval" class="slide level2">
 <h2>Interpreting a Confidence Interval</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
 <ul>
 <li>We say we are <strong>95% confident</strong> or <strong>95% sure</strong> because
 <ul>
 <li>95% of all samples yield intervals that contain the true parameter</li>
 </ul></li>
 </ul>
+<div class="fragment">
+<p><strong>Turn and talk (30–60 sec):</strong> In the picture, what does each horizontal line represent? What is the vertical line? Why do a few intervals miss it?</p>
+</div>
+</div><div class="column" style="width:52%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/CIfig.jpg" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="example-3-roller-coaster-speeds" class="slide level2 smaller">
+<h2>Example 3: Roller Coaster Speeds</h2>
+<p>A random sample of 30 roller coasters from a worldwide database of 1,207 coasters has a mean top speed of <span class="math inline">\(\bar{x} = 71.3\)</span> km/h. The standard error of the sample mean is about 4.3 km/h.</p>
+<p>a) Find a 95% confidence interval for the mean top speed of the coasters in the database.</p>
+<div class="ws">
 
-<img data-src="figs/CIfig.jpg" class="quarto-figure quarto-figure-center r-stretch"></section>
+</div>
+<p>b) Clearly interpret the meaning of this confidence interval in context. What is the parameter?</p>
+<div class="ws-l">
+
+</div>
+<p>c) Is 65 km/h a plausible value for the population mean? Is 85 km/h?</p>
+<div class="ws">
+
+</div>
+
+<aside class="notes">
+<ol type="a">
+<li><p>71.3 ± 2(4.3) = 71.3 ± 8.6 = <strong>62.7 to 79.9 km/h</strong>.</p></li>
+<li><p>Parameter: <span class="math inline">\(\mu\)</span>, the mean top speed of all coasters in the database (1,207 of them). We are 95% confident that the mean top speed of all the coasters is between 62.7 and 79.9 km/h. Make sure the interpretation is about the <strong>population mean</strong>, not about the 30 sampled coasters and not about individual coasters.</p></li>
+<li><p>65 km/h is inside the interval, so it is plausible. 85 km/h is above 79.9, so it is not plausible.</p></li>
+</ol>
+<p>Instructor check: the actual mean top speed of all 1,207 coasters is 72.4 km/h, so this interval did capture the truth. SE was found by bootstrapping the sample of 30 (10,000 resamples, Python; not run in R). In class, students are only told the SE.</p>
+<p>Common slip: students say “95% of coasters have speeds between 62.7 and 79.9.” Individual coasters vary much more (SD of speed is about 27 km/h across the database). This anticipates Misinterpretation 1.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Data: coasters (math260projdata), Captain Coaster community database. Speed is in km/h.</p>
+</div></aside></section>
+<section id="example-4-is-the-economy-a-top-priority" class="slide level2 smaller">
+<h2>Example 4: Is the Economy a Top Priority?</h2>
+<p>A survey of 5,128 Americans in January 2022 found that 71% consider the economy a “top priority” for the president and congress. The standard error for this statistic is 0.006 (or 0.6%).</p>
+<p>Find and interpret a 95% confidence interval for the true proportion of all Americans that considered the economy a “top priority” at that time.</p>
+<div class="ws">
+
+</div>
+<div class="ws-l">
+
+</div>
+<aside class="notes">
+<p>0.71 ± 2(0.006) = 0.71 ± 0.012 = <strong>0.698 to 0.722</strong> (about 69.8% to 72.2%). We are 95% confident that the proportion of all Americans who considered the economy a top priority in January 2022 is between 69.8% and 72.2%.</p>
+<p>Why so narrow compared with the n = 30 coaster example? Big sample, so a small SE. Ask students what would have to change to get the same width with the coasters.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="confidence-interval-misconceptions" class="slide level2">
 <h2>Confidence Interval Misconceptions</h2>
 <p><strong>Misinterpretation 1</strong></p>
@@ -236,7 +642,58 @@ Math 260 Applied Statistics
 <ul>
 <li>“The probability that the population parameter is <strong>in this particular 95% confidence interval</strong> is 0.95.”</li>
 </ul>
+<aside class="notes">
+<p>Optional Turn and talk (30 sec): which of these three wrong statements did you find most tempting, and why?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
+</section>
+<section id="self-quiz-interpreting-a-ci-ac" class="slide level2 smaller">
+<h2>Self-Quiz: Interpreting a CI (a–c)</h2>
+<p>A survey conducted by the Pew Research Center in June 2023 asked 10,329 U.S. adults whether they believe the federal government should do more to reduce the effects of climate change and 56% agreed that the federal government should do more. The survey reports a margin of error of ±1.5 percentage points with a 95% confidence level, so the 95% confidence interval for the proportion of U.S. adults who believe the federal government should do more about climate change is <strong>54.5% to 57.5%</strong>.</p>
+<p>Which of the following statements are correct interpretations? (Select all that apply.)</p>
+<p>a) The true proportion of <em>all U.S. adults</em> who believe the federal government should do more about climate change is between 54.5% and 57.5%, with 95% confidence. _______</p>
+<p>b) We are 95% confident that between 54.5% and 57.5% of U.S. adults in <em>this sample</em> believe the government should do more about climate change. _______</p>
+<p>c) The confidence interval tells us that 95% of the population believes the federal government should do more about climate change. _______</p>
+</section>
+<section id="self-quiz-interpreting-a-ci-d-e" class="slide level2 smaller">
+<h2>Self-Quiz: Interpreting a CI (d, e)</h2>
+<p>Recall: the 95% confidence interval for the proportion of U.S. adults who believe the federal government should do more about climate change is 54.5% to 57.5%.</p>
+<p>d) If we repeated the survey many times, approximately 95% of the resulting confidence intervals would contain the true population proportion of U.S. adults who believe the federal government should do more about climate change. _______</p>
+<p>e) We are 95% confident that the proportion of U.S. adults who will believe in the future that the government should do more about climate change will fall between 54.5% and 57.5%. _______</p>
+<div class="ws">
+
+</div>
+<aside class="notes">
+<p>Correct: <strong>a</strong> and <strong>d</strong>.</p>
+<ul>
+<li>a: correct, the standard interpretation (about the population proportion).</li>
+<li>b: wrong, the sample proportion is known exactly (56%); the interval is about the population.</li>
+<li>c: wrong, Misinterpretation 1; 56% (not 95%) is the estimate for the share who agree.</li>
+<li>d: correct, the long-run “95% of all samples” meaning.</li>
+<li>e: wrong, the interval is about the population <em>now</em> (when surveyed), not future opinion.</li>
+</ul>
+<p>Consider asking students to rewrite one wrong option so it becomes correct.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
@@ -578,13 +1035,14 @@ Math 260 Applied Statistics
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
