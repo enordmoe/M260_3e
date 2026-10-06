@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="sec3p1_lect_m260_files/libs/clipboard/clipboard.min.js"></script>
-<script src="sec3p1_lect_m260_files/libs/quarto-html/tabby.min.js"></script>
-<script src="sec3p1_lect_m260_files/libs/quarto-html/popper.min.js"></script>
-<script src="sec3p1_lect_m260_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="sec3p1_lect_m260_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="sec3p1_lect_m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="sec3p1_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="sec3p1_m260_files/libs/clipboard/clipboard.min.js"></script>
+<script src="sec3p1_m260_files/libs/quarto-html/tabby.min.js"></script>
+<script src="sec3p1_m260_files/libs/quarto-html/popper.min.js"></script>
+<script src="sec3p1_m260_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="sec3p1_m260_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="sec3p1_m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="sec3p1_m260_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Math 260 Applied Statistics">
@@ -14,8 +14,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="sec3p1_lect_m260_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="sec3p1_lect_m260_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="sec3p1_m260_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="sec3p1_m260_files/libs/revealjs/dist/reveal.css">
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -32,13 +32,13 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="sec3p1_lect_m260_files/libs/revealjs/dist/theme/quarto-fe1b06afc5958099a575323cff4e8791.css">
-  <link href="sec3p1_lect_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="sec3p1_lect_m260_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="sec3p1_lect_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="sec3p1_lect_m260_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="sec3p1_lect_m260_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="sec3p1_lect_m260_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="sec3p1_m260_files/libs/revealjs/dist/theme/quarto-fe1b06afc5958099a575323cff4e8791.css">
+  <link href="sec3p1_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="sec3p1_m260_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="sec3p1_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="sec3p1_m260_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="sec3p1_m260_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="sec3p1_m260_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -128,6 +128,7 @@
   </style>
   <style>
   /* blank writing space on example slides; adjust heights here */
+  .reveal .wvs   { height: 1.5em; }
   .reveal .ws   { height: 2.5em; }
   .reveal .ws-l { height: 5em; }
   /* fill-in answer tables */
@@ -233,7 +234,7 @@ Math 260 Applied Statistics
 </section>
 <section id="example-1-health-information-from-ai-chatbots" class="slide level2 smaller">
 <h2>Example 1: Health Information from AI Chatbots</h2>
-<p>Back to Pew: of 5,111 U.S. adults surveyed in October 2025, 22% reported getting health information from AI chatbots at least sometimes.</p>
+<p>Back to Pew: Of 5,111 U.S. adults surveyed in October 2025, 22% reported getting health information from AI chatbots at least sometimes.</p>
 <p><strong>(a)</strong> Find the relevant proportion and give the correct notation with it.</p>
 <div class="ws">
 
@@ -365,24 +366,42 @@ Math 260 Applied Statistics
 <li><p><strong>Key Answer</strong> It depends on how much the statistic varies <em>from sample to sample</em>!</p></li>
 </ul>
 </section>
-<section id="sampling-variability-in-a-national-health-survey" class="slide level2 smaller">
-<h2>Sampling Variability in a National Health Survey</h2>
-<p>Every six months, the CDC’s National Health Interview Survey asks a <strong>new random sample</strong> of U.S. adults the same question: <em>Has a doctor ever told you that you have high blood pressure?</em></p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="sec3p1_lect_m260_files/figure-revealjs/unnamed-chunk-2-1.png" width="864"></p>
-</figure>
+<section id="activity-mm-sampling" class="slide level2 smaller">
+<h2>Activity: M&amp;M Sampling</h2>
+<div class="columns">
+<div class="column" style="width:58%;">
+<p>Your cup is a <strong>random sample</strong> of M&amp;Ms.</p>
+<ol type="1">
+<li>Count your M&amp;Ms: <span class="math inline">\(n =\)</span></li>
+</ol>
+<div class="wvs">
+
 </div>
+<ol start="2" type="1">
+<li>Count the <strong>orange</strong> ones:</li>
+</ol>
+<div class="wvs">
+
 </div>
+<ol start="3" type="1">
+<li>Compute your sample proportion<br> of orange: <span class="math inline">\(\hat p =\)</span></li>
+</ol>
+<div class="wvs">
+
 </div>
-<div class="fragment">
-<p><strong>Turn and talk (60 sec):</strong> Did the percentage of adults with high blood pressure really go up and down this much? Why do the estimates bounce around?</p>
+<ol start="4" type="1">
+<li><strong>Whole class combined:</strong> <br>proportion orange =</li>
+</ol>
+<div class="ws">
+
 </div>
+</div><div class="column" style="width:42%;">
+<p><img data-src="https://commons.wikimedia.org/wiki/Special:FilePath/Plain-M%26Ms-Pile.jpg?width=600" style="width:100.0%"></p>
+<p><strong>Before we look:</strong> will everyone get the same <span class="math inline">\(\hat p\)</span>? How different could they be?</p>
+</div></div>
 
 <aside class="notes">
-<p>Target: the true percentage is roughly steady; each half-year is a different random sample, so the estimate wobbles (about 26.2% to 28.0%). That wobble is sampling variability — same question, same survey design, different people. CDC’s 95% CIs are roughly ±0.8 to ±1.2 points and overlap across almost every period. Contrast with 1.2: this isn’t bias — the method stays the same every time. A sampling distribution is what we’d get if we could repeat this over and over. If someone asks about the scale: the y-axis starts at 24, which magnifies the bounces. Worth asking what the plot would look like from 0 to 100.</p>
+<p>Placeholder for the M&amp;M activity (about 20–25 per cup, each student has their own sample). Flow: collect counts in the spreadsheet → dotplot of the class p̂’s in R → same idea at scale in StatKey. Points to draw out: every p̂ is a legitimate estimate of the same p (proportion orange in all M&amp;Ms), yet they differ — that’s sampling variability. Ask what one dot is. Look for the range of p̂’s and, with luck, a mound shape. Connection forward: the class dotplot is a small sampling distribution (next slide). Have everyone write down the pooled class proportion (total orange / total M&amp;Ms) — the StatKey slides use it as the “pretend truth” p.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -395,7 +414,7 @@ Math 260 Applied Statistics
           display:block!important;
       }</style></aside>
 <aside><div>
-<p>Source: CDC/NCHS, NHIS Biannual Early Release Estimates (data.cdc.gov, dataset trpk-sp8z). H1 = Jan–Jun, H2 = Jul–Dec.</p>
+<p>Photo: Evan-Amos, Wikimedia Commons.</p>
 </div></aside></section>
 <section id="sampling-distribution" class="slide level2">
 <h2>Sampling Distribution</h2>
@@ -406,23 +425,24 @@ Math 260 Applied Statistics
 </ul></li>
 </ul>
 </section>
-<section id="statkey-build-a-sampling-distribution" class="slide level2 smaller">
-<h2>StatKey: Build a Sampling Distribution</h2>
+<section id="statkey-a-whole-lot-more-cups" class="slide level2 smaller">
+<h2>StatKey: A Whole Lot More Cups</h2>
+<p>Our class gave us a few dozen <span class="math inline">\(\hat p\)</span>’s. What if we could fill <strong>1000 cups</strong>?</p>
 <p>Open <a href="https://www.lock5stat.com/StatKey">StatKey</a> → <strong>Sampling Distributions: Proportion</strong></p>
 <ol type="1">
-<li>Click <strong>Edit Proportion</strong> and set the population proportion to <span class="math inline">\(p = 0.22\)</span> (pretend we know the truth for the Pew question).</li>
-<li>Set the sample size to <span class="math inline">\(n = 100\)</span>.</li>
-<li>Click <strong>Generate 1 Sample</strong> a few times. Watch <span class="math inline">\(\hat p\)</span> change.</li>
+<li>Click <strong>Edit Proportion</strong> and set <span class="math inline">\(p\)</span> to our <strong>class proportion orange</strong> (pretend that’s the truth for all M&amp;Ms).</li>
+<li>Set the sample size to <span class="math inline">\(n = 25\)</span> (about one cup).</li>
+<li>Click <strong>Generate 1 Sample</strong> a few times. Each one is a new cup. Watch <span class="math inline">\(\hat p\)</span> change.</li>
 <li>Now click <strong>Generate 1000 Samples</strong>.</li>
 </ol>
 <div class="fragment">
 <p><strong>With your partner:</strong><br>
 * What does one dot represent?<br>
 * Where is the distribution centered?<br>
-* What shape is it?</p>
+* What shape is it? How does it compare with our class dotplot?</p>
 </div>
 <aside class="notes">
-<p>One dot = one sample of 100 people, one p̂. Center ≈ 0.22 (= p). Shape: roughly symmetric and bell-shaped. Leave the StatKey window open — they’ll read the standard error off it in two slides, then change n.</p>
+<p>One dot = one cup of 25 M&amp;Ms, one p̂. Center ≈ the p they typed in. Shape: mound-shaped, though with only 25 per cup the dots stack in columns (p̂ can only be 0/25, 1/25, …) and there may be a slight right skew if p is near 0.2. The class dotplot is the same thing with far fewer dots. Leave the StatKey window open for the SE slide.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -452,20 +472,20 @@ Math 260 Applied Statistics
 <li><p>The standard error of a statistic is just the <strong>standard deviation of its sampling distribution.</strong></p></li>
 </ul>
 </section>
-<section id="statkey-read-the-standard-error" class="slide level2 smaller">
-<h2>StatKey: Read the Standard Error</h2>
-<p>Back in StatKey (still <span class="math inline">\(p = 0.22\)</span>, <span class="math inline">\(n = 100\)</span>, 1000+ samples):</p>
+<section id="statkey-how-much-do-cups-vary" class="slide level2 smaller">
+<h2>StatKey: How Much Do Cups Vary?</h2>
+<p>Back in StatKey (still our class <span class="math inline">\(p\)</span>, <span class="math inline">\(n = 25\)</span>, 1000+ samples):</p>
 <p>Find the <strong>std. error</strong> in the summary box (upper right).</p>
 <p>SE =</p>
 <div class="ws">
 
 </div>
-<p><strong>Turn and talk (30 sec):</strong> About 95% of the dots fall within 2 SE of the center. Check that on your dotplot — does it look right?</p>
+<p><strong>Turn and talk (30 sec):</strong> About 95% of the dots fall within 2 SE of the center. Was <em>your</em> cup’s <span class="math inline">\(\hat p\)</span> inside that range?</p>
 <div class="ws">
 
 </div>
 <aside class="notes">
-<p>Theoretical SE = √(0.22·0.78/100) ≈ 0.041; StatKey values will land near 0.040–0.043. Middle 95% ≈ 0.14 to 0.30. Don’t give the formula — SE is read from StatKey in this unit.</p>
+<p>Expected SE for n = 25: about 0.08 if p ≈ 0.20, about 0.087 if p ≈ 0.25, about 0.092 if p ≈ 0.30. So a typical cup is off by 8 or 9 percentage points — one cup is a noisy estimate. With 2 SE ≈ 0.16–0.18, nearly every student’s p̂ should be inside; if a few are outside, that’s the expected 1 in 20. Real cups vary in size (20–25), which StatKey ignores. Don’t give the formula — SE is read from StatKey in this unit.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -553,9 +573,10 @@ Math 260 Applied Statistics
           display:block!important;
       }</style></aside>
 </section>
-<section id="statkey-change-the-sample-size" class="slide level2 smaller">
-<h2>StatKey: Change the Sample Size</h2>
-<p>Back to <strong>Sampling Distributions: Proportion</strong> with <span class="math inline">\(p = 0.22\)</span>.</p>
+<section id="statkey-bigger-cups" class="slide level2 smaller">
+<h2>StatKey: Bigger Cups</h2>
+<p>What if each cup held <strong>100</strong> M&amp;Ms (about four of ours poured together)?</p>
+<p>Back to <strong>Sampling Distributions: Proportion</strong> with our class <span class="math inline">\(p\)</span>.</p>
 <table class="fillin caption-top">
 <tbody>
 <tr class="odd">
@@ -563,11 +584,11 @@ Math 260 Applied Statistics
 <th data-quarto-table-cell-role="th">Std. error from StatKey</th>
 </tr>
 <tr class="even">
-<td class="lab">\(n = 100\)</td>
+<td class="lab">\(n = 25\)</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td class="lab">\(n = 400\)</td>
+<td class="lab">\(n = 100\)</td>
 <td></td>
 </tr>
 </tbody>
@@ -579,7 +600,7 @@ Math 260 Applied Statistics
 
 </div>
 <aside class="notes">
-<p>Expected: n = 100 → SE ≈ 0.041; n = 400 → SE ≈ 0.021. Quadrupling n cuts the SE in half — sets up the matching self-quiz, which uses exactly that pattern (25 → 100 → 400). Remind them to click Generate 1000 Samples again after changing n (StatKey resets the plot).</p>
+<p>Expected: n = 25 → SE ≈ 0.08–0.09; n = 100 → SE ≈ 0.04–0.045 (for p between 0.20 and 0.30). Quadrupling n cuts the SE in half — sets up the matching self-quiz, which uses the same sizes (25 → 100 → 400). Remind them to click Generate 1000 Samples again after changing n (StatKey resets the plot). Optional physical check: have groups of four pool their cups and compute a group p̂ — those group values should sit closer together than the individual ones.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -698,20 +719,20 @@ Random sampling …
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="sec3p1_lect_m260_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="sec3p1_m260_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="sec3p1_lect_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="sec3p1_lect_m260_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="sec3p1_lect_m260_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="sec3p1_lect_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="sec3p1_lect_m260_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="sec3p1_lect_m260_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="sec3p1_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="sec3p1_m260_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="sec3p1_m260_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="sec3p1_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="sec3p1_m260_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="sec3p1_m260_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="sec3p1_lect_m260_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="sec3p1_lect_m260_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="sec3p1_lect_m260_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="sec3p1_lect_m260_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="sec3p1_m260_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="sec3p1_m260_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="sec3p1_m260_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="sec3p1_m260_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

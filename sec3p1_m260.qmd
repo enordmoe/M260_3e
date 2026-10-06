@@ -12,6 +12,7 @@ format:
       text: |
         <style>
         /* blank writing space on example slides; adjust heights here */
+        .reveal .wvs   { height: 1.5em; }
         .reveal .ws   { height: 2.5em; }
         .reveal .ws-l { height: 5em; }
         /* fill-in answer tables */
@@ -90,7 +91,7 @@ A **statistic** is a number that is computed from data in a **sample.**
 
 ## Example 1: Health Information from AI Chatbots {.smaller}
 
-Back to Pew: of 5,111 U.S. adults surveyed in October 2025, 22% reported
+Back to Pew: Of 5,111 U.S. adults surveyed in October 2025, 22% reported
 getting health information from AI chatbots at least sometimes.
 
 **(a)** Find the relevant proportion and give the correct notation with it.
@@ -217,52 +218,58 @@ see "500" and "200" and call it a parameter because the numbers are big.
 
 -   **Key Answer** It depends on how much the statistic varies *from sample to sample*!
 
-## Sampling Variability in a National Health Survey {.smaller}
+## Activity: M&M Sampling {.smaller}
 
-Every six months, the CDC's National Health Interview Survey asks a **new
-random sample** of U.S. adults the same question: *Has a doctor ever told
-you that you have high blood pressure?*
+::: columns
+::: {.column width="58%"}
+Your cup is a **random sample** of M&Ms.
 
-```{r}
-#| echo: false
-#| fig-height: 3.2
-#| fig-width: 9
-htn <- data.frame(
-  period = paste(rep(2019:2025, each = 2), c("H1", "H2")),
-  pct = c(26.8, 27.5, 26.2, 27.0, 26.9, 28.0, 26.7,
-          27.2, 27.8, 27.4, 27.6, 27.0, 27.6, 27.9)
-)
-htn$period <- factor(htn$period, levels = htn$period)
-gf_line(pct ~ period, data = htn, group = 1, color = "gray60") |>
-  gf_point(size = 3, color = "#EA6820") |>
-  gf_labs(x = NULL, y = "% of U.S. adults") |>
-  gf_lims(y = c(24, 30)) |>
-  gf_theme(theme_bw(base_size = 14)) |>
-  gf_theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
+1.  Count your M&Ms: $n =$
 
-::: {.fragment}
-**Turn and talk (60 sec):** Did the percentage of adults with high blood
-pressure really go up and down this much? Why do the estimates bounce
-around?
+::: {.wvs}
+:::
+
+2.  Count the **orange** ones:
+
+::: {.wvs}
+:::
+
+3.  Compute your sample proportion<br> of orange: $\hat p =$
+
+::: {.wvs}
+:::
+
+4. **Whole class combined:** <br>proportion orange =
+
+::: {.ws}
+:::
+:::
+
+::: {.column width="42%"}
+![](https://commons.wikimedia.org/wiki/Special:FilePath/Plain-M%26Ms-Pile.jpg?width=600){width="100%"}
+
+**Before we look:** will everyone get the same $\hat p$? How different
+could they be?
+:::
 :::
 
 ::: aside
-Source: CDC/NCHS, NHIS Biannual Early Release Estimates (data.cdc.gov, dataset trpk-sp8z). H1 = Jan–Jun, H2 = Jul–Dec.
+Photo: Evan-Amos, Wikimedia Commons.
 :::
 
 ::: notes
-Target: the true percentage is roughly steady; each half-year is a
-different random sample, so the estimate wobbles (about 26.2% to 28.0%).
-That wobble is sampling variability — same question, same survey design,
-different people. CDC's 95% CIs are roughly ±0.8 to ±1.2 points and
-overlap across almost every period.
-Contrast with 1.2: this isn't bias — the method stays the same every
-time. A sampling distribution is what we'd get if we could repeat this
-over and over.
-If someone asks about the scale: the y-axis starts at 24, which
-magnifies the bounces. Worth asking what the plot would look like
-from 0 to 100.
+Placeholder for the M&M activity (about 20–25 per cup, each student
+has their own sample).
+Flow: collect counts in the spreadsheet → dotplot of the class p̂'s in
+R → same idea at scale in StatKey.
+Points to draw out: every p̂ is a legitimate estimate of the same p
+(proportion orange in all M&Ms), yet they differ — that's sampling
+variability. Ask what one dot is. Look for the range of p̂'s and, with
+luck, a mound shape.
+Connection forward: the class dotplot is a small sampling distribution
+(next slide). Have everyone write down the pooled class proportion
+(total orange / total M&Ms) — the StatKey slides use it as the
+"pretend truth" p.
 :::
 
 ## Sampling Distribution
@@ -271,29 +278,34 @@ from 0 to 100.
 
     -   A sampling distribution shows us how the sample statistic varies *from sample to sample*.
 
-## StatKey: Build a Sampling Distribution {.smaller}
+## StatKey: A Whole Lot More Cups {.smaller}
+
+Our class gave us a few dozen $\hat p$'s. What if we could fill
+**1000 cups**?
 
 Open [StatKey](https://www.lock5stat.com/StatKey) →
 **Sampling Distributions: Proportion**
 
-1.  Click **Edit Proportion** and set the population proportion to
-    $p = 0.22$ (pretend we know the truth for the Pew question).
-2.  Set the sample size to $n = 100$.
-3.  Click **Generate 1 Sample** a few times. Watch $\hat p$ change.
+1.  Click **Edit Proportion** and set $p$ to our **class proportion
+    orange** (pretend that's the truth for all M&Ms).
+2.  Set the sample size to $n = 25$ (about one cup).
+3.  Click **Generate 1 Sample** a few times. Each one is a new cup. Watch
+    $\hat p$ change.
 4.  Now click **Generate 1000 Samples**.
 
 ::: {.fragment}
 **With your partner:**  
 * What does one dot represent?  
 * Where is the distribution centered?  
-* What shape is it?
+* What shape is it? How does it compare with our class dotplot?
 :::
 
 ::: notes
-One dot = one sample of 100 people, one p̂. Center ≈ 0.22 (= p).
-Shape: roughly symmetric and bell-shaped. Leave the StatKey window
-open — they'll read the standard error off it in two slides, then
-change n.
+One dot = one cup of 25 M&Ms, one p̂. Center ≈ the p they typed in.
+Shape: mound-shaped, though with only 25 per cup the dots stack in
+columns (p̂ can only be 0/25, 1/25, ...) and there may be a slight
+right skew if p is near 0.2. The class dotplot is the same thing with
+far fewer dots. Leave the StatKey window open for the SE slide.
 :::
 
 ## Center and Shape of Sampling Distributions
@@ -314,9 +326,9 @@ change n.
 
 -   The standard error of a statistic is just the **standard deviation of its sampling distribution.**
 
-## StatKey: Read the Standard Error {.smaller}
+## StatKey: How Much Do Cups Vary? {.smaller}
 
-Back in StatKey (still $p = 0.22$, $n = 100$, 1000+ samples):
+Back in StatKey (still our class $p$, $n = 25$, 1000+ samples):
 
 Find the **std. error** in the summary box (upper right).
 
@@ -326,15 +338,18 @@ SE =
 :::
 
 **Turn and talk (30 sec):** About 95% of the dots fall within 2 SE of
-the center. Check that on your dotplot — does it look right?
+the center. Was *your* cup's $\hat p$ inside that range?
 
 ::: {.ws}
 :::
 
 ::: notes
-Theoretical SE = √(0.22·0.78/100) ≈ 0.041; StatKey values will land
-near 0.040–0.043. Middle 95% ≈ 0.14 to 0.30. Don't give the formula —
-SE is read from StatKey in this unit.
+Expected SE for n = 25: about 0.08 if p ≈ 0.20, about 0.087 if
+p ≈ 0.25, about 0.092 if p ≈ 0.30. So a typical cup is off by 8 or 9
+percentage points — one cup is a noisy estimate. With 2 SE ≈ 0.16–0.18,
+nearly every student's p̂ should be inside; if a few are outside, that's
+the expected 1 in 20. Real cups vary in size (20–25), which StatKey
+ignores. Don't give the formula — SE is read from StatKey in this unit.
 :::
 
 ## Example 3: Proportion Never Married {.smaller}
@@ -398,15 +413,17 @@ Accept anything 0.015–0.025.
 before the StatKey check on the next slide.
 :::
 
-## StatKey: Change the Sample Size {.smaller}
+## StatKey: Bigger Cups {.smaller}
 
-Back to **Sampling Distributions: Proportion** with $p = 0.22$.
+What if each cup held **100** M&Ms (about four of ours poured together)?
+
+Back to **Sampling Distributions: Proportion** with our class $p$.
 
 ```{=html}
 <table class="fillin">
 <tr><th class="lab">Sample size</th><th>Std. error from StatKey</th></tr>
+<tr><td class="lab">\(n = 25\)</td><td></td></tr>
 <tr><td class="lab">\(n = 100\)</td><td></td></tr>
-<tr><td class="lab">\(n = 400\)</td><td></td></tr>
 </table>
 ```
 
@@ -418,10 +435,13 @@ Back to **Sampling Distributions: Proportion** with $p = 0.22$.
 :::
 
 ::: notes
-Expected: n = 100 → SE ≈ 0.041; n = 400 → SE ≈ 0.021. Quadrupling n
-cuts the SE in half — sets up the matching self-quiz, which uses
-exactly that pattern (25 → 100 → 400). Remind them to click
-Generate 1000 Samples again after changing n (StatKey resets the plot).
+Expected: n = 25 → SE ≈ 0.08–0.09; n = 100 → SE ≈ 0.04–0.045
+(for p between 0.20 and 0.30). Quadrupling n cuts the SE in half —
+sets up the matching self-quiz, which uses the same sizes
+(25 → 100 → 400). Remind them to click Generate 1000 Samples again
+after changing n (StatKey resets the plot). Optional physical check:
+have groups of four pool their cups and compute a group p̂ — those
+group values should sit closer together than the individual ones.
 :::
 
 ## What Happens to Sampling Variability as the Sample Size Gets Larger?
