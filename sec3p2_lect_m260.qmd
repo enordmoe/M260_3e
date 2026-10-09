@@ -13,6 +13,12 @@ format:
         <style>
         .reveal .ws   { height: 2.5em; }
         .reveal .ws-l { height: 5em; }
+        /* typeable answer boxes (contenteditable): same minimum footprint as .ws / .ws-l, grow if you type more */
+        .reveal .ws.ed, .reveal .ws-l.ed { height: auto; text-align: left; font-size: 0.9em;
+          color: #1a3a8a; outline: none; }
+        .reveal .ws.ed   { min-height: 2.5em; }
+        .reveal .ws-l.ed { min-height: 5em; }
+        .reveal .ws.ed:focus, .reveal .ws-l.ed:focus { outline: 2px dashed #EA6820; outline-offset: 2px; }
         .reveal table.fillin { border-collapse: collapse; margin: 0.4em 0 0.8em 0; }
         .reveal table.fillin th, .reveal table.fillin td {
           border: 1px solid #888 !important; text-align: center; vertical-align: middle;
@@ -75,7 +81,7 @@ Sample proportion of heads: $\hat{p} =$ \_\_\_\_\_\_\_\_\_\_\_\_\_
 
 If you did this many, many times, describe the **shape** and **center** of the sampling distribution of sample proportions of heads in 25 flips of a coin.
 
-::: {.ws-l}
+::: {.ws-l .ed contenteditable="true"}
 :::
 
 ::: notes
@@ -152,7 +158,7 @@ a\) What is the relevant sample statistic? Give appropriate notation and the val
 
 b\) What population parameter are we estimating with this sample statistic?
 
-::: {.ws}
+::: {.ws .ed contenteditable="true"}
 :::
 
 ::: notes
@@ -172,7 +178,7 @@ c\) Use the margin of error to give a confidence interval for the estimate.
 
 d\) Is 0.37 a plausible value of the population proportion? Is 0.50 a plausible value?
 
-::: {.ws-l}
+::: {.ws-l .ed contenteditable="true"}
 :::
 
 ::: notes
@@ -302,7 +308,7 @@ a\) Find a 95% confidence interval for the mean top speed of the coasters in the
 
 b\) Clearly interpret the meaning of this confidence interval in context. What is the parameter?
 
-::: {.ws-l}
+::: {.ws-l .ed contenteditable="true"}
 :::
 
 c\) Is 65 km/h a plausible value for the population mean? Is 85 km/h?
@@ -335,7 +341,7 @@ Find and interpret a 95% confidence interval for the true proportion of all Amer
 ::: {.ws}
 :::
 
-::: {.ws-l}
+::: {.ws-l .ed contenteditable="true"}
 :::
 
 ::: notes

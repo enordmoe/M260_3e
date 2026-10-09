@@ -129,6 +129,12 @@
   <style>
   .reveal .ws   { height: 2.5em; }
   .reveal .ws-l { height: 5em; }
+  /* typeable answer boxes (contenteditable): same minimum footprint as .ws / .ws-l, grow if you type more */
+  .reveal .ws.ed, .reveal .ws-l.ed { height: auto; text-align: left; font-size: 0.9em;
+    color: #1a3a8a; outline: none; }
+  .reveal .ws.ed   { min-height: 2.5em; }
+  .reveal .ws-l.ed { min-height: 5em; }
+  .reveal .ws.ed:focus, .reveal .ws-l.ed:focus { outline: 2px dashed #EA6820; outline-offset: 2px; }
   .reveal table.fillin { border-collapse: collapse; margin: 0.4em 0 0.8em 0; }
   .reveal table.fillin th, .reveal table.fillin td {
     border: 1px solid #888 !important; text-align: center; vertical-align: middle;
@@ -210,7 +216,7 @@ Tails
 </tbody></table>
 <p>Sample proportion of heads: <span class="math inline">\(\hat{p} =\)</span> _____________</p>
 <p>If you did this many, many times, describe the <strong>shape</strong> and <strong>center</strong> of the sampling distribution of sample proportions of heads in 25 flips of a coin.</p>
-<div class="ws-l">
+<div class="ws-l ed" contenteditable="true">
 
 </div>
 <aside class="notes">
@@ -305,7 +311,7 @@ Tails
 
 </div>
 <p>b) What population parameter are we estimating with this sample statistic?</p>
-<div class="ws">
+<div class="ws ed" contenteditable="true">
 
 </div>
 <aside class="notes">
@@ -333,7 +339,7 @@ Tails
 
 </div>
 <p>d) Is 0.37 a plausible value of the population proportion? Is 0.50 a plausible value?</p>
-<div class="ws-l">
+<div class="ws-l ed" contenteditable="true">
 
 </div>
 <aside class="notes">
@@ -570,7 +576,7 @@ c)
 
 </div>
 <p>b) Clearly interpret the meaning of this confidence interval in context. What is the parameter?</p>
-<div class="ws-l">
+<div class="ws-l ed" contenteditable="true">
 
 </div>
 <p>c) Is 65 km/h a plausible value for the population mean? Is 85 km/h?</p>
@@ -607,7 +613,7 @@ c)
 <div class="ws">
 
 </div>
-<div class="ws-l">
+<div class="ws-l ed" contenteditable="true">
 
 </div>
 <aside class="notes">
