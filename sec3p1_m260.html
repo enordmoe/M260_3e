@@ -131,6 +131,10 @@
   .reveal .wvs   { height: 1.5em; }
   .reveal .ws   { height: 2.5em; }
   .reveal .ws-l { height: 5em; }
+  /* typeable answer boxes (contenteditable): same footprint as .ws-l, grows if you type more */
+  .reveal .ws-l.ed { height: auto; min-height: 5em; text-align: left; font-size: 0.9em;
+    color: #1a3a8a; outline: none; }
+  .reveal .ws-l.ed:focus { outline: 2px dashed #EA6820; outline-offset: 2px; }
   /* fill-in answer tables */
   .reveal table.fillin { border-collapse: collapse; margin: 0.4em 0 0.8em 0; }
   .reveal table.fillin th, .reveal table.fillin td {
@@ -171,7 +175,7 @@ Math 260 Applied Statistics
 <p>In October 2025, Pew Research Center surveyed <strong>5,111 U.S. adults</strong>. <strong>22%</strong> said they get health information from AI chatbots at least sometimes.</p>
 <div class="fragment">
 <p><strong>Turn and talk (60 sec):</strong><br>
-1. If Pew repeated the survey next week with a <em>new</em> random sample of 5,111 adults, would they get exactly 22% again?<br>
+1. If Pew repeated the survey the next week with a <em>new</em> random sample of 5,111 adults, would they get exactly 22% again?<br>
 2. Would they get something <em>close</em> to 22%? How close?<br>
 3. Is 22% the answer for <em>all</em> U.S. adults?</p>
 </div>
@@ -269,11 +273,11 @@ Math 260 Applied Statistics
 <h2>Example 2: Books Read in a Year</h2>
 <p>A survey of 2,986 Americans ages 16 and older found that 80% of them read at least one book in the last year. Of these book readers, the <strong>mean</strong> number of books read in the last year is <strong>17</strong>, while the <strong>median</strong> is <strong>8</strong>.</p>
 <p><strong>(a)</strong> How many “book readers” (read at least one book in the past year) were included in the sample?</p>
-<div class="ws-l">
+<div class="ws-l ed" contenteditable="true">
 
 </div>
 <p><strong>(b)</strong> Why might the mean and median be so different? What is the likely shape of the distribution of books read by book readers?</p>
-<div class="ws-l">
+<div class="ws-l ed" contenteditable="true">
 
 </div>
 <aside class="notes">
@@ -297,11 +301,11 @@ Math 260 Applied Statistics
 <h2>Example 2 (continued)</h2>
 <p>Recall: among the book readers in the sample, the <strong>mean</strong> number of books read in the last year is <strong>17</strong> and the <strong>median</strong> is <strong>8</strong>.</p>
 <p><strong>(c)</strong> Give the correct notation for the value 17. Is it a parameter or a statistic?</p>
-<div class="ws-l">
+<div class="ws-l ed" contenteditable="true">
 
 </div>
 <p><strong>(d)</strong> Give notation for and define the population parameter that we estimate using the result of part (c).</p>
-<div class="ws-l">
+<div class="ws-l ed" contenteditable="true">
 
 </div>
 <aside class="notes">

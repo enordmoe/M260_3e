@@ -15,6 +15,10 @@ format:
         .reveal .wvs   { height: 1.5em; }
         .reveal .ws   { height: 2.5em; }
         .reveal .ws-l { height: 5em; }
+        /* typeable answer boxes (contenteditable): same footprint as .ws-l, grows if you type more */
+        .reveal .ws-l.ed { height: auto; min-height: 5em; text-align: left; font-size: 0.9em;
+          color: #1a3a8a; outline: none; }
+        .reveal .ws-l.ed:focus { outline: 2px dashed #EA6820; outline-offset: 2px; }
         /* fill-in answer tables */
         .reveal table.fillin { border-collapse: collapse; margin: 0.4em 0 0.8em 0; }
         .reveal table.fillin th, .reveal table.fillin td {
@@ -57,7 +61,7 @@ sometimes.
 
 ::: {.fragment}
 **Turn and talk (60 sec):**  
-1. If Pew repeated the survey next week with a *new* random sample of
+1. If Pew repeated the survey the next week with a *new* random sample of
 5,111 adults, would they get exactly 22% again?  
 2. Would they get something *close* to 22%? How close?  
 3. Is 22% the answer for *all* U.S. adults?
@@ -129,13 +133,13 @@ read at least one book in the last year. Of these book readers, the
 **(a)** How many "book readers" (read at least one book in the past
 year) were included in the sample?
 
-::: {.ws-l}
+::: {.ws-l .ed contenteditable="true"}
 :::
 
 **(b)** Why might the mean and median be so different? What is the
 likely shape of the distribution of books read by book readers?
 
-::: {.ws-l}
+::: {.ws-l .ed contenteditable="true"}
 :::
 
 ::: notes
@@ -152,13 +156,13 @@ books read in the last year is **17** and the **median** is **8**.
 **(c)** Give the correct notation for the value 17. Is it a parameter
 or a statistic?
 
-::: {.ws-l}
+::: {.ws-l .ed contenteditable="true"}
 :::
 
 **(d)** Give notation for and define the population parameter that we
 estimate using the result of part (c).
 
-::: {.ws-l}
+::: {.ws-l .ed contenteditable="true"}
 :::
 
 ::: notes
