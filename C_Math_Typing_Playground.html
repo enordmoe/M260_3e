@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Math Typing Playground</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<style>
+:root{
+  --bg:#fafafa; --card:#ffffff; --ink:#1f2430; --muted:#5d6475; --line:#dcdfe6;
+  --accent:#5b2c83; --accent-soft:#f1ebf7; --good:#1c7a45; --good-soft:#e5f4ea; --bad:#a3262a; --bad-soft:#fbeaea;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15171c; --card:#1d2027; --ink:#e8eaf0; --muted:#9aa1b2; --line:#343946;
+    --accent:#c4a3e8; --accent-soft:#2a2336; --good:#6fd39a; --good-soft:#1a2c22; --bad:#f08a8d; --bad-soft:#341d1f;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:920px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:1.5rem;margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 16px}
+.modes{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.pill{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 14px;border-radius:999px;cursor:pointer;font:inherit}
+.pill[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pill[aria-pressed="true"]{color:#15171c}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px}
+.card h2{font-size:1rem;margin:0 0 8px;color:var(--accent)}
+.steps{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.dot{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--muted);font-size:.8rem;cursor:pointer}
+.dot.cur{border-color:var(--accent);color:var(--accent);font-weight:700}
+.dot.done{background:var(--good);border-color:var(--good);color:#fff}
+.target{min-height:64px;display:flex;align-items:center;justify-content:center;background:var(--accent-soft);border-radius:8px;padding:10px;font-size:1.35rem;overflow-x:auto}
+.ask{margin:8px 0 0}
+.palette{display:flex;flex-direction:column;gap:8px}
+.group{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.group b{font-size:.78rem;color:var(--muted);width:78px;flex:none}
+.key{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:5px 9px;cursor:pointer;min-width:38px;font:inherit}
+.key:hover{border-color:var(--accent)}
+textarea{width:100%;font:1.05rem/1.4 ui-monospace,Menlo,Consolas,monospace;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);resize:vertical;min-height:70px}
+textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+.preview{min-height:64px;display:flex;align-items:center;justify-content:center;border:1px dashed var(--line);border-radius:8px;padding:10px;font-size:1.35rem;overflow-x:auto}
+.preview.inline{justify-content:flex-start;font-size:1rem}
+.msg{margin-top:8px;padding:8px 12px;border-radius:8px;font-size:.95rem}
+.msg.good{background:var(--good-soft);color:var(--good)}
+.msg.bad{background:var(--bad-soft);color:var(--bad)}
+.msg.info{background:var(--accent-soft);color:var(--ink)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.btn{border:1px solid var(--accent);background:var(--card);color:var(--accent);border-radius:8px;padding:7px 14px;cursor:pointer;font:inherit}
+.btn.primary{background:var(--accent);color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.primary{color:#15171c}}
+.btn[disabled]{opacity:.45;cursor:default}
+code.q{background:var(--accent-soft);padding:1px 6px;border-radius:5px;font-size:.9em}
+label.opt{display:inline-flex;gap:6px;align-items:center;color:var(--muted);font-size:.9rem}
+.hidden{display:none}
+.katex-error{color:var(--bad)}
+</style>
+</head>
+<body>
+<main>
+  <h1>Math Typing Playground</h1>
+  <p class="sub">Type LaTeX in the box and watch the math appear. Click the symbol buttons if you do not remember a command.</p>
+
+  <div class="modes" role="group" aria-label="Mode">
+    <button class="pill" id="m-chal" aria-pressed="true">Challenges</button>
+    <button class="pill" id="m-free" aria-pressed="false">Free play</button>
+  </div>
+
+  <section class="card" id="chal-card">
+    <h2 id="chal-title"></h2>
+    <div class="steps" id="steps" aria-label="Challenge progress"></div>
+    <div class="target" id="target" aria-label="Target expression"></div>
+    <p class="ask" id="ask"></p>
+  </section>
+
+  <section class="card">
+    <h2>Symbol buttons</h2>
+    <div class="palette" id="palette"></div>
+  </section>
+
+  <section class="card">
+    <h2>Your turn: type here (no dollar signs needed)</h2>
+    <textarea id="src" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="Example: \bar{x} = 12.4"></textarea>
+    <div class="row">
+      <label class="opt"><input type="radio" name="disp" value="inline" checked> Inside a sentence</label>
+      <label class="opt"><input type="radio" name="disp" value="display"> On its own line</label>
+    </div>
+    <h2 style="margin-top:12px">What you get</h2>
+    <div class="preview" id="preview"></div>
+    <div id="msg"></div>
+    <div class="row" id="chal-row">
+      <button class="btn primary" id="check">Check my answer</button>
+      <button class="btn" id="hint">Hint</button>
+      <button class="btn" id="reveal">Show the answer</button>
+      <button class="btn" id="next" disabled>Next challenge</button>
+    </div>
+    <div class="row">
+      <button class="btn" id="copy">Copy for Quarto</button>
+      <span id="copied" class="sub" style="margin:0"></span>
+    </div>
+  </section>
+</main>
+
+<script>
+const CHALLENGES = [
+ {
+  "title": "A sample mean",
+  "ask": "Make the symbol for a sample mean: the letter x with a bar over it.",
+  "target": "\\bar{x}",
+  "hint": "A bar over a letter uses \\bar{ } with the letter inside the braces.",
+  "answer": "\\bar{x}"
+ },
+ {
+  "title": "A population mean",
+  "ask": "Make the Greek letter mu (the population mean).",
+  "target": "\\mu",
+  "hint": "Greek letters are a backslash plus the English name of the letter.",
+  "answer": "\\mu"
+ },
+ {
+  "title": "A sample proportion",
+  "ask": "Make p with a hat on it.",
+  "target": "\\hat{p}",
+  "hint": "A hat uses \\hat{ } with the letter inside the braces.",
+  "answer": "\\hat{p}"
+ },
+ {
+  "title": "A subscript",
+  "ask": "Make mu with a subscript 0.",
+  "target": "\\mu_0",
+  "hint": "An underscore _ makes a subscript. One character after it needs no braces.",
+  "answer": "\\mu_0"
+ },
+ {
+  "title": "A null hypothesis",
+  "ask": "Type the null hypothesis that the population mean body temperature is 98.6.",
+  "target": "H_0: \\mu = 98.6",
+  "hint": "Use H_0, then a colon, then \\mu, then = and the number.",
+  "answer": "H_0: \\mu = 98.6"
+ },
+ {
+  "title": "A two-sided alternative",
+  "ask": "Type the alternative hypothesis that the population mean is not equal to 98.6.",
+  "target": "H_a: \\mu \\ne 98.6",
+  "hint": "The not-equal symbol is \\ne. The subscript is the letter a.",
+  "answer": "H_a: \\mu \\ne 98.6"
+ },
+ {
+  "title": "A one-sided alternative",
+  "ask": "Type the alternative hypothesis that the population proportion is greater than 0.5.",
+  "target": "H_a: p > 0.5",
+  "hint": "Greater than is just the > key. No backslash needed.",
+  "answer": "H_a: p > 0.5"
+ },
+ {
+  "title": "Two groups",
+  "ask": "Type the null hypothesis that two population means are equal, written as a difference equal to zero.",
+  "target": "H_0: \\mu_1 - \\mu_2 = 0",
+  "hint": "Two subscripted mus with a minus sign between them.",
+  "answer": "H_0: \\mu_1 - \\mu_2 = 0"
+ },
+ {
+  "title": "Statistic plus or minus",
+  "ask": "Make the start of an interval estimate: p-hat, plus or minus, then ME.",
+  "target": "\\hat{p} \\pm ME",
+  "hint": "Use \\hat{p}, then \\pm, then the letters ME.",
+  "answer": "\\hat{p} \\pm ME"
+ },
+ {
+  "title": "A 95% interval from a standard error",
+  "ask": "Make x-bar plus or minus 2 times SE.",
+  "target": "\\bar{x} \\pm 2 \\times SE",
+  "hint": "The multiplication sign is \\times.",
+  "answer": "\\bar{x} \\pm 2 \\times SE"
+ },
+ {
+  "title": "An interval with numbers",
+  "ask": "Type the interval from 0.58 to 0.66, in parentheses with a comma.",
+  "target": "(0.58, 0.66)",
+  "hint": "Parentheses and commas are just typed. No backslashes needed.",
+  "answer": "(0.58, 0.66)"
+ },
+ {
+  "title": "Two groups of proportions",
+  "ask": "Make the difference of two sample proportions: p-hat with subscript 1, minus p-hat with subscript 2.",
+  "target": "\\hat{p}_1 - \\hat{p}_2",
+  "hint": "Put the subscript after the closing brace of \\hat{p}.",
+  "answer": "\\hat{p}_1 - \\hat{p}_2"
+ },
+ {
+  "title": "A percent sign",
+  "ask": "Make: 95%",
+  "target": "95\\%",
+  "hint": "Inside math, a percent sign needs a backslash in front of it.",
+  "answer": "95\\%"
+ },
+ {
+  "title": "A fraction with a root",
+  "ask": "Make the standard error: s over the square root of n.",
+  "target": "SE = \\frac{s}{\\sqrt{n}}",
+  "hint": "\\frac{top}{bottom}, with \\sqrt{n} in the bottom braces.",
+  "answer": "SE = \\frac{s}{\\sqrt{n}}"
+ },
+ {
+  "title": "A test statistic",
+  "ask": "Make the z statistic for a mean.",
+  "target": "z = \\frac{\\bar{x} - \\mu_0}{\\sigma / \\sqrt{n}}",
+  "hint": "Top: \\bar{x} - \\mu_0. Bottom: \\sigma / \\sqrt{n}. Wrap each in braces after \\frac.",
+  "answer": "z = \\frac{\\bar{x} - \\mu_0}{\\sigma / \\sqrt{n}}"
+ },
+ {
+  "title": "A confidence interval",
+  "ask": "Make the confidence interval formula for a proportion.",
+  "target": "\\hat{p} \\pm z^* \\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}",
+  "hint": "\\pm, then z^*, then \\sqrt with a \\frac inside its braces.",
+  "answer": "\\hat{p} \\pm z^* \\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}"
+ }
+];
+
+const GROUPS = [
+  {name:"Letters", keys:[["μ","\\mu"],["σ","\\sigma"],["α","\\alpha"],["β","\\beta"],["ρ","\\rho"],["χ","\\chi"],["π","\\pi"]]},
+  {name:"Marks", keys:[["x̄","\\bar{}",-1],["p̂","\\hat{}",-1],["x₁","_{}",-1],["x²","^{}",-1]]},
+  {name:"Compare", keys:[["≠","\\ne "],["≤","\\le "],["≥","\\ge "],["±","\\pm "],["<","< "],[">","> "],["=","= "]]},
+  {name:"Structure", keys:[["a/b","\\frac{}{}",-3],["√","\\sqrt{}",-1],["H₀","H_0: "],["Hₐ","H_a: "]]}
+];
+
+let mode = "chal", idx = 0, done = new Set(), solved = false;
+const $ = id => document.getElementById(id);
+const src = $("src");
+
+function ready(fn){ if (window.katex) fn(); else setTimeout(()=>ready(fn), 40); }
+
+function norm(tex){
+  try{
+    const s = katex.renderToString(tex, {output:"mathml", throwOnError:true, displayMode:true});
+    return s.replace(/<annotation[\s\S]*?<\/annotation>/g, "").replace(/\s+/g, "");
+  }catch(e){ return null; }
+}
+
+function renderInto(el, tex, display){
+  try{
+    katex.render(tex, el, {displayMode: display, throwOnError: true});
+    return null;
+  }catch(e){
+    el.textContent = tex;
+    return (e.message || "").replace(/^KaTeX parse error:\s*/, "");
+  }
+}
+
+function friendly(err){
+  if (!err) return "";
+  if (/Undefined control sequence/.test(err)){
+    const m = err.match(/Undefined control sequence:\s*(\\\w+)/);
+    return "I do not know the command " + (m?m[1]:"you typed") + ". Check the spelling of the word after the backslash.";
+  }
+  if (/Expected '}'|Unexpected end of input|Expected group/.test(err)) return "A brace is not closed. Every { needs a matching }.";
+  if (/Expected 'EOF'|Unexpected '}'/.test(err)) return "There is an extra } somewhere.";
+  if (/Double subscript|Double superscript/.test(err)) return "Two subscripts (or two superscripts) in a row. Put each one in its own braces.";
+  return "Something is not quite right: " + err;
+}
+
+function currentTex(){ return src.value.trim(); }
+function isDisplay(){ return document.querySelector('input[name="disp"]:checked').value === "display"; }
+
+function updatePreview(){
+  const tex = currentTex(), el = $("preview");
+  el.classList.toggle("inline", !isDisplay());
+  if (!tex){ el.textContent = ""; $("msg").innerHTML = ""; return; }
+  const err = renderInto(el, tex, isDisplay());
+  const m = $("msg");
+  if (err) m.innerHTML = '<div class="msg bad">' + friendly(err).replace(/</g,"&lt;") + '</div>';
+  else if (!(mode==="chal" && solved)) m.innerHTML = "";
+}
+
+function buildPalette(){
+  const p = $("palette");
+  GROUPS.forEach(g=>{
+    const row = document.createElement("div"); row.className = "group";
+    row.innerHTML = "<b>" + g.name + "</b>";
+    g.keys.forEach(([label, ins, back])=>{
+      const b = document.createElement("button");
+      b.className = "key"; b.type = "button"; b.textContent = label; b.title = ins.trim();
+      b.addEventListener("click", ()=>insertAtCursor(ins, back||0));
+      row.appendChild(b);
+    });
+    p.appendChild(row);
+  });
+}
+
+function insertAtCursor(text, back){
+  const s = src.selectionStart, e = src.selectionEnd;
+  src.value = src.value.slice(0,s) + text + src.value.slice(e);
+  const pos = s + text.length + back;
+  src.focus(); src.setSelectionRange(pos, pos);
+  updatePreview();
+}
+
+function buildSteps(){
+  const st = $("steps"); st.innerHTML = "";
+  CHALLENGES.forEach((c,i)=>{
+    const d = document.createElement("button");
+    d.className = "dot" + (i===idx?" cur":"") + (done.has(i)?" done":"");
+    d.textContent = done.has(i) ? "✓" : (i+1);
+    d.setAttribute("aria-label", "Challenge " + (i+1));
+    d.addEventListener("click", ()=>{ idx = i; loadChallenge(); });
+    st.appendChild(d);
+  });
+}
+
+function loadChallenge(){
+  const c = CHALLENGES[idx]; solved = done.has(idx);
+  $("chal-title").textContent = "Challenge " + (idx+1) + " of " + CHALLENGES.length + ": " + c.title;
+  renderInto($("target"), c.target, true);
+  $("ask").textContent = c.ask;
+  src.value = ""; $("msg").innerHTML = ""; $("preview").textContent = "";
+  $("next").disabled = !solved;
+  buildSteps(); src.focus();
+}
+
+function setMode(m){
+  mode = m;
+  $("m-chal").setAttribute("aria-pressed", m==="chal");
+  $("m-free").setAttribute("aria-pressed", m==="free");
+  $("chal-card").classList.toggle("hidden", m!=="chal");
+  $("chal-row").classList.toggle("hidden", m!=="chal");
+  $("msg").innerHTML = "";
+  if (m==="chal") loadChallenge(); else { src.value=""; $("preview").textContent=""; src.focus(); }
+}
+
+function check(){
+  const tex = currentTex();
+  if (!tex){ $("msg").innerHTML = '<div class="msg info">Type something first, then check.</div>'; return; }
+  const mine = norm(tex), want = norm(CHALLENGES[idx].target);
+  if (mine === null){ updatePreview(); return; }
+  if (mine === want){
+    done.add(idx); solved = true; $("next").disabled = (idx === CHALLENGES.length-1);
+    $("msg").innerHTML = '<div class="msg good">That matches. ' + (idx < CHALLENGES.length-1 ? "Click Next challenge." : "You finished every challenge.") + '</div>';
+    buildSteps();
+  } else {
+    $("msg").innerHTML = '<div class="msg bad">It renders, but it does not look like the target yet. Compare the two carefully, or click Hint.</div>';
+  }
+}
+
+ready(()=>{
+  buildPalette(); setMode("chal");
+  src.addEventListener("input", updatePreview);
+  document.querySelectorAll('input[name="disp"]').forEach(r=>r.addEventListener("change", updatePreview));
+  $("m-chal").onclick = ()=>setMode("chal");
+  $("m-free").onclick = ()=>setMode("free");
+  $("check").onclick = check;
+  $("hint").onclick = ()=>{ $("msg").innerHTML = '<div class="msg info">Hint: ' + CHALLENGES[idx].hint.replace(/</g,"&lt;") + '</div>'; };
+  $("reveal").onclick = ()=>{
+    const a = CHALLENGES[idx].answer;
+    $("msg").innerHTML = '<div class="msg info">One way to type it: <code class="q"></code></div>';
+    $("msg").querySelector("code").textContent = a;
+  };
+  $("next").onclick = ()=>{ if (idx < CHALLENGES.length-1){ idx++; loadChallenge(); } };
+  $("copy").onclick = async ()=>{
+    const t = currentTex(); if (!t) return;
+    const out = isDisplay() ? "$$" + t + "$$" : "$" + t + "$";
+    const note = $("copied");
+    let ok = false;
+    try{ await navigator.clipboard.writeText(out); ok = true; }catch(e){}
+    if (!ok){
+      try{
+        const ta = document.createElement("textarea");
+        ta.value = out; ta.setAttribute("readonly",""); ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select();
+        ok = document.execCommand("copy");
+        document.body.removeChild(ta);
+      }catch(e){}
+    }
+    if (ok){ note.textContent = "Copied. Paste it into your Quarto file."; setTimeout(()=>note.textContent="", 4000); }
+    else {
+      note.innerHTML = 'Your browser blocked copying here. Select this and copy it: <input id="sel" readonly style="font:inherit;font-family:ui-monospace,Menlo,monospace;padding:3px 6px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink)">';
+      const i = $("sel"); i.value = out; i.size = Math.max(10, out.length + 2); i.focus(); i.select();
+    }
+  };
+});
+</script>
+</body>
+</html>
