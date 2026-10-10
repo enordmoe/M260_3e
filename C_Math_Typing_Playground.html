@@ -169,13 +169,6 @@ const CHALLENGES = [
   "answer": "\\hat{p} \\pm ME"
  },
  {
-  "title": "A 95% interval from a standard error",
-  "ask": "Make x-bar plus or minus 2 times SE.",
-  "target": "\\bar{x} \\pm 2 \\times SE",
-  "hint": "The multiplication sign is \\times.",
-  "answer": "\\bar{x} \\pm 2 \\times SE"
- },
- {
   "title": "An interval with numbers",
   "ask": "Type the interval from 0.58 to 0.66, in parentheses with a comma.",
   "target": "(0.58, 0.66)",
@@ -195,35 +188,14 @@ const CHALLENGES = [
   "target": "95\\%",
   "hint": "Inside math, a percent sign needs a backslash in front of it.",
   "answer": "95\\%"
- },
- {
-  "title": "A fraction with a root",
-  "ask": "Make the standard error: s over the square root of n.",
-  "target": "SE = \\frac{s}{\\sqrt{n}}",
-  "hint": "\\frac{top}{bottom}, with \\sqrt{n} in the bottom braces.",
-  "answer": "SE = \\frac{s}{\\sqrt{n}}"
- },
- {
-  "title": "A test statistic",
-  "ask": "Make the z statistic for a mean.",
-  "target": "z = \\frac{\\bar{x} - \\mu_0}{\\sigma / \\sqrt{n}}",
-  "hint": "Top: \\bar{x} - \\mu_0. Bottom: \\sigma / \\sqrt{n}. Wrap each in braces after \\frac.",
-  "answer": "z = \\frac{\\bar{x} - \\mu_0}{\\sigma / \\sqrt{n}}"
- },
- {
-  "title": "A confidence interval",
-  "ask": "Make the confidence interval formula for a proportion.",
-  "target": "\\hat{p} \\pm z^* \\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}",
-  "hint": "\\pm, then z^*, then \\sqrt with a \\frac inside its braces.",
-  "answer": "\\hat{p} \\pm z^* \\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}"
  }
 ];
 
 const GROUPS = [
-  {name:"Letters", keys:[["μ","\\mu"],["σ","\\sigma"],["α","\\alpha"],["β","\\beta"],["ρ","\\rho"],["χ","\\chi"],["π","\\pi"]]},
+  {name:"Letters", keys:[["μ","\\mu"],["σ","\\sigma"],["α","\\alpha"],["ρ","\\rho"]]},
   {name:"Marks", keys:[["x̄","\\bar{}",-1],["p̂","\\hat{}",-1],["x₁","_{}",-1],["x²","^{}",-1]]},
   {name:"Compare", keys:[["≠","\\ne "],["≤","\\le "],["≥","\\ge "],["±","\\pm "],["<","< "],[">","> "],["=","= "]]},
-  {name:"Structure", keys:[["a/b","\\frac{}{}",-3],["√","\\sqrt{}",-1],["H₀","H_0: "],["Hₐ","H_a: "]]}
+  {name:"Hypotheses", keys:[["H₀","H_0: "],["Hₐ","H_a: "]]}
 ];
 
 let mode = "chal", idx = 0, done = new Set(), solved = false;

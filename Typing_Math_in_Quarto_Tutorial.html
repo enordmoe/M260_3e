@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Typing Math in Quarto: A Gentle Introduction</title>
+<title>Typing Math in Quarto: A Quick Start</title>
 <style>
 
 code{white-space: pre-wrap;}
@@ -2244,32 +2244,15 @@ window.Quarto = {
 
 </head>
 
-<body class="quarto-light">
+<body class="fullcontent quarto-light">
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul class="collapse">
-  <li><a href="#start-here" id="toc-start-here" class="nav-link active" data-scroll-target="#start-here">Start here</a></li>
-  <li><a href="#step-1-dollar-signs-turn-math-on" id="toc-step-1-dollar-signs-turn-math-on" class="nav-link" data-scroll-target="#step-1-dollar-signs-turn-math-on">Step 1: Dollar signs turn math on</a></li>
-  <li><a href="#step-2-the-symbols-you-will-use-most" id="toc-step-2-the-symbols-you-will-use-most" class="nav-link" data-scroll-target="#step-2-the-symbols-you-will-use-most">Step 2: The symbols you will use most</a></li>
-  <li><a href="#step-3-comparison-symbols" id="toc-step-3-comparison-symbols" class="nav-link" data-scroll-target="#step-3-comparison-symbols">Step 3: Comparison symbols</a></li>
-  <li><a href="#step-4-subscripts-and-superscripts" id="toc-step-4-subscripts-and-superscripts" class="nav-link" data-scroll-target="#step-4-subscripts-and-superscripts">Step 4: Subscripts and superscripts</a></li>
-  <li><a href="#step-5-writing-hypotheses" id="toc-step-5-writing-hypotheses" class="nav-link" data-scroll-target="#step-5-writing-hypotheses">Step 5: Writing hypotheses</a></li>
-  <li><a href="#step-6-fractions-and-square-roots" id="toc-step-6-fractions-and-square-roots" class="nav-link" data-scroll-target="#step-6-fractions-and-square-roots">Step 6: Fractions and square roots</a></li>
-  <li><a href="#step-7-putting-it-together" id="toc-step-7-putting-it-together" class="nav-link" data-scroll-target="#step-7-putting-it-together">Step 7: Putting it together</a></li>
-  <li><a href="#when-something-goes-wrong" id="toc-when-something-goes-wrong" class="nav-link" data-scroll-target="#when-something-goes-wrong">When something goes wrong</a></li>
-  <li><a href="#quick-reference" id="toc-quick-reference" class="nav-link" data-scroll-target="#quick-reference">Quick reference</a></li>
-  </ul>
-</nav>
-</div>
+
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Typing Math in Quarto: A Gentle Introduction</h1>
+<h1 class="title">Typing Math in Quarto: A Quick Start</h1>
 <p class="subtitle lead">Math 260 Applied Statistics</p>
 </div>
 
@@ -2289,42 +2272,18 @@ window.Quarto = {
 
 <section id="start-here" class="level1">
 <h1>Start here</h1>
-<p>You will sometimes want to write a statistical symbol or formula, such as a hypothesis like <span class="math inline">H_0: \mu = 98.6</span>. This tutorial shows you how, in about 20 minutes.</p>
-<p><strong>This is optional.</strong> You can always describe a hypothesis in words. But if you would like to use symbols, this is the whole skill, and it is smaller than it looks.</p>
-<p><strong>How to use this tutorial</strong></p>
-<ol type="1">
-<li>Open this file in RStudio and click <strong>Render</strong> to see the finished page. Then look at the source on the left and the result on the right, side by side.</li>
-<li>In each <strong>Your turn</strong> section, type your answer on the blank line underneath, then click <strong>Render</strong> again.</li>
-<li>Click <strong>Check your answer</strong> to compare. Yours does not need to match letter for letter. It just needs to look right when rendered.</li>
-</ol>
+<p>This is optional. If you would like to write a few symbols in your homework, such as the hypothesis <span class="math inline">H_0: \mu = 98.6</span>, this is all you need. It takes about 10 minutes.</p>
+<p>Click <strong>Render</strong> to see this page. In each <strong>Your turn</strong>, type your answer on the blank line, click <strong>Render</strong> again, and then open <strong>Check your answer</strong>. Yours only needs to look right when rendered.</p>
 </section>
 <section id="step-1-dollar-signs-turn-math-on" class="level1">
 <h1>Step 1: Dollar signs turn math on</h1>
-<p>Ordinary text is just text. To get math, put it between dollar signs.</p>
-<p>You type:</p>
+<p>Put math between dollar signs.</p>
 <pre><code>The population mean is $\mu$.</code></pre>
 <p>You get: The population mean is <span class="math inline">\mu</span>.</p>
-<p>A symbol that begins with a backslash, like <code>\mu</code>, is a <em>command</em>. Without the dollar signs, you would see the plain text <code>\mu</code>.</p>
-<p>Two dollar signs on each side put the math on its own centered line:</p>
-<pre><code>$$\bar{x} = 12.4$$</code></pre>
-<p><span class="math display">\bar{x} = 12.4</span></p>
-<p>Use single dollar signs inside a sentence and double dollar signs for a line of its own.</p>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>A real dollar sign
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Because <code>$</code> switches math on, a price needs a backslash in front: type <code>\$5</code> to get $5.</p>
-</div>
-</div>
+<p>A symbol that starts with a backslash, like <code>\mu</code>, is a <em>command</em>. Without the dollar signs you would see the plain text <code>\mu</code>. (To get a real dollar sign, type <code>\$</code>.)</p>
 </section>
-<section id="step-2-the-symbols-you-will-use-most" class="level1">
-<h1>Step 2: The symbols you will use most</h1>
+<section id="step-2-the-symbols-you-will-use" class="level1">
+<h1>Step 2: The symbols you will use</h1>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -2360,30 +2319,39 @@ window.Quarto = {
 <td style="text-align: left;">significance level</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>$\beta$</code></td>
-<td style="text-align: center;"><span class="math inline">\beta</span></td>
-<td style="text-align: left;">slope (in regression)</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;"><code>$\rho$</code></td>
 <td style="text-align: center;"><span class="math inline">\rho</span></td>
 <td style="text-align: left;">population correlation</td>
 </tr>
+<tr class="odd">
+<td style="text-align: left;"><code>$\ne$</code></td>
+<td style="text-align: center;"><span class="math inline">\ne</span></td>
+<td style="text-align: left;">not equal to</td>
+</tr>
 <tr class="even">
-<td style="text-align: left;"><code>$\chi^2$</code></td>
-<td style="text-align: center;"><span class="math inline">\chi^2</span></td>
-<td style="text-align: left;">chi-square</td>
+<td style="text-align: left;"><code>$\le$</code></td>
+<td style="text-align: center;"><span class="math inline">\le</span></td>
+<td style="text-align: left;">less than or equal to</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>$\ge$</code></td>
+<td style="text-align: center;"><span class="math inline">\ge</span></td>
+<td style="text-align: left;">greater than or equal to</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>$\pm$</code></td>
+<td style="text-align: center;"><span class="math inline">\pm</span></td>
+<td style="text-align: left;">plus or minus</td>
 </tr>
 </tbody>
 </table>
-<p>Notice the pattern. Greek letters are the backslash plus the English name of the letter. A hat or a bar goes on a letter using <code>\hat{ }</code> or <code>\bar{ }</code>, with the letter inside the braces.</p>
+<p>Greek letters are a backslash plus the English name. A bar or hat goes over a letter with <code>\bar{ }</code> or <code>\hat{ }</code>, with the letter inside the braces. The keys <code>=</code>, <code>&lt;</code> and <code>&gt;</code> are just typed.</p>
 <section id="your-turn" class="level3">
 <h3 class="anchored" data-anchor-id="your-turn">Your turn</h3>
-<p>Write one sentence with the symbol for a sample mean and the symbol for a population mean. For example, “The sample mean is … and the population mean is …”, with the symbols filled in.</p>
+<p>Write a sentence with the symbol for a sample mean and the symbol for a population mean.</p>
 <p>Type your answer here:</p>
-<p> </p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2392,7 +2360,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><code>The sample mean is $\bar{x}$ and the population mean is $\mu$.</code></p>
 <p>The sample mean is <span class="math inline">\bar{x}</span> and the population mean is <span class="math inline">\mu</span>.</p>
@@ -2401,64 +2369,9 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="step-3-comparison-symbols" class="level1">
-<h1>Step 3: Comparison symbols</h1>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">You type</th>
-<th style="text-align: center;">You get</th>
-<th style="text-align: left;">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><code>$=$</code></td>
-<td style="text-align: center;"><span class="math inline">=</span></td>
-<td style="text-align: left;">equals</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>$\ne$</code></td>
-<td style="text-align: center;"><span class="math inline">\ne</span></td>
-<td style="text-align: left;">not equal to</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>$&lt;$</code></td>
-<td style="text-align: center;"><span class="math inline">&lt;</span></td>
-<td style="text-align: left;">less than</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>$&gt;$</code></td>
-<td style="text-align: center;"><span class="math inline">&gt;</span></td>
-<td style="text-align: left;">greater than</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>$\le$</code></td>
-<td style="text-align: center;"><span class="math inline">\le</span></td>
-<td style="text-align: left;">less than or equal to</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>$\ge$</code></td>
-<td style="text-align: center;"><span class="math inline">\ge</span></td>
-<td style="text-align: left;">greater than or equal to</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>$\pm$</code></td>
-<td style="text-align: center;"><span class="math inline">\pm</span></td>
-<td style="text-align: left;">plus or minus</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>$\approx$</code></td>
-<td style="text-align: center;"><span class="math inline">\approx</span></td>
-<td style="text-align: left;">approximately equal</td>
-</tr>
-</tbody>
-</table>
-<p>For <code>=</code>, <code>&lt;</code> and <code>&gt;</code> you simply type the key. The others are backslash commands.</p>
-</section>
-<section id="step-4-subscripts-and-superscripts" class="level1">
-<h1>Step 4: Subscripts and superscripts</h1>
-<p>An underscore <code>_</code> makes a subscript (it drops down). A caret <code>^</code> makes a superscript (it rises).</p>
+<section id="step-3-subscripts" class="level1">
+<h1>Step 3: Subscripts</h1>
+<p>An underscore <code>_</code> makes a subscript. A caret <code>^</code> makes a superscript.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -2472,14 +2385,6 @@ window.Quarto = {
 <td style="text-align: center;"><span class="math inline">\mu_1</span></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>$\bar{x}_2$</code></td>
-<td style="text-align: center;"><span class="math inline">\bar{x}_2</span></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>$x^2$</code></td>
-<td style="text-align: center;"><span class="math inline">x^2</span></td>
-</tr>
-<tr class="even">
 <td style="text-align: left;"><code>$H_0$</code></td>
 <td style="text-align: center;"><span class="math inline">H_0</span></td>
 </tr>
@@ -2487,97 +2392,54 @@ window.Quarto = {
 <td style="text-align: left;"><code>$H_a$</code></td>
 <td style="text-align: center;"><span class="math inline">H_a</span></td>
 </tr>
+<tr class="even">
+<td style="text-align: left;"><code>$x^2$</code></td>
+<td style="text-align: center;"><span class="math inline">x^2</span></td>
+</tr>
 </tbody>
 </table>
-<p><strong>One rule to remember:</strong> if the subscript or superscript is more than one character, put it in braces.</p>
-<pre><code>$x_10$     gives  x with a 1 below, then a 0 beside it (wrong)
-$x_{10}$   gives  x with 10 below (right)</code></pre>
-<p><span class="math inline">x_{10}</span> is right. When unsure, use braces. They never hurt.</p>
-<section id="your-turn-1" class="level3">
-<h3 class="anchored" data-anchor-id="your-turn-1">Your turn</h3>
-<p>Write the symbol for the mean of group 1 and the mean of group 2, separated by “and”. These are population means, so use <span class="math inline">\mu</span> with subscripts.</p>
-<p>Type your answer here:</p>
-<p> </p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Check your answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><code>$\mu_1$ and $\mu_2$</code></p>
-<p><span class="math inline">\mu_1</span> and <span class="math inline">\mu_2</span></p>
-</div>
-</div>
-</div>
+<p>If the subscript or superscript is more than one character, put it in braces: <code>$x_{10}$</code> gives <span class="math inline">x_{10}</span>.</p>
 </section>
-</section>
-<section id="step-5-writing-hypotheses" class="level1">
-<h1>Step 5: Writing hypotheses</h1>
-<p>You now have everything you need for hypotheses. Notice the colon after <span class="math inline">H_0</span> and <span class="math inline">H_a</span>, and that everything stays inside one pair of dollar signs.</p>
-<pre><code>$H_0: \mu = 98.6$
-$H_a: \mu \ne 98.6$</code></pre>
-<p><span class="math inline">H_0: \mu = 98.6</span></p>
-<p><span class="math inline">H_a: \mu \ne 98.6</span></p>
-<p>Here are more patterns to copy and adapt.</p>
+<section id="step-4-hypotheses-and-intervals" class="level1">
+<h1>Step 4: Hypotheses and intervals</h1>
+<p>Put the whole hypothesis inside one pair of dollar signs, with a colon after <span class="math inline">H_0</span> or <span class="math inline">H_a</span>.</p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 23%">
-<col style="width: 39%">
-<col style="width: 36%">
-</colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Situation</th>
 <th style="text-align: left;">You type</th>
 <th style="text-align: center;">You get</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">One proportion</td>
-<td style="text-align: left;"><code>$H_0: p = 0.5$</code></td>
-<td style="text-align: center;"><span class="math inline">H_0: p = 0.5</span></td>
+<td style="text-align: left;"><code>$H_0: \mu = 98.6$</code></td>
+<td style="text-align: center;"><span class="math inline">H_0: \mu = 98.6</span></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">One-sided</td>
+<td style="text-align: left;"><code>$H_a: \mu \ne 98.6$</code></td>
+<td style="text-align: center;"><span class="math inline">H_a: \mu \ne 98.6</span></td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;"><code>$H_a: p &gt; 0.5$</code></td>
 <td style="text-align: center;"><span class="math inline">H_a: p &gt; 0.5</span></td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">Two means</td>
+<tr class="even">
 <td style="text-align: left;"><code>$H_0: \mu_1 - \mu_2 = 0$</code></td>
 <td style="text-align: center;"><span class="math inline">H_0: \mu_1 - \mu_2 = 0</span></td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">Two proportions</td>
-<td style="text-align: left;"><code>$H_a: p_1 \ne p_2$</code></td>
-<td style="text-align: center;"><span class="math inline">H_a: p_1 \ne p_2</span></td>
-</tr>
 <tr class="odd">
-<td style="text-align: left;">Correlation</td>
-<td style="text-align: left;"><code>$H_0: \rho = 0$</code></td>
-<td style="text-align: center;"><span class="math inline">H_0: \rho = 0</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Slope</td>
-<td style="text-align: left;"><code>$H_a: \beta_1 \ne 0$</code></td>
-<td style="text-align: center;"><span class="math inline">H_a: \beta_1 \ne 0</span></td>
+<td style="text-align: left;"><code>$\hat{p} \pm ME$</code></td>
+<td style="text-align: center;"><span class="math inline">\hat{p} \pm ME</span></td>
 </tr>
 </tbody>
 </table>
-<section id="your-turn-2" class="level3">
-<h3 class="anchored" data-anchor-id="your-turn-2">Your turn</h3>
+<p>Inside dollar signs a percent sign needs a backslash: <code>$95\%$</code> gives <span class="math inline">95\%</span>.</p>
+<section id="your-turn-1" class="level3">
+<h3 class="anchored" data-anchor-id="your-turn-1">Your turn</h3>
 <p>A researcher wonders whether the average sleep of college students differs from 8 hours. Let <span class="math inline">\mu</span> be the population mean hours of sleep. Write the null and alternative hypotheses.</p>
 <p>Type your answer here:</p>
-<p> </p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -2586,7 +2448,7 @@ $H_a: \mu \ne 98.6$</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <pre><code>$H_0: \mu = 8$
 
@@ -2597,215 +2459,36 @@ $H_a: \mu \ne 8$</code></pre>
 </div>
 </div>
 </section>
-<section id="your-turn-3" class="level3">
-<h3 class="anchored" data-anchor-id="your-turn-3">Your turn</h3>
-<p>A different study asks whether a majority of voters in a town support a ballot measure. Let <span class="math inline">p</span> be the population proportion who support it. Write the hypotheses.</p>
-<p>Type your answer here:</p>
-<p> </p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Check your answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<pre><code>$H_0: p = 0.5$
-
-$H_a: p &gt; 0.5$</code></pre>
-<p><span class="math inline">H_0: p = 0.5</span></p>
-<p><span class="math inline">H_a: p &gt; 0.5</span></p>
-</div>
-</div>
-</div>
 </section>
-</section>
-<section id="step-6-fractions-and-square-roots" class="level1">
-<h1>Step 6: Fractions and square roots</h1>
-<p><code>\frac{top}{bottom}</code> makes a fraction. <code>\sqrt{ }</code> makes a square root of whatever is inside the braces.</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">You type</th>
-<th style="text-align: center;">You get</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><code>$\frac{1}{2}$</code></td>
-<td style="text-align: center;"><span class="math inline">\frac{1}{2}</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>$\sqrt{n}$</code></td>
-<td style="text-align: center;"><span class="math inline">\sqrt{n}</span></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>$\frac{s}{\sqrt{n}}$</code></td>
-<td style="text-align: center;"><span class="math inline">\frac{s}{\sqrt{n}}</span></td>
-</tr>
-</tbody>
-</table>
-<p>A formula is just these pieces combined. Here is the standard error of a sample mean, on its own line:</p>
-<pre><code>$$SE = \frac{s}{\sqrt{n}}$$</code></pre>
-<p><span class="math display">SE = \frac{s}{\sqrt{n}}</span></p>
-<section id="your-turn-4" class="level3">
-<h3 class="anchored" data-anchor-id="your-turn-4">Your turn</h3>
-<p>Type the formula for a standardized score, <span class="math inline">z = \dfrac{x - \mu}{\sigma}</span>, on its own line.</p>
-<p>Type your answer here:</p>
-<p> </p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Check your answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<pre><code>$$z = \frac{x - \mu}{\sigma}$$</code></pre>
-<p><span class="math display">z = \frac{x - \mu}{\sigma}</span></p>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="step-7-putting-it-together" class="level1">
-<h1>Step 7: Putting it together</h1>
-<p>Here are formulas you will meet in this course, typed exactly as shown. Look at the source for each and see how it is built from the pieces above.</p>
-<p>Test statistic for a mean:</p>
-<pre><code>$$z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}}$$</code></pre>
-<p><span class="math display">z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}}</span></p>
-<p>Confidence interval for a proportion:</p>
-<pre><code>$$\hat{p} \pm z^* \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$$</code></pre>
-<p><span class="math display">\hat{p} \pm z^* \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}</span></p>
-<p>If you want to show your work line by line, put each line on its own row, ending every row except the last with <code>\\</code>:</p>
-<pre><code>$$
-\begin{gather*}
-\hat{p} \pm z^* \sqrt{\hat{p}(1-\hat{p})/n} \\
-0.42 \pm 1.96 \sqrt{0.42(1-0.42)/200} \\
-0.42 \pm 0.068 \\
-(0.352, 0.488)
-\end{gather*}
-$$</code></pre>
-<p><span class="math display">\begin{gather*}
-\hat{p} \pm z^* \sqrt{\hat{p}(1-\hat{p})/n} \\
-0.42 \pm 1.96 \sqrt{0.42(1-0.42)/200} \\
-0.42 \pm 0.068 \\
-(0.352, 0.488)
-\end{gather*}</span></p>
-</section>
-<section id="when-something-goes-wrong" class="level1">
-<h1>When something goes wrong</h1>
+<section id="if-something-goes-wrong" class="level1">
+<h1>If something goes wrong</h1>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">What you see</th>
-<th style="text-align: left;">Likely cause</th>
 <th style="text-align: left;">Fix</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Backslash command shows as plain text, such as <code>\mu</code></td>
-<td style="text-align: left;">Missing dollar signs</td>
-<td style="text-align: left;">Wrap the math in <code>$ ... $</code></td>
+<td style="text-align: left;">Plain text like <code>\mu</code> instead of a symbol</td>
+<td style="text-align: left;">Wrap it in dollar signs</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Large parts of the page look like math</td>
-<td style="text-align: left;">An odd number of dollar signs</td>
-<td style="text-align: left;">Find the one that is missing or extra</td>
+<td style="text-align: left;">Big parts of the page look like math</td>
+<td style="text-align: left;">You have an odd number of dollar signs</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Subscript only takes the first character</td>
-<td style="text-align: left;">Missing braces</td>
-<td style="text-align: left;">Write <code>x_{10}</code> instead of <code>x_10</code></td>
+<td style="text-align: left;">A subscript only takes the first character</td>
+<td style="text-align: left;">Use braces: <code>x_{10}</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Red error text instead of a formula</td>
-<td style="text-align: left;">A typo in a command name, or an unmatched brace</td>
-<td style="text-align: left;">Check every <code>{</code> has a matching <code>}</code></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">A price like $5 disappears</td>
-<td style="text-align: left;"><code>$</code> was read as a math switch</td>
-<td style="text-align: left;">Type <code>\$5</code></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="quick-reference" class="level1">
-<h1>Quick reference</h1>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">You type</th>
-<th style="text-align: center;">You get</th>
-<th style="text-align: left;"></th>
-<th style="text-align: left;">You type</th>
-<th style="text-align: center;">You get</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><code>\mu</code></td>
-<td style="text-align: center;"><span class="math inline">\mu</span></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>\ne</code></td>
-<td style="text-align: center;"><span class="math inline">\ne</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>\sigma</code></td>
-<td style="text-align: center;"><span class="math inline">\sigma</span></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>\le</code></td>
-<td style="text-align: center;"><span class="math inline">\le</span></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>\alpha</code></td>
-<td style="text-align: center;"><span class="math inline">\alpha</span></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>\ge</code></td>
-<td style="text-align: center;"><span class="math inline">\ge</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>\bar{x}</code></td>
-<td style="text-align: center;"><span class="math inline">\bar{x}</span></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>\pm</code></td>
-<td style="text-align: center;"><span class="math inline">\pm</span></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>\hat{p}</code></td>
-<td style="text-align: center;"><span class="math inline">\hat{p}</span></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>\frac{a}{b}</code></td>
-<td style="text-align: center;"><span class="math inline">\frac{a}{b}</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>x_{1}</code></td>
-<td style="text-align: center;"><span class="math inline">x_{1}</span></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>\sqrt{n}</code></td>
-<td style="text-align: center;"><span class="math inline">\sqrt{n}</span></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>x^{2}</code></td>
-<td style="text-align: center;"><span class="math inline">x^{2}</span></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>\\</code></td>
-<td style="text-align: center;">new line in <code>gather*</code></td>
+<td style="text-align: left;">Red error text</td>
+<td style="text-align: left;">Check spelling and that every <code>{</code> has a matching <code>}</code></td>
 </tr>
 </tbody>
 </table>

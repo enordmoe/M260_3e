@@ -1,10 +1,9 @@
 ---
-title: "Typing Math in Quarto: A Gentle Introduction"
+title: "Typing Math in Quarto: A Quick Start"
 subtitle: "Math 260 Applied Statistics"
 format:
   html:
-    toc: true
-    toc-depth: 2
+    toc: false
     html-math-method: katex
     theme: flatly
     embed-resources: true
@@ -15,21 +14,13 @@ editor: visual
 
 # Start here
 
-You will sometimes want to write a statistical symbol or formula, such as a hypothesis like $H_0: \mu = 98.6$. This tutorial shows you how, in about 20 minutes.
+This is optional. If you would like to write a few symbols in your homework, such as the hypothesis $H_0: \mu = 98.6$, this is all you need. It takes about 10 minutes.
 
-**This is optional.** You can always describe a hypothesis in words. But if you would like to use symbols, this is the whole skill, and it is smaller than it looks.
-
-**How to use this tutorial**
-
-1.  Open this file in RStudio and click **Render** to see the finished page. Then look at the source on the left and the result on the right, side by side.
-2.  In each **Your turn** section, type your answer on the blank line underneath, then click **Render** again.
-3.  Click **Check your answer** to compare. Yours does not need to match letter for letter. It just needs to look right when rendered.
+Click **Render** to see this page. In each **Your turn**, type your answer on the blank line, click **Render** again, and then open **Check your answer**. Yours only needs to look right when rendered.
 
 # Step 1: Dollar signs turn math on
 
-Ordinary text is just text. To get math, put it between dollar signs.
-
-You type:
+Put math between dollar signs.
 
 ```         
 The population mean is $\mu$.
@@ -37,25 +28,9 @@ The population mean is $\mu$.
 
 You get: The population mean is $\mu$.
 
-A symbol that begins with a backslash, like `\mu`, is a *command*. Without the dollar signs, you would see the plain text `\mu`.
+A symbol that starts with a backslash, like `\mu`, is a *command*. Without the dollar signs you would see the plain text `\mu`. (To get a real dollar sign, type `\$`.)
 
-Two dollar signs on each side put the math on its own centered line:
-
-```         
-$$\bar{x} = 12.4$$
-```
-
-$$\bar{x} = 12.4$$
-
-Use single dollar signs inside a sentence and double dollar signs for a line of its own.
-
-::: callout-warning
-## A real dollar sign
-
-Because `$` switches math on, a price needs a backslash in front: type `\$5` to get \$5.
-:::
-
-# Step 2: The symbols you will use most
+# Step 2: The symbols you will use
 
 | You type    |  You get  | Name                          |
 |:------------|:---------:|:------------------------------|
@@ -64,19 +39,19 @@ Because `$` switches math on, a price needs a backslash in front: type `\$5` to 
 | `$\bar{x}$` | $\bar{x}$ | sample mean                   |
 | `$\hat{p}$` | $\hat{p}$ | sample proportion             |
 | `$\alpha$`  | $\alpha$  | significance level            |
-| `$\beta$`   |  $\beta$  | slope (in regression)         |
 | `$\rho$`    |  $\rho$   | population correlation        |
-| `$\chi^2$`  | $\chi^2$  | chi-square                    |
+| `$\ne$`     |   $\ne$   | not equal to                  |
+| `$\le$`     |   $\le$   | less than or equal to         |
+| `$\ge$`     |   $\ge$   | greater than or equal to      |
+| `$\pm$`     |   $\pm$   | plus or minus                 |
 
-Notice the pattern. Greek letters are the backslash plus the English name of the letter. A hat or a bar goes on a letter using `\hat{ }` or `\bar{ }`, with the letter inside the braces.
+Greek letters are a backslash plus the English name. A bar or hat goes over a letter with `\bar{ }` or `\hat{ }`, with the letter inside the braces. The keys `=`, `<` and `>` are just typed.
 
 ### Your turn
 
-Write one sentence with the symbol for a sample mean and the symbol for a population mean. For example, "The sample mean is ... and the population mean is ...", with the symbols filled in.
+Write a sentence with the symbol for a sample mean and the symbol for a population mean.
 
 Type your answer here:
-
- 
 
 ::: {.callout-tip collapse="true"}
 ## Check your answer
@@ -86,81 +61,32 @@ Type your answer here:
 The sample mean is $\bar{x}$ and the population mean is $\mu$.
 :::
 
-# Step 3: Comparison symbols
+# Step 3: Subscripts
 
-| You type    |  You get  | Meaning                  |
-|:------------|:---------:|:-------------------------|
-| `$=$`       |    $=$    | equals                   |
-| `$\ne$`     |   $\ne$   | not equal to             |
-| `$<$`       |    $<$    | less than                |
-| `$>$`       |    $>$    | greater than             |
-| `$\le$`     |   $\le$   | less than or equal to    |
-| `$\ge$`     |   $\ge$   | greater than or equal to |
-| `$\pm$`     |   $\pm$   | plus or minus            |
-| `$\approx$` | $\approx$ | approximately equal      |
+An underscore `_` makes a subscript. A caret `^` makes a superscript.
 
-For `=`, `<` and `>` you simply type the key. The others are backslash commands.
+| You type  | You get |
+|:----------|:-------:|
+| `$\mu_1$` | $\mu_1$ |
+| `$H_0$`   |  $H_0$  |
+| `$H_a$`   |  $H_a$  |
+| `$x^2$`   |  $x^2$  |
 
-# Step 4: Subscripts and superscripts
+If the subscript or superscript is more than one character, put it in braces: `$x_{10}$` gives $x_{10}$.
 
-An underscore `_` makes a subscript (it drops down). A caret `^` makes a superscript (it rises).
+# Step 4: Hypotheses and intervals
 
-| You type      |   You get   |
-|:--------------|:-----------:|
-| `$\mu_1$`     |   $\mu_1$   |
-| `$\bar{x}_2$` | $\bar{x}_2$ |
-| `$x^2$`       |    $x^2$    |
-| `$H_0$`       |    $H_0$    |
-| `$H_a$`       |    $H_a$    |
+Put the whole hypothesis inside one pair of dollar signs, with a colon after $H_0$ or $H_a$.
 
-**One rule to remember:** if the subscript or superscript is more than one character, put it in braces.
+| You type                   |         You get          |
+|:---------------------------|:------------------------:|
+| `$H_0: \mu = 98.6$`        |    $H_0: \mu = 98.6$     |
+| `$H_a: \mu \ne 98.6$`      |   $H_a: \mu \ne 98.6$    |
+| `$H_a: p > 0.5$`           |      $H_a: p > 0.5$      |
+| `$H_0: \mu_1 - \mu_2 = 0$` | $H_0: \mu_1 - \mu_2 = 0$ |
+| `$\hat{p} \pm ME$`         |     $\hat{p} \pm ME$     |
 
-```         
-$x_10$     gives  x with a 1 below, then a 0 beside it (wrong)
-$x_{10}$   gives  x with 10 below (right)
-```
-
-$x_{10}$ is right. When unsure, use braces. They never hurt.
-
-### Your turn
-
-Write the symbol for the mean of group 1 and the mean of group 2, separated by "and". These are population means, so use $\mu$ with subscripts.
-
-Type your answer here:
-
- 
-
-::: {.callout-tip collapse="true"}
-## Check your answer
-
-`$\mu_1$ and $\mu_2$`
-
-$\mu_1$ and $\mu_2$
-:::
-
-# Step 5: Writing hypotheses
-
-You now have everything you need for hypotheses. Notice the colon after $H_0$ and $H_a$, and that everything stays inside one pair of dollar signs.
-
-```         
-$H_0: \mu = 98.6$
-$H_a: \mu \ne 98.6$
-```
-
-$H_0: \mu = 98.6$
-
-$H_a: \mu \ne 98.6$
-
-Here are more patterns to copy and adapt.
-
-| Situation       | You type                   |         You get          |
-|:----------------|:---------------------------|:------------------------:|
-| One proportion  | `$H_0: p = 0.5$`           |      $H_0: p = 0.5$      |
-| One-sided       | `$H_a: p > 0.5$`           |      $H_a: p > 0.5$      |
-| Two means       | `$H_0: \mu_1 - \mu_2 = 0$` | $H_0: \mu_1 - \mu_2 = 0$ |
-| Two proportions | `$H_a: p_1 \ne p_2$`       |    $H_a: p_1 \ne p_2$    |
-| Correlation     | `$H_0: \rho = 0$`          |     $H_0: \rho = 0$      |
-| Slope           | `$H_a: \beta_1 \ne 0$`     |   $H_a: \beta_1 \ne 0$   |
+Inside dollar signs a percent sign needs a backslash: `$95\%$` gives $95\%$.
 
 ### Your turn
 
@@ -168,8 +94,6 @@ A researcher wonders whether the average sleep of college students differs from 
 
 Type your answer here:
 
- 
-
 ::: {.callout-tip collapse="true"}
 ## Check your answer
 
@@ -184,122 +108,11 @@ $H_0: \mu = 8$
 $H_a: \mu \ne 8$
 :::
 
-### Your turn
+# If something goes wrong
 
-A different study asks whether a majority of voters in a town support a ballot measure. Let $p$ be the population proportion who support it. Write the hypotheses.
-
-Type your answer here:
-
- 
-
-::: {.callout-tip collapse="true"}
-## Check your answer
-
-```         
-$H_0: p = 0.5$
-
-$H_a: p > 0.5$
-```
-
-$H_0: p = 0.5$
-
-$H_a: p > 0.5$
-:::
-
-# Step 6: Fractions and square roots
-
-`\frac{top}{bottom}` makes a fraction. `\sqrt{ }` makes a square root of whatever is inside the braces.
-
-| You type               |       You get        |
-|:-----------------------|:--------------------:|
-| `$\frac{1}{2}$`        |    $\frac{1}{2}$     |
-| `$\sqrt{n}$`           |      $\sqrt{n}$      |
-| `$\frac{s}{\sqrt{n}}$` | $\frac{s}{\sqrt{n}}$ |
-
-A formula is just these pieces combined. Here is the standard error of a sample mean, on its own line:
-
-```         
-$$SE = \frac{s}{\sqrt{n}}$$
-```
-
-$$SE = \frac{s}{\sqrt{n}}$$
-
-### Your turn
-
-Type the formula for a standardized score, $z = \dfrac{x - \mu}{\sigma}$, on its own line.
-
-Type your answer here:
-
- 
-
-::: {.callout-tip collapse="true"}
-## Check your answer
-
-```         
-$$z = \frac{x - \mu}{\sigma}$$
-```
-
-$$z = \frac{x - \mu}{\sigma}$$
-:::
-
-# Step 7: Putting it together
-
-Here are formulas you will meet in this course, typed exactly as shown. Look at the source for each and see how it is built from the pieces above.
-
-Test statistic for a mean:
-
-```         
-$$z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}}$$
-```
-
-$$z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}}$$
-
-Confidence interval for a proportion:
-
-```         
-$$\hat{p} \pm z^* \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$$
-```
-
-$$\hat{p} \pm z^* \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$$
-
-If you want to show your work line by line, put each line on its own row, ending every row except the last with `\\`:
-
-```         
-$$
-\begin{gather*}
-\hat{p} \pm z^* \sqrt{\hat{p}(1-\hat{p})/n} \\
-0.42 \pm 1.96 \sqrt{0.42(1-0.42)/200} \\
-0.42 \pm 0.068 \\
-(0.352, 0.488)
-\end{gather*}
-$$
-```
-
-$$\begin{gather*}
-\hat{p} \pm z^* \sqrt{\hat{p}(1-\hat{p})/n} \\
-0.42 \pm 1.96 \sqrt{0.42(1-0.42)/200} \\
-0.42 \pm 0.068 \\
-(0.352, 0.488)
-\end{gather*}$$
-
-# When something goes wrong
-
-| What you see | Likely cause | Fix |
-|:---|:---|:---|
-| Backslash command shows as plain text, such as `\mu` | Missing dollar signs | Wrap the math in `$ ... $` |
-| Large parts of the page look like math | An odd number of dollar signs | Find the one that is missing or extra |
-| Subscript only takes the first character | Missing braces | Write `x_{10}` instead of `x_10` |
-| Red error text instead of a formula | A typo in a command name, or an unmatched brace | Check every `{` has a matching `}` |
-| A price like \$5 disappears | `$` was read as a math switch | Type `\$5` |
-
-# Quick reference
-
-| You type  |  You get  |     | You type      |        You get        |
-|:----------|:---------:|:----|:--------------|:---------------------:|
-| `\mu`     |   $\mu$   |     | `\ne`         |         $\ne$         |
-| `\sigma`  | $\sigma$  |     | `\le`         |         $\le$         |
-| `\alpha`  | $\alpha$  |     | `\ge`         |         $\ge$         |
-| `\bar{x}` | $\bar{x}$ |     | `\pm`         |         $\pm$         |
-| `\hat{p}` | $\hat{p}$ |     | `\frac{a}{b}` |     $\frac{a}{b}$     |
-| `x_{1}`   |  $x_{1}$  |     | `\sqrt{n}`    |      $\sqrt{n}$       |
-| `x^{2}`   |  $x^{2}$  |     | `\\`          | new line in `gather*` |
+| What you see | Fix |
+|:---|:---|
+| Plain text like `\mu` instead of a symbol | Wrap it in dollar signs |
+| Big parts of the page look like math | You have an odd number of dollar signs |
+| A subscript only takes the first character | Use braces: `x_{10}` |
+| Red error text | Check spelling and that every `{` has a matching `}` |
