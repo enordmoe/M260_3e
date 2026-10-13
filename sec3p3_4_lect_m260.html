@@ -6,8 +6,8 @@
 <script src="sec3p3_4_lect_m260_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="sec3p3_4_lect_m260_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="sec3p3_4_lect_m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="sec3p3_4_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.42">
+<link href="sec3p3_4_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Math 260 Applied Statistics">
   <title>3.3-3.4 Constructing Bootstrap Confidence Intervals</title>
@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="sec3p3_4_lect_m260_files/libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="sec3p3_4_lect_m260_files/libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -29,7 +32,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="sec3p3_4_lect_m260_files/libs/revealjs/dist/theme/quarto-1246092c7357598352506a630e966e2e.css">
+  <link rel="stylesheet" href="sec3p3_4_lect_m260_files/libs/revealjs/dist/theme/quarto-fe1b06afc5958099a575323cff4e8791.css">
   <link href="sec3p3_4_lect_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="sec3p3_4_lect_m260_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="sec3p3_4_lect_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -123,6 +126,21 @@
       margin-right: 0; 
     }
   </style>
+  <style>
+  .reveal .ws   { height: 2.5em; }
+  .reveal .ws-l { height: 5em; }
+  /* typeable answer boxes (contenteditable): same minimum footprint as .ws / .ws-l, grow if you type more */
+  .reveal .ws.ed, .reveal .ws-l.ed { height: auto; text-align: left; font-size: 0.9em;
+    color: #1a3a8a; outline: none; }
+  .reveal .ws.ed   { min-height: 2.5em; }
+  .reveal .ws-l.ed { min-height: 5em; }
+  .reveal .ws.ed:focus, .reveal .ws-l.ed:focus { outline: 2px dashed #EA6820; outline-offset: 2px; }
+  .reveal table.fillin { border-collapse: collapse; margin: 0.4em 0 0.8em 0; }
+  .reveal table.fillin th, .reveal table.fillin td {
+    border: 1px solid #888 !important; text-align: center; vertical-align: middle;
+    padding: 0.2em 0.5em; width: 5.5em; height: 2.4em; }
+  .reveal table.fillin .lab { width: auto; font-weight: bold; }
+  </style>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -164,6 +182,256 @@ Math 260 Applied Statistics
 </ul>
 <p><span class="math inline">\(\Rightarrow\)</span> Use the <strong>bootstrap!!</strong></p>
 </section>
+<section id="activity-number-of-laughs-in-a-day" class="slide level2 smaller">
+<h2>Activity: Number of Laughs in a Day</h2>
+<p>How many times do you think you laugh in a day? <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></p>
+<p>Suppose the following gives the number of laughs in a day for <strong>six people</strong>:</p>
+<table class="fillin">
+<tbody><tr>
+<td>
+16
+</td>
+<td>
+22
+</td>
+<td>
+9
+</td>
+<td>
+31
+</td>
+<td>
+6
+</td>
+<td>
+42
+</td>
+</tr>
+</tbody></table>
+<p>Using this sample, what is the mean number of laughs in a day?</p>
+<div class="ws">
+
+</div>
+<aside class="notes">
+<p>Let students answer the first question on their own (collect a few guesses if you like: it frames “laughs per day” as a quantity that varies from person to person).</p>
+<p>Sample mean: (16 + 22 + 9 + 31 + 6 + 42)/6 = 126/6 = <strong>21</strong> laughs per day.</p>
+<p>Set up the problem: this is our ONE sample. We want to know how much sample means would vary from sample to sample, but we can’t go back to the population. Do not mention the word “bootstrap” yet; let students invent the idea on the next slide.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="activity-make-bootstrap-samples-with-tickets" class="slide level2 smaller">
+<h2>Activity: Make Bootstrap Samples with Tickets</h2>
+<p><strong>Use this data, and tickets, to create bootstrap samples.</strong></p>
+<p>16, 22, 9, 31, 6, 42</p>
+<p>How many tickets do you need? <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></p>
+<p>What do you put on the tickets?</p>
+<div class="ws ed" contenteditable="true">
+
+</div>
+<p>What do you do with the tickets to create a bootstrap sample?</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<p>What statistic do you compute from the bootstrap sample? <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></p>
+<aside class="notes">
+<p>Answers:</p>
+<ul>
+<li><strong>6 tickets</strong> (one per person in the original sample, i.e., the same size as the sample).</li>
+<li>Put <strong>one value</strong> on each ticket: 16, 22, 9, 31, 6, 42 (one ticket per case).</li>
+<li>Mix the tickets, <strong>draw one at random, record its value, put it back</strong> (replace it), mix again, and repeat until you have drawn <strong>6 values</strong> in all. Because tickets go back, a value can show up more than once and some may not show up at all.</li>
+<li>Compute the <strong>mean</strong> of the six recorded values (the same statistic as the original sample: the mean).</li>
+</ul>
+<p>Hand out tickets (or have students tear up the handout). Let pairs argue about “put it back”: if they don’t replace, they just get the original six values in a different order and the mean is always 21.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="activity-your-bootstrap-samples" class="slide level2 smaller">
+<h2>Activity: Your Bootstrap Samples</h2>
+<p>Use your tickets to find <strong>three bootstrap samples</strong>. Record each sample and compute its bootstrap statistic (the mean).</p>
+<table class="fillin">
+<tbody><tr>
+<th>
+Bootstrap sample
+</th>
+<th colspan="6">
+Six values drawn
+</th>
+<th>
+Bootstrap mean
+</th>
+</tr>
+<tr>
+<td class="lab">
+1
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+</tr>
+<tr>
+<td class="lab">
+2
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+</tr>
+<tr>
+<td class="lab">
+3
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+</tr>
+</tbody></table>
+<div class="fragment">
+<p><strong>Turn and talk (30-60 sec):</strong> Compare your bootstrap means with those around you. Are they all the same? Are they close? What does that tell you about the variability of the bootstrap statistics?</p>
+</div>
+<aside class="notes">
+<p>Give students about 3-4 minutes to draw. Walk around; watch for students who forget to replace tickets (all six values distinct) or who draw only 3 values.</p>
+<p>Expected: each bootstrap mean is a number near 21 but they differ from person to person, roughly between 12 and 30. Example bootstrap sample: 9, 42, 9, 16, 31, 9 gives mean 19.3.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="enter-your-three-bootstrap-means" class="slide level2">
+<h2>Enter Your Three Bootstrap Means</h2>
+<div class="r-stack">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/sec3p3_qr_laughs_form.png" class="quarto-figure quarto-figure-center" height="430"></p>
+</figure>
+</div>
+</div>
+<p style="text-align:center;">
+Scan the QR code to open the MS Forms page and enter your <strong>3 bootstrap means</strong>.<br> <small>Or go to <b>https://forms.office.com/r/wL0yj94jBZ</b></small>
+</p>
+<aside class="notes">
+<p>Replace the QR image (figs/sec3p3_qr_laughs_form.png) if you move to a different form. The current image encodes the link printed on your handout: https://forms.office.com/r/wL0yj94jBZ.</p>
+<p>Leave this up while students enter their means. Then export or display the responses and make a quick dotplot of all the bootstrap means (e.g., paste into R, or a StatKey custom dataset) for the next slide.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-do-the-classs-bootstrap-means-tell-us" class="slide level2 smaller">
+<h2>What Do the Class’s Bootstrap Means Tell Us?</h2>
+<p>Look at the dotplot of everyone’s bootstrap means.</p>
+<div class="fragment">
+<p><strong>Turn and talk (60 sec):</strong></p>
+<ol type="1">
+<li><p>Where is this distribution centered? Why does that make sense?</p></li>
+<li><p>About how much do the bootstrap means vary?</p></li>
+<li><p>How might we use this to estimate how much a sample mean varies?</p></li>
+</ol>
+</div>
+<aside class="notes">
+<ol type="1">
+<li>Centered near <strong>21</strong>, the mean of the original sample (the bootstrap distribution is centered at the sample statistic, not at the unknown population mean). This sets up the “Center” slide later.</li>
+<li>Spread: the standard deviation of the bootstrap means. For this sample, the theoretical bootstrap SE is sqrt(936/6)/sqrt(6) = <strong>about 5.1</strong> laughs (population-style SD of the 6 values is 12.5; sample SD is 13.7), so most bootstrap means fall roughly between 11 and 31, and your class dotplot should be close to that. With only 6 values the dotplot will look lumpy; that’s fine, it is a live illustration.</li>
+<li>The standard deviation of the bootstrap means estimates the <strong>standard error</strong> of the sample mean, which is exactly what we need for statistic +/- 2 SE.</li>
+</ol>
+<p>Transition: “What you just did by hand is called the bootstrap. A computer can do it thousands of times.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="bootstrap" class="slide level2">
 <h2>Bootstrap?</h2>
 
@@ -199,6 +467,48 @@ Math 260 Applied Statistics
 </ul>
 
 <img data-src="figs/dw2d_bs_sampling.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="quick-self-quiz-bootstrap-samples" class="slide level2 smaller">
+<h2>Quick Self-Quiz: Bootstrap Samples</h2>
+<p>A sample consists of the following values: <strong>8, 4, 11, 3, 7</strong>.</p>
+<p>Which of the following are possible bootstrap samples from this sample? Circle all that are possible.</p>
+<ol type="a">
+<li><p>8, 3, 7, 11</p></li>
+<li><p>4, 11, 4, 3, 3</p></li>
+<li><p>3, 4, 5, 7, 8</p></li>
+<li><p>7, 8, 8, 3, 4</p></li>
+</ol>
+<p>For each one that is <strong>not</strong> possible, explain why not.</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<p><strong>b and d</strong> are possible bootstrap samples.</p>
+<ul>
+<li><ol type="a">
+<li>Not possible: it has only 4 values. A bootstrap sample must be the <strong>same size</strong> as the original sample (5).</li>
+</ol></li>
+<li><ol start="2" type="a">
+<li>Possible: every value came from the original sample; values can repeat (4 and 3 appear twice), and 8 and 7 happened not to be drawn.</li>
+</ol></li>
+<li><ol start="3" type="a">
+<li>Not possible: 5 is not in the original sample. (This is just the original sample with 11 replaced by 5; bootstrap samples can only use values that are in the original sample.)</li>
+</ol></li>
+<li><ol start="4" type="a">
+<li>Possible: 8 appears twice, 11 not at all. Repeats are allowed because we sample with replacement.</li>
+</ol></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="bootstrap-1" class="slide level2">
 <h2>Bootstrap</h2>
 <ul>
@@ -206,6 +516,32 @@ Math 260 Applied Statistics
 <li><p>A <strong>bootstrap statistic</strong> is the statistic computed on a bootstrap sample (mean, proportion, difference in means, etc.)</p></li>
 <li><p>A <strong>bootstrap distribution</strong> is the distribution of many bootstrap statistics.</p></li>
 </ul>
+</section>
+<section id="example-1-mms" class="slide level2 smaller">
+<h2>Example 1: M&amp;Ms</h2>
+<p>We wish to estimate the proportion of M&amp;Ms that are orange, and we have one package of M&amp;Ms containing 20 pieces.</p>
+<p>Describe carefully how we can use this one sample to create a bootstrap statistic. Be specific.</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<p>Answer: Treat the 20 candies as the “population.” Draw one M&amp;M at random, record its color, <strong>put it back</strong>, and repeat until you have <strong>20 draws</strong> (same size as the original sample). Compute the proportion of the 20 draws that are orange: that is one bootstrap statistic, p-hat<em>. (Equivalently: write each of the 20 colors on a ticket; sample 20 tickets with replacement.) Repeating many times gives a bootstrap distribution of p-hat</em>.</p>
+<p>Tie back to the activity: same idea, but the statistic is a proportion instead of a mean. Common mistakes: sampling without replacement; using a sample size other than 20; recording the count instead of the proportion (fine, but the statistic of interest is the proportion).</p>
+<p>If, say, 4 of the 20 were orange (p-hat = 0.20), the bootstrap SE would be about sqrt(0.2*0.8/20) = 0.09.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="section" class="title-slide slide level1 center">
@@ -260,6 +596,112 @@ Math 260 Applied Statistics
 <p>When a bootstrap distribution for a sample statistic is symmetric and bell-shaped, we estimate a 95% confidence interval using <span class="math display">\[\text{Statistic}\pm 2\cdot \text{SE}\]</span> where SE denotes the standard error of the statistic estimated from the bootstrap distribution.</p>
 </blockquote>
 </section>
+<section id="example-2-global-warming" class="slide level2 smaller">
+<h2>Example 2: Global Warming</h2>
+<p>What percentage of Americans believe global warming is happening? In April 2026, the Yale Program on Climate Change Communication surveyed 1,068 U.S. adults in a nationally representative survey. 726 of them said they think global warming is happening. A bootstrap distribution for this data is shown.</p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="figs/sec3p3_climate2026_statkey.png" height="300"></p>
+</div><div class="column" style="width:40%;">
+<p>Use the information shown to give a 95% CI for the proportion of Americans who think global warming is happening.</p>
+<div class="ws">
+
+</div>
+<p>Interpret your interval in context.</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+</div></div>
+
+<aside class="notes">
+<p><strong>Data:</strong> The report gives 68% of adults saying global warming is happening (16% not happening), n = 1,068. The count 726 is reconstructed as 0.68 x 1068 = 726.2, so it is a simplification: the published 68% is rounded (it could be anywhere from 67.5% to 68.5%, i.e., counts of about 721-732), and the actual survey is weighted. Students do not need this detail; mention it if someone asks “how did they get exactly 726?”</p>
+<p><strong>StatKey image to add</strong> (save as figs/sec3p3_climate2026_statkey.png): Bootstrap Confidence Intervals &gt; CI for Single Proportion &gt; Edit Data &gt; enter Count = 726, Sample size n = 1068 &gt; OK. Click Generate 1000 Samples a few times (the old screenshot used 3000). Sample proportion shows 0.680.</p>
+<p><strong>Expected values:</strong> p-hat = 726/1068 = <strong>0.680</strong>. Bootstrap SE about <strong>0.014</strong> (theory: sqrt(0.68 x 0.32/1068) = 0.0143; a simulation of 3000 bootstrap samples gave 0.0144).</p>
+<p>95% CI: 0.680 +/- 2(0.014) = 0.680 +/- 0.028 = about <strong>(0.652, 0.708)</strong>, i.e., roughly (65%, 71%).</p>
+<p><strong>Interpretation:</strong> We are 95% confident that the proportion of all U.S. adults who think global warming is happening is between about 0.65 and 0.71 (65% to 71%) [based on this spring 2026 survey].</p>
+<p>Check the bootstrap distribution first: symmetric and bell-shaped, so the SE method is OK. It is centered at the sample proportion (about 0.680), not at the unknown population value.</p>
+<p><strong>Source check:</strong> Numbers are from the Yale/GMU report page (Spring 2026: 68% yes vs.&nbsp;16% no, n = 1,068, April 17-26, 2026, adults 18+ in the 50 states and DC; report states an average margin of error of +/- 3 points at 95%). The slide paraphrases the question; I could not read the exact question wording or the survey-method appendix (mode and weighting), so check Appendix II of the report PDF if you want to quote the wording. For comparison, the Fall 2025 report (n = 1,146, Nov 6-14, 2025) had 72% saying yes; the earlier 2010 Pew version of this example had 59% saying “solid evidence” (n = 2,251), a different question, so the two are not directly comparable.</p>
+<p><strong>Possible extension:</strong> The interval’s width is about +/- 3 points, which matches the report’s stated margin of error, a nice link to the later margin-of-error material.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Source: Yale Program on Climate Change Communication and George Mason University, <em>Climate Change in the American Mind: Beliefs &amp; Attitudes, Spring 2026</em> (n = 1,068; April 17-26, 2026).</p>
+</div></aside></section>
+<section id="statkey-bootstrap-ci-for-a-mean" class="slide level2 smaller">
+<h2>StatKey: Bootstrap CI for a Mean</h2>
+<p>Is normal body temperature really 98.6°F? A sample of body temperatures for 50 healthy individuals was taken. We will use StatKey.</p>
+<ol type="1">
+<li><p>Go to <strong>StatKey</strong> and choose <strong>Bootstrap Confidence Intervals: CI for Single Mean, Median, Std. Dev.</strong></p></li>
+<li><p>Under the dataset menu, select <strong>Body Temperatures</strong> (n = 50).</p></li>
+<li><p>Click <strong>Generate 1000 Samples</strong> (at least once; more is fine).</p></li>
+<li><p>Read the <strong>standard error</strong> from the upper right of the dotplot: the <strong>SD</strong> of the bootstrap statistics.</p></li>
+<li><p>Keep this window open. We will use the same bootstrap distribution again.</p></li>
+</ol>
+<aside class="notes">
+<p>No answers on this slide. Click-by-click guide; menu wording may differ slightly in the current version of StatKey, so check against the live site before class. Students need at least 1000 bootstrap statistics (several clicks of “Generate 1000 Samples” is fine).</p>
+<p>If students get slightly different numbers than the notes on the next slide, that is expected and a good point to make (see “Number of Bootstrap Samples” later).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-3-body-temperature" class="slide level2 smaller">
+<h2>Example 3: Body Temperature</h2>
+<p>Use StatKey to answer the questions that follow.</p>
+<ol type="a">
+<li>What is the sample mean? What is the sample standard deviation?</li>
+</ol>
+<div class="ws">
+
+</div>
+<ol start="2" type="a">
+<li>Generate a bootstrap distribution, using at least 1000 simulated statistics. What is the standard error?</li>
+</ol>
+<div class="ws">
+
+</div>
+<ol start="3" type="a">
+<li>Use the standard error to find a 95% confidence interval. Show your work. Is 98.6 in the interval?</li>
+</ol>
+<div class="ws-l">
+
+</div>
+<aside class="notes">
+<p>Expected values (Lock5 BodyTemp50 data; approximate; confirm against StatKey before class, since I could not run StatKey or access the data here):</p>
+<ol type="a">
+<li><p>Sample mean about <strong>98.26°F</strong>, sample standard deviation about <strong>0.765°F</strong> (StatKey shows these in the Original Sample box).</p></li>
+<li><p>Bootstrap SE about <strong>0.11</strong> (roughly s/sqrt(n) = 0.765/sqrt(50) = 0.108). Students’ values will vary slightly, e.g., 0.10 to 0.11.</p></li>
+<li><p>98.26 +/- 2(0.11) = 98.26 +/- 0.22, about <strong>(98.04, 98.48)</strong>. <strong>98.6 is not in the interval</strong>, so 98.6 is not a plausible value for the mean body temperature of healthy adults based on this sample.</p></li>
+</ol>
+<p>Check that the bootstrap distribution is symmetric and bell-shaped before using the SE method.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="summary" class="slide level2 smaller">
 <h2>Summary</h2>
 <ul>
@@ -299,6 +741,39 @@ Math 260 Applied Statistics
 </ul>
 
 <img data-src="images/percentile_interval.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="example-3-continued-percentile-method" class="slide level2 smaller">
+<h2>Example 3 (continued): Percentile Method</h2>
+<p><em>Recall: body temperatures of 50 healthy individuals. Keep the same StatKey bootstrap distribution open.</em></p>
+<ol start="4" type="a">
+<li>Using the same distribution, find a 95% confidence interval using the “Two-tail” option (the percentile method). Give your confidence interval here:</li>
+</ol>
+<div class="ws">
+
+</div>
+<ol start="5" type="a">
+<li>Compare the two 95% confidence intervals you found. Are they similar?</li>
+</ol>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<p>StatKey steps: check the <strong>Two-Tail</strong> box under the dotplot; the default shaded middle area is 95%, and the endpoints are shown below the plot.</p>
+<ol start="4" type="a">
+<li><p>About <strong>(98.05, 98.47)</strong> (will differ slightly from student to student because each bootstrap distribution is random).</p></li>
+<li><p>Yes. The two 95% intervals (SE method vs.&nbsp;percentile method) are very similar, as expected when the bootstrap distribution is symmetric and bell-shaped. Both exclude 98.6.</p></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="the-percentile-method-99-interval" class="slide level2">
 <h2>The Percentile Method: 99% Interval</h2>
 <ul>
@@ -324,6 +799,42 @@ Math 260 Applied Statistics
 <li>Why? More precise estimate.</li>
 </ul></li>
 </ul>
+</section>
+<section id="example-3-continued-99-interval" class="slide level2 smaller">
+<h2>Example 3 (continued): 99% Interval</h2>
+<p><em>Recall: still using the same bootstrap distribution of the 50 body temperatures.</em></p>
+<ol start="6" type="a">
+<li>Give a 99% confidence interval:</li>
+</ol>
+<div class="ws">
+
+</div>
+<ol start="7" type="a">
+<li><p>Is the 99% confidence interval wider or narrower than the 95% confidence interval? <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u></p></li>
+<li><p>Clearly interpret the 99% confidence interval in context.</p></li>
+</ol>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<p>StatKey: with <strong>Two-Tail</strong> checked, change the shaded middle proportion to <strong>0.99</strong> (equivalently 0.005 in each tail). Check wording against your StatKey screen.</p>
+<ol start="6" type="a">
+<li><p>About <strong>(98.00, 98.52)</strong> (will vary a bit by student).</p></li>
+<li><p><strong>Wider.</strong> To be 99% confident we must capture more of the bootstrap distribution (the middle 99% instead of the middle 95%).</p></li>
+<li><p>We are 99% confident that the mean body temperature of healthy individuals is between about 98.00°F and 98.52°F. Since 98.6 is outside even the 99% interval, there is strong evidence that the mean body temperature is below 98.6°F.</p></li>
+</ol>
+<p>Note the observational-data/sample caveat: this is based on a sample of 50 healthy individuals, and the interval is for the population mean, not for individual body temperatures.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="two-approaches-to-a-bootstrap-confidence-interval" class="slide level2">
 <h2>Two Approaches to a Bootstrap Confidence Interval</h2>
@@ -642,190 +1153,173 @@ Math 260 Applied Statistics
     </script>
 
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
           }
+          return false;
         }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
           }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
           for (const childEl of codeEl.children) {
             if (isCodeAnnotation(childEl)) {
               childEl.remove();
             }
           }
           return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
             }
           }
-        }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
           }
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
           }
-        } else {
-          return undefined;
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
         }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>
