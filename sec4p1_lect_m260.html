@@ -6,8 +6,8 @@
 <script src="sec4p1_lect_m260_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="sec4p1_lect_m260_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="sec4p1_lect_m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="sec4p1_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.42">
+<link href="sec4p1_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Math 260 Applied Statistics">
   <title>4.1 Introducing Hypothesis Tests</title>
@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="sec4p1_lect_m260_files/libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="sec4p1_lect_m260_files/libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -29,7 +32,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="sec4p1_lect_m260_files/libs/revealjs/dist/theme/quarto-1246092c7357598352506a630e966e2e.css">
+  <link rel="stylesheet" href="sec4p1_lect_m260_files/libs/revealjs/dist/theme/quarto-fe1b06afc5958099a575323cff4e8791.css">
   <link href="sec4p1_lect_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="sec4p1_lect_m260_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="sec4p1_lect_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -123,6 +126,33 @@
       margin-right: 0; 
     }
   </style>
+  <style>
+  .reveal .ws   { height: 2.5em; }
+  .reveal .ws-l { height: 5em; }
+  /* typeable answer boxes (contenteditable): same minimum footprint as .ws / .ws-l, grow if you type more */
+  .reveal .ws.ed, .reveal .ws-l.ed { height: auto; text-align: left; font-size: 0.9em;
+    color: #1a3a8a; outline: none; }
+  .reveal .ws.ed   { min-height: 2.5em; }
+  .reveal .ws-l.ed { min-height: 5em; }
+  .reveal .ws.ed:focus, .reveal .ws-l.ed:focus { outline: 2px dashed #EA6820; outline-offset: 2px; }
+  .reveal table.fillin { border-collapse: collapse; margin: 0.4em 0 0.8em 0; }
+  .reveal table.fillin th, .reveal table.fillin td {
+    border: 1px solid #888 !important; text-align: center; vertical-align: middle;
+    padding: 0.2em 0.5em; width: 5.5em; height: 2.4em; }
+  .reveal table.fillin .lab { width: auto; font-weight: bold; }
+  /* extra-compact slides (StatKey table slides) */
+  .reveal .slide.tight { font-size: 0.6em !important; }
+  .reveal .slide.tight h2 { font-size: 1.9em; margin-bottom: 0.2em; }
+  .reveal .slide.tight ol, .reveal .slide.tight ul { margin-bottom: 0.2em; }
+  .reveal .slide.tight ol li { margin-top: 0.15em; margin-bottom: 0.1em; }
+  .reveal .slide.tight p { margin: 0.35em 0; }
+  .reveal .slide.tight table.fillin { margin: 0.2em 0 0.4em 0; }
+  .reveal .slide.tight table.fillin th, .reveal .slide.tight table.fillin td { height: 1.9em; padding: 0.1em 0.4em; }
+  .reveal .slide.tight .ws { height: 2em; }
+  .reveal .slide.tight .ws-l { height: 3.5em; }
+  .reveal .slide.tight .ws.ed { min-height: 2em; }
+  .reveal .slide.tight .ws-l.ed { min-height: 3.5em; }
+  </style>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -140,12 +170,97 @@ Math 260 Applied Statistics
 </div>
 
 </section>
+<section id="warm-up-can-you-beat-chance" class="slide level2 smaller">
+<h2>Warm-Up: Can You Beat Chance?</h2>
+<p>Each card hides one of five symbols (circle, cross, waves, square, star). Try to sense which one it is.</p>
+<ol type="1">
+<li>Open the <strong>Zener Card ESP Test</strong> applet (on Moodle) and choose <strong>25 trials</strong>.</li>
+<li>Make your 25 guesses. <strong>Number correct = _____ out of 25</strong></li>
+<li><strong>Class tally on the board:</strong> draw a number line from 0 to 25 and add one tick mark above your score. Sketch the class picture here:</li>
+</ol>
+<div class="ws-l">
+
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Turn and talk (60 sec):</strong> Before you start, how many out of 25 would you <em>expect</em> to get right if you were just guessing? After the tally: where is the class centered, and does anyone stand out?</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Activity, about 5 minutes. Students can use phones or laptops; the applet picks each card at random, so every guess has a 1-in-5 chance of being right if there is no ESP. Expected: 5 out of 25. Let them name their own “this would surprise me” threshold; that is the strength-of-evidence idea we formalize later.</p>
+<p>Board tally: expect a pile-up around 3-7, center near 5 (20%), a little right skew. If someone is at 10+, ask whether that is ESP or just luck among 25-30 people. Keep the board picture up: it is compared with 1000 simulated guessers on the StatKey slides.</p>
+<p>Reference (exact binomial, n = 25, p = 0.2): P(at least 7) = 0.220, at least 8 = 0.109, at least 9 = 0.047, at least 10 = 0.017, at least 11 = 0.006. With a class of 25-30 and no ESP, a top score around 8-9 is quite plausible.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-1-extrasensory-perception-esp" class="slide level2 smaller">
+<h2>Example 1: Extrasensory Perception (ESP)</h2>
+<p>In an ESP test, one person writes down one of the letters A, B, C, D, or E and tries to telepathically communicate the choice to a partner, who then tries to guess it. (Our Zener cards work the same way, with five symbols.)</p>
+<p><strong>a)</strong> If there is no ESP and people are just randomly guessing among five choices, what proportion of guesses would be correct? <span class="math inline">\(p =\)</span> ________ (so about _____ out of 25)</p>
+<p><strong>b)</strong> Suppose the sample size is the same in every case. Circle the sample proportion correct that provides:</p>
+<ul>
+<li>the <strong>greatest</strong> evidence that people have ESP: <span class="math inline">\(\hat p = 0.1\)</span> <span class="math inline">\(\quad\)</span> <span class="math inline">\(\hat p = 0.25\)</span> <span class="math inline">\(\quad\)</span> <span class="math inline">\(\hat p = 0.4\)</span> <span class="math inline">\(\quad\)</span> <span class="math inline">\(\hat p = 0.7\)</span></li>
+<li>the <strong>least</strong> evidence that people have ESP: <span class="math inline">\(\hat p = 0.1\)</span> <span class="math inline">\(\quad\)</span> <span class="math inline">\(\hat p = 0.25\)</span> <span class="math inline">\(\quad\)</span> <span class="math inline">\(\hat p = 0.4\)</span> <span class="math inline">\(\quad\)</span> <span class="math inline">\(\hat p = 0.7\)</span></li>
+</ul>
+<p><strong>c)</strong> Why did you pick your “least evidence” value?</p>
+<div class="ws ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<ol type="a">
+<li><p>p = 0.2, so 5 out of 25. Connect to the center of the class tally.</p></li>
+<li><p>Greatest: 0.7. Least: 0.1. Tell them to notice that 0.1 is below chance, so it certainly does not support ESP (the research claim is “better than chance”). 0.25 is only slightly above chance and is the next-least convincing, so it is a good discussion point: with only a handful of guesses, 0.25 is easily explained by luck. This is the old “Example 1 Revisited” most/least question, merged here because the class has just generated real data.</p></li>
+<li><p>Typeable. Look for: below chance cannot support better-than-chance; or, very close to 0.2 is what we expect from luck alone.</p></li>
+</ol>
+<p>Tie back to the board: where does our tally put the highest scorers? 0.4 = 10 out of 25.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="statistical-test" class="slide level2">
 <h2>Statistical Test</h2>
 <p>A <strong>statistical test</strong> is used to determine whether results from a sample are convincing enough to allow us to conclude something about the population.</p>
 <blockquote>
 <p>An outcome that would rarely happen if a claim were true is good evidence that the claim is not true.</p>
 </blockquote>
+<aside class="notes">
+<p>Refer to the ESP tally: “an outcome that would rarely happen if people are just guessing” is something like 12 out of 25.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="statistical-hypotheses-null" class="slide level2">
 <h2>Statistical Hypotheses: Null</h2>
@@ -189,6 +304,87 @@ Math 260 Applied Statistics
 <li><p>The direction of inequality in the alternative depends on the specifics of the research question of interest</p></li>
 </ul>
 </section>
+<section id="example-1-continued-hypotheses-for-esp" class="slide level2 smaller">
+<h2>Example 1 (continued): Hypotheses for ESP</h2>
+<p>Recall: if there is no ESP, people are randomly guessing among five choices.</p>
+<p>Write down the null and alternative hypotheses for testing whether people have ESP.</p>
+<p><strong>Define the parameter</strong> <span class="math inline">\(p\)</span> in words:</p>
+<div class="ws ed" contenteditable="true">
+
+</div>
+<p><span class="math inline">\(H_0\)</span>: _______________________________</p>
+<p><span class="math inline">\(H_a\)</span>: _______________________________</p>
+<p>Which of these is the <em>sample</em> quantity, and where did it show up in our activity? (Turn and talk, 30 sec.)</p>
+<aside class="notes">
+<p>p = the long-run proportion of guesses that are correct for all people (or this person) guessing the hidden symbol. H0: p = 0.2. Ha: p &gt; 0.2.</p>
+<p>Stress that the alternative is one-sided because the research question is “better than chance”; below chance would not be evidence of ESP (ties back to the 0.1 discussion). The sample quantity is p-hat = (number correct)/25, each student’s own score; none of it belongs in the hypotheses.</p>
+<p>Note the null always has an equality; the null here is the claim “just guessing.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-2-sleep-vs-caffeine-for-memory" class="slide level2 smaller">
+<h2>Example 2: Sleep vs Caffeine for Memory</h2>
+<p>In an experiment, students were given words to memorize, then were randomly assigned to either take a 90-minute nap or take a caffeine pill. A couple of hours later they were tested on recall. We wish to test whether the sample provides evidence of a <em>difference</em> in mean number of words recalled between taking a nap and taking caffeine.</p>
+<p><strong>Define the parameters</strong> in words:</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<p>What are the null and alternative hypotheses for this test?</p>
+<p><span class="math inline">\(H_0\)</span>: _______________________________</p>
+<p><span class="math inline">\(H_a\)</span>: _______________________________</p>
+<aside class="notes">
+<p>mu_s = mean number of words recalled by all students like these after a nap; mu_c = same after caffeine. H0: mu_s = mu_c (or mu_s - mu_c = 0). Ha: mu_s != mu_c (two-sided because the question is “a difference,” no direction).</p>
+<p>Contrast with ESP: one-sided vs two-sided because of the wording of the research question.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="quick-self-quiz-writing-hypotheses" class="slide level2 smaller">
+<h2>Quick Self-Quiz: Writing Hypotheses</h2>
+<p>Write down the hypotheses for the test in each case below. Define your parameters.</p>
+<p><strong>a)</strong> Does the proportion of people who support gun control differ between males and females?</p>
+<div class="ws-l">
+
+</div>
+<p><strong>b)</strong> Is the average number of hours of sleep per night for college students less than 7?</p>
+<div class="ws-l">
+
+</div>
+<aside class="notes">
+<ol type="a">
+<li><p>p_M = proportion of all males who support gun control; p_F = same for females. H0: p_M = p_F. Ha: p_M != p_F. (Two-sided: “differ.”)</p></li>
+<li><p>mu = mean hours of sleep per night for all college students. H0: mu = 7. Ha: mu &lt; 7.</p></li>
+</ol>
+<p>If someone puts x-bar or p-hat in a hypothesis, point to the Points to Note slide.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="null-hypothesis" class="slide level2">
 <h2>Null Hypothesis</h2>
 
@@ -196,6 +392,277 @@ Math 260 Applied Statistics
 <section id="evidence" class="slide level2">
 <h2>Evidence</h2>
 <p>The goal of a hypothesis test is to determine whether the sample data provide enough evidence to refute the null hypothesis in favor of the alternative hypothesis.</p>
+</section>
+<section id="example-1-revisited-what-does-evidence-mean-for-esp" class="slide level2 smaller">
+<h2>Example 1 Revisited: What Does Evidence Mean for ESP?</h2>
+<p>Recall: <span class="math inline">\(H_0\)</span>: <span class="math inline">\(p = 0.2\)</span> (just guessing) and <span class="math inline">\(H_a\)</span>: <span class="math inline">\(p &gt; 0.2\)</span> (ESP).</p>
+<p><strong>a)</strong> If a test for ESP shows evidence <strong>against</strong> <span class="math inline">\(H_0\)</span> and in support of <span class="math inline">\(H_a\)</span>, what does that mean in terms of ESP?</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<p><strong>b)</strong> If the results do <strong>not</strong> show enough evidence to refute <span class="math inline">\(H_0\)</span>, what does that mean in terms of ESP?</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<ol type="a">
+<li><p>The data would be unlikely if people were only guessing, so we have evidence that people (at least some) do better than chance, i.e., support for ESP.</p></li>
+<li><p>The test is <strong>inconclusive</strong>: the results are consistent with guessing, so we cannot rule out luck. Model wording: “The data are inconclusive; we do not have enough evidence that people do better than chance.” This does NOT prove there is no ESP or that p = 0.2 exactly. Use the class tally: “Most of you scored about 5, which looks just like guessing.”</p></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-2-revisited-what-does-evidence-mean-for-sleep-vs-caffeine" class="slide level2 smaller">
+<h2>Example 2 Revisited: What Does Evidence Mean for Sleep vs Caffeine?</h2>
+<p><strong>a)</strong> If the test comparing sleep and caffeine shows evidence <strong>against</strong> <span class="math inline">\(H_0\)</span> and in support of <span class="math inline">\(H_a\)</span>, what does that mean in terms of sleep, caffeine, and memory?</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<p><strong>b)</strong> If the results do <strong>not</strong> show enough evidence to refute <span class="math inline">\(H_0\)</span> and support <span class="math inline">\(H_a\)</span>, what does that mean in terms of sleep, caffeine, and memory?</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<ol type="a">
+<li><p>Evidence that the mean recall differs between nap and caffeine (the experiment was randomized, so a cause-and-effect conclusion about the treatment is reasonable).</p></li>
+<li><p>The test is <strong>inconclusive</strong>: we do not have enough evidence of a difference in mean recall; the observed difference could plausibly be due to random assignment. Not the same as “nap and caffeine are equally effective.”</p></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="quick-self-quiz-statistical-significance" class="slide level2 smaller">
+<h2>Quick Self-Quiz: Statistical Significance</h2>
+<p>A sample of 50 cans of tomatoes is tested for levels of the chemical BPA to see if there is evidence that the mean level is greater than 100 ppb (parts per billion).</p>
+<p>Write down the hypotheses for this test:</p>
+<div class="ws">
+
+</div>
+<p>Give a possible sample mean that you think would show strong evidence against the null hypothesis and in support of the alternative hypothesis:</p>
+<div class="ws">
+
+</div>
+<p>Give a possible sample mean that would definitely <strong>not</strong> show evidence against the null hypothesis:</p>
+<div class="ws">
+
+</div>
+<aside class="notes">
+<p>H0: mu = 100; Ha: mu &gt; 100, where mu is the mean BPA level (ppb) in all cans of tomatoes of this type.</p>
+<p>Strong evidence: a sample mean well above 100 (e.g., 130 or 150, depending on the variability, which we do not know yet; that is the point of the next section). Definitely not evidence: any sample mean at or below 100 (e.g., 90).</p>
+<p>Link back to ESP: both parts depend on the direction of Ha, and “how far is far enough” depends on how much sample means (or proportions) vary by chance. StatKey shows exactly that on the next slides.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="statkey-sampling-distribution" class="slide level2 tight">
+<h2>StatKey: Sampling Distribution</h2>
+<p>What would results look like if <strong>nobody</strong> had ESP and everyone just guessed (<span class="math inline">\(p = 0.2\)</span>, 25 cards each)? Use the familiar sampling distribution applet.</p>
+<ol type="1">
+<li>Go to <strong>StatKey</strong> (lock5stats.com/statkey) and open <strong>Sampling Distribution for a Proportion</strong>.</li>
+<li>Set the population proportion to <span class="math inline">\(0.2\)</span> and the sample size to <span class="math inline">\(n = 25\)</span>.</li>
+<li>Click <strong>Generate 1 Sample</strong> a few times, then <strong>Generate 1000 Samples</strong>.</li>
+</ol>
+<p>Fill in from the plot of simulated sample proportions <span class="math inline">\(\hat p\)</span>:</p>
+<table class="fillin">
+<tbody><tr>
+<td class="lab">
+Center
+</td>
+<td>
+</td>
+<td class="lab">
+Shape
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td class="lab">
+Standard error
+</td>
+<td>
+</td>
+<td class="lab">
+Range of <span class="math inline">\(\hat p\)</span>
+</td>
+<td>
+</td>
+</tr>
+</tbody></table>
+<p>Turn and talk (30 sec): Each dot is one “guesser” with no ESP. Why isn’t every dot at exactly 0.2? Where would the highest scorer(s) on our board fall?</p>
+<aside class="notes">
+<p>This is Chapter 3 material: the sampling distribution of p-hat when the true proportion is 0.2, i.e., exactly what guessing produces.</p>
+<p>Expected: center about 0.20 (5 out of 25); SE about 0.08 (exact sqrt(.2*.8/25) = 0.08); roughly bell-shaped with slight right skew; the 1000 dots typically run from about 0 to about 0.5 (roughly 0-12 out of 25).</p>
+<p>Why not exactly 0.2: sampling variability; even a pure guesser gets 3 or 7 out of 25 sometimes.</p>
+<p>Have students compare the shape with the board tally: both are piles around 0.2 / 5.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="statkey-randomization-test" class="slide level2 tight">
+<h2>StatKey: Randomization Test</h2>
+<p>Now we use the same idea to formalize a <strong>test</strong>. Suppose a student scored <span class="math inline">\(\hat p = 0.4\)</span> (10 out of 25).</p>
+<ol type="1">
+<li>Open <strong>Test for a Single Proportion</strong> under <em>Randomization Hypothesis Tests</em>.</li>
+<li>Click <strong>Edit Data</strong>: sample size <span class="math inline">\(n = 25\)</span>, count <span class="math inline">\(= 10\)</span>.</li>
+<li>Check the null and alternative: <span class="math inline">\(H_0\)</span>: <span class="math inline">\(p =\)</span> ____ and <span class="math inline">\(H_a\)</span>: <span class="math inline">\(p\)</span> ___ ____.</li>
+<li>Click <strong>Generate 1000 Samples</strong>, check <strong>Right Tail</strong>, and read off the results.</li>
+</ol>
+<table class="fillin">
+<tbody><tr>
+<td class="lab">
+Observed statistic (test statistic) <span class="math inline">\(\hat p\)</span>
+</td>
+<td>
+</td>
+<td class="lab">
+Center of the randomization distribution
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td class="lab">
+Number of simulated samples with <span class="math inline">\(\hat p \ge\)</span> observed
+</td>
+<td>
+</td>
+<td class="lab">
+Proportion of simulated samples (“p-value”)
+</td>
+<td>
+</td>
+</tr>
+</tbody></table>
+<p>How is this plot different from the sampling distribution applet? (Turn and talk, 30 sec)</p>
+<div class="ws ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<p>Key point: the randomization distribution is built assuming H0 is true, so it is centered at the NULL value 0.2, not at the observed statistic. The observed sample statistic (p-hat = 0.4) is the <strong>test statistic</strong>; we locate it on the null distribution.</p>
+<p>H0: p = 0.2; Ha: p &gt; 0.2 (right tail).</p>
+<p>Expected: center about 0.20; simulated samples with p-hat &gt;= 0.4 should be around 15-20 out of 1000. Exact binomial P(X &gt;= 10) = 0.017. The “p-value” is the proportion of simulated samples at least as extreme as the observed statistic: about 0.017 (StatKey will show roughly 0.01-0.03 depending on the run).</p>
+<p>Difference from the sampling distribution applet: here we ASSUME H0 (center at null, p = 0.2) and ask where our sample falls; we start from a sample we actually observed. Mechanically the picture is the same one they just made, which is the point.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="statkey-strength-of-evidence" class="slide level2 tight">
+<h2>StatKey: Strength of Evidence</h2>
+<p>Recall: <span class="math inline">\(H_0\)</span>: <span class="math inline">\(p = 0.2\)</span>, <span class="math inline">\(H_a\)</span>: <span class="math inline">\(p &gt; 0.2\)</span>, observed <span class="math inline">\(\hat p = 0.4\)</span> (10 of 25).</p>
+<p>Change the count in <strong>Edit Data</strong> and fill in the p-value StatKey gives for each score:</p>
+<table class="fillin">
+<tbody><tr>
+<td class="lab">
+Score (out of 25)
+</td>
+<td>
+7
+</td>
+<td>
+8
+</td>
+<td>
+9
+</td>
+<td>
+10
+</td>
+</tr>
+<tr>
+<td class="lab">
+<span class="math inline">\(\hat p\)</span>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td class="lab">
+Proportion of simulations at least as large
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+</tbody></table>
+<p><strong>a)</strong> Which of these scores gives the strongest evidence against <span class="math inline">\(H_0\)</span>? How can you tell from the picture?</p>
+<div class="ws ed" contenteditable="true">
+
+</div>
+<p><strong>b)</strong> Our best score on the board was _____. Is that convincing evidence of ESP? Explain in context.</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<p>Expected p-values (exact binomial; StatKey will vary by about +/- 0.01-0.02): 7 out of 25 (p-hat 0.28): 0.220; 8 (0.32): 0.109; 9 (0.36): 0.047; 10 (0.40): 0.017.</p>
+<ol type="a">
+<li><p>10 out of 25: the smallest proportion of simulated samples is as extreme or more, i.e., the observed statistic sits farthest out in the tail of the randomization distribution.</p></li>
+<li><p>Depends on the class. If the top score is about 8-9: not very convincing, since in a class of 25-30 pure guessers someone often does that well; the data are consistent with guessing (p-value not small). If someone hit 10+ or more, the evidence is stronger, but note it was picked as the best of ~30 people, so be careful (do not belabor).</p></li>
+</ol>
+<p>Wording: small p-value = result would rarely occur if H0 were true = evidence against H0. This answers the first “Topics to Come” question; the second question (how small is small enough) is next section.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="topics-to-come" class="slide level2">
 <h2>Topics to Come</h2>
@@ -219,6 +686,17 @@ Math 260 Applied Statistics
 <li><strong>Alternative hypothesis (</strong><span class="math inline">\(H_a\)</span>): what we seek evidence for</li>
 </ul></li>
 <li><p>A hypothesis test examines whether sample data provide enough evidence to refute the null hypothesis and support the alternative hypothesis.</p></li>
+</ul>
+</section>
+<section id="wrapping-up" class="slide level2">
+<h2>Wrapping Up</h2>
+<ul>
+<li class="fragment">A hypothesis test asks whether a sample result would be surprising if the null hypothesis were true; our ESP tally showed what “surprising” looks like.</li>
+<li class="fragment"><span class="math inline">\(H_0\)</span> is “no effect / no difference” (an equality); <span class="math inline">\(H_a\)</span> is the claim we seek evidence for (an inequality whose direction comes from the research question).</li>
+<li class="fragment">Hypotheses are about <strong>parameters</strong> (<span class="math inline">\(p\)</span>, <span class="math inline">\(\mu\)</span>), never statistics (<span class="math inline">\(\hat p\)</span>, <span class="math inline">\(\bar x\)</span>).</li>
+<li class="fragment">A randomization distribution shows what to expect by chance when <span class="math inline">\(H_0\)</span> is true; the <strong>test statistic</strong> is our sample’s value located on it.</li>
+<li class="fragment">The <strong>p-value</strong> is the proportion of simulated samples at least as extreme as our statistic: the smaller it is, the stronger the evidence against <span class="math inline">\(H_0\)</span>.</li>
+<li class="fragment">If the evidence against <span class="math inline">\(H_0\)</span> is not strong enough, the test is <strong>inconclusive</strong>; it does not prove <span class="math inline">\(H_0\)</span> is true.</li>
 </ul>
 
 </section>
@@ -478,190 +956,173 @@ Math 260 Applied Statistics
     </script>
 
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
           }
+          return false;
         }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
           }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
           for (const childEl of codeEl.children) {
             if (isCodeAnnotation(childEl)) {
               childEl.remove();
             }
           }
           return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
             }
           }
-        }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
           }
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
           }
-        } else {
-          return undefined;
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
         }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>

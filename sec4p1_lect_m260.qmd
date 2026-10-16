@@ -8,6 +8,35 @@ format:
     reveal-options:
       slideNumber: true
     html-math-method: mathjax
+    include-in-header:
+      text: |
+        <style>
+        .reveal .ws   { height: 2.5em; }
+        .reveal .ws-l { height: 5em; }
+        /* typeable answer boxes (contenteditable): same minimum footprint as .ws / .ws-l, grow if you type more */
+        .reveal .ws.ed, .reveal .ws-l.ed { height: auto; text-align: left; font-size: 0.9em;
+          color: #1a3a8a; outline: none; }
+        .reveal .ws.ed   { min-height: 2.5em; }
+        .reveal .ws-l.ed { min-height: 5em; }
+        .reveal .ws.ed:focus, .reveal .ws-l.ed:focus { outline: 2px dashed #EA6820; outline-offset: 2px; }
+        .reveal table.fillin { border-collapse: collapse; margin: 0.4em 0 0.8em 0; }
+        .reveal table.fillin th, .reveal table.fillin td {
+          border: 1px solid #888 !important; text-align: center; vertical-align: middle;
+          padding: 0.2em 0.5em; width: 5.5em; height: 2.4em; }
+        .reveal table.fillin .lab { width: auto; font-weight: bold; }
+        /* extra-compact slides (StatKey table slides) */
+        .reveal .slide.tight { font-size: 0.6em !important; }
+        .reveal .slide.tight h2 { font-size: 1.9em; margin-bottom: 0.2em; }
+        .reveal .slide.tight ol, .reveal .slide.tight ul { margin-bottom: 0.2em; }
+        .reveal .slide.tight ol li { margin-top: 0.15em; margin-bottom: 0.1em; }
+        .reveal .slide.tight p { margin: 0.35em 0; }
+        .reveal .slide.tight table.fillin { margin: 0.2em 0 0.4em 0; }
+        .reveal .slide.tight table.fillin th, .reveal .slide.tight table.fillin td { height: 1.9em; padding: 0.1em 0.4em; }
+        .reveal .slide.tight .ws { height: 2em; }
+        .reveal .slide.tight .ws-l { height: 3.5em; }
+        .reveal .slide.tight .ws.ed { min-height: 2em; }
+        .reveal .slide.tight .ws-l.ed { min-height: 3.5em; }
+        </style>
 title-slide-attributes:
   data-background-color: "#EA6820"
 from: markdown+emoji
@@ -21,13 +50,64 @@ library(mosaic)
 library(Lock5Data)
 ```
 
+## Warm-Up: Can You Beat Chance? {.smaller}
 
+Each card hides one of five symbols (circle, cross, waves, square, star). Try to sense which one it is.
+
+1.  Open the **Zener Card ESP Test** applet (on Moodle) and choose **25 trials**.
+2.  Make your 25 guesses. **Number correct = \_\_\_\_\_ out of 25**
+3.  **Class tally on the board:** draw a number line from 0 to 25 and add one tick mark above your score. Sketch the class picture here:
+
+::: {.ws-l}
+:::
+
+::: callout-note
+**Turn and talk (60 sec):** Before you start, how many out of 25 would you *expect* to get right if you were just guessing? After the tally: where is the class centered, and does anyone stand out?
+:::
+
+::: notes
+Activity, about 5 minutes. Students can use phones or laptops; the applet picks each card at random, so every guess has a 1-in-5 chance of being right if there is no ESP. Expected: 5 out of 25. Let them name their own "this would surprise me" threshold; that is the strength-of-evidence idea we formalize later.
+
+Board tally: expect a pile-up around 3-7, center near 5 (20%), a little right skew. If someone is at 10+, ask whether that is ESP or just luck among 25-30 people. Keep the board picture up: it is compared with 1000 simulated guessers on the StatKey slides.
+
+Reference (exact binomial, n = 25, p = 0.2): P(at least 7) = 0.220, at least 8 = 0.109, at least 9 = 0.047, at least 10 = 0.017, at least 11 = 0.006. With a class of 25-30 and no ESP, a top score around 8-9 is quite plausible.
+:::
+
+## Example 1: Extrasensory Perception (ESP) {.smaller}
+
+In an ESP test, one person writes down one of the letters A, B, C, D, or E and tries to telepathically communicate the choice to a partner, who then tries to guess it. (Our Zener cards work the same way, with five symbols.)
+
+**a)** If there is no ESP and people are just randomly guessing among five choices, what proportion of guesses would be correct?  $p =$ \_\_\_\_\_\_\_\_ (so about \_\_\_\_\_ out of 25)
+
+**b)** Suppose the sample size is the same in every case. Circle the sample proportion correct that provides:
+
+-   the **greatest** evidence that people have ESP: $\hat p = 0.1$ $\quad$ $\hat p = 0.25$ $\quad$ $\hat p = 0.4$ $\quad$ $\hat p = 0.7$
+-   the **least** evidence that people have ESP: $\hat p = 0.1$ $\quad$ $\hat p = 0.25$ $\quad$ $\hat p = 0.4$ $\quad$ $\hat p = 0.7$
+
+**c)** Why did you pick your "least evidence" value?
+
+::: {.ws .ed contenteditable="true"}
+:::
+
+::: notes
+a) p = 0.2, so 5 out of 25. Connect to the center of the class tally.
+
+b) Greatest: 0.7. Least: 0.1. Tell them to notice that 0.1 is below chance, so it certainly does not support ESP (the research claim is "better than chance"). 0.25 is only slightly above chance and is the next-least convincing, so it is a good discussion point: with only a handful of guesses, 0.25 is easily explained by luck. This is the old "Example 1 Revisited" most/least question, merged here because the class has just generated real data.
+
+c) Typeable. Look for: below chance cannot support better-than-chance; or, very close to 0.2 is what we expect from luck alone.
+
+Tie back to the board: where does our tally put the highest scorers? 0.4 = 10 out of 25.
+:::
 
 ## Statistical Test
 
 A **statistical test** is used to determine whether results from a sample are convincing enough to allow us to conclude something about the population.
 
 > An outcome that would rarely happen if a claim were true is good evidence that the claim is not true.
+
+::: notes
+Refer to the ESP tally: "an outcome that would rarely happen if people are just guessing" is something like 12 out of 25.
+:::
 
 ## Statistical Hypotheses: Null
 
@@ -61,6 +141,74 @@ Statistical tests are framed formally in terms of two competing hypotheses:
 
 -   The direction of inequality in the alternative depends on the specifics of the research question of interest
 
+## Example 1 (continued): Hypotheses for ESP {.smaller}
+
+Recall: if there is no ESP, people are randomly guessing among five choices.
+
+Write down the null and alternative hypotheses for testing whether people have ESP.
+
+**Define the parameter** $p$ in words:
+
+::: {.ws .ed contenteditable="true"}
+:::
+
+$H_0$: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+$H_a$: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Which of these is the *sample* quantity, and where did it show up in our activity? (Turn and talk, 30 sec.)
+
+::: notes
+p = the long-run proportion of guesses that are correct for all people (or this person) guessing the hidden symbol. H0: p = 0.2. Ha: p > 0.2.
+
+Stress that the alternative is one-sided because the research question is "better than chance"; below chance would not be evidence of ESP (ties back to the 0.1 discussion). The sample quantity is p-hat = (number correct)/25, each student's own score; none of it belongs in the hypotheses.
+
+Note the null always has an equality; the null here is the claim "just guessing."
+:::
+
+## Example 2: Sleep vs Caffeine for Memory {.smaller}
+
+In an experiment, students were given words to memorize, then were randomly assigned to either take a 90-minute nap or take a caffeine pill. A couple of hours later they were tested on recall. We wish to test whether the sample provides evidence of a *difference* in mean number of words recalled between taking a nap and taking caffeine.
+
+**Define the parameters** in words:
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+What are the null and alternative hypotheses for this test?
+
+$H_0$: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+$H_a$: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+::: notes
+mu_s = mean number of words recalled by all students like these after a nap; mu_c = same after caffeine. H0: mu_s = mu_c (or mu_s - mu_c = 0). Ha: mu_s != mu_c (two-sided because the question is "a difference," no direction).
+
+Contrast with ESP: one-sided vs two-sided because of the wording of the research question.
+:::
+
+## Quick Self-Quiz: Writing Hypotheses {.smaller}
+
+Write down the hypotheses for the test in each case below. Define your parameters.
+
+**a)** Does the proportion of people who support gun control differ between males and females?
+
+::: {.ws-l}
+:::
+
+**b)** Is the average number of hours of sleep per night for college students less than 7?
+
+::: {.ws-l}
+:::
+
+::: notes
+a) p_M = proportion of all males who support gun control; p_F = same for females. H0: p_M = p_F. Ha: p_M != p_F. (Two-sided: "differ.")
+
+b) mu = mean hours of sleep per night for all college students. H0: mu = 7. Ha: mu < 7.
+
+If someone puts x-bar or p-hat in a hypothesis, point to the Points to Note slide.
+:::
+
 ## Null Hypothesis
 
 ![](http://imgs.xkcd.com/comics/null_hypothesis.png)
@@ -68,6 +216,159 @@ Statistical tests are framed formally in terms of two competing hypotheses:
 ## Evidence
 
 The goal of a hypothesis test is to determine whether the sample data provide enough evidence to refute the null hypothesis in favor of the alternative hypothesis.
+
+## Example 1 Revisited: What Does Evidence Mean for ESP? {.smaller}
+
+Recall: $H_0$: $p = 0.2$ (just guessing) and $H_a$: $p > 0.2$ (ESP).
+
+**a)** If a test for ESP shows evidence **against** $H_0$ and in support of $H_a$, what does that mean in terms of ESP?
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+**b)** If the results do **not** show enough evidence to refute $H_0$, what does that mean in terms of ESP?
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+::: notes
+a) The data would be unlikely if people were only guessing, so we have evidence that people (at least some) do better than chance, i.e., support for ESP.
+
+b) The test is **inconclusive**: the results are consistent with guessing, so we cannot rule out luck. Model wording: "The data are inconclusive; we do not have enough evidence that people do better than chance." This does NOT prove there is no ESP or that p = 0.2 exactly. Use the class tally: "Most of you scored about 5, which looks just like guessing."
+:::
+
+## Example 2 Revisited: What Does Evidence Mean for Sleep vs Caffeine? {.smaller}
+
+**a)** If the test comparing sleep and caffeine shows evidence **against** $H_0$ and in support of $H_a$, what does that mean in terms of sleep, caffeine, and memory?
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+**b)** If the results do **not** show enough evidence to refute $H_0$ and support $H_a$, what does that mean in terms of sleep, caffeine, and memory?
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+::: notes
+a) Evidence that the mean recall differs between nap and caffeine (the experiment was randomized, so a cause-and-effect conclusion about the treatment is reasonable).
+
+b) The test is **inconclusive**: we do not have enough evidence of a difference in mean recall; the observed difference could plausibly be due to random assignment. Not the same as "nap and caffeine are equally effective."
+:::
+
+## Quick Self-Quiz: Statistical Significance {.smaller}
+
+A sample of 50 cans of tomatoes is tested for levels of the chemical BPA to see if there is evidence that the mean level is greater than 100 ppb (parts per billion).
+
+Write down the hypotheses for this test:
+
+::: {.ws}
+:::
+
+Give a possible sample mean that you think would show strong evidence against the null hypothesis and in support of the alternative hypothesis:
+
+::: {.ws}
+:::
+
+Give a possible sample mean that would definitely **not** show evidence against the null hypothesis:
+
+::: {.ws}
+:::
+
+::: notes
+H0: mu = 100; Ha: mu > 100, where mu is the mean BPA level (ppb) in all cans of tomatoes of this type.
+
+Strong evidence: a sample mean well above 100 (e.g., 130 or 150, depending on the variability, which we do not know yet; that is the point of the next section). Definitely not evidence: any sample mean at or below 100 (e.g., 90).
+
+Link back to ESP: both parts depend on the direction of Ha, and "how far is far enough" depends on how much sample means (or proportions) vary by chance. StatKey shows exactly that on the next slides.
+:::
+
+## StatKey: Sampling Distribution {.tight}
+
+What would results look like if **nobody** had ESP and everyone just guessed ($p = 0.2$, 25 cards each)? Use the familiar sampling distribution applet.
+
+1.  Go to **StatKey** (lock5stats.com/statkey) and open **Sampling Distribution for a Proportion**.
+2.  Set the population proportion to $0.2$ and the sample size to $n = 25$.
+3.  Click **Generate 1 Sample** a few times, then **Generate 1000 Samples**.
+
+Fill in from the plot of simulated sample proportions $\hat p$:
+
+<table class="fillin">
+<tr><td class="lab">Center</td><td></td><td class="lab">Shape</td><td></td></tr>
+<tr><td class="lab">Standard error</td><td></td><td class="lab">Range of $\hat p$</td><td></td></tr>
+</table>
+
+Turn and talk (30 sec): Each dot is one "guesser" with no ESP. Why isn't every dot at exactly 0.2? Where would the highest scorer(s) on our board fall?
+
+::: notes
+This is Chapter 3 material: the sampling distribution of p-hat when the true proportion is 0.2, i.e., exactly what guessing produces.
+
+Expected: center about 0.20 (5 out of 25); SE about 0.08 (exact sqrt(.2*.8/25) = 0.08); roughly bell-shaped with slight right skew; the 1000 dots typically run from about 0 to about 0.5 (roughly 0-12 out of 25).
+
+Why not exactly 0.2: sampling variability; even a pure guesser gets 3 or 7 out of 25 sometimes.
+
+Have students compare the shape with the board tally: both are piles around 0.2 / 5.
+:::
+
+## StatKey: Randomization Test {.tight}
+
+Now we use the same idea to formalize a **test**. Suppose a student scored $\hat p = 0.4$ (10 out of 25).
+
+1.  Open **Test for a Single Proportion** under *Randomization Hypothesis Tests*.
+2.  Click **Edit Data**: sample size $n = 25$, count $= 10$.
+3.  Check the null and alternative: $H_0$: $p =$ \_\_\_\_ and $H_a$: $p$ \_\_\_ \_\_\_\_.
+4.  Click **Generate 1000 Samples**, check **Right Tail**, and read off the results.
+
+<table class="fillin">
+<tr><td class="lab">Observed statistic (test statistic) $\hat p$</td><td></td><td class="lab">Center of the randomization distribution</td><td></td></tr>
+<tr><td class="lab">Number of simulated samples with $\hat p \ge$ observed</td><td></td><td class="lab">Proportion of simulated samples ("p-value")</td><td></td></tr>
+</table>
+
+How is this plot different from the sampling distribution applet? (Turn and talk, 30 sec)
+
+::: {.ws .ed contenteditable="true"}
+:::
+
+::: notes
+Key point: the randomization distribution is built assuming H0 is true, so it is centered at the NULL value 0.2, not at the observed statistic. The observed sample statistic (p-hat = 0.4) is the **test statistic**; we locate it on the null distribution.
+
+H0: p = 0.2; Ha: p > 0.2 (right tail).
+
+Expected: center about 0.20; simulated samples with p-hat >= 0.4 should be around 15-20 out of 1000. Exact binomial P(X >= 10) = 0.017. The "p-value" is the proportion of simulated samples at least as extreme as the observed statistic: about 0.017 (StatKey will show roughly 0.01-0.03 depending on the run).
+
+Difference from the sampling distribution applet: here we ASSUME H0 (center at null, p = 0.2) and ask where our sample falls; we start from a sample we actually observed. Mechanically the picture is the same one they just made, which is the point.
+:::
+
+## StatKey: Strength of Evidence {.tight}
+
+Recall: $H_0$: $p = 0.2$, $H_a$: $p > 0.2$, observed $\hat p = 0.4$ (10 of 25).
+
+Change the count in **Edit Data** and fill in the p-value StatKey gives for each score:
+
+<table class="fillin">
+<tr><td class="lab">Score (out of 25)</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+<tr><td class="lab">$\hat p$</td><td></td><td></td><td></td><td></td></tr>
+<tr><td class="lab">Proportion of simulations at least as large</td><td></td><td></td><td></td><td></td></tr>
+</table>
+
+**a)** Which of these scores gives the strongest evidence against $H_0$? How can you tell from the picture?
+
+::: {.ws .ed contenteditable="true"}
+:::
+
+**b)** Our best score on the board was \_\_\_\_\_. Is that convincing evidence of ESP? Explain in context.
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+::: notes
+Expected p-values (exact binomial; StatKey will vary by about +/- 0.01-0.02): 7 out of 25 (p-hat 0.28): 0.220; 8 (0.32): 0.109; 9 (0.36): 0.047; 10 (0.40): 0.017.
+
+a) 10 out of 25: the smallest proportion of simulated samples is as extreme or more, i.e., the observed statistic sits farthest out in the tail of the randomization distribution.
+
+b) Depends on the class. If the top score is about 8-9: not very convincing, since in a class of 25-30 pure guessers someone often does that well; the data are consistent with guessing (p-value not small). If someone hit 10+ or more, the evidence is stronger, but note it was picked as the best of ~30 people, so be careful (do not belabor).
+
+Wording: small p-value = result would rarely occur if H0 were true = evidence against H0. This answers the first "Topics to Come" question; the second question (how small is small enough) is next section.
+:::
 
 ## Topics to Come
 
@@ -88,5 +389,13 @@ The goal of a hypothesis test is to determine whether the sample data provide en
 
 -   A hypothesis test examines whether sample data provide enough evidence to refute the null hypothesis and support the alternative hypothesis.
 
+## Wrapping Up
 
-
+::: incremental
+-   A hypothesis test asks whether a sample result would be surprising if the null hypothesis were true; our ESP tally showed what "surprising" looks like.
+-   $H_0$ is "no effect / no difference" (an equality); $H_a$ is the claim we seek evidence for (an inequality whose direction comes from the research question).
+-   Hypotheses are about **parameters** ($p$, $\mu$), never statistics ($\hat p$, $\bar x$).
+-   A randomization distribution shows what to expect by chance when $H_0$ is true; the **test statistic** is our sample's value located on it.
+-   The **p-value** is the proportion of simulated samples at least as extreme as our statistic: the smaller it is, the stronger the evidence against $H_0$.
+-   If the evidence against $H_0$ is not strong enough, the test is **inconclusive**; it does not prove $H_0$ is true.
+:::
