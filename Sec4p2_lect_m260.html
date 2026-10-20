@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="Sec4p2_lect_m260_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Sec4p2_lect_m260_files/libs/quarto-html/tabby.min.js"></script>
-<script src="Sec4p2_lect_m260_files/libs/quarto-html/popper.min.js"></script>
-<script src="Sec4p2_lect_m260_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="Sec4p2_lect_m260_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Sec4p2_lect_m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="Sec4p2_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.42">
+<script src="sec4p2_lect_m260_files/libs/clipboard/clipboard.min.js"></script>
+<script src="sec4p2_lect_m260_files/libs/quarto-html/tabby.min.js"></script>
+<script src="sec4p2_lect_m260_files/libs/quarto-html/popper.min.js"></script>
+<script src="sec4p2_lect_m260_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="sec4p2_lect_m260_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="sec4p2_lect_m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="sec4p2_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Math 260 Applied Statistics">
   <title>4.2 Measuring Evidence With p-Values</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="Sec4p2_lect_m260_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="Sec4p2_lect_m260_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="sec4p2_lect_m260_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="sec4p2_lect_m260_files/libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -29,13 +32,13 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="Sec4p2_lect_m260_files/libs/revealjs/dist/theme/quarto-1246092c7357598352506a630e966e2e.css">
-  <link href="Sec4p2_lect_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="Sec4p2_lect_m260_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="Sec4p2_lect_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="Sec4p2_lect_m260_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="Sec4p2_lect_m260_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="Sec4p2_lect_m260_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="sec4p2_lect_m260_files/libs/revealjs/dist/theme/quarto-fe1b06afc5958099a575323cff4e8791.css">
+  <link href="sec4p2_lect_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="sec4p2_lect_m260_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="sec4p2_lect_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="sec4p2_lect_m260_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="sec4p2_lect_m260_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="sec4p2_lect_m260_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -123,6 +126,21 @@
       margin-right: 0; 
     }
   </style>
+  <style>
+  .reveal .ws   { height: 2.5em; }
+  .reveal .ws-l { height: 5em; }
+  /* typeable answer boxes (contenteditable): same minimum footprint as .ws / .ws-l, grow if you type more */
+  .reveal .ws.ed, .reveal .ws-l.ed { height: auto; text-align: left; font-size: 0.9em;
+    color: #1a3a8a; outline: none; }
+  .reveal .ws.ed   { min-height: 2.5em; }
+  .reveal .ws-l.ed { min-height: 5em; }
+  .reveal .ws.ed:focus, .reveal .ws-l.ed:focus { outline: 2px dashed #EA6820; outline-offset: 2px; }
+  .reveal table.fillin { border-collapse: collapse; margin: 0.4em 0 0.8em 0; }
+  .reveal table.fillin th, .reveal table.fillin td {
+    border: 1px solid #888 !important; text-align: center; vertical-align: middle;
+    padding: 0.2em 0.5em; width: 5.5em; height: 2.4em; }
+  .reveal table.fillin .lab { width: auto; font-weight: bold; }
+  </style>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -140,30 +158,38 @@ Math 260 Applied Statistics
 </div>
 
 </section>
-<section>
-<section id="key-questions" class="title-slide slide level1 center">
-<h1>Key Questions</h1>
-<p><span class="emoji" data-emoji="question">❓</span> How unusual is it to see a sample statistic as extreme as that observed, if <span class="math inline">\(H_0\)</span> were true?</p>
-<ul>
-<li>If it is very unusual, we have statistically significant evidence against the null hypothesis</li>
-</ul>
-<p><span class="emoji" data-emoji="point_right">👉</span> But <em>how</em> do we <strong>measure</strong> how unusual a sample statistic is, if <span class="math inline">\(H_0\)</span> were true?</p>
-</section>
-<section id="quantifying-evidence-against-the-null-hypothesis" class="slide level2">
-<h2>Quantifying Evidence Against the Null Hypothesis</h2>
-<p><span class="emoji" data-emoji="bulb">💡</span> To see if a statistic provides evidence against <span class="math inline">\(H_0\)</span>, we need to explore…</p>
-<div>
-<ul>
-<li class="fragment">what kind of sample statistics we would observe<br>
-</li>
-<li class="fragment">just by <em>random chance</em><br>
-</li>
-<li class="fragment"><strong>if</strong> <span class="math inline">\(H_0\)</span> were true.<br>
-</li>
-</ul>
-</div>
+<section id="warm-up-spinning-pennies" class="slide level2 smaller">
+<h2>Warm-Up: Spinning Pennies</h2>
+<ol type="1">
+<li><strong>Predict</strong> the probability of heads when spinning a penny.</li>
+<li><strong>Spin</strong> your penny 20 times (do it well!).</li>
+<li><strong>Record</strong> the number of heads.</li>
+<li>Put a <strong>tick mark on the board</strong> under your value.</li>
+</ol>
+<table class="fillin">
+<tbody><tr>
+<th>
+My prediction of P(heads)
+</th>
+<th>
+My number of heads (out of 20)
+</th>
+<th>
+My proportion of heads
+</th>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+</tbody></table>
 <aside class="notes">
-<p>Spinning pennies 20 times and count number of heads. Randomization distribution</p>
+<p>Spin on a hard, flat surface: stand the penny on its edge, twist it with two fingers, and let it fall flat on its own (no bumping the table, no flipping). Record heads each time.</p>
+<p>Most students predict 0.5. Real pennies often come out noticeably below that (spinning is not like flipping; the two faces are not balanced, and Gelman and Nolan have written about spun pennies landing heads well under half the time), so students are usually surprised. Build the tick-mark dotplot on the board as students report. Do not explain the result yet; leave it as a puzzle.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -176,41 +202,160 @@ Math 260 Applied Statistics
           display:block!important;
       }</style></aside>
 </section>
-<section id="randomization-distribution" class="slide level2">
+<section id="our-class-data" class="slide level2 smaller">
+<h2>Our Class Data</h2>
+<p>The tick marks on the board show the number of heads in 20 spins for each student.</p>
+<ol type="a">
+<li>Sketch the distribution of the class results. Label the axis.</li>
+</ol>
+<div class="ws-l">
+
+</div>
+<ol start="2" type="a">
+<li>Describe the center and spread. Is 10 heads typical for our class?</li>
+</ol>
+<div class="ws ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<ol type="a">
+<li><p>Have students copy the board. The class distribution will usually be centered below 10 and may be a bit spread out (each student has a different penny and spinning technique).</p></li>
+<li><p>Typical talking point: most of the class has fewer than 10 heads, so the center is clearly below 10. Is that just luck of the draw, or is spinning really biased toward tails?</p></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="if-spinning-were-fair" class="slide level2">
+<h2>If Spinning Were Fair</h2>
+<p><strong>Turn and talk (60 sec):</strong> If spinning a penny were just like flipping a fair coin, how many heads out of 20 would be typical? How many heads would surprise you?</p>
+<aside class="notes">
+<p>For a fair coin, we expect about 10 heads, and anything from about 6 to 14 is not surprising; 3 or 17 would be shocking. That sets up the main question: how unusual is our sample statistic <em>if</em> the null hypothesis (p = 0.5) were true? Move to the Key Questions slide.</p>
+<p>Later (Randomization Distribution slide): return to this penny data with StatKey (Test for a Single Proportion, null proportion 0.5, n = 20, generate 1000 samples) and compare that fair-coin distribution to the class tick marks.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section>
+<section id="key-questions" class="title-slide slide level1 center">
+<h1>Key Questions</h1>
+<p><span class="emoji" data-emoji="question">❓</span> How unusual is it to see a sample statistic as extreme as that observed, if <span class="math inline">\(H_0\)</span> were true?</p>
+<ul>
+<li>If it is very unusual, we have statistically significant evidence against the null hypothesis</li>
+</ul>
+<p>But <em>how</em> do we <strong>measure</strong> how unusual a sample statistic is, if <span class="math inline">\(H_0\)</span> were true?</p>
+</section>
+<section id="quantifying-evidence-against-the-null-hypothesis" class="slide level2">
+<h2>Quantifying Evidence Against the Null Hypothesis</h2>
+<p>To see if a statistic provides evidence against <span class="math inline">\(H_0\)</span>, we need to explore…</p>
+<ul>
+<li class="fragment">what kind of sample statistics we would observe<br>
+</li>
+<li class="fragment">just by <em>random chance</em><br>
+</li>
+<li class="fragment"><strong>if</strong> <span class="math inline">\(H_0\)</span> were true.<br>
+</li>
+</ul>
+<aside class="notes">
+<p>Back to the pennies: spinning 20 times and counting heads. A randomization distribution shows what counts we would get from a <em>fair</em> penny, just by chance.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="randomization-distribution" class="slide level2 smaller">
 <h2>Randomization Distribution</h2>
 <ul>
 <li><p>A <strong>randomization distribution</strong> is a collection of statistics from samples simulated assuming the null hypothesis is true</p></li>
 <li><p>The randomization distribution shows what values of statistics would be observed, just by random chance, <em>if the null hypothesis were true</em></p></li>
 </ul>
-<p><img data-src="images/secp4p2_rand.png" class="absolute" style="bottom: 0px; right: 50px; height: 300px; "></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/sec4p2_penny_randdist.png" height="230"></p>
+<figcaption>Simulated proportions of heads in 20 spins of a <em>fair</em> penny (StatKey, 1000 samples)</figcaption>
+</figure>
+</div>
+<div class="fragment">
+<p><strong>Turn and talk (30 sec):</strong> Where is this distribution centered? Why?</p>
+</div>
+<aside class="notes">
+<p>Centered at the null value (0 for a difference in means, 0.5 for the penny proportion), because the simulation assumes H0 is true. Connects back to the penny warm-up: the “fair spin” world. The figure is StatKey’s Test for a Single Proportion (null 0.5, n = 20, 1000 samples; mean 0.495, SE 0.113). Compare it to the class tick marks on the board (convert counts to proportions: 6 heads = 0.30). Better still, regenerate it live in StatKey.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="key-question" class="slide level2">
 <h2>Key Question</h2>
 <p><span class="emoji" data-emoji="question">❓</span> How unusual is it to see a sample statistic as extreme as that observed, if <span class="math inline">\(H_0\)</span> is true?</p>
-<div>
 <ul>
 <li class="fragment"><p>A <strong>randomization distribution</strong> tells us what values of statistics we would see just by random chance, <em>if the null hypothesis were true</em></p></li>
 <li class="fragment"><p>Use the distribution to assess how extreme the observed statistic is!</p></li>
 </ul>
-</div>
 </section>
 <section id="p-value" class="slide level2">
 <h2>p-value</h2>
-<p><span class="emoji" data-emoji="pencil2">✏️</span> The <span class="math inline">\(p\)</span>-value is the chance of obtaining a sample statistic as extreme (or more extreme) than the observed sample statistic, <em>if the null hypothesis were true</em></p>
+<p>The <span class="math inline">\(p\)</span>-value is the chance of obtaining a sample statistic as extreme (or more extreme) than the observed sample statistic, <em>if the null hypothesis were true</em></p>
 <div class="fragment">
 <p><strong>Calculate</strong> the <span class="math inline">\(p\)</span>-value as the proportion of statistics in a randomization distribution that are as extreme (or more extreme) than the observed sample statistic</p>
 </div>
+<div class="fragment">
+<p><strong>Turn and talk (30 sec):</strong> In your own words, what does a <span class="math inline">\(p\)</span>-value of 0.03 tell us?</p>
+</div>
+<aside class="notes">
+<p>Listen for the common error: “there is a 3% chance H0 is true.” Correct: if H0 were true, only 3% of random samples would give a statistic this extreme or more.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="calculating-a-p-value" class="slide level2">
 <h2>Calculating a p-value</h2>
 <ol type="1">
 <li><p>What kinds of statistics would we get, just by random chance, if the null hypothesis were true?</p>
-<p><span class="emoji" data-emoji="white_check_mark">✅</span> Randomization distribution</p></li>
+<p>Answer: the randomization distribution</p></li>
 </ol>
 <div class="fragment">
 <ol start="2" type="1">
 <li><p>What proportion of these statistics are as extreme as our original sample statistic?</p>
-<p><span class="emoji" data-emoji="white_check_mark">✅</span> <span class="math inline">\(p\)</span>-value</p></li>
+<p>Answer: the <span class="math inline">\(p\)</span>-value</p></li>
 </ol>
 </div>
 </section>
@@ -237,24 +382,258 @@ Math 260 Applied Statistics
 <section id="guidelines-for-thinking-about-p-values" class="slide level2">
 <h2>Guidelines for Thinking About P-values</h2>
 <p>When wording conclusions from a test of significance, you can consider:</p>
-<div>
 <ul>
 <li class="fragment"><p><span class="math inline">\(.05\le p \le .10 \implies\)</span> <em>slight</em> evidence</p></li>
 <li class="fragment"><p><span class="math inline">\(.01\le p \le .05 \implies\)</span> <em>some</em> or <em>moderate</em> evidence</p></li>
 <li class="fragment"><p><span class="math inline">\(p \le .01 \implies\)</span> <em>strong</em> or <em>convincing</em> evidence</p></li>
 </ul>
-</div>
 </section>
-<section id="summary" class="slide level2">
+<section id="example-sleep-or-caffeine" class="slide level2 smaller">
+<h2>Example: Sleep or Caffeine</h2>
+<p>Students memorized words, then were randomly assigned to take a 90-minute nap or a caffeine pill and were tested on recall. Do the data show a <em>difference</em> in mean words recalled?</p>
+<p><span class="math inline">\(H_0: \mu_s = \mu_c\)</span> vs <span class="math inline">\(H_a: \mu_s \neq \mu_c\)</span>, with sample statistic <span class="math inline">\(\bar{x}_s - \bar{x}_c = 3.0\)</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/sec4p2_sleep_caffeine.png" class="quarto-figure quarto-figure-center" height="270"></p>
+</figure>
+</div>
+<ol type="a">
+<li>Is this a one-tailed or two-tailed test? Where is the randomization distribution centered?</li>
+</ol>
+<div class="ws">
+
+</div>
+<aside class="notes">
+<ol type="a">
+<li>Two-tailed (Ha has not-equal); centered at 0 (the mean shown is -0.021), because the null says no difference.</li>
+</ol>
+<p>Study design based on Mednick et al.&nbsp;(2008), Behavioural Brain Research. The 3.0 statistic and the randomization dotplot are from the class handout (StatKey, 1000 samples), so your own simulation will differ slightly.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="sleep-or-caffeine-continued" class="slide level2 smaller">
+<h2>Sleep or Caffeine, continued</h2>
+<p>Recall: <span class="math inline">\(H_a: \mu_s \neq \mu_c\)</span> and <span class="math inline">\(\bar{x}_s - \bar{x}_c = 3.0\)</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/sec4p2_sleep_caffeine.png" class="quarto-figure quarto-figure-center" height="200"></p>
+</figure>
+</div>
+<ol start="2" type="a">
+<li>Use the randomization distribution to state the <span class="math inline">\(p\)</span>-value.</li>
+</ol>
+<div class="ws">
+
+</div>
+<ol start="3" type="a">
+<li>What does the <span class="math inline">\(p\)</span>-value tell us about the evidence against <span class="math inline">\(H_0\)</span>? Answer in context.</li>
+</ol>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<ol start="2" type="a">
+<li><p>The statistic 3.0 and its mirror image -3.0 are both shaded. Each tail has proportion 0.022, so the two-sided p-value is 2(0.022) = 0.044 (the 0.956 in the middle is 1 minus that).</p></li>
+<li><p>p = 0.044 falls in the .01 to .05 range: some (moderate) evidence that mean recall differs between nap and caffeine. Because the people were randomly assigned, a difference can reasonably be attributed to nap vs caffeine.</p></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="activity-beer-and-mosquitoes" class="slide level2 smaller">
+<h2>Activity: Beer and Mosquitoes</h2>
+<p>43 men were randomly assigned to drink a liter of beer (25 men) or water (18 men). The number of mosquitoes approaching each man was recorded. Is the mean number of mosquitoes approaching a beer drinker <em>larger</em> than for a water drinker?</p>
+<ol type="a">
+<li>Is this an experiment or an observational study? What are the cases? What are the variables?</li>
+</ol>
+<div class="ws-l">
+
+</div>
+<ol start="2" type="a">
+<li>State the null and alternative hypotheses. Define any parameters used.</li>
+</ol>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<ol type="a">
+<li><p>Experiment (men were randomly assigned to beer or water). Cases: the 43 men. Variables: drink (beer or water; categorical, explanatory) and number of mosquitoes approaching (quantitative, response).</p></li>
+<li><p>H0: mu_B = mu_W vs Ha: mu_B &gt; mu_W, where mu_B and mu_W are the mean numbers of mosquitoes approaching men who drink beer / water (all men like these). One-sided because the question asks whether beer drinkers attract <em>more</em>.</p></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="beer-and-mosquitoes-statkey" class="slide level2 smaller">
+<h2>Beer and Mosquitoes: StatKey</h2>
+<ol start="3" type="a">
+<li>In StatKey (lock5stat.com/statkey), choose <strong>Test for Difference in Means</strong>, select the <strong>Beer and Mosquitoes</strong> dataset, and click <strong>Generate 1000 Samples</strong>. Classify each possible difference in means as (i) very likely, (ii) unlikely but possible, or (iii) very unlikely to ever occur just by chance.</li>
+</ol>
+<table class="fillin">
+<tbody><tr>
+<th class="lab">
+Difference in means
+</th>
+<th>
+(-7)
+</th>
+<th>
+(-3)
+</th>
+<th>
+(-0.5)
+</th>
+<th>
+(1)
+</th>
+<th>
+(5)
+</th>
+</tr>
+<tr>
+<td class="lab">
+(i), (ii), or (iii)?
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+</tbody></table>
+<aside class="notes">
+<p>Randomization distribution is centered near 0 with a standard error of roughly 1.3 (your simulation will vary slightly), roughly bell-shaped.</p>
+<p>-7: (iii) very unlikely (more than 5 SEs out; nothing plotted). -3: (ii) relatively unlikely but occasionally occurs (a few percent of dots at or beyond it in the tail). -0.5: (i) very likely. 1: (i) very likely. 5: (iii) very unlikely (about 4 SEs out; typically no dots at or beyond it in 1000 samples).</p>
+<p>Tip for StatKey: the group assignment does not matter for the shape; the difference is Beer minus Water. In StatKey, check the label above the plot to see which group is first.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="beer-and-mosquitoes-p-value" class="slide level2 smaller">
+<h2>Beer and Mosquitoes: p-value</h2>
+<p>Recall: <span class="math inline">\(H_0: \mu_B = \mu_W\)</span> vs <span class="math inline">\(H_a: \mu_B &gt; \mu_W\)</span></p>
+<ol start="4" type="a">
+<li>Find the difference in means observed in the study (shown for the <strong>Original Sample</strong> in StatKey). Give the notation and the value of the sample statistic.</li>
+</ol>
+<div class="ws">
+
+</div>
+<ol start="5" type="a">
+<li>Where does the sample statistic lie in the randomization distribution? Is it likely or unlikely to occur just by random chance?</li>
+</ol>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<ol start="6" type="a">
+<li>In StatKey, check the <strong>Right Tail</strong> box and use the sample statistic to find the <span class="math inline">\(p\)</span>-value. Is it large or small?</li>
+</ol>
+<div class="ws">
+
+</div>
+<aside class="notes">
+<ol start="4" type="a">
+<li><p><span class="math inline">\(\bar{x}_B - \bar{x}_W = 23.6 - 19.22 = 4.38\)</span> (beer group mean 23.6, water group mean 19.22).</p></li>
+<li><p>4.38 is far out in the right tail, about 3 to 4 SEs above 0 – beyond (or at the very edge of) nearly all the randomization dots. It is very unlikely to occur just by random chance if beer had no effect.</p></li>
+<li><p>Right-tail test (Ha has “&gt;”), so no doubling. The p-value is tiny: about 0.000 to 0.002 in 1000 simulated samples (zero or one or two dots). Small, so strong evidence against H0 (p &lt;= .01): evidence that beer drinkers attract more mosquitoes on average. Random assignment supports a cause-and-effect conclusion for these men.</p></li>
+</ol>
+<p>Caveat if asked: results apply to the kind of men in the study (adult male volunteers), not everyone.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="quick-self-quiz" class="slide level2 smaller">
+<h2>Quick Self-Quiz</h2>
+<p>To test <span class="math inline">\(H_0: \mu = 50\)</span> vs <span class="math inline">\(H_a: \mu &lt; 50\)</span> using sample data with <span class="math inline">\(\bar{x} = 43.7\)</span>:</p>
+<ol type="a">
+<li>Where will the randomization distribution be centered? Why?</li>
+</ol>
+<div class="ws ed" contenteditable="true">
+
+</div>
+<ol start="2" type="a">
+<li>Is this a left-tail test, a right-tail test, or a two-tail test?</li>
+</ol>
+<div class="ws">
+
+</div>
+<ol start="3" type="a">
+<li>How can we find the <span class="math inline">\(p\)</span>-value once we have the randomization distribution?</li>
+</ol>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<ol type="a">
+<li><p>At 50, the null value, because the randomization samples are generated assuming H0 is true.</p></li>
+<li><p>Left-tail: Ha has “&lt;”, so the p-value is the proportion in the lower tail.</p></li>
+<li><p>Find the proportion of randomization statistics that are 43.7 or smaller. No doubling, since the test is one-sided.</p></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary" class="slide level2 smaller">
 <h2>Summary</h2>
-<div>
 <ul>
 <li class="fragment"><p>The randomization distribution shows what types of statistics would be observed, just by random chance, <em>if the null hypothesis were true</em>.</p></li>
 <li class="fragment"><p>A <span class="math inline">\(p\)</span>-value is the chance of getting a statistic as extreme as that observed, <em>if</em> <span class="math inline">\(H_0\)</span> were true.</p></li>
 <li class="fragment"><p>A <span class="math inline">\(p\)</span>-value can be calculated as the proportion of statistics in the randomization distribution <em>as extreme or more extreme than the observed sample statistic</em>.</p></li>
 <li class="fragment"><p>The smaller the <em>p</em>-value, the greater the evidence against <span class="math inline">\(H_0.\)</span></p></li>
 </ul>
-</div>
 
 </section></section>
     </div>
@@ -265,20 +644,20 @@ Math 260 Applied Statistics
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="Sec4p2_lect_m260_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="sec4p2_lect_m260_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="Sec4p2_lect_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="Sec4p2_lect_m260_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="Sec4p2_lect_m260_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="Sec4p2_lect_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="Sec4p2_lect_m260_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="Sec4p2_lect_m260_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="sec4p2_lect_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="sec4p2_lect_m260_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="sec4p2_lect_m260_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="sec4p2_lect_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="sec4p2_lect_m260_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="sec4p2_lect_m260_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="Sec4p2_lect_m260_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="Sec4p2_lect_m260_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="Sec4p2_lect_m260_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="Sec4p2_lect_m260_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="sec4p2_lect_m260_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="sec4p2_lect_m260_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="sec4p2_lect_m260_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="sec4p2_lect_m260_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -513,190 +892,173 @@ Math 260 Applied Statistics
     </script>
 
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
           }
+          return false;
         }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
           }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
           for (const childEl of codeEl.children) {
             if (isCodeAnnotation(childEl)) {
               childEl.remove();
             }
           }
           return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
             }
           }
-        }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
           }
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
           }
-        } else {
-          return undefined;
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
         }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>
