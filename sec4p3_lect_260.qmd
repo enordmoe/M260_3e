@@ -85,20 +85,6 @@ The most common value of $\alpha$ is .05
 5.  Write a sentence explaining the conclusion of the test in context, indicating whether or not we have convincing evidence for $H_a$ and referring back to the question of interest.
 :::
 
-## Significance Testing is Controversial
-
-![](https://imgs.xkcd.com/comics/mathematical_symbol_fight.png)
-
-## Moving to a World Beyond $p<0.05$
-
-![Moving to a World Beyond Significance Testing Article](figs/moving_to_a_world_beyond_p_heading.png)
-
--   [Link](https://doi.org/10.1080/00031305.2019.1583913) to the article
-
-## P-value, Significance Levels, and Decisions
-
-<img src="figs/pval_and_sig_level.png" style="width: 70%"/>
-
 ## Statistical Conclusions
 
 ![](figs/stat_conclusions.png)
