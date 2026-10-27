@@ -1,0 +1,431 @@
+---
+title: "4.4-4.5 More about Hypothesis Tests"
+author: "Math 260 Applied Statistics"
+format:
+  revealjs:
+    chalkboard: true
+    theme: [default, custom.scss]
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+    include-in-header:
+      text: |
+        <style>
+        .reveal .ws   { height: 2.5em; }
+        .reveal .ws-l { height: 5em; }
+        /* typeable answer boxes (contenteditable): same minimum footprint as .ws / .ws-l, grow if you type more */
+        .reveal .ws.ed, .reveal .ws-l.ed { height: auto; text-align: left; font-size: 0.9em;
+          color: #1a3a8a; outline: none; }
+        .reveal .ws.ed   { min-height: 2.5em; }
+        .reveal .ws-l.ed { min-height: 5em; }
+        .reveal .ws.ed:focus, .reveal .ws-l.ed:focus { outline: 2px dashed #EA6820; outline-offset: 2px; }
+        .reveal table.fillin { border-collapse: collapse; margin: 0.4em 0 0.8em 0; }
+        .reveal table.fillin th, .reveal table.fillin td {
+          border: 1px solid #888 !important; text-align: center; vertical-align: middle;
+          padding: 0.2em 0.5em; width: 5.5em; height: 2.4em; }
+        .reveal table.fillin .lab { width: auto; font-weight: bold; }
+        </style>
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: true
+---
+
+```{r, echo=F,message=FALSE}
+library(mosaic)
+library(Lock5Data)
+```
+
+
+
+#  {background-color="#EA6820"}
+
+::: {#title-slide .center}
+[Section 4.4 <br>A Closer Look at Testing]{style="font-size: 2em; font-weight: bold;"}
+:::
+
+## Warm-up: A Rapid Strep Test {.smaller}
+
+A clinic uses a rapid test to decide whether a patient with a sore throat has strep throat. Think of the test as a hypothesis test:
+
+$H_0$: the patient does **not** have strep throat $\qquad$ $H_a$: the patient **does** have strep throat
+
+::: {.callout-note appearance="minimal"}
+### Turn and talk (60 sec)
+
+1. In what **two different ways** could the test give the wrong answer for a patient?
+2. Which mistake do you think is more serious? Why?
+3. Could you make one kind of mistake rarer? What might that do to the other kind?
+:::
+
+::: notes
+Intent: let students discover the two kinds of error before the vocabulary. Wrong ways: positive test when the patient is healthy (false positive; unnecessary antibiotics) and negative test when the patient has strep (false negative; untreated infection, possible complications). Which is worse is a judgment call. Making the test more demanding before it says "positive" lowers false positives but raises false negatives. This sets up Type I vs Type II and the role of the significance level.
+:::
+
+## Section 4.4 Topics
+
+-   **Type I and Type II Errors**
+    -   Understand false positives (Type I) and false negatives (Type II) in hypothesis testing.
+-   **Multiple Testing & Publication Bias**
+    -   Explore how running multiple tests and selective reporting can lead to misleading conclusions.
+-   **Practical vs. Statistical Significance**
+    -   Differentiate between statistically significant results and results that are practically meaningful.
+
+## Type I and Type II Errors
+
+|                |      Reject $H_0$       |   Do not reject $H_0$   |
+|----------------|:-----------------------:|:-----------------------:|
+| $H_0$ is true  | Type I Error $(\alpha)$ |        No error         |
+| $H_0$ is false |        No error         | Type II Error $(\beta)$ |
+
+<br>
+
+### Type I Error $==>$ False positive
+
+<br>
+
+### Type II Error $==>$ False negative
+
+## Significance Level
+
+The significance level, $\alpha$, represents the tolerable probability of making a Type I error.
+
+## Example 1: BPA in Tomato Soup {.smaller}
+
+A consumer protection agency is testing a sample of cans of tomato soup from a company. If they find evidence that the average level of the chemical bisphenol A (BPA) in tomato soup from this company is greater than 100 ppb (parts per billion), they will recall all the soup and sue the company.
+
+**(a)** State the null and alternative hypotheses.
+
+::: {.ws}
+:::
+
+**(b)** What does a Type I error mean in this situation?
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+::: notes
+(a) $H_0: \mu = 100$ vs $H_a: \mu > 100$, where $\mu$ is the mean BPA level (ppb) in this company's tomato soup.
+
+(b) Type I: the agency rejects $H_0$ when it is true. The soup actually has mean BPA of 100 ppb (or less), but the sample gives convincing evidence otherwise, so the agency recalls safe soup and sues the company unfairly.
+:::
+
+## Example 1: BPA in Tomato Soup (cont.) {.smaller}
+
+*Recall: the agency recalls the soup and sues if there is evidence that mean BPA is above 100 ppb.*
+
+**(c)** What does a Type II error mean in this situation?
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+**(d)** Which do you think is more serious, a Type I error or a Type II error? (There is no right answer; one could argue either way.)
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+::: notes
+(c) Type II: the agency fails to reject $H_0$ when $H_0$ is false. The soup really does have mean BPA above 100 ppb, but the sample does not provide enough evidence, so the soup stays on shelves and consumers keep being exposed.
+
+(d) Opinion. Type I case: financial and reputational harm to the company, wasted recall cost. Type II case: public health risk. Many students argue Type II is worse for health; others stress the cost of a wrongful lawsuit. Good moment to tie back to the warm-up: the relative seriousness of the two errors should guide how small we make $\alpha$.
+:::
+
+## Multiple Testing
+
+-   When multiple hypothesis tests are conducted, the chance that **at** **least one test incorrectly rejects** a true null hypothesis increases with the number of tests.
+
+-   If the null hypotheses are all true, a proportion $\alpha$ of the tests will yield statistically significant results **just by random chance**.
+
+##
+
+![](https://imgs.xkcd.com/comics/significant.png)
+
+## Publication Bias
+
+-   **Publication bias** refers to the fact that usually only the significant results get published.
+
+-   The one study that turns out significant gets published, and no one knows about all the insignificant results.
+
+-   This combined with the problem of multiple comparisons, can yield very misleading results.
+
+## Replicating Results
+
+By attempting to *replicate* significant results with another study, this second study can either:
+
+-   Reject $H_0$, providing further confirmation that $H_a$ is true
+
+OR
+
+-   Fail to reject $H_0$, suggesting that the first study may have yielded a Type I error.
+
+## Example 2: Vitamin E and Heart Attacks? {.smaller}
+
+Suppose 100 tests are conducted to determine whether taking vitamin E increases one's chances of having a heart attack. Suppose also that vitamin E has absolutely no effect on one's likelihood of having a heart attack. The tests will use a 5% significance level.
+
+**(a)** How many of the tests are likely to show significance, just by random chance?
+
+::: {.ws}
+:::
+
+**(b)** If only the significant tests are reported, what is the only information the public is likely to hear?
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+::: notes
+(a) About 5 of the 100 tests ($100 \times 0.05$), since every null is true and each test has a 5% chance of a Type I error.
+
+(b) Only the roughly 5 studies that "found" vitamin E is linked to heart attacks (either direction) get reported; the ~95 non-significant results are never heard. This is publication bias combined with multiple testing. Optional extension: if the 100 tests were independent, the chance that at least one is significant is $1 - 0.95^{100} \approx 0.994$.
+:::
+
+## Practical vs Statistical Significance
+
+-   With small sample sizes, even large differences or effects may not be significant.
+
+-   With large sample sizes, even a very small difference or effect can be significant.
+
+-   A statistically significant result is not always practically significant, especially with large sample sizes.
+
+## Turn and Talk: Is It Worth It? {.smaller}
+
+::: {.callout-note appearance="minimal"}
+### Turn and talk (30-60 sec)
+
+A study of 50,000 adults finds that a new blood pressure medication lowers average systolic blood pressure by 0.3 mmHg more than a placebo, with a p-value less than 0.0001.
+
+1. Is the result statistically significant?
+2. Would a doctor have a good reason to prescribe this medication based on this result? Why or why not?
+:::
+
+::: {.fragment}
+Keep this in mind for the next activity: what changes when the sample size changes?
+:::
+
+::: notes
+Statistically significant: yes, the p-value is tiny. Practically significant: a 0.3 mmHg drop is clinically negligible (treatment decisions typically hinge on differences of several mmHg), so cost, side effects and inconvenience would likely outweigh it. The huge sample size is what makes such a tiny effect detectable. The numbers are illustrative, not from a specific study.
+:::
+
+## Self-Quiz: Sample Size on StatKey {.smaller}
+
+Is a coin fair? $H_0: p = 0.5$ vs $H_a: p \neq 0.5$. StatKey: **Randomization Hypothesis Tests → Test for a Single Proportion → Edit Data**; generate 1000+ samples; select **Two-Tail**.
+
+<table class="fillin compact">
+<thead>
+<tr><th class="lab"></th><th>Sample proportion</th><th>p-value</th><th style="width: 12em;">Conclusion ($\alpha = 0.05$)</th></tr>
+</thead>
+<tbody>
+<tr><td class="lab">**(a)** 56 heads in 100 tosses</td><td></td><td></td><td></td></tr>
+<tr><td class="lab">**(b)** 560 heads in 1000 tosses</td><td></td><td></td><td></td></tr>
+</tbody>
+</table>
+
+**(c)** Compare the sample proportions in (a) and (b). Compare the p-values. Why are the p-values so different?
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+::: notes
+(a) $\hat{p} = 0.56$; StatKey p-value about 0.27 (exact two-sided binomial 0.271; simulated values vary slightly). Do not reject $H_0$: no convincing evidence the coin is unfair.
+
+(b) $\hat{p} = 0.56$; p-value about 0.0002 (exact 0.00017; StatKey may show 0 or 0.000-0.001 with 1000 samples; generate 10,000 or more to see small values). Reject $H_0$: strong evidence the coin is not fair.
+
+(c) The sample proportions are identical (0.56), but the larger sample gives a much smaller standard error, so a 0.06 departure from 0.5 is far out in the tail of the randomization distribution. The same difference is not significant with n = 100 but highly significant with n = 1000. Ties directly to the practical vs statistical significance slide: a 56% heads rate is hardly a practically important departure from a fair coin.
+:::
+
+#  {background-color="#EA6820"}
+
+::: center
+[Section 4.5 <br>Making Connections]{style="font-size: 2em; font-weight: bold;"}
+:::
+
+## Bootstrap and Randomization Distributions
+
+| Bootstrap Distributions | Randomization Distributions |
+|:---------------------------------:|:-----------------------------------:|
+| Our best guess at the distribution of sample statistics | Our best guess at the distribution of sample statistics, if $H_0$ were true |
+| Centered around the observed sample statistic | Centered around the null hypothesized value |
+| Simulate sampling from the population by resampling from the original sample | Simulate samples assuming $H_0$ were true |
+
+## Key difference {background-color="#FAD9C7"}
+
+<br> <br>
+
+. . .
+
+### Randomization distribution assumes $H_0$ true, <br> while a bootstrap distribution does *not*
+
+## Turn and Talk: Where Is the Center? {.smaller}
+
+::: {.callout-note appearance="minimal"}
+### Turn and talk (30-60 sec)
+
+A sample of body temperatures has mean $\bar{x} = 98.26$ °F. We want to test $H_0: \mu = 98.6$ vs $H_a: \mu \neq 98.6$.
+
+1. Where would the **bootstrap** distribution of sample means be centered?
+2. Where would the **randomization** distribution be centered?
+:::
+
+::: notes
+Bootstrap: centered at the observed sample mean, 98.26. Randomization: centered at the null value, 98.6. The spread (standard error) is about the same for both; only the center moves. The sample mean 98.26 is the midpoint of the confidence interval used in the next example.
+:::
+
+## Intervals and Tests
+
+<br>
+
+-   If a 95% CI **contains** the parameter in $H_0$, then a two-tailed test should **not reject** $H_0$ at the 5% significance level.
+
+. . .
+
+<br>
+
+-   If a 95% CI **misses** the parameter in $H_0$, then a two-tailed test should **reject** $H_0$ at the 5% significance level.
+
+## Intervals and Tests
+
+A confidence interval represents the **range of plausible values** for the population parameter:
+
+-   If the null hypothesized value is **not within** the CI, it is **not a plausible** value and **should be rejected.**
+
+. . .
+
+-   If the null hypothesized value is **within** the CI, it **is a plausible** value and **should not be rejected.**
+
+## Intervals and Tests
+
+-   **Confidence intervals** give you a range of plausible values for the parameter.
+
+. . .
+
+-   A **significance test** describes the plausibility of one specific value of the parameter (through the $p$-value).
+
+## Example 1: Normal Human Body Temperature {.smaller}
+
+We find a 95% confidence interval for mean body temperature $\mu$ to be 98.05 to 98.47.
+
+What is the conclusion of a test of $H_0: \mu = 98.6$ vs $H_a: \mu \neq 98.6$? What significance level is used in making the conclusion?
+
+**Conclusion of the test:**
+
+::: {.ws .ed contenteditable="true"}
+:::
+
+**Significance level:**
+
+::: {.ws}
+:::
+
+::: notes
+98.6 is outside the interval (98.05, 98.47), so it is not a plausible value for the mean: reject $H_0$. There is evidence that mean body temperature differs from 98.6 °F (and the interval suggests it is lower). A 95% CI corresponds to a two-tailed test at the 5% level, $\alpha = 0.05$.
+:::
+
+## Self-Quiz: Intervals and Tests {.smaller}
+
+Using the confidence interval given, indicate the conclusion of the two-tailed test and the significance level used.
+
+<table class="fillin">
+<thead>
+<tr><th class="lab" style="width: 24em;">Interval and hypotheses</th><th style="width: 9em;">Conclusion</th><th style="width: 9em;">Significance level</th></tr>
+</thead>
+<tbody>
+<tr><td class="lab">(a) 95% CI for a mean $\mu$ is 12.5 to 17.1.<br>Test $H_0: \mu = 18$ vs $H_a: \mu \neq 18$.</td><td></td><td></td></tr>
+<tr><td class="lab">(b) 90% CI for a proportion $p$ is 0.62 to 0.80.<br>Test $H_0: p = 0.65$ vs $H_a: p \neq 0.65$.</td><td></td><td></td></tr>
+<tr><td class="lab">(c) 99% CI for a difference in proportions is $-0.10$ to $0.20$.<br>Test $H_0: p_1 = p_2$ vs $H_a: p_1 \neq p_2$.</td><td></td><td></td></tr>
+</tbody>
+</table>
+
+::: notes
+(a) 18 is outside (12.5, 17.1): reject $H_0$ at $\alpha = 0.05$.
+
+(b) 0.65 is inside (0.62, 0.80): do not reject $H_0$ at $\alpha = 0.10$ (a 90% CI matches a 10% level).
+
+(c) $H_0: p_1 = p_2$ is the same as $p_1 - p_2 = 0$, and 0 is inside ($-0.10$, 0.20): do not reject $H_0$ at $\alpha = 0.01$.
+
+Common slip: students use 5% every time. The confidence level determines the significance level: significance level = 100% minus the confidence level.
+:::
+
+## Example 2: Evaluating Drugs to Fight Cocaine Addiction {.smaller}
+
+In a randomized experiment, 48 cocaine addicts trying to quit were randomly assigned to desipramine (new drug) or lithium (existing drug). The response is whether the person relapsed. Is desipramine better than lithium?
+
+|             | Relapse | No relapse | Total |
+|-------------|:-------:|:----------:|:-----:|
+| Desipramine |   10    |     14     |  24   |
+| Lithium     |   18    |     6      |  24   |
+| Total       |   28    |     20     |  48   |
+
+**(a)** With $p_D$ and $p_L$ the relapse proportions for desipramine and lithium, write $H_0$ and $H_a$.
+
+::: {.ws}
+:::
+
+**(b)** Compute the appropriate sample statistic.
+
+::: {.ws}
+:::
+
+**(c)** What does it mean to assume $H_0$ is true when computing a randomization statistic here?
+
+::: {.ws .ed contenteditable="true"}
+:::
+
+::: notes
+(a) $H_0: p_D = p_L$ vs $H_a: p_D < p_L$ (desipramine is better means a lower relapse proportion).
+
+(b) $\hat{p}_D - \hat{p}_L = 10/24 - 18/24 = 0.417 - 0.750 = -0.333$.
+
+(c) Assuming $H_0$ means the relapse rate is the same for both drugs, i.e., the drug has no effect on relapse. The 28 relapses and 20 non-relapses would have occurred regardless of which drug each person was assigned; only the group labels are random.
+:::
+
+## Example 2: Cocaine Addiction (cont.) {.smaller}
+
+*Recall: desipramine, 10 of 24 relapsed; lithium, 18 of 24 relapsed.*
+
+**(d)** How could we compute a randomization sample? What is the randomization statistic?
+
+::: {.ws .ed contenteditable="true"}
+:::
+
+**(e)** StatKey: **Randomization Hypothesis Tests → Test for Difference in Proportions → Edit Data**, 1000+ samples. Describe the distribution. Where is it centered?
+
+::: {.ws .ed contenteditable="true"}
+:::
+
+**(f)** Use the statistic from (b) to find the p-value (choose the tail). Make a conclusion.
+
+::: {.ws .ed contenteditable="true"}
+:::
+
+::: notes
+(d) Physically: 28 cards marked "relapse" and 20 marked "no relapse"; shuffle and deal 24 to desipramine and 24 to lithium; compute $\hat{p}_D - \hat{p}_L$ for the shuffled groups. Repeat many times. In R: `do(1000) * diffprop(relapse ~ shuffle(drug), data = ...)`. StatKey does this when you click Generate Samples.
+
+(e) Roughly symmetric and bell-shaped, centered at 0 (the null value, no difference), because $H_0$ is assumed true. Contrast with a bootstrap distribution, which would be centered at the observed $-0.333$.
+
+(f) Left tail (because $H_a: p_D < p_L$) at $-0.333$. StatKey p-value about 0.02 (exact one-sided Fisher p = 0.0196; simulated values around 0.01-0.03). Since p < 0.05, reject $H_0$: there is evidence that desipramine has a lower relapse rate than lithium. Because this is a randomized experiment, we can conclude the drug causes the lower relapse rate (for people like these 48 volunteers). Note: with only 48 subjects, the practical question is how large the effect is: the relapse rate dropped from 75% to about 42%.
+:::
+
+## Summary
+
+::: incremental
+-   If a null hypothesized value lies **inside** a 95% CI, a two-tailed test using $\alpha=.05$ would **not reject** $H_0$.
+
+<span style="display: block; height: 5px;"></span>
+
+-   If a null hypothesized value lies **outside** a 95% CI, a two-tailed test using $\alpha=.05$ would **reject** $H_0$.
+
+<span style="display: block; height: 5px;"></span>
+
+-   **Statistical significance** is not at all the same as **practical significance**.
+:::
+
+## Wrapping Up {.smaller}
+
+::: incremental
+-   **Type I error:** reject a true $H_0$ (false positive). **Type II error:** fail to reject a false $H_0$ (false negative).
+-   **Multiple testing** and **publication bias** produce misleading "significant" results; **replication** is the check.
+-   Large samples make tiny effects **statistically significant**; ask if they are **practically significant**.
+-   **Randomization** distributions center at the null value; **bootstrap** distributions center at the sample statistic.
+-   A CI and a two-tailed test agree: reject $H_0$ exactly when the null value is outside the interval.
+:::
