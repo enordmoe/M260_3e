@@ -6,8 +6,8 @@
 <script src="Sec5p2_lect_m260_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="Sec5p2_lect_m260_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Sec5p2_lect_m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="Sec5p2_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.42">
+<link href="Sec5p2_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Math 260 Applied Statistics">
   <title>Section 5.2 Confidence Intervals Using Normal Distributions</title>
@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="Sec5p2_lect_m260_files/libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="Sec5p2_lect_m260_files/libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -29,7 +32,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="Sec5p2_lect_m260_files/libs/revealjs/dist/theme/quarto-1246092c7357598352506a630e966e2e.css">
+  <link rel="stylesheet" href="Sec5p2_lect_m260_files/libs/revealjs/dist/theme/quarto-fe1b06afc5958099a575323cff4e8791.css">
   <link href="Sec5p2_lect_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="Sec5p2_lect_m260_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="Sec5p2_lect_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -123,6 +126,21 @@
       margin-right: 0; 
     }
   </style>
+  <style>
+  .reveal .ws   { height: 2.5em; }
+  .reveal .ws-l { height: 5em; }
+  /* typeable answer boxes (contenteditable): same minimum footprint as .ws / .ws-l, grow if you type more */
+  .reveal .ws.ed, .reveal .ws-l.ed { height: auto; text-align: left; font-size: 0.9em;
+    color: #1a3a8a; outline: none; }
+  .reveal .ws.ed   { min-height: 2.5em; }
+  .reveal .ws-l.ed { min-height: 5em; }
+  .reveal .ws.ed:focus, .reveal .ws-l.ed:focus { outline: 2px dashed #EA6820; outline-offset: 2px; }
+  .reveal table.fillin { border-collapse: collapse; margin: 0.4em 0 0.8em 0; }
+  .reveal table.fillin th, .reveal table.fillin td {
+    border: 1px solid #888 !important; text-align: center; vertical-align: middle;
+    padding: 0.2em 0.5em; width: 5.5em; height: 2.4em; }
+  .reveal table.fillin .lab { width: auto; font-weight: bold; }
+  </style>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -140,40 +158,386 @@ Math 260 Applied Statistics
 </div>
 
 </section>
+<section id="warm-up-turn-and-talk-60-sec" class="slide level2">
+<h2>Warm-Up: Turn and Talk (60 sec)</h2>
+<p>In Chapter 3 you found a 95% confidence interval with the rule</p>
+<p><span class="math display">\[
+\text{statistic} \pm 2\times \text{SE}
+\]</span></p>
+<ol type="1">
+<li>Where does the “2” come from?</li>
+<li>What if you want a 90% or a 99% interval? Would the same “2” still work?</li>
+</ol>
+<aside class="notes">
+<p>Intent: students recall that 2 is roughly the number of SEs that captures the middle 95% of a bell-shaped distribution (rule of thumb: 95% within 2 SDs), and see that other confidence levels need a different multiplier. That need is today’s topic: the critical value z*. Take 2-3 answers, then move on.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="outline" class="slide level2">
 <h2>Outline</h2>
 <ul>
-<li>Confidence interval using a normal distribution</li>
+<li>The method: <span class="math inline">\(\text{statistic} \pm z^* \times \text{SE}\)</span></li>
+<li>Finding <span class="math inline">\(z^*\)</span> with StatKey</li>
+<li>Try it: real examples</li>
+<li>Why it works: the normal model</li>
+<li>Putting 5.1 and 5.2 together in StatKey</li>
 </ul>
 </section>
-<section id="example-news-sources" class="slide level2">
-<h2>Example: News Sources</h2>
-<p>A Survey conducted by the Pew Foundation found that 17% of a sample of 10,658 Americans get their news on TikTok. Find a 95% confidence interval for the corresponding parameter. Assume the SE is 0.6 percentage points.</p>
-</section>
-<section id="confidence-intervals-using-normal-distributions" class="slide level2">
-<h2>Confidence Intervals Using Normal Distributions</h2>
-<blockquote>
-<p>If a bootstrap distribution is bell-shaped, a P% confidence interval can be found as the interval containing the middle P% of the normal distribution with mean equal to the observed sample statistic and standard deviation equal to the standard error of the statistic:</p>
-</blockquote>
-<p><span class="math display">\[
-N(\mbox{sample statistic}, \mbox{SE})
-\]</span></p>
-</section>
-<section id="confidence-intervals-using-the-standard-normal" class="slide level2">
-<h2>Confidence Intervals Using the Standard Normal</h2>
+<section id="the-method" class="slide level2 smaller">
+<h2>The Method</h2>
+<p>If a statistic is normally distributed, a P% confidence interval for the parameter is</p>
+<p><span class="math display">\[\text{statistic} \pm z^* \times \text{SE} \]</span></p>
+<p>where <span class="math inline">\(z^*\)</span> is the <strong>critical value</strong>: the value with area P% between <span class="math inline">\(-z^*\)</span> and <span class="math inline">\(z^*\)</span> under the standard normal curve (mean 0, standard deviation 1).</p>
 <ul>
-<li>If a statistic is normally distributed, we find a P% confidence interval for the parameter using</li>
+<li>For 95% confidence, <span class="math inline">\(z^*\approx 1.96\)</span>, which is where the “2” came from.</li>
+<li>This extends the SE method to confidence levels beyond 95%.</li>
 </ul>
-<p><span class="math display">\[\text{statistic} \pm z^* \text{SE} \]</span></p>
-<p>where <span class="math inline">\(z^*\)</span> is the <em>critical value</em> with area P% between <span class="math inline">\(-z^*\)</span> and <span class="math inline">\(z^*\)</span> in the standard normal distribution.</p>
-<ul>
-<li>Extends SE method to confidence levels beyond just 95%.</li>
-</ul>
+<aside class="notes">
+<p>Keep this fast; the point is that the only new ingredient is z*. The standard normal was introduced in 5.1 (mean 0, SD 1; z counts SEs from the center).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="use-statkey-to-find-the-critical-value-z" class="slide level2">
 <h2>Use StatKey to Find the Critical Value <span class="math inline">\(z^*\)</span></h2>
 
 <img data-src="figs/statkey_with_zstar.png" class="r-stretch"></section>
+<section id="example-1-finding-z" class="slide level2 smaller">
+<h2>Example 1: Finding <span class="math inline">\(z^*\)</span></h2>
+<p>Use StatKey’s normal distribution to find the endpoints <span class="math inline">\(\pm z^*\)</span> with the given area in the middle. Sketch the area.</p>
+<p><strong>(a)</strong> The area between <span class="math inline">\(\pm z^*\)</span> is 0.95</p>
+<div class="ws-l">
+
+</div>
+<p><strong>(b)</strong> The area between <span class="math inline">\(\pm z^*\)</span> is 0.80</p>
+<div class="ws-l">
+
+</div>
+<p><strong>(c)</strong> The area between <span class="math inline">\(\pm z^*\)</span> is 0.90</p>
+<div class="ws-l">
+
+</div>
+<aside class="notes">
+<ol type="a">
+<li>1.96. (b) 1.28. (c) 1.645 (StatKey shows 1.645 or 1.64). Mean 0, SD 1 in StatKey’s Normal tool; choose Two-Tail and set the middle area; StatKey reports both endpoints. Point out that higher confidence gives a larger z* (wider interval). Part (c) is the old self-quiz item.</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-2-teens-and-tiktok" class="slide level2 smaller">
+<h2>Example 2: Teens and TikTok</h2>
+<p>A Pew Research Center survey of 1,458 U.S. teens ages 13 to 17 (fall 2025) found that 21% say they use TikTok “almost constantly.” Find a 95% confidence interval for the percentage of all U.S. teens who use TikTok almost constantly. Assume SE = 1.7 percentage points.</p>
+<p><strong>(a)</strong> What is <span class="math inline">\(z^*\)</span> for a 95% confidence interval?</p>
+<div class="ws">
+
+</div>
+<p><strong>(b)</strong> Use <span class="math inline">\(\text{statistic} \pm z^* \times \text{SE}\)</span> to find the interval.</p>
+<div class="ws">
+
+</div>
+<p><strong>(c)</strong> Interpret the interval in context.</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+
+<aside class="notes">
+<ol type="a">
+<li>1.96 (or about 2). (b) 21 +/- 1.96(1.7) = 21 +/- 3.3, so about (17.7%, 24.3%). (c) We are 95% confident that between about 18% and 24% of all U.S. teens ages 13 to 17 use TikTok almost constantly. Quick discussion: social media use is something students know well; sampling variability only, not bias.</li>
+</ol>
+<p>Source details (checked on Pew’s pages): 21% of teens use TikTok almost constantly; 1,458 teens ages 13 to 17, surveyed Sept.&nbsp;25 to Oct.&nbsp;9, 2025 via Ipsos KnowledgePanel; Pew’s stated margin of sampling error is plus or minus 3.3 points for the full sample. The SE of 1.7 is that margin divided by 1.96 (a simple-random-sample SE would be about 1.1, since Pew’s weighting adds variability); if a student asks, the interval here matches Pew’s own reported margin.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Source: Pew Research Center, “Teens, Social Media and AI Chatbots 2025” (Sept.&nbsp;25 to Oct.&nbsp;9, 2025).</p>
+</div></aside></section>
+<section id="why-it-works-the-normal-model" class="slide level2">
+<h2>Why It Works: The Normal Model</h2>
+<blockquote>
+<p>If a bootstrap distribution is bell-shaped, a P% confidence interval can be found as the interval containing the middle P% of the normal distribution with mean equal to the observed sample statistic and standard deviation equal to the standard error of the statistic:</p>
+</blockquote>
+<p><span class="math display">\[
+N(\text{sample statistic}, \text{SE})
+\]</span></p>
+<p>Standardizing turns “the middle P% of <span class="math inline">\(N(\text{statistic}, \text{SE})\)</span>” into “the middle P% of the standard normal,” which is why <span class="math inline">\(\text{statistic} \pm z^* \times \text{SE}\)</span> works.</p>
+<aside class="notes">
+<p>Contrast with the 5.1 test: there the randomization distribution is centered at the NULL value; here the bootstrap distribution is centered at the SAMPLE statistic. Example 3 shows the three approaches agree.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-3-confidence-intervals-three-ways-1-of-2" class="slide level2 smaller">
+<h2>Example 3: Confidence Intervals Three Ways (1 of 2)</h2>
+<p>In a July 2026 Gallup poll of 1,200 U.S. adults, 54% said they drink alcohol (about 648 of the 1,200). We want a 95% confidence interval for the proportion of all U.S. adults who drink alcohol.</p>
+<p><strong>(a)</strong> Sample statistic: __________</p>
+<p><strong>Bootstrap (StatKey):</strong> <em>CI for a Single Proportion</em> → <strong>Edit Data</strong> → sample size 1200, count 648 → generate at least 5000 samples → <strong>Two-Tail</strong> → middle 95%.</p>
+<p><strong>(b)</strong> Bootstrap standard error: __________ 95% percentile interval: __________</p>
+<p><strong>(c)</strong> Model the bootstrap distribution with a normal distribution with mean ________ and standard deviation ________. Use the Two-Tail option on this normal distribution to find the middle 95%.</p>
+<div class="ws">
+
+</div>
+
+<aside class="notes">
+<ol type="a">
+<li>0.54 (648/1200). (b) SE is about 0.014 (theory: sqrt(.54*.46/1200) = 0.0144). Percentile interval about (0.512, 0.568); it varies slightly run to run. (c) Normal with mean 0.54 and SD 0.014; middle 95% is about (0.512, 0.568).</li>
+</ol>
+<p>Source details (checked on Gallup’s page): 54% of U.S. adults say they drink alcohol, a record-low 54% for the second year in a row; 1,200 adults aged 18+ in all 50 states and DC, surveyed July 1-19, 2026; Gallup’s stated margin of error is plus or minus 4 points at 95% confidence. The count of 648 is just 0.54 x 1,200 for StatKey (Gallup’s 54% is weighted). Gallup’s plus or minus 4 is a bit wider than the simple-random-sample margin here (plus or minus 2.8) because Gallup’s weighting adds variability; if a student asks, say our SE assumes a simple random sample.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Source: Gallup, “Americans’ Drinking Remains at Record Low” (2026 Consumption Habits survey, July 1-19, 2026).</p>
+</div></aside></section>
+<section id="example-3-three-ways-2-of-2" class="slide level2" style="font-size: 0.7em;">
+<h2>Example 3: Three Ways (2 of 2)</h2>
+<p>Recall: 54% of 1,200 adults, <span class="math inline">\(\hat{p}=0.54\)</span>, bootstrap SE about 0.014.</p>
+<p><strong>(d)</strong> What is <span class="math inline">\(z^*\)</span> for a 95% interval? ________ Use <span class="math inline">\(\text{statistic} \pm z^* \times \text{SE}\)</span> to find the interval.</p>
+<div style="height: 2em;">
+
+</div>
+<p><strong>(e)</strong> Compare the three 95% intervals.</p>
+<table class="fillin" style="font-size: 0.85em;">
+<tbody><tr>
+<th style="width:1.5em;height:1.5em;">
+</th>
+<th style="width:16em;height:1.5em;">
+Method
+</th>
+<th style="width:8em;height:1.5em;">
+95% interval
+</th>
+</tr>
+<tr>
+<td class="lab" style="height:1.5em;">
+1
+</td>
+<td style="height:1.5em;">
+Bootstrap percentiles
+</td>
+<td style="height:1.5em;">
+</td>
+</tr>
+<tr>
+<td class="lab" style="height:1.5em;">
+2
+</td>
+<td style="height:1.5em;">
+<span class="math inline">\(N(\text{statistic},\text{SE})\)</span> middle 95%
+</td>
+<td style="height:1.5em;">
+</td>
+</tr>
+<tr>
+<td class="lab" style="height:1.5em;">
+3
+</td>
+<td style="height:1.5em;">
+<span class="math inline">\(\text{statistic} \pm z^* \times \text{SE}\)</span>
+</td>
+<td style="height:1.5em;">
+</td>
+</tr>
+</tbody></table>
+<p>What do you notice, and why?</p>
+<div class="ws ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<ol start="4" type="a">
+<li>z* = 1.96; 0.54 +/- 1.96(0.0144) = 0.54 +/- 0.028, about (0.512, 0.568). (e) All three agree to about two decimal places: the bootstrap distribution is approximately normal, and the formula is just the normal model written out. Differences come from simulation noise. Tie back to 5.1: the p-values agreed three ways for the same reason.</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-4-the-city-that-never-sleeps" class="slide level2 smaller">
+<h2>Example 4: The City that Never Sleeps</h2>
+<p>New York is known as “the city that never sleeps.” A random sample of 25 New Yorkers were asked how much sleep they get per night, and the average was 7.73 hours. We are told the standard error for this estimate is 0.15 hours. Use the normal distribution to find a 99% confidence interval for the average sleep of New Yorkers.</p>
+<p><strong>(a)</strong> What is <span class="math inline">\(z^*\)</span>?</p>
+<div class="ws">
+
+</div>
+<p><strong>(b)</strong> Find the 99% confidence interval.</p>
+<div class="ws">
+
+</div>
+<p><strong>(c)</strong> Interpret the interval in context.</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<ol type="a">
+<li>z* = 2.576 (StatKey about 2.58). (b) 7.73 +/- 2.576(0.15) = 7.73 +/- 0.39, about (7.34, 8.12) hours. (c) We are 99% confident that the mean nightly sleep of all New Yorkers is between about 7.34 and 8.12 hours. Optional: a 99% interval is wider than a 95% one; a small sample (n = 25) is why we are told the SE rather than trusting the CLT blindly. The next sections replace this with t-based methods.</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="putting-5.1-and-5.2-together-statkey-activity-1-of-4" class="slide level2 smaller">
+<h2>Putting 5.1 and 5.2 Together: StatKey Activity (1 of 4)</h2>
+<p><strong>Proportion of NFL overtimes won by the coin flip winner.</strong></p>
+<p><em>StatKey:</em> <strong>Test for a Single Proportion</strong> → choose the dataset <em>NFL Wins in Overtime Games</em> → generate a randomization distribution (several thousand samples) under <span class="math inline">\(H_0: p=0.5\)</span>. The original sample proportion is 0.561. Use <span class="math inline">\(H_a: p&gt;0.5\)</span> and the <strong>Right-Tail</strong> option.</p>
+<p><strong>(a)</strong> Randomization <span class="math inline">\(p\)</span>-value: __________</p>
+<p><strong>(b)</strong> Standard error of the randomization distribution: __________</p>
+<aside class="notes">
+<p>Data: coin flip winner won 240 of 428 overtime games, so p-hat = 0.561. (a) About 0.006 (varies run to run; 0.004 to 0.009 typical). (b) SE about 0.024 (theory: sqrt(.5*.5/428) = 0.0242).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="statkey-activity-nfl-overtimes-2-of-4" class="slide level2 smaller">
+<h2>StatKey Activity: NFL Overtimes (2 of 4)</h2>
+<p>Recall: <span class="math inline">\(H_0: p=0.5\)</span>, <span class="math inline">\(H_a: p&gt;0.5\)</span>, <span class="math inline">\(\hat{p}=0.561\)</span>, randomization SE about 0.024.</p>
+<p><strong>(c)</strong> Compute the standardized test statistic</p>
+<p><span class="math display">\[
+z=\frac{\text{Sample statistic}-\text{Null parameter}}{\text{SE}}
+\]</span></p>
+<div class="ws">
+
+</div>
+<p><strong>(d)</strong> In StatKey, switch to the normal distribution (mean 0, SD 1), choose <strong>Right-Tail</strong>, and find the area to the right of your <span class="math inline">\(z\)</span>: __________</p>
+<p><strong>(e)</strong> Compare the two <span class="math inline">\(p\)</span>-values.</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<ol start="3" type="a">
+<li>z = (0.561 - 0.5)/0.024 = 2.5 (2.52 with the unrounded SE 0.0242). (d) About 0.006 (z = 2.52 gives 0.0059; z = 2.5 gives 0.0062). (e) The two p-values agree (both about 0.006): strong evidence the coin flip winner wins more than half of overtime games (240 of 428). Link to 5.1.</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="statkey-activity-atlanta-commute-times-3-of-4" class="slide level2 smaller">
+<h2>StatKey Activity: Atlanta Commute Times (3 of 4)</h2>
+<p><strong>Bootstrap confidence interval for mean Atlanta commute time.</strong></p>
+<p><em>StatKey:</em> <strong>Confidence Interval for a Mean</strong> → choose the dataset <em>Atlanta Commute Time</em>. The sample mean commute time is 29.11 minutes. Generate a bootstrap distribution (several thousand samples).</p>
+<p><strong>(a)</strong> 90% interval using <strong>Two-Tail</strong>: __________ to __________</p>
+<p><strong>(b)</strong> Standard error of the bootstrap distribution: __________</p>
+<aside class="notes">
+<p>Expected (check in StatKey; I could not open the dataset here): the Atlanta sample has n = 500 and SD about 20.7 minutes, so (b) SE is about 0.93 minutes. (a) The percentile interval is about (27.6, 30.7) minutes; the bootstrap distribution is slightly right-skewed because commute times are.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="statkey-activity-atlanta-commute-times-4-of-4" class="slide level2 smaller">
+<h2>StatKey Activity: Atlanta Commute Times (4 of 4)</h2>
+<p>Recall: sample mean 29.11 minutes, bootstrap SE about 0.93.</p>
+<p><strong>(c)</strong> In StatKey, use the normal distribution (mean 0, SD 1) and <strong>Two-Tail</strong> to find the cutoffs with 90% in the middle: <span class="math inline">\(z^*=\)</span> __________</p>
+<p><strong>(d)</strong> Use <span class="math inline">\(\text{sample statistic} \pm z^* \times \text{SE}\)</span> to find the 90% interval.</p>
+<div class="ws">
+
+</div>
+<p><strong>(e)</strong> Compare the two intervals.</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<ol start="3" type="a">
+<li>z* = 1.645. (d) 29.11 +/- 1.645(0.93) = 29.11 +/- 1.53, about (27.6, 30.6) minutes. (e) The two intervals agree closely: the bootstrap distribution is approximately normal, so the formula method works. Interpretation: we are 90% confident that the mean commute time for Atlanta commuters is between about 27.6 and 30.6 minutes.</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="chap-5-summary-general-formulas" class="slide level2">
 <h2>Chap 5 Summary: General Formulas</h2>
 <h3 id="confidence-interval">Confidence interval</h3>
@@ -186,10 +550,19 @@ N(\mbox{sample statistic}, \mbox{SE})
 \]</span></p>
 </section>
 <section id="looking-ahead" class="slide level2">
-<h2>Looking ahead</h2>
+<h2>Looking Ahead</h2>
 <ul>
 <li><p>For now, the <span class="math inline">\(\text{SE}\)</span> comes from <strong>resampling</strong> methods (randomization or bootstrap).</p></li>
 <li><p>Beginning next class, we use classical model-based <strong>formulas</strong> to compute <span class="math inline">\(\text{SE}\)</span>.</p></li>
+</ul>
+</section>
+<section id="wrapping-up" class="slide level2">
+<h2>Wrapping Up</h2>
+<ul>
+<li class="fragment">A P% confidence interval is <span class="math inline">\(\text{statistic} \pm z^* \times \text{SE}\)</span>.</li>
+<li class="fragment"><span class="math inline">\(z^*\)</span> is the standard normal cutoff with P% of the area in the middle; higher confidence means a larger <span class="math inline">\(z^*\)</span> and a wider interval.</li>
+<li class="fragment">For 95% confidence, <span class="math inline">\(z^*\approx 2\)</span> (more precisely, 1.96).</li>
+<li class="fragment">Bootstrap percentiles, the normal model, and the <span class="math inline">\(z^*\)</span> formula all give nearly the same interval when the bootstrap distribution is bell-shaped.</li>
 </ul>
 
 </section>
@@ -449,190 +822,173 @@ N(\mbox{sample statistic}, \mbox{SE})
     </script>
 
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
           }
+          return false;
         }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
           }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
           for (const childEl of codeEl.children) {
             if (isCodeAnnotation(childEl)) {
               childEl.remove();
             }
           }
           return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
             }
           }
-        }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
           }
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
           }
-        } else {
-          return undefined;
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
         }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>
