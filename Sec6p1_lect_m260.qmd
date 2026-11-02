@@ -8,6 +8,23 @@ format:
     reveal-options:
       slideNumber: true
     html-math-method: mathjax
+    include-in-header:
+      text: |
+        <style>
+        .reveal .ws   { height: 2.5em; }
+        .reveal .ws-l { height: 5em; }
+        /* typeable answer boxes (contenteditable): same minimum footprint as .ws / .ws-l, grow if you type more */
+        .reveal .ws.ed, .reveal .ws-l.ed { height: auto; text-align: left; font-size: 0.9em;
+          color: #1a3a8a; outline: none; }
+        .reveal .ws.ed   { min-height: 2.5em; }
+        .reveal .ws-l.ed { min-height: 5em; }
+        .reveal .ws.ed:focus, .reveal .ws-l.ed:focus { outline: 2px dashed #EA6820; outline-offset: 2px; }
+        .reveal table.fillin { border-collapse: collapse; margin: 0.4em 0 0.8em 0; }
+        .reveal table.fillin th, .reveal table.fillin td {
+          border: 1px solid #888 !important; text-align: center; vertical-align: middle;
+          padding: 0.2em 0.5em; width: 5.5em; height: 2.4em; }
+        .reveal table.fillin .lab { width: auto; font-weight: bold; }
+        </style>
 title-slide-attributes:
   data-background-color: "#EA6820"
 from: markdown+emoji
@@ -21,6 +38,30 @@ library(mosaic)
 library(Lock5Data)
 ```
 
+## Data Collection: Dice {.smaller}
+
+:::: {.columns}
+::: {.column width="60%"}
+We will pass a pair of dice around the room while we work today. When the dice reach you:
+
+1. Roll both dice **at least ten times**, ignoring ties.
+2. Record which die is greater each time.
+3. Submit your totals with the QR code.
+
+<table class="fillin">
+<tr><td class="lab" style="white-space:nowrap">WHITE greater</td><td style="width:6em"></td><td class="lab" style="white-space:nowrap">RED greater</td><td style="width:6em"></td></tr>
+</table>
+:::
+::: {.column width="40%"}
+![](figs/sec6p1_dice_qr.png){height=380px fig-align="center"}
+:::
+::::
+
+::: notes
+Start the dice moving right away (one set only; don't mention that they are trick dice). Remind the class every so often to pass them along and submit. Check the Forms response count when the coffee survey wraps up; the pooled totals are used near the end of class.
+
+**Time budget (75 min):** dice setup 3, StatKey 8, SE/CLT/Example 1 7, CI/Example 2 7, survey + coffee 10, test slides 4, tongue 12, dice test 6, sample size + Example 3 about 10 (fine to move to the start of next class), wrap-up 2. If short on time: skip Example 2 (the coffee activity practices the same CI) and/or push the dice test to next class.
+:::
 
 ## Outline
 
@@ -30,12 +71,49 @@ library(Lock5Data)
 
 * Confidence Interval
 
-* Sample Size for Desired Margin of Error
-
 * Hypothesis Test
 
+* Sample Size for Desired Margin of Error
 
-## Standard Error for Sample Proportions  
+## Warm-Up: Sample Variability {.smaller}
+
+According to 2022 data, 12.9% of college students in Michigan are enrolled in private institutions.
+
+Suppose we take a random sample of 100 Michigan college students and compute the sample proportion enrolled in private institutions, $\hat p$.
+
+**Turn and talk (60 sec):**
+
+1. Will $\hat p$ be exactly 0.129? Why or why not?
+2. If every student here took their own random sample of 100, what would the distribution of the $\hat p$ values look like (center and spread)?
+3. What would change with samples of 500?
+
+::: aside
+Source: 2022 Michigan college enrollment data, as given in the class examples.
+:::
+
+::: notes
+Goal: let them discover sampling variability before any formula. Expect: no, $\hat p$ varies from sample to sample; the distribution is centered near 0.129; spread around 0.03 for n = 100; narrower for n = 500 (about 0.015). Then go straight to StatKey to check their predictions.
+:::
+
+## StatKey Simulation {.smaller}
+
+1. In StatKey, choose **Sampling Distribution for a Proportion**; set $p = 0.129$ and $n = 100$.
+2. Generate 1000 samples. Record the **mean**, the **standard deviation** (this is the SE) and the **shape** of the simulated $\hat p$ values.
+3. Change to $n = 500$ and repeat.
+
+<table class="fillin">
+<tr><th class="lab">Sample size</th><th style="width:9em">Shape</th><th>Mean</th><th>SE</th></tr>
+<tr><td class="lab">\(n = 100\)</td><td></td><td></td><td></td></tr>
+<tr><td class="lab">\(n = 500\)</td><td></td><td></td><td></td></tr>
+</table>
+
+**Turn and talk (30 sec):** What do you notice about the SE when the sample size went from 100 to 500?
+
+::: notes
+Expected StatKey results (each simulation will differ a little): n = 100: mean about 0.129, SE about 0.034 (theory 0.0335), shape roughly normal with a slight right skew. n = 500: mean about 0.129, SE about 0.015 (theory 0.0150), shape very close to normal. A 5-fold increase in n cuts the SE by a factor of about $\sqrt{5} \approx 2.24$. Use this to motivate the formula on the next slide. Menu wording in StatKey may differ slightly from what is written here.
+:::
+
+## Standard Error for Sample Proportions
 
 
 * For random samples of size $n$ from a population with proportion $p$, the **standard error of the sample proportion** $\hat p$ is
@@ -47,11 +125,14 @@ $$
 
 * The larger the sample size $n$, the smaller the SE.
 
+::: notes
+Have them check the formula against the StatKey values they just recorded: 0.0335 for n = 100 and 0.0150 for n = 500.
+:::
 
 
-## The Central Limit Theorem for Proportions  
+## The Central Limit Theorem for Proportions
 
-* If $n$ is sufficently large,
+* If $n$ is sufficiently large,
 $$
 \hat p \sim N\left(p,\sqrt{\frac{p(1-p)}{n}}\right)
 $$
@@ -63,54 +144,148 @@ $$
   + $n(1-p)\ge 10$
 
 
+## Example 1: Michigan Students {.smaller}
+
+According to 2022 data, 12.9% of college students in Michigan are enrolled in private institutions. For random samples of size $n$, describe the shape, mean, and standard error of the distribution of sample proportions for
+
+<table class="fillin">
+<tr><th class="lab"></th><th>\(np\)</th><th>\(n(1-p)\)</th><th style="width:9em">Shape</th><th>Mean</th><th>SE</th></tr>
+<tr><td class="lab" style="white-space:nowrap"><span>a)</span> \(n = 100\)</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td class="lab" style="white-space:nowrap"><span>b)</span> \(n = 500\)</td><td></td><td></td><td></td><td></td><td></td></tr>
+</table>
+
+c\) What is the effect of the larger sample size on the shape, mean, and standard error?
+
+::: {.ws .ed contenteditable="true"}
+:::
+
+::: notes
+(a) np = 12.9 and n(1 - p) = 87.1, both at least 10, so approximately normal (n = 100 is the borderline case; mention the slight right skew they saw in StatKey). Mean 0.129. SE = sqrt(0.129 x 0.871 / 100) = 0.0335.
+
+(b) np = 64.5 and n(1 - p) = 435.5, approximately normal, mean 0.129, SE = 0.0150.
+
+(c) Shape: closer to normal. Mean: unchanged at 0.129 (center is p, no matter the n). SE: smaller by a factor of about $\sqrt{5} \approx 2.24$, so estimates from bigger samples are more precise.
+:::
 
 ## Confidence Interval for a Single Proportion
 
-A confidence interval for a popoulation proportion $p$ can be computed using  
+A confidence interval for a population proportion $p$ can be computed using
 $$
 \hat p \pm z^* \sqrt{\frac{\hat p(1-\hat p)}{n}}
 $$
 
-if $n$ is large enough so that  
+if $n$ is large enough so that
 
-* $n\hat p\ge 10$ and  
+* $n\hat p\ge 10$ and
 
-* $n (1-\hat p)\ge 10$  
+* $n (1-\hat p)\ge 10$
 
+## Example 2: Movie Goers {.smaller}
 
+In a random sample of 1000 US adults in August 2022, 550 of them said they are more likely to wait and watch a new movie in the comfort of their own home.
 
-## Sample Size for a Desired Margin of Error  
+a) Check the sample size conditions and find a 95% confidence interval for the proportion of movie goers who are more likely to watch a new movie from home. (Use $z^* = 1.96$.)
 
-To estimate a population proportion to within a desired margin of error, $\text{ME}$ with a given level of confidence, choose $n$ such that  
-$$
-n=\left(\frac{z^*}{\text{ME}}\right)^2 \tilde p (1-\tilde p)
-$$
+::: {.ws-l}
+:::
 
-where $\tilde p$ is either  
+b) Interpret the interval in context.
 
-* A guessed value for $p$ (if one is available) OR
+::: {.ws .ed contenteditable="true"}
+:::
 
+::: aside
+Source: Morning Consult survey of US adults, August 2022 (reported by Statista).
+:::
 
-* $\tilde p=0.5$ if no other guess is available
+::: notes
+$\hat p = 0.55$; conditions: 550 and 450 are both at least 10. SE = sqrt(0.55 x 0.45 / 1000) = 0.0157. ME = 1.96 x 0.0157 = 0.0308. 95% CI: 0.55 plus or minus 0.031, i.e. about (0.519, 0.581).
 
-  +  Setting $\tilde p=0.5$ will ensure that $n$ is large enough no matter what $p$ turns out to be.  
+Interpretation: we are 95% confident that between about 51.9% and 58.1% of movie goers (US adults) are more likely to wait and watch a new movie at home.
 
+If you are short on time, this example can be skipped or assigned: the coffee activity practices the same skills with the class's own data.
+:::
 
-## Hypothesis Testing for a Single Proportion  
+## Class Survey {.smaller}
 
-To test $H_0:p=p_0$, we use the standardized test statistic 
+:::: {.columns}
+::: {.column width="42%"}
+![](figs/sec6p1_coffee_tongue_qr.png){height=340px fig-align="center"}
+:::
+::: {.column width="58%"}
+Scan the QR code and answer both survey questions.
+
+* Did you drink any coffee this morning? (Yes or No) \_\_\_\_\_\_
+
+* Can you roll your tongue as in the photo? (Yes or No) \_\_\_\_\_\_
+
+![](figs/sec6p1_tongue.jpg){height=120px}
+:::
+::::
+
+::: aside
+Photo: Wikimedia Commons (rolled tongue).
+:::
+
+::: notes
+About 3 minutes. One survey collects both variables so students only scan once; the tongue-rolling data are used again after the hypothesis test slides. Show the Forms summary when most have answered and let them read off n and the counts.
+:::
+
+## Activity: Coffee {.smaller}
+
+Use the people in the classroom as the sample.
+
+<table class="fillin">
+<tr><th style="width:10em"><span>1.</span> How many people are in the class?</th><th style="width:10em"><span>2.</span> How many drank coffee this morning?</th><th style="width:10em"><span>3.</span> Proportion who drank coffee (use correct notation)</th></tr>
+<tr><td></td><td></td><td></td></tr>
+</table>
+
+4\. What quantity are we estimating if we use this information to construct a confidence interval? Use correct notation and define the parameter. What is a reasonable population?
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+::: notes
+(1) n from the survey; (2) x = number of Yes answers; (3) $\hat p = x/n$ (a statistic, so $\hat p$ and not $p$).
+
+(4) The parameter is $p$, the proportion of all students in the population who drank coffee this morning. A reasonable population is K College students (or college students more broadly, with the caveat that our class is not a random sample, so generalizing is shaky).
+:::
+
+## Coffee: Confidence Interval {.smaller}
+
+Recall: use your $n$ and $\hat p$ from the previous slide.
+
+5. Check the sample size conditions and construct a 95% confidence interval for the parameter defined in #4.
+
+::: {.ws-l}
+:::
+
+Interpret the interval in context.
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+::: notes
+$\hat p \pm 1.96\sqrt{\hat p(1-\hat p)/n}$. Check $n\hat p \ge 10$ and $n(1-\hat p) \ge 10$. If the class is small and few people drank coffee, the condition may fail; that is a teachable moment (then pool with the other section or use StatKey's bootstrap).
+
+Interpretation template: we are 95% confident that between ___ and ___ of [population] drank coffee this morning. Remind them of the sampling caveat (the class is not a random sample).
+:::
+
+## Hypothesis Testing for a Single Proportion
+
+To test $H_0:p=p_0$, we use the standardized test statistic
 $$
 z=\frac{\hat p-p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}}
 $$
-where $\hat p$ is the proportion in a random sample of size $n$.   
+where $\hat p$ is the proportion in a random sample of size $n$.
 
-* Check sample size conditions:  
-  + $np_0\ge 10$  
-  + $n(1-p_0)\ge 10$  
-  
-## Computing the P-value  
+* Check sample size conditions:
+  + $np_0\ge 10$
+  + $n(1-p_0)\ge 10$
 
-* The appropriate $p$-value depends on the alternative hypothesis:  
+## Computing the P-value
+
+* The appropriate $p$-value depends on the alternative hypothesis:
 
 
 | Alternate Hypothesis 	|         $p$-value        	|
@@ -120,3 +295,167 @@ where $\hat p$ is the proportion in a random sample of size $n$.
 | $H_a:p\neq p_0$      	| $2P(Z\ge z)$ if $z\ge 0$ 	|
 | $H_a:p\neq p_0$      	|   $2P(Z\le z)$ if $z<0$  	|
 
+## Activity: Tongue Rolling {.smaller}
+
+Use the people in the classroom as the sample.
+
+<table class="fillin">
+<tr><th style="width:10em"><span>1.</span> How many people are in the class?</th><th style="width:10em"><span>2.</span> How many can roll their tongue?</th><th style="width:10em"><span>3.</span> Proportion who can roll their tongue (use correct notation)</th></tr>
+<tr><td></td><td></td><td></td></tr>
+</table>
+
+4\. What quantity are we estimating if we use this information to construct a confidence interval? Use correct notation and define the parameter. What is a reasonable population?
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+::: notes
+(3) $\hat p = x/n$. (4) $p$ = proportion of all people (in the population of interest, e.g., K College students) who can roll their tongue.
+
+If a student asks about the genetics: tongue rolling used to be presented as a simple dominant trait, but twin studies showed it is not that simple. That is fine to mention after the test, since the "75%" claim is only the hypothesis we are checking.
+:::
+
+## Tongue Rolling: The Test {.smaller}
+
+Tongue rolling has been said to be a dominant trait, in which case theoretically 75% of all people should be able to roll their tongues. Do our data provide evidence otherwise?
+
+a) State the null and alternative hypotheses.
+
+::: {.ws}
+:::
+
+b) Check the sample size conditions.
+
+::: {.ws}
+:::
+
+::: notes
+(a) $H_0: p = 0.75$ versus $H_a: p \ne 0.75$ (two-sided because the question asks for evidence "otherwise").
+
+(b) Need $np_0 = 0.75n \ge 10$ (n at least 14) and $n(1-p_0) = 0.25n \ge 10$ (n at least **40**). Heads up: if the class has fewer than 40 students, the second condition fails. Options: pool with the other section or last term's survey data, or acknowledge the normal approximation is shaky and use StatKey's randomization test for a single proportion.
+:::
+
+## Tongue Test, Continued {.smaller}
+
+Recall: the claim is that 75% of all people can roll their tongues.
+
+c) Find the test statistic and the $p$-value.
+
+::: {.ws-l}
+:::
+
+d) State your conclusion in context.
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+::: notes
+(c) $z = (\hat p - 0.75)/\sqrt{0.75(0.25)/n}$; p-value is $2P(Z \ge |z|)$.
+
+(d) Compare the p-value to a significance level (0.05): small p-value means the data provide evidence the proportion differs from 0.75; large p-value means no evidence against 75% (not proof that it is 75%). Also remind them of the sampling caveat.
+:::
+
+## Dice: Testing for Fairness {.smaller}
+
+Let $p$ be the proportion of rolls (ignoring ties) in which the **white** die is greater than the red die.
+
+a) If both dice are fair, what value should $p$ have, and why?
+
+::: {.ws .ed contenteditable="true"}
+:::
+
+b) State the null and alternative hypotheses for testing whether the dice are fair.
+
+::: {.ws}
+:::
+
+::: notes
+(a) For two fair dice, P(white greater) = 15/36, P(red greater) = 15/36, P(tie) = 6/36. Ignoring ties leaves 15/30 = 0.5, so $p = 0.5$.
+
+(b) $H_0: p = 0.5$ versus $H_a: p \ne 0.5$.
+
+Do not reveal that the dice are rigged yet.
+:::
+
+## Dice: Pooled Class Results {.smaller}
+
+Recall: $p$ is the proportion of non-tied rolls in which the WHITE die is greater.
+
+<table class="fillin">
+<tr><td class="lab">WHITE greater</td><td style="width:6em"></td><td class="lab">RED greater</td><td style="width:6em"></td><td class="lab">Total \(n\)</td><td style="width:6em"></td><td class="lab">\(\hat p\)</td><td style="width:6em"></td></tr>
+</table>
+
+c) Check the sample size conditions and find the test statistic and the $p$-value.
+
+::: {.ws-l}
+:::
+
+d) State your conclusion in context.
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+::: notes
+Pull the totals from the Forms responses (export to Excel and sum the two columns) and fill in the table live. Conditions: $np_0 = n(1-p_0) = 0.5n \ge 10$ needs n of at least 20, which pooled data easily meets. $z = (\hat p - 0.5)/\sqrt{0.5(0.5)/n}$; two-sided p-value $= 2P(Z \ge |z|)$.
+
+If the p-value is small, the data provide strong evidence the dice are not fair; this is the moment to reveal the trick dice. Natural follow-up to ask: how lopsided are they? That is what a confidence interval for $p$ answers.
+:::
+
+## Sample Size for a Desired Margin of Error {.smaller}
+
+To estimate a population proportion to within a desired margin of error, $\text{ME}$ with a given level of confidence, choose $n$ such that
+$$
+n=\left(\frac{z^*}{\text{ME}}\right)^2 \tilde p (1-\tilde p)
+$$
+
+where $\tilde p$ is either
+
+* A guessed value for $p$ (if one is available) OR
+
+
+* $\tilde p=0.5$ if no other guess is available
+
+  +  Setting $\tilde p=0.5$ will ensure that $n$ is large enough no matter what $p$ turns out to be.
+
+::: notes
+Natural stopping point: if time is short, start next class here, with Example 3 and then move on to the next section.
+:::
+
+## Example 3: Sample Size {.smaller}
+
+Recall (Example 2): $n = 1000$, $\hat p = 0.55$, 95% confidence ($z^* = 1.96$).
+
+a) What is the margin of error for the confidence interval found in Example 2?
+
+::: {.ws}
+:::
+
+b) What sample size is needed if we want a margin of error within ±2%? (Use the sample proportion from the original sample.)
+
+::: {.ws}
+:::
+
+c) What sample size is needed if we want a margin of error within ±2%, and if we use the conservative estimate of $p = 0.5$?
+
+::: {.ws}
+:::
+
+::: notes
+(a) ME = 1.96 x sqrt(0.55 x 0.45 / 1000) = 0.0308 (about 3.1 percentage points); it is the "plus or minus" part of the interval.
+
+(b) $n = (1.96/0.02)^2(0.55)(0.45) = 2376.99$, so n = 2377 (always round up).
+
+(c) $n = (1.96/0.02)^2(0.5)(0.5) = 2401$.
+
+Compare (b) and (c): the conservative estimate asks for slightly more people but guarantees the ME no matter what p turns out to be.
+:::
+
+## Wrapping Up {.smaller}
+
+::: {.incremental}
+* The SE of $\hat p$ shrinks as $n$ grows, and $\hat p$ is approximately normal when $np \ge 10$ and $n(1-p) \ge 10$.
+* A confidence interval for $p$ uses $\hat p$ in the SE: $\hat p \pm z^* \sqrt{\hat p(1-\hat p)/n}$.
+* A test of $H_0: p = p_0$ uses $p_0$ in the SE, and the conditions are checked with $p_0$.
+* The same data can be used to estimate $p$ (interval) or to check a claim about $p$ (test).
+* Plan sample size from the margin of error you want, using $\tilde p = 0.5$ when you have no guess.
+:::

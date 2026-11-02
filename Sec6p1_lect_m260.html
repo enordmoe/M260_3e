@@ -6,8 +6,8 @@
 <script src="Sec6p1_lect_m260_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="Sec6p1_lect_m260_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Sec6p1_lect_m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="Sec6p1_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.42">
+<link href="Sec6p1_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Math 260 Applied Statistics">
   <title>6.1 Inference About a Single Proportion</title>
@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="Sec6p1_lect_m260_files/libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="Sec6p1_lect_m260_files/libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -29,7 +32,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="Sec6p1_lect_m260_files/libs/revealjs/dist/theme/quarto-1246092c7357598352506a630e966e2e.css">
+  <link rel="stylesheet" href="Sec6p1_lect_m260_files/libs/revealjs/dist/theme/quarto-fe1b06afc5958099a575323cff4e8791.css">
   <link href="Sec6p1_lect_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="Sec6p1_lect_m260_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="Sec6p1_lect_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -123,6 +126,21 @@
       margin-right: 0; 
     }
   </style>
+  <style>
+  .reveal .ws   { height: 2.5em; }
+  .reveal .ws-l { height: 5em; }
+  /* typeable answer boxes (contenteditable): same minimum footprint as .ws / .ws-l, grow if you type more */
+  .reveal .ws.ed, .reveal .ws-l.ed { height: auto; text-align: left; font-size: 0.9em;
+    color: #1a3a8a; outline: none; }
+  .reveal .ws.ed   { min-height: 2.5em; }
+  .reveal .ws-l.ed { min-height: 5em; }
+  .reveal .ws.ed:focus, .reveal .ws-l.ed:focus { outline: 2px dashed #EA6820; outline-offset: 2px; }
+  .reveal table.fillin { border-collapse: collapse; margin: 0.4em 0 0.8em 0; }
+  .reveal table.fillin th, .reveal table.fillin td {
+    border: 1px solid #888 !important; text-align: center; vertical-align: middle;
+    padding: 0.2em 0.5em; width: 5.5em; height: 2.4em; }
+  .reveal table.fillin .lab { width: auto; font-weight: bold; }
+  </style>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -140,15 +158,148 @@ Math 260 Applied Statistics
 </div>
 
 </section>
+<section id="data-collection-dice" class="slide level2 smaller">
+<h2>Data Collection: Dice</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p>We will pass a pair of dice around the room while we work today. When the dice reach you:</p>
+<ol type="1">
+<li>Roll both dice <strong>at least ten times</strong>, ignoring ties.</li>
+<li>Record which die is greater each time.</li>
+<li>Submit your totals with the QR code.</li>
+</ol>
+<table class="fillin">
+<tbody><tr>
+<td class="lab" style="white-space:nowrap">
+WHITE greater
+</td>
+<td style="width:6em">
+</td>
+<td class="lab" style="white-space:nowrap">
+RED greater
+</td>
+<td style="width:6em">
+</td>
+</tr>
+</tbody></table>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/sec6p1_dice_qr.png" class="quarto-figure quarto-figure-center" height="380"></p>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Start the dice moving right away (one set only; don’t mention that they are trick dice). Remind the class every so often to pass them along and submit. Check the Forms response count when the coffee survey wraps up; the pooled totals are used near the end of class.</p>
+<p><strong>Time budget (75 min):</strong> dice setup 3, StatKey 8, SE/CLT/Example 1 7, CI/Example 2 7, survey + coffee 10, test slides 4, tongue 12, dice test 6, sample size + Example 3 about 10 (fine to move to the start of next class), wrap-up 2. If short on time: skip Example 2 (the coffee activity practices the same CI) and/or push the dice test to next class.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="outline" class="slide level2">
 <h2>Outline</h2>
 <ul>
 <li><p>Standard Error</p></li>
 <li><p>Sampling Distribution</p></li>
 <li><p>Confidence Interval</p></li>
-<li><p>Sample Size for Desired Margin of Error</p></li>
 <li><p>Hypothesis Test</p></li>
+<li><p>Sample Size for Desired Margin of Error</p></li>
 </ul>
+</section>
+<section id="warm-up-sample-variability" class="slide level2 smaller">
+<h2>Warm-Up: Sample Variability</h2>
+<p>According to 2022 data, 12.9% of college students in Michigan are enrolled in private institutions.</p>
+<p>Suppose we take a random sample of 100 Michigan college students and compute the sample proportion enrolled in private institutions, <span class="math inline">\(\hat p\)</span>.</p>
+<p><strong>Turn and talk (60 sec):</strong></p>
+<ol type="1">
+<li>Will <span class="math inline">\(\hat p\)</span> be exactly 0.129? Why or why not?</li>
+<li>If every student here took their own random sample of 100, what would the distribution of the <span class="math inline">\(\hat p\)</span> values look like (center and spread)?</li>
+<li>What would change with samples of 500?</li>
+</ol>
+
+<aside class="notes">
+<p>Goal: let them discover sampling variability before any formula. Expect: no, <span class="math inline">\(\hat p\)</span> varies from sample to sample; the distribution is centered near 0.129; spread around 0.03 for n = 100; narrower for n = 500 (about 0.015). Then go straight to StatKey to check their predictions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Source: 2022 Michigan college enrollment data, as given in the class examples.</p>
+</div></aside></section>
+<section id="statkey-simulation" class="slide level2 smaller">
+<h2>StatKey Simulation</h2>
+<ol type="1">
+<li>In StatKey, choose <strong>Sampling Distribution for a Proportion</strong>; set <span class="math inline">\(p = 0.129\)</span> and <span class="math inline">\(n = 100\)</span>.</li>
+<li>Generate 1000 samples. Record the <strong>mean</strong>, the <strong>standard deviation</strong> (this is the SE) and the <strong>shape</strong> of the simulated <span class="math inline">\(\hat p\)</span> values.</li>
+<li>Change to <span class="math inline">\(n = 500\)</span> and repeat.</li>
+</ol>
+<table class="fillin">
+<tbody><tr>
+<th class="lab">
+Sample size
+</th>
+<th style="width:9em">
+Shape
+</th>
+<th>
+Mean
+</th>
+<th>
+SE
+</th>
+</tr>
+<tr>
+<td class="lab">
+(n = 100)
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td class="lab">
+(n = 500)
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+</tbody></table>
+<p><strong>Turn and talk (30 sec):</strong> What do you notice about the SE when the sample size went from 100 to 500?</p>
+<aside class="notes">
+<p>Expected StatKey results (each simulation will differ a little): n = 100: mean about 0.129, SE about 0.034 (theory 0.0335), shape roughly normal with a slight right skew. n = 500: mean about 0.129, SE about 0.015 (theory 0.0150), shape very close to normal. A 5-fold increase in n cuts the SE by a factor of about <span class="math inline">\(\sqrt{5} \approx 2.24\)</span>. Use this to motivate the formula on the next slide. Menu wording in StatKey may differ slightly from what is written here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="standard-error-for-sample-proportions" class="slide level2">
 <h2>Standard Error for Sample Proportions</h2>
@@ -161,11 +312,24 @@ SE=\sqrt{\frac{p(1-p)}{n}}
 <ul>
 <li>The larger the sample size <span class="math inline">\(n\)</span>, the smaller the SE.</li>
 </ul>
+<aside class="notes">
+<p>Have them check the formula against the StatKey values they just recorded: 0.0335 for n = 100 and 0.0150 for n = 500.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="the-central-limit-theorem-for-proportions" class="slide level2">
 <h2>The Central Limit Theorem for Proportions</h2>
 <ul>
-<li><p>If <span class="math inline">\(n\)</span> is sufficently large, <span class="math display">\[
+<li><p>If <span class="math inline">\(n\)</span> is sufficiently large, <span class="math display">\[
 \hat p \sim N\left(p,\sqrt{\frac{p(1-p)}{n}}\right)
 \]</span></p></li>
 <li><p>A normal distribution is a good approximation as long as</p>
@@ -175,10 +339,85 @@ SE=\sqrt{\frac{p(1-p)}{n}}
 </ul></li>
 </ul>
 </section>
+<section id="example-1-michigan-students" class="slide level2 smaller">
+<h2>Example 1: Michigan Students</h2>
+<p>According to 2022 data, 12.9% of college students in Michigan are enrolled in private institutions. For random samples of size <span class="math inline">\(n\)</span>, describe the shape, mean, and standard error of the distribution of sample proportions for</p>
+<table class="fillin">
+<tbody><tr>
+<th class="lab">
+</th>
+<th>
+(np)
+</th>
+<th>
+(n(1-p))
+</th>
+<th style="width:9em">
+Shape
+</th>
+<th>
+Mean
+</th>
+<th>
+SE
+</th>
+</tr>
+<tr>
+<td class="lab" style="white-space:nowrap">
+<span>a)</span> (n = 100)
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td class="lab" style="white-space:nowrap">
+<span>b)</span> (n = 500)
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+</tbody></table>
+<p>c) What is the effect of the larger sample size on the shape, mean, and standard error?</p>
+<div class="ws ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<ol type="a">
+<li><p>np = 12.9 and n(1 - p) = 87.1, both at least 10, so approximately normal (n = 100 is the borderline case; mention the slight right skew they saw in StatKey). Mean 0.129. SE = sqrt(0.129 x 0.871 / 100) = 0.0335.</p></li>
+<li><p>np = 64.5 and n(1 - p) = 435.5, approximately normal, mean 0.129, SE = 0.0150.</p></li>
+<li><p>Shape: closer to normal. Mean: unchanged at 0.129 (center is p, no matter the n). SE: smaller by a factor of about <span class="math inline">\(\sqrt{5} \approx 2.24\)</span>, so estimates from bigger samples are more precise.</p></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="confidence-interval-for-a-single-proportion" class="slide level2">
 <h2>Confidence Interval for a Single Proportion</h2>
-<p>A confidence interval for a popoulation proportion <span class="math inline">\(p\)</span> can be computed using<br>
-<span class="math display">\[
+<p>A confidence interval for a population proportion <span class="math inline">\(p\)</span> can be computed using <span class="math display">\[
 \hat p \pm z^* \sqrt{\frac{\hat p(1-\hat p)}{n}}
 \]</span></p>
 <p>if <span class="math inline">\(n\)</span> is large enough so that</p>
@@ -187,20 +426,146 @@ SE=\sqrt{\frac{p(1-p)}{n}}
 <li><p><span class="math inline">\(n (1-\hat p)\ge 10\)</span></p></li>
 </ul>
 </section>
-<section id="sample-size-for-a-desired-margin-of-error" class="slide level2">
-<h2>Sample Size for a Desired Margin of Error</h2>
-<p>To estimate a population proportion to within a desired margin of error, <span class="math inline">\(\text{ME}\)</span> with a given level of confidence, choose <span class="math inline">\(n\)</span> such that<br>
-<span class="math display">\[
-n=\left(\frac{z^*}{\text{ME}}\right)^2 \tilde p (1-\tilde p)
-\]</span></p>
-<p>where <span class="math inline">\(\tilde p\)</span> is either</p>
+<section id="example-2-movie-goers" class="slide level2 smaller">
+<h2>Example 2: Movie Goers</h2>
+<p>In a random sample of 1000 US adults in August 2022, 550 of them said they are more likely to wait and watch a new movie in the comfort of their own home.</p>
+<ol type="a">
+<li>Check the sample size conditions and find a 95% confidence interval for the proportion of movie goers who are more likely to watch a new movie from home. (Use <span class="math inline">\(z^* = 1.96\)</span>.)</li>
+</ol>
+<div class="ws-l">
+
+</div>
+<ol start="2" type="a">
+<li>Interpret the interval in context.</li>
+</ol>
+<div class="ws ed" contenteditable="true">
+
+</div>
+
+<aside class="notes">
+<p><span class="math inline">\(\hat p = 0.55\)</span>; conditions: 550 and 450 are both at least 10. SE = sqrt(0.55 x 0.45 / 1000) = 0.0157. ME = 1.96 x 0.0157 = 0.0308. 95% CI: 0.55 plus or minus 0.031, i.e.&nbsp;about (0.519, 0.581).</p>
+<p>Interpretation: we are 95% confident that between about 51.9% and 58.1% of movie goers (US adults) are more likely to wait and watch a new movie at home.</p>
+<p>If you are short on time, this example can be skipped or assigned: the coffee activity practices the same skills with the class’s own data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Source: Morning Consult survey of US adults, August 2022 (reported by Statista).</p>
+</div></aside></section>
+<section id="class-survey" class="slide level2 smaller">
+<h2>Class Survey</h2>
+<div class="columns">
+<div class="column" style="width:42%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/sec6p1_coffee_tongue_qr.png" class="quarto-figure quarto-figure-center" height="340"></p>
+</figure>
+</div>
+</div><div class="column" style="width:58%;">
+<p>Scan the QR code and answer both survey questions.</p>
 <ul>
-<li><p>A guessed value for <span class="math inline">\(p\)</span> (if one is available) OR</p></li>
-<li><p><span class="math inline">\(\tilde p=0.5\)</span> if no other guess is available</p>
-<ul>
-<li>Setting <span class="math inline">\(\tilde p=0.5\)</span> will ensure that <span class="math inline">\(n\)</span> is large enough no matter what <span class="math inline">\(p\)</span> turns out to be.</li>
-</ul></li>
+<li><p>Did you drink any coffee this morning? (Yes or No) ______</p></li>
+<li><p>Can you roll your tongue as in the photo? (Yes or No) ______</p></li>
 </ul>
+<p><img data-src="figs/sec6p1_tongue.jpg" height="120"></p>
+</div></div>
+
+<aside class="notes">
+<p>About 3 minutes. One survey collects both variables so students only scan once; the tongue-rolling data are used again after the hypothesis test slides. Show the Forms summary when most have answered and let them read off n and the counts.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Photo: Wikimedia Commons (rolled tongue).</p>
+</div></aside></section>
+<section id="activity-coffee" class="slide level2 smaller">
+<h2>Activity: Coffee</h2>
+<p>Use the people in the classroom as the sample.</p>
+<table class="fillin">
+<tbody><tr>
+<th style="width:10em">
+<span>1.</span> How many people are in the class?
+</th>
+<th style="width:10em">
+<span>2.</span> How many drank coffee this morning?
+</th>
+<th style="width:10em">
+<span>3.</span> Proportion who drank coffee (use correct notation)
+</th>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+</tbody></table>
+<p>4. What quantity are we estimating if we use this information to construct a confidence interval? Use correct notation and define the parameter. What is a reasonable population?</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<ol type="1">
+<li><p>n from the survey; (2) x = number of Yes answers; (3) <span class="math inline">\(\hat p = x/n\)</span> (a statistic, so <span class="math inline">\(\hat p\)</span> and not <span class="math inline">\(p\)</span>).</p></li>
+<li><p>The parameter is <span class="math inline">\(p\)</span>, the proportion of all students in the population who drank coffee this morning. A reasonable population is K College students (or college students more broadly, with the caveat that our class is not a random sample, so generalizing is shaky).</p></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="coffee-confidence-interval" class="slide level2 smaller">
+<h2>Coffee: Confidence Interval</h2>
+<p>Recall: use your <span class="math inline">\(n\)</span> and <span class="math inline">\(\hat p\)</span> from the previous slide.</p>
+<ol start="5" type="1">
+<li>Check the sample size conditions and construct a 95% confidence interval for the parameter defined in #4.</li>
+</ol>
+<div class="ws-l">
+
+</div>
+<p>Interpret the interval in context.</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<p><span class="math inline">\(\hat p \pm 1.96\sqrt{\hat p(1-\hat p)/n}\)</span>. Check <span class="math inline">\(n\hat p \ge 10\)</span> and <span class="math inline">\(n(1-\hat p) \ge 10\)</span>. If the class is small and few people drank coffee, the condition may fail; that is a teachable moment (then pool with the other section or use StatKey’s bootstrap).</p>
+<p>Interpretation template: we are 95% confident that between ___ and ___ of [population] drank coffee this morning. Remind them of the sampling caveat (the class is not a random sample).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="hypothesis-testing-for-a-single-proportion" class="slide level2">
 <h2>Hypothesis Testing for a Single Proportion</h2>
@@ -210,8 +575,7 @@ z=\frac{\hat p-p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}}
 <ul>
 <li>Check sample size conditions:
 <ul>
-<li><span class="math inline">\(np_0\ge 10\)</span><br>
-</li>
+<li><span class="math inline">\(np_0\ge 10\)</span></li>
 <li><span class="math inline">\(n(1-p_0)\ge 10\)</span></li>
 </ul></li>
 </ul>
@@ -247,6 +611,279 @@ z=\frac{\hat p-p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}}
 </tr>
 </tbody>
 </table>
+</section>
+<section id="activity-tongue-rolling" class="slide level2 smaller">
+<h2>Activity: Tongue Rolling</h2>
+<p>Use the people in the classroom as the sample.</p>
+<table class="fillin">
+<tbody><tr>
+<th style="width:10em">
+<span>1.</span> How many people are in the class?
+</th>
+<th style="width:10em">
+<span>2.</span> How many can roll their tongue?
+</th>
+<th style="width:10em">
+<span>3.</span> Proportion who can roll their tongue (use correct notation)
+</th>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+</tbody></table>
+<p>4. What quantity are we estimating if we use this information to construct a confidence interval? Use correct notation and define the parameter. What is a reasonable population?</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<ol start="3" type="1">
+<li><span class="math inline">\(\hat p = x/n\)</span>. (4) <span class="math inline">\(p\)</span> = proportion of all people (in the population of interest, e.g., K College students) who can roll their tongue.</li>
+</ol>
+<p>If a student asks about the genetics: tongue rolling used to be presented as a simple dominant trait, but twin studies showed it is not that simple. That is fine to mention after the test, since the “75%” claim is only the hypothesis we are checking.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="tongue-rolling-the-test" class="slide level2 smaller">
+<h2>Tongue Rolling: The Test</h2>
+<p>Tongue rolling has been said to be a dominant trait, in which case theoretically 75% of all people should be able to roll their tongues. Do our data provide evidence otherwise?</p>
+<ol type="a">
+<li>State the null and alternative hypotheses.</li>
+</ol>
+<div class="ws">
+
+</div>
+<ol start="2" type="a">
+<li>Check the sample size conditions.</li>
+</ol>
+<div class="ws">
+
+</div>
+<aside class="notes">
+<ol type="a">
+<li><p><span class="math inline">\(H_0: p = 0.75\)</span> versus <span class="math inline">\(H_a: p \ne 0.75\)</span> (two-sided because the question asks for evidence “otherwise”).</p></li>
+<li><p>Need <span class="math inline">\(np_0 = 0.75n \ge 10\)</span> (n at least 14) and <span class="math inline">\(n(1-p_0) = 0.25n \ge 10\)</span> (n at least <strong>40</strong>). Heads up: if the class has fewer than 40 students, the second condition fails. Options: pool with the other section or last term’s survey data, or acknowledge the normal approximation is shaky and use StatKey’s randomization test for a single proportion.</p></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="tongue-test-continued" class="slide level2 smaller">
+<h2>Tongue Test, Continued</h2>
+<p>Recall: the claim is that 75% of all people can roll their tongues.</p>
+<ol start="3" type="a">
+<li>Find the test statistic and the <span class="math inline">\(p\)</span>-value.</li>
+</ol>
+<div class="ws-l">
+
+</div>
+<ol start="4" type="a">
+<li>State your conclusion in context.</li>
+</ol>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<ol start="3" type="a">
+<li><p><span class="math inline">\(z = (\hat p - 0.75)/\sqrt{0.75(0.25)/n}\)</span>; p-value is <span class="math inline">\(2P(Z \ge |z|)\)</span>.</p></li>
+<li><p>Compare the p-value to a significance level (0.05): small p-value means the data provide evidence the proportion differs from 0.75; large p-value means no evidence against 75% (not proof that it is 75%). Also remind them of the sampling caveat.</p></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="dice-testing-for-fairness" class="slide level2 smaller">
+<h2>Dice: Testing for Fairness</h2>
+<p>Let <span class="math inline">\(p\)</span> be the proportion of rolls (ignoring ties) in which the <strong>white</strong> die is greater than the red die.</p>
+<ol type="a">
+<li>If both dice are fair, what value should <span class="math inline">\(p\)</span> have, and why?</li>
+</ol>
+<div class="ws ed" contenteditable="true">
+
+</div>
+<ol start="2" type="a">
+<li>State the null and alternative hypotheses for testing whether the dice are fair.</li>
+</ol>
+<div class="ws">
+
+</div>
+<aside class="notes">
+<ol type="a">
+<li><p>For two fair dice, P(white greater) = 15/36, P(red greater) = 15/36, P(tie) = 6/36. Ignoring ties leaves 15/30 = 0.5, so <span class="math inline">\(p = 0.5\)</span>.</p></li>
+<li><p><span class="math inline">\(H_0: p = 0.5\)</span> versus <span class="math inline">\(H_a: p \ne 0.5\)</span>.</p></li>
+</ol>
+<p>Do not reveal that the dice are rigged yet.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="dice-pooled-class-results" class="slide level2 smaller">
+<h2>Dice: Pooled Class Results</h2>
+<p>Recall: <span class="math inline">\(p\)</span> is the proportion of non-tied rolls in which the WHITE die is greater.</p>
+<table class="fillin">
+<tbody><tr>
+<td class="lab">
+WHITE greater
+</td>
+<td style="width:6em">
+</td>
+<td class="lab">
+RED greater
+</td>
+<td style="width:6em">
+</td>
+<td class="lab">
+Total (n)
+</td>
+<td style="width:6em">
+</td>
+<td class="lab">
+(p)
+</td>
+<td style="width:6em">
+</td>
+</tr>
+</tbody></table>
+<ol start="3" type="a">
+<li>Check the sample size conditions and find the test statistic and the <span class="math inline">\(p\)</span>-value.</li>
+</ol>
+<div class="ws-l">
+
+</div>
+<ol start="4" type="a">
+<li>State your conclusion in context.</li>
+</ol>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<p>Pull the totals from the Forms responses (export to Excel and sum the two columns) and fill in the table live. Conditions: <span class="math inline">\(np_0 = n(1-p_0) = 0.5n \ge 10\)</span> needs n of at least 20, which pooled data easily meets. <span class="math inline">\(z = (\hat p - 0.5)/\sqrt{0.5(0.5)/n}\)</span>; two-sided p-value <span class="math inline">\(= 2P(Z \ge |z|)\)</span>.</p>
+<p>If the p-value is small, the data provide strong evidence the dice are not fair; this is the moment to reveal the trick dice. Natural follow-up to ask: how lopsided are they? That is what a confidence interval for <span class="math inline">\(p\)</span> answers.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="sample-size-for-a-desired-margin-of-error" class="slide level2 smaller">
+<h2>Sample Size for a Desired Margin of Error</h2>
+<p>To estimate a population proportion to within a desired margin of error, <span class="math inline">\(\text{ME}\)</span> with a given level of confidence, choose <span class="math inline">\(n\)</span> such that <span class="math display">\[
+n=\left(\frac{z^*}{\text{ME}}\right)^2 \tilde p (1-\tilde p)
+\]</span></p>
+<p>where <span class="math inline">\(\tilde p\)</span> is either</p>
+<ul>
+<li><p>A guessed value for <span class="math inline">\(p\)</span> (if one is available) OR</p></li>
+<li><p><span class="math inline">\(\tilde p=0.5\)</span> if no other guess is available</p>
+<ul>
+<li>Setting <span class="math inline">\(\tilde p=0.5\)</span> will ensure that <span class="math inline">\(n\)</span> is large enough no matter what <span class="math inline">\(p\)</span> turns out to be.</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>Natural stopping point: if time is short, start next class here, with Example 3 and then move on to the next section.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-3-sample-size" class="slide level2 smaller">
+<h2>Example 3: Sample Size</h2>
+<p>Recall (Example 2): <span class="math inline">\(n = 1000\)</span>, <span class="math inline">\(\hat p = 0.55\)</span>, 95% confidence (<span class="math inline">\(z^* = 1.96\)</span>).</p>
+<ol type="a">
+<li>What is the margin of error for the confidence interval found in Example 2?</li>
+</ol>
+<div class="ws">
+
+</div>
+<ol start="2" type="a">
+<li>What sample size is needed if we want a margin of error within ±2%? (Use the sample proportion from the original sample.)</li>
+</ol>
+<div class="ws">
+
+</div>
+<ol start="3" type="a">
+<li>What sample size is needed if we want a margin of error within ±2%, and if we use the conservative estimate of <span class="math inline">\(p = 0.5\)</span>?</li>
+</ol>
+<div class="ws">
+
+</div>
+<aside class="notes">
+<ol type="a">
+<li><p>ME = 1.96 x sqrt(0.55 x 0.45 / 1000) = 0.0308 (about 3.1 percentage points); it is the “plus or minus” part of the interval.</p></li>
+<li><p><span class="math inline">\(n = (1.96/0.02)^2(0.55)(0.45) = 2376.99\)</span>, so n = 2377 (always round up).</p></li>
+<li><p><span class="math inline">\(n = (1.96/0.02)^2(0.5)(0.5) = 2401\)</span>.</p></li>
+</ol>
+<p>Compare (b) and (c): the conservative estimate asks for slightly more people but guarantees the ME no matter what p turns out to be.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="wrapping-up" class="slide level2 smaller">
+<h2>Wrapping Up</h2>
+<ul>
+<li class="fragment">The SE of <span class="math inline">\(\hat p\)</span> shrinks as <span class="math inline">\(n\)</span> grows, and <span class="math inline">\(\hat p\)</span> is approximately normal when <span class="math inline">\(np \ge 10\)</span> and <span class="math inline">\(n(1-p) \ge 10\)</span>.</li>
+<li class="fragment">A confidence interval for <span class="math inline">\(p\)</span> uses <span class="math inline">\(\hat p\)</span> in the SE: <span class="math inline">\(\hat p \pm z^* \sqrt{\hat p(1-\hat p)/n}\)</span>.</li>
+<li class="fragment">A test of <span class="math inline">\(H_0: p = p_0\)</span> uses <span class="math inline">\(p_0\)</span> in the SE, and the conditions are checked with <span class="math inline">\(p_0\)</span>.</li>
+<li class="fragment">The same data can be used to estimate <span class="math inline">\(p\)</span> (interval) or to check a claim about <span class="math inline">\(p\)</span> (test).</li>
+<li class="fragment">Plan sample size from the margin of error you want, using <span class="math inline">\(\tilde p = 0.5\)</span> when you have no guess.</li>
+</ul>
 
 </section>
     </div>
@@ -505,190 +1142,173 @@ z=\frac{\hat p-p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}}
     </script>
 
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
           }
+          return false;
         }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
           }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
           for (const childEl of codeEl.children) {
             if (isCodeAnnotation(childEl)) {
               childEl.remove();
             }
           }
           return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
             }
           }
-        }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
           }
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
           }
-        } else {
-          return undefined;
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
         }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>
