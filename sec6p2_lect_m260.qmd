@@ -8,6 +8,23 @@ format:
     reveal-options:
       slideNumber: true
     html-math-method: mathjax
+    include-in-header:
+      text: |
+        <style>
+        .reveal .ws   { height: 2.5em; }
+        .reveal .ws-l { height: 5em; }
+        /* typeable answer boxes (contenteditable): same minimum footprint as .ws / .ws-l, grow if you type more */
+        .reveal .ws.ed, .reveal .ws-l.ed { height: auto; text-align: left; font-size: 0.9em;
+          color: #1a3a8a; outline: none; }
+        .reveal .ws.ed   { min-height: 2.5em; }
+        .reveal .ws-l.ed { min-height: 5em; }
+        .reveal .ws.ed:focus, .reveal .ws-l.ed:focus { outline: 2px dashed #EA6820; outline-offset: 2px; }
+        .reveal table.fillin { border-collapse: collapse; margin: 0.4em 0 0.8em 0; }
+        .reveal table.fillin th, .reveal table.fillin td {
+          border: 1px solid #888 !important; text-align: center; vertical-align: middle;
+          padding: 0.2em 0.5em; width: 5.5em; height: 2.4em; }
+        .reveal table.fillin .lab { width: auto; font-weight: bold; }
+        </style>
 title-slide-attributes:
   data-background-color: "#EA6820"
 from: markdown+emoji
@@ -22,6 +39,25 @@ library(Lock5Data)
 ```
 
 
+## Warm-Up: What Is "Normal" Body Temperature? {.smaller}
+
+A forehead thermometer is going around the room. Read your own temperature (in °F) and, if you wish, submit it anonymously with the QR code. Passing the thermometer along without submitting is fine.
+
+::: {.fragment}
+**Turn and talk (60 sec):**
+
+1. Where do you think the number 98.6°F comes from?
+2. If our class average turned out to be 98.2°F, would that convince you that 98.6°F is wrong? What else would you want to know?
+3. Why can't one person's reading settle the question?
+:::
+
+::: notes
+Intent: students meet the question we will test later in the hour (is mean body temperature 98.6°F?) before any vocabulary. The thermometer circulates while they talk.
+
+Logistics: set the thermometer to body mode and °F, and try it on yourself first. Students read their own forehead, so no one sees anyone else's number, and passing it along is an invisible opt-out. Ask them to submit at about the same time so response order cannot be matched to seating.
+
+Likely answers: (1) 98.6°F is 37°C, from a large nineteenth-century study by Wunderlich (1851). (2) One class average is itself a sample, so we need to account for variability, and we should ask how many students and how spread out the readings are. (3) People differ, and one reading also varies with time of day, room temperature and the device.
+:::
 
 
 ## Outline
@@ -36,7 +72,7 @@ library(Lock5Data)
 ## Standard Error for Sample Means
 
 
-> For random samples of size $n$ from a population with mean $\mu$, the standard error of the sample mean $\bar x$ is 
+> For random samples of size $n$ from a population with mean $\mu$, the standard error of the sample mean $\bar x$ is
 $$
 SE=\frac{\sigma}{\sqrt{n}}
 $$
@@ -57,6 +93,68 @@ $$
 * Smaller sample sizes may be sufficient for symmetric distributions, and 30 may not be sufficient for very skewed distributions or distributions with high outliers.
 
 
+## Example 1: Baseball Salaries {.smaller}
+
+There were 877 major league baseball players in 2024 and their mean salary was $\mu = 5.08$ million dollars with standard deviation $\sigma = 7.48$ million dollars. If we take random samples of size $n = 30$ players and calculate the mean salary, in millions of dollars, of each sample, describe the shape, center, and standard error of the distribution of sample means.
+
+**(a)** Shape:
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+**(b)** Center:
+
+::: {.ws}
+:::
+
+**(c)** Standard error:
+
+::: {.ws}
+:::
+
+::: notes
+(a) The CLT guideline n ≥ 30 says approximately normal, but salaries are strongly right-skewed (σ is larger than μ), so n = 30 is borderline and the distribution of sample means is likely still somewhat right-skewed. Accept either answer with a reason. This ties back to the last bullet of the CLT slide.
+
+(b) Center = μ = 5.08 million dollars.
+
+(c) SE = σ/√n = 7.48/√30 ≈ 1.37 million dollars.
+:::
+
+
+## Example 2: More Baseball Salaries {.smaller}
+
+Using the same data as Example 1 ($\mu = 5.08$, $\sigma = 7.48$ million dollars), but now taking samples of size $n = 75$, describe the shape, center, and standard error of the distribution of sample means. Compare your answers with those of Example 1.
+
+**(a)** Shape:
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+**(b)** Center:
+
+::: {.ws}
+:::
+
+**(c)** Standard error:
+
+::: {.ws}
+:::
+
+**(d)** Compare with Example 1:
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+::: notes
+(a) Closer to normal than with n = 30 because n is larger.
+
+(b) Center is still μ = 5.08 million dollars; the center does not depend on n.
+
+(c) SE = 7.48/√75 ≈ 0.864 million dollars.
+
+(d) Same center, narrower spread, and a more normal shape. The SE fell by a factor of √(30/75) ≈ 0.63, not by the factor 30/75 = 0.4. To cut the SE in half we need four times as many observations.
+:::
+
 
 ## Standard Error of the Sample Mean in Practice
 
@@ -73,6 +171,14 @@ $$
 
 * The $t$ distribution is very similar to the standard normal $Z$, but with slightly thicker tails to reflect this added uncertainty.
 
+::: {.fragment}
+**Turn and talk (30 sec):** Why does estimating $\sigma$ with $s$ add uncertainty, especially when $n$ is small?
+:::
+
+::: notes
+$s$ is itself a random quantity that changes from sample to sample, and with a small sample it can be far from $\sigma$. The thicker tails account for the chance that $s$ is too small.
+:::
+
 
 ## Degrees of Freedom
 
@@ -82,16 +188,44 @@ $$
 * Degrees of freedom are calculated based on the sample size.
 
 * The greater the degrees of freedom, the closer the $t$-distribution is to the standard normal.
- 
+
 
 ## t-distribution
 
 
 * If a population with mean $\mu_0$ is approximately normal or if $n$ is large
-$(n \ge 30),$ the standardized statistic for a mean using the sample $s$ 
+$(n \ge 30),$ the standardized statistic for a mean using the sample $s$
 follows a $t$-distribution with $n–1$ degrees of freedom:
 
 $$\frac{\bar x-\mu_0}{s/\sqrt{n}}\sim t_{n-1}$$
+
+
+## Quick Self-Quiz: Using the t-Distribution {.smaller}
+
+**(a)** Find endpoints of a $t$-distribution with 5% beyond them in each tail if the sample has size $n = 18$.
+
+::: {.ws}
+:::
+
+**(b)** Find the area in a $t$-distribution to the right of 2.30 if the sample has size $n = 15$.
+
+::: {.ws}
+:::
+
+**(c)** Find the area in a $t$-distribution to the left of 1.22 if the sample has size $n = 50$.
+
+::: {.ws}
+:::
+
+::: notes
+Use R, StatKey's theoretical t distribution, or a t-table. Remember df = n − 1.
+
+(a) df = 17, endpoints ±1.740 (`qt(0.95, 17)`). Compare with ±1.645 from the normal.
+
+(b) df = 14, area ≈ 0.0187 (`pt(2.30, 14, lower.tail = FALSE)`).
+
+(c) df = 49, area ≈ 0.886 (`pt(1.22, 49)`). The normal gives 0.889, a good illustration that the t is close to normal for larger df.
+:::
 
 
 ## Normality Condition {.smaller}
@@ -112,9 +246,18 @@ $$\frac{\bar x-\mu_0}{s/\sqrt{n}}\sim t_{n-1}$$
 
 * If sample sizes are small, only use the $t$-distribution if the data look reasonably symmetric and do not have any extreme outliers.
 
-* Even then, remember that the $t$ is just an approximation! 
+* Even then, remember that the $t$ is just an approximation!
 
 * In practice, if sample sizes are small, use simulation methods (bootstrapping and randomization).
+
+::: {.fragment}
+**Turn and talk (30 sec):** When you look at a dotplot of a small sample, what would make you hesitate to use the $t$-distribution?
+:::
+
+::: notes
+Look for strong skew and for extreme outliers. Students will apply this to the class temperature data in the Your Turn below.
+:::
+
 
 ## t-test for a Single Mean {.smaller}
 
@@ -151,6 +294,119 @@ The $p$-value is the area in the tail(s) beyond $t$ for a $t$-distribution with 
 2. Population distribution is approximately normal OR sample size is large $(n\ge 30)$
 
 
+## Your Turn: Average Body Temperature {.smaller}
+
+The conventional value for average body temperature is 98.6°F. Use today's class temperatures to test whether the mean body temperature of K students differs from 98.6°F.
+
+**(a)** In words, what is the parameter $\mu$?
+
+::: {.ws .ed contenteditable="true"}
+:::
+
+**(b)** State the null and alternative hypotheses.
+
+::: {.ws}
+:::
+
+**(c)** Use the dotplot and summary statistics on the screen to fill in:
+
+<table class="fillin">
+<tr><th>\(n\)</th><th>\(\bar x\)</th><th>\(s\)</th><th>\(SE=s/\sqrt{n}\)</th></tr>
+<tr><td></td><td></td><td></td><td></td></tr>
+</table>
+
+::: notes
+Pairs work on this slide while you paste the class temperatures into R.
+
+```
+temp <- c()   # paste the class values here
+tempdata <- data.frame(temp = temp)
+gf_dotplot(~temp, data = tempdata, binwidth = 0.2)
+favstats(~temp, data = tempdata)
+```
+
+(a) The mean body temperature (°F) of all K students (or, as measured by this thermometer, of all students like these).
+
+(b) H0: μ = 98.6 versus Ha: μ ≠ 98.6 (two-sided, since the question is whether it differs).
+
+(c) Read n, x-bar and s from favstats; SE = s/√n.
+:::
+
+
+## Your Turn: Conditions and Test {.smaller}
+
+Recall: $H_0: \mu = 98.6$ versus $H_a: \mu \neq 98.6$. Use your $n$, $\bar x$, $s$ from the previous slide.
+
+**(d)** Are the conditions for the $t$ test reasonable? Look at the dotplot.
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+**(e)** Compute the test statistic, degrees of freedom, and $p$-value:
+
+<table class="fillin">
+<tr><th>\(t\)</th><th>df</th><th>\(p\)-value</th></tr>
+<tr><td></td><td></td><td></td></tr>
+</table>
+
+**(f)** State your conclusion in the context of the problem.
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+::: notes
+(d) Discuss the two conditions. Our class is not a simple random sample of anything, which is the same caveat as for the sleep data; the dotplot should be roughly symmetric with no extreme outliers (watch for a reading far from the rest, which may be a recording error or a device problem). If n is under 30, the shape matters; if n is 30 or more, the t is fine.
+
+(e) t = (x̄ − 98.6)/(s/√n); df = n − 1; two-sided p-value = `2 * pt(-abs(t), df)`. Check with `t.test(~temp, mu = 98.6, data = tempdata)`.
+
+(f) Compare p to 0.05 and state the conclusion about the mean body temperature of students, not just "reject H0". Fill in after seeing the data: forehead readings are often a bit below 98.6, so a small p-value is likely.
+
+While pairs work: upload the values to tempdata.csv (column name must be `temp`) and knit temperature_analysis_with_t.qmd so you can show the full analysis near the end.
+:::
+
+
+## Your Turn: Confidence Interval {.smaller}
+
+**(g)** Find a 95% confidence interval for the mean body temperature.
+
+<table class="fillin">
+<tr><th>df</th><th>\(t^*\)</th><th>margin of error</th><th>95% CI</th></tr>
+<tr><td></td><td></td><td></td><td></td></tr>
+</table>
+
+**(h)** Interpret the interval in context.
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+**(i)** Is 98.6 inside your interval? Does this agree with your test conclusion? Explain.
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+::: notes
+(g) df = n − 1; t* = `qt(0.975, df)`; margin of error = t* · s/√n; interval = x̄ ± ME. Check with `t.test(~temp, conf.level = 0.95, data = tempdata)`.
+
+(h) We are 95% confident that the mean body temperature of K students is between the two endpoints (°F).
+
+(i) A two-sided test at α = 0.05 and a 95% interval always agree: reject H0 exactly when 98.6 is outside the interval.
+:::
+
+
+## Discussion: What Are We Measuring?
+
+::: {.fragment}
+**Turn and talk (60 sec):**
+
+1. A forehead thermometer measures skin temperature and estimates body temperature from it. How could this affect our results?
+2. What if many of us just walked in from the cold? How would the data change?
+3. Does a small $p$-value tell us that 98.6°F is wrong, or that this method gives a different number? What is the difference?
+:::
+
+::: notes
+Statistical significance does not tell us why the sample mean differs from 98.6. Possible reasons: true differences in average temperature (modern studies often find averages a bit under 98.6°F), skin versus core temperature, room and outdoor temperature, time of day, device calibration, and the fact that our sample is a convenience sample of one class. This is a measurement and sampling issue, not something the t test can fix.
+:::
+
 
 ## Sample Size for Desired Margin of Error {.smaller}
 
@@ -166,14 +422,18 @@ where $\tilde\sigma$ is an estimate of the population standard deviation.
 
 ## Summary {.smaller}
 
-- **Standard Error & Central Limit Theorem**  
-  Standard error decreases with larger samples. Sample means follow a normal distribution if \(n \ge 30\).
+- **Standard Error & Central Limit Theorem**
+  Standard error decreases with larger samples. Sample means follow a normal distribution if $n \ge 30$.
 
-- **t-Distribution**  
+- **t-Distribution**
   Used when population standard deviation is unknown; has thicker tails than normal, adjusting for sample variability.
 
-- **Inference Methods**  
-  Hypothesis tests and confidence intervals for a single mean rely on the t-distribution, requiring normality or large \(n\).
+- **Inference Methods**
+  Hypothesis tests and confidence intervals for a single mean rely on the t-distribution, requiring normality or large $n$.
 
-- **Sample Size Planning**  
+- **Sample Size Planning**
   Determine sample size for a desired margin of error using the z-distribution as an approximation.
+
+::: notes
+If there is time: the t-distribution was introduced by William Gosset ("Student") in 1908, and his first example used sleep data from patients at the asylum in Kalamazoo. No slide for this.
+:::

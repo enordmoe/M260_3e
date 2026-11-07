@@ -1,0 +1,326 @@
+---
+title: "R Help Sheet for the Poster Project"
+subtitle: "Math 260 Applied Statistics"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    toc-location: left
+    number-sections: false
+    theme: flatly
+    embed-resources: true
+    code-copy: true
+    code-overflow: wrap
+    fig-width: 6.5
+    fig-height: 3.6
+    fig-align: left
+execute:
+  warning: false
+  message: false
+  echo: true
+---
+
+```{=html}
+<style>
+  body { font-family: Calibri, "Segoe UI", Arial, sans-serif; font-size: 17px; }
+  h1, h2, h3, .title { font-family: Georgia, serif; color: #5A7A5E; }
+  h2 { margin-top: 2.2rem; border-bottom: 2px solid #5A7A5E; padding-bottom: .2rem; }
+  .subtitle { color: #555; }
+  div.sourceCode { margin-bottom: 1.1rem; }
+  .callout { margin-top: 1rem; margin-bottom: 1.2rem; }
+  table { font-size: 0.92em; }
+</style>
+```
+
+```{r, setup, include=FALSE}
+library(mosaic)
+library(math260projdata)
+```
+
+This sheet collects the R steps you are most likely to need while building your poster. Every box of code can be **copied with the button in its top-right corner** and pasted into your own Quarto file.
+
+The examples use two datasets from `math260projdata`, `coasters` and `happiness`. **Swap in the names of your own dataset and variables** wherever you see them. Names, spelling and capitalization must match your data exactly.
+
+The recipes build on each other in order. If an example uses `coasters2`, it was created in Section 3.
+
+# 1. Look at your data first
+
+Before you filter or recode anything, check what is actually there.
+
+```{r}
+head(coasters, n = 3)                # first few rows
+names(coasters)                      # variable names
+tally(~ material, data = coasters)   # labels of a categorical variable
+favstats(~ speed, data = coasters)   # a quantitative variable
+```
+
+::: {.callout-tip}
+## Why check labels?
+Filtering and recoding only work if you type each category **exactly** as it appears (`"Wooden"`, not `"wooden"`). Use `tally()` to see the exact spelling.
+:::
+
+# 2. Filter cases
+
+Filtering keeps only the rows you want. **Always save the result under a new name** (like `steel` below) so your original data stay intact.
+
+**Keep one group**
+
+```{r}
+steel <- coasters |> filter(material == "Steel")
+```
+
+**Keep two (or more) groups.** Use `%in%` with a list of labels. Add `droplevels()` so the unused category does not linger in tables and graphs.
+
+```{r}
+two_types <- coasters |>
+  filter(material %in% c("Steel", "Wooden")) |>
+  droplevels()
+```
+
+**Keep cases that meet a numerical condition.** A comma between conditions means "and".
+
+```{r}
+tall_fast <- coasters |> filter(height > 40, speed >= 100)
+```
+
+**Look for outliers, then remove one only if you have a reason.**
+
+```{r}
+# The five fastest coasters
+coasters |> arrange(desc(speed)) |> select(name, speed, height) |> head(n = 5)
+
+# Drop only the 240 km/h coaster, then count the cases before and after
+no_outlier <- coasters |> filter(speed < 220)
+nrow(coasters)
+nrow(no_outlier)
+```
+
+**Drop cases with a missing value** for one variable
+
+```{r}
+happy_known <- happiness |> filter(!is.na(continent))
+```
+
+::: {.callout-tip}
+## Poster tip
+Be sure to say on your poster the sample size for the final sample after any removed cases.
+:::
+
+# 3. Recode variables
+
+Recoding creates a **new column** with `mutate()`. Most of the course methods compare two groups, so these recipes turn a variable into a two-category variable.
+
+**Categorical to binary: one category versus all the others**
+
+```{r}
+coasters2 <- coasters |>
+  mutate(wooden = ifelse(material == "Wooden", "Wooden", "Not wooden"))
+```
+
+**Quantitative to binary: split at a cutoff you can justify**
+
+```{r}
+coasters2 <- coasters2 |>
+  mutate(fast = ifelse(speed >= 100, "Fast", "Not fast"))
+```
+
+**Collapse several categories into two** (this one uses `happiness`)
+
+```{r}
+happiness2 <- happiness |>
+  mutate(region2 = ifelse(continent %in% c("Europe", "Americas"), "Europe/Americas", "Other"))
+```
+
+**Quantitative to several ordered groups** with `cut()`
+
+```{r}
+coasters2 <- coasters2 |>
+  mutate(height_group = cut(height, breaks = c(0, 20, 40, Inf),
+                            labels = c("Low (up to 20 m)", "Medium (20 to 40 m)", "Tall (over 40 m)")))
+```
+
+**Choose which group comes first.** The first level listed comes first in tables and graphs.
+
+```{r}
+coasters2 <- coasters2 |>
+  mutate(wooden = factor(wooden, levels = c("Wooden", "Not wooden")))
+```
+
+**Always check that the recode did what you intended**
+
+```{r}
+tally(wooden ~ material, data = coasters2)
+tally(fast ~ height_group, data = coasters2)
+```
+
+::: {.callout-tip}
+## Keep your data steps together
+Put all of your filtering and recoding in one chunk near the top of your Quarto file, and give the final dataset one name. Then your whole analysis re-runs correctly every time you render.
+:::
+
+# 4. Numerical summaries and tables
+
+**Compare a quantitative variable across two groups**
+
+```{r}
+favstats(speed ~ wooden, data = coasters2)
+```
+
+**Difference in group means.** R subtracts the first group's mean from the second's, so this is the mean for "Not wooden" minus the mean for "Wooden". Reverse the order of the levels in Section 3 if you would rather report it the other way.
+
+```{r}
+diffmean(speed ~ wooden, data = coasters2)
+```
+
+**Compare proportions.** The first table gives conditional proportions for each group. The second gives one proportion.
+
+```{r}
+tally(fast ~ wooden, data = coasters2, format = "proportion")
+prop(~ fast, data = coasters2, success = "Fast")
+```
+
+**A clean table for your poster.** Choose only the columns your audience needs and round them. When you render your Quarto file, you can copy this table from the HTML page and paste it into PowerPoint.
+
+```{r}
+favstats(speed ~ wooden, data = coasters2) |>
+  select(wooden, n, mean, sd) |>
+  knitr::kable(digits = 1)
+```
+
+# 5. Graphs for your poster
+
+Pick the tab that matches your variables. Each recipe already includes labels (see the last tab for what each label does).
+
+::: {.panel-tabset}
+
+## Compare groups: histograms
+
+```{r}
+gf_histogram(~ speed | wooden ~ ., data = coasters2, binwidth = 10) |>
+  gf_labs(title = "Top speeds of wooden and non-wooden coasters",
+          x = "Top speed (km/h)", y = "Number of coasters")
+```
+
+## Compare groups: boxplots
+
+```{r}
+gf_boxplot(speed ~ wooden, data = coasters2) |>
+  gf_labs(title = "Wooden coasters tend to be faster",
+          x = "Coaster material", y = "Top speed (km/h)")
+```
+
+## Two quantitative variables
+
+One overall line:
+
+```{r}
+gf_point(speed ~ height, data = coasters2, alpha = 0.5) |>
+  gf_smooth(method = "lm") |>
+  gf_labs(title = "Taller coasters are faster",
+          x = "Height (meters)", y = "Top speed (km/h)")
+```
+
+Color the points by group:
+
+```{r}
+gf_point(speed ~ height, data = coasters2, color = ~ wooden, alpha = 0.5) |>
+  gf_labs(title = "Speed and height by material",
+          x = "Height (meters)", y = "Top speed (km/h)", color = "Material")
+```
+
+## Categorical variables
+
+One variable:
+
+```{r}
+gf_props(~ material, data = coasters2) |>
+  gf_labs(title = "Most coasters in the database are steel",
+          x = "Coaster material", y = "Proportion of coasters")
+```
+
+Compare groups with stacked bars:
+
+```{r}
+gf_props(~ wooden, fill = ~ fast, data = coasters2, position = "fill") |>
+  gf_labs(title = "Share of fast coasters, by material",
+          x = "Coaster material", y = "Proportion", fill = "Speed")
+```
+
+If the category names are long, flip the bars with `gf_refine(coord_flip())` added at the end.
+
+## Labels, size and color
+
+`gf_labs()` can set any of these (use only the ones you need):
+
+```{r}
+gf_boxplot(speed ~ wooden, data = coasters2) |>
+  gf_labs(title = "Title: state the finding",
+          subtitle = "Subtitle: describe the data or sample",
+          x = "x-axis label with units",
+          y = "y-axis label with units",
+          caption = "Source: Captain Coaster community database")
+```
+
+**Make text large enough for a poster** by adding `gf_theme()` as the last step:
+
+```{r}
+gf_boxplot(speed ~ wooden, data = coasters2) |>
+  gf_labs(title = "Wooden coasters tend to be faster",
+          x = "Coaster material", y = "Top speed (km/h)") |>
+  gf_theme(theme_bw(base_size = 18))
+```
+
+**Choose colors.** A `~` before a variable name means "use a different color for each group". Quotes around a color name mean "use this one color for everything".
+
+```{r}
+gf_histogram(~ speed, data = coasters2, binwidth = 10, fill = "steelblue", color = "white") |>
+  gf_labs(x = "Top speed (km/h)", y = "Number of coasters") |>
+  gf_theme(theme_bw(base_size = 18))
+```
+
+Type `colors()` at the Console to see the names R knows.
+
+:::
+
+# 6. Save a graph as a PNG for PowerPoint
+
+**Point and click.** Make your graph, then in the **Plots** pane choose **Export → Save as Image**. Pick **PNG**, set the size, and save the file in your project folder. You can also choose **Copy to Clipboard** and paste straight into your poster.
+
+**With code.** Save the graph under a name, then use `ggsave()`. The size is in inches.
+
+```{r, eval=FALSE}
+speed_plot <- gf_boxplot(speed ~ wooden, data = coasters2) |>
+  gf_labs(title = "Wooden coasters tend to be faster",
+          x = "Coaster material", y = "Top speed (km/h)") |>
+  gf_theme(theme_bw(base_size = 18))
+
+ggsave("speed_boxplot.png", plot = speed_plot, width = 8, height = 5, dpi = 300)
+```
+
+The file is saved in your working directory. Type `getwd()` at the Console to see where that is.
+
+::: {.callout-tip}
+## Check the size on your poster
+Text scales with the image. If the text looks too small after you place the image on your poster, save it again with a smaller `width`/`height` or a larger `base_size`. Resizing the picture in PowerPoint does not fix the text size relative to the rest of the poster.
+:::
+
+# 7. Save your cleaned data to a file
+
+To use your filtered or recoded data somewhere else, such as StatKey or Excel, write it to a CSV file. Keeping only the columns you need makes the file easier to work with.
+
+```{r, eval=FALSE}
+two_types |>
+  select(name, material, speed) |>
+  write.csv("coasters_two_types.csv", row.names = FALSE)
+```
+
+# 8. When something goes wrong
+
+| What you see | What it usually means |
+|:-----------------------------|:---------------------------------------------------|
+| `object 'xxx' not found` | A typo, or you did not run the chunk that creates it, or you forgot to save a result with `<-` |
+| `could not find function "filter"` | The setup chunk with `library(mosaic)` has not been run |
+| Zero rows after `filter()` | A category was spelled differently than in the data. Check with `tally()`. Use `==`, not `=` |
+| An empty category in a table or graph | Add `|> droplevels()` after your `filter()` |
+| `unexpected symbol` or `unexpected ','` | A missing or extra comma, quote or parenthesis. A `|>` goes at the **end** of a line, never the start |
+| New column is all `NA` | The old column name or a category label in `ifelse()` is misspelled |
