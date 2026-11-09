@@ -41,6 +41,8 @@ library(Lock5Data)
 
 ## Warm-Up: What Is "Normal" Body Temperature? {.smaller}
 
+::: {.columns}
+::: {.column width="62%"}
 A forehead thermometer is going around the room. Read your own temperature (in °F) and, if you wish, submit it anonymously with the QR code. Passing the thermometer along without submitting is fine.
 
 ::: {.fragment}
@@ -49,6 +51,12 @@ A forehead thermometer is going around the room. Read your own temperature (in �
 1. Where do you think the number 98.6°F comes from?
 2. If our class average turned out to be 98.2°F, would that convince you that 98.6°F is wrong? What else would you want to know?
 3. Why can't one person's reading settle the question?
+:::
+:::
+
+::: {.column width="38%"}
+![](figs/sec6p2_temp_qr.png){fig-align="center" height="380"}
+:::
 :::
 
 ::: notes
@@ -190,6 +198,19 @@ $s$ is itself a random quantity that changes from sample to sample, and with a s
 * The greater the degrees of freedom, the closer the $t$-distribution is to the standard normal.
 
 
+## Explore: t Versus Normal
+
+<iframe data-src="t_vs_z.html" width="100%" height="540" style="border:none;"></iframe>
+
+::: notes
+Start at df = 1 and press Play, or use the Jump buttons. Point out three things: (1) the t curve is lower in the middle and has heavier tails, (2) the t* card shrinks toward 1.96 as df grows, and (3) the shaded area beyond ±1.96 shrinks toward 5%. Connect to the next slide: the t* here is the t* in the confidence interval formula, so a small sample needs a wider interval than the normal would give.
+
+Ask for a prediction first: "By about what df do you think t* gets within 0.05 of 1.96?" (about df = 40, where t* is 2.021 and the gap is about 0.06; df = 50 gets within 0.05).
+
+The page is self-contained (no internet needed). Keep t_vs_z.html in the same folder as this deck, and upload both if you post the deck.
+:::
+
+
 ## t-distribution
 
 
@@ -311,7 +332,7 @@ The conventional value for average body temperature is 98.6°F. Use today's clas
 **(c)** Use the dotplot and summary statistics on the screen to fill in:
 
 <table class="fillin">
-<tr><th>\(n\)</th><th>\(\bar x\)</th><th>\(s\)</th><th>\(SE=s/\sqrt{n}\)</th></tr>
+<tr><th>$n$</th><th>$\bar x$</th><th>$s$</th><th>$SE=s/\sqrt{n}$</th></tr>
 <tr><td></td><td></td><td></td><td></td></tr>
 </table>
 
@@ -345,7 +366,7 @@ Recall: $H_0: \mu = 98.6$ versus $H_a: \mu \neq 98.6$. Use your $n$, $\bar x$, $
 **(e)** Compute the test statistic, degrees of freedom, and $p$-value:
 
 <table class="fillin">
-<tr><th>\(t\)</th><th>df</th><th>\(p\)-value</th></tr>
+<tr><th>$t$</th><th>df</th><th>$p$-value</th></tr>
 <tr><td></td><td></td><td></td></tr>
 </table>
 
@@ -370,7 +391,7 @@ While pairs work: upload the values to tempdata.csv (column name must be `temp`)
 **(g)** Find a 95% confidence interval for the mean body temperature.
 
 <table class="fillin">
-<tr><th>df</th><th>\(t^*\)</th><th>margin of error</th><th>95% CI</th></tr>
+<tr><th>df</th><th>$t^*$</th><th>margin of error</th><th>95% CI</th></tr>
 <tr><td></td><td></td><td></td><td></td></tr>
 </table>
 

@@ -6,8 +6,8 @@
 <script src="sec6p2_lect_m260_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="sec6p2_lect_m260_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="sec6p2_lect_m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="sec6p2_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.42">
+<link href="sec6p2_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Math 260 Applied Statistics">
   <title>6.2 Inference About a Single Mean</title>
@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="sec6p2_lect_m260_files/libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="sec6p2_lect_m260_files/libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -29,7 +32,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="sec6p2_lect_m260_files/libs/revealjs/dist/theme/quarto-1246092c7357598352506a630e966e2e.css">
+  <link rel="stylesheet" href="sec6p2_lect_m260_files/libs/revealjs/dist/theme/quarto-fe1b06afc5958099a575323cff4e8791.css">
   <link href="sec6p2_lect_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="sec6p2_lect_m260_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="sec6p2_lect_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -123,6 +126,21 @@
       margin-right: 0; 
     }
   </style>
+  <style>
+  .reveal .ws   { height: 2.5em; }
+  .reveal .ws-l { height: 5em; }
+  /* typeable answer boxes (contenteditable): same minimum footprint as .ws / .ws-l, grow if you type more */
+  .reveal .ws.ed, .reveal .ws-l.ed { height: auto; text-align: left; font-size: 0.9em;
+    color: #1a3a8a; outline: none; }
+  .reveal .ws.ed   { min-height: 2.5em; }
+  .reveal .ws-l.ed { min-height: 5em; }
+  .reveal .ws.ed:focus, .reveal .ws-l.ed:focus { outline: 2px dashed #EA6820; outline-offset: 2px; }
+  .reveal table.fillin { border-collapse: collapse; margin: 0.4em 0 0.8em 0; }
+  .reveal table.fillin th, .reveal table.fillin td {
+    border: 1px solid #888 !important; text-align: center; vertical-align: middle;
+    padding: 0.2em 0.5em; width: 5.5em; height: 2.4em; }
+  .reveal table.fillin .lab { width: auto; font-weight: bold; }
+  </style>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -139,6 +157,42 @@ Math 260 Applied Statistics
 </div>
 </div>
 
+</section>
+<section id="warm-up-what-is-normal-body-temperature" class="slide level2 smaller">
+<h2>Warm-Up: What Is “Normal” Body Temperature?</h2>
+<div class="columns">
+<div class="column" style="width:62%;">
+<p>A forehead thermometer is going around the room. Read your own temperature (in °F) and, if you wish, submit it anonymously with the QR code. Passing the thermometer along without submitting is fine.</p>
+<div class="fragment">
+<p><strong>Turn and talk (60 sec):</strong></p>
+<ol type="1">
+<li>Where do you think the number 98.6°F comes from?</li>
+<li>If our class average turned out to be 98.2°F, would that convince you that 98.6°F is wrong? What else would you want to know?</li>
+<li>Why can’t one person’s reading settle the question?</li>
+</ol>
+</div>
+</div><div class="column" style="width:38%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/sec6p2_temp_qr.png" class="quarto-figure quarto-figure-center" height="380"></p>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Intent: students meet the question we will test later in the hour (is mean body temperature 98.6°F?) before any vocabulary. The thermometer circulates while they talk.</p>
+<p>Logistics: set the thermometer to body mode and °F, and try it on yourself first. Students read their own forehead, so no one sees anyone else’s number, and passing it along is an invisible opt-out. Ask them to submit at about the same time so response order cannot be matched to seating.</p>
+<p>Likely answers: (1) 98.6°F is 37°C, from a large nineteenth-century study by Wunderlich (1851). (2) One class average is itself a sample, so we need to account for variability, and we should ask how many students and how spread out the readings are. (3) People differ, and one reading also varies with time of day, room temperature and the device.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="outline" class="slide level2">
 <h2>Outline</h2>
@@ -171,6 +225,77 @@ SE=\frac{\sigma}{\sqrt{n}}
 <li><p>Smaller sample sizes may be sufficient for symmetric distributions, and 30 may not be sufficient for very skewed distributions or distributions with high outliers.</p></li>
 </ul>
 </section>
+<section id="example-1-baseball-salaries" class="slide level2 smaller">
+<h2>Example 1: Baseball Salaries</h2>
+<p>There were 877 major league baseball players in 2024 and their mean salary was <span class="math inline">\(\mu = 5.08\)</span> million dollars with standard deviation <span class="math inline">\(\sigma = 7.48\)</span> million dollars. If we take random samples of size <span class="math inline">\(n = 30\)</span> players and calculate the mean salary, in millions of dollars, of each sample, describe the shape, center, and standard error of the distribution of sample means.</p>
+<p><strong>(a)</strong> Shape:</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<p><strong>(b)</strong> Center:</p>
+<div class="ws">
+
+</div>
+<p><strong>(c)</strong> Standard error:</p>
+<div class="ws">
+
+</div>
+<aside class="notes">
+<ol type="a">
+<li><p>The CLT guideline n ≥ 30 says approximately normal, but salaries are strongly right-skewed (σ is larger than μ), so n = 30 is borderline and the distribution of sample means is likely still somewhat right-skewed. Accept either answer with a reason. This ties back to the last bullet of the CLT slide.</p></li>
+<li><p>Center = μ = 5.08 million dollars.</p></li>
+<li><p>SE = σ/√n = 7.48/√30 ≈ 1.37 million dollars.</p></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-2-more-baseball-salaries" class="slide level2 smaller">
+<h2>Example 2: More Baseball Salaries</h2>
+<p>Using the same data as Example 1 (<span class="math inline">\(\mu = 5.08\)</span>, <span class="math inline">\(\sigma = 7.48\)</span> million dollars), but now taking samples of size <span class="math inline">\(n = 75\)</span>, describe the shape, center, and standard error of the distribution of sample means. Compare your answers with those of Example 1.</p>
+<p><strong>(a)</strong> Shape:</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<p><strong>(b)</strong> Center:</p>
+<div class="ws">
+
+</div>
+<p><strong>(c)</strong> Standard error:</p>
+<div class="ws">
+
+</div>
+<p><strong>(d)</strong> Compare with Example 1:</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<ol type="a">
+<li><p>Closer to normal than with n = 30 because n is larger.</p></li>
+<li><p>Center is still μ = 5.08 million dollars; the center does not depend on n.</p></li>
+<li><p>SE = 7.48/√75 ≈ 0.864 million dollars.</p></li>
+<li><p>Same center, narrower spread, and a more normal shape. The SE fell by a factor of √(30/75) ≈ 0.63, not by the factor 30/75 = 0.4. To cut the SE in half we need four times as many observations.</p></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="standard-error-of-the-sample-mean-in-practice" class="slide level2">
 <h2>Standard Error of the Sample Mean in Practice</h2>
 <p>Usually, we don’t know the population standard deviation <span class="math inline">\(\sigma\)</span>, so estimate it with the sample standard deviation, <span class="math inline">\(s\)</span> to get the estimated <strong>standard error</strong> <span class="math display">\[
@@ -183,6 +308,22 @@ SE=\frac{\sigma}{\sqrt{n}}
 <li><p>Replacing <span class="math inline">\(\sigma\)</span> with <span class="math inline">\(s\)</span> changes the distribution of the <span class="math inline">\(z\)</span>-statistic from Normal to <span class="math inline">\(t\)</span>.</p></li>
 <li><p>The <span class="math inline">\(t\)</span> distribution is very similar to the standard normal <span class="math inline">\(Z\)</span>, but with slightly thicker tails to reflect this added uncertainty.</p></li>
 </ul>
+<div class="fragment">
+<p><strong>Turn and talk (30 sec):</strong> Why does estimating <span class="math inline">\(\sigma\)</span> with <span class="math inline">\(s\)</span> add uncertainty, especially when <span class="math inline">\(n\)</span> is small?</p>
+</div>
+<aside class="notes">
+<p><span class="math inline">\(s\)</span> is itself a random quantity that changes from sample to sample, and with a small sample it can be far from <span class="math inline">\(\sigma\)</span>. The thicker tails account for the chance that <span class="math inline">\(s\)</span> is too small.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="degrees-of-freedom" class="slide level2">
 <h2>Degrees of Freedom</h2>
@@ -192,12 +333,65 @@ SE=\frac{\sigma}{\sqrt{n}}
 <li><p>The greater the degrees of freedom, the closer the <span class="math inline">\(t\)</span>-distribution is to the standard normal.</p></li>
 </ul>
 </section>
+<section id="explore-t-versus-normal" class="slide level2">
+<h2>Explore: t Versus Normal</h2>
+<iframe data-src="t_vs_z.html" width="100%" height="540" style="border:none;">
+</iframe>
+<aside class="notes">
+<p>Start at df = 1 and press Play, or use the Jump buttons. Point out three things: (1) the t curve is lower in the middle and has heavier tails, (2) the t* card shrinks toward 1.96 as df grows, and (3) the shaded area beyond ±1.96 shrinks toward 5%. Connect to the next slide: the t* here is the t* in the confidence interval formula, so a small sample needs a wider interval than the normal would give.</p>
+<p>Ask for a prediction first: “By about what df do you think t* gets within 0.05 of 1.96?” (about df = 40, where t* is 2.021 and the gap is about 0.06; df = 50 gets within 0.05).</p>
+<p>The page is self-contained (no internet needed). Keep t_vs_z.html in the same folder as this deck, and upload both if you post the deck.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="t-distribution-1" class="slide level2">
 <h2>t-distribution</h2>
 <ul>
 <li>If a population with mean <span class="math inline">\(\mu_0\)</span> is approximately normal or if <span class="math inline">\(n\)</span> is large <span class="math inline">\((n \ge 30),\)</span> the standardized statistic for a mean using the sample <span class="math inline">\(s\)</span> follows a <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(n–1\)</span> degrees of freedom:</li>
 </ul>
 <p><span class="math display">\[\frac{\bar x-\mu_0}{s/\sqrt{n}}\sim t_{n-1}\]</span></p>
+</section>
+<section id="quick-self-quiz-using-the-t-distribution" class="slide level2 smaller">
+<h2>Quick Self-Quiz: Using the t-Distribution</h2>
+<p><strong>(a)</strong> Find endpoints of a <span class="math inline">\(t\)</span>-distribution with 5% beyond them in each tail if the sample has size <span class="math inline">\(n = 18\)</span>.</p>
+<div class="ws">
+
+</div>
+<p><strong>(b)</strong> Find the area in a <span class="math inline">\(t\)</span>-distribution to the right of 2.30 if the sample has size <span class="math inline">\(n = 15\)</span>.</p>
+<div class="ws">
+
+</div>
+<p><strong>(c)</strong> Find the area in a <span class="math inline">\(t\)</span>-distribution to the left of 1.22 if the sample has size <span class="math inline">\(n = 50\)</span>.</p>
+<div class="ws">
+
+</div>
+<aside class="notes">
+<p>Use R, StatKey’s theoretical t distribution, or a t-table. Remember df = n − 1.</p>
+<ol type="a">
+<li><p>df = 17, endpoints ±1.740 (<code>qt(0.95, 17)</code>). Compare with ±1.645 from the normal.</p></li>
+<li><p>df = 14, area ≈ 0.0187 (<code>pt(2.30, 14, lower.tail = FALSE)</code>).</p></li>
+<li><p>df = 49, area ≈ 0.886 (<code>pt(1.22, 49)</code>). The normal gives 0.889, a good illustration that the t is close to normal for larger df.</p></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="normality-condition" class="slide level2 smaller">
 <h2>Normality Condition</h2>
@@ -218,6 +412,22 @@ SE=\frac{\sigma}{\sqrt{n}}
 <li><p>Even then, remember that the <span class="math inline">\(t\)</span> is just an approximation!</p></li>
 <li><p>In practice, if sample sizes are small, use simulation methods (bootstrapping and randomization).</p></li>
 </ul>
+<div class="fragment">
+<p><strong>Turn and talk (30 sec):</strong> When you look at a dotplot of a small sample, what would make you hesitate to use the <span class="math inline">\(t\)</span>-distribution?</p>
+</div>
+<aside class="notes">
+<p>Look for strong skew and for extreme outliers. Students will apply this to the class temperature data in the Your Turn below.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="t-test-for-a-single-mean" class="slide level2 smaller">
 <h2>t-test for a Single Mean</h2>
@@ -252,6 +462,198 @@ SE=\frac{\sigma}{\sqrt{n}}
 <li><p>Population distribution is approximately normal OR sample size is large <span class="math inline">\((n\ge 30)\)</span></p></li>
 </ol>
 </section>
+<section id="your-turn-average-body-temperature" class="slide level2 smaller">
+<h2>Your Turn: Average Body Temperature</h2>
+<p>The conventional value for average body temperature is 98.6°F. Use today’s class temperatures to test whether the mean body temperature of K students differs from 98.6°F.</p>
+<p><strong>(a)</strong> In words, what is the parameter <span class="math inline">\(\mu\)</span>?</p>
+<div class="ws ed" contenteditable="true">
+
+</div>
+<p><strong>(b)</strong> State the null and alternative hypotheses.</p>
+<div class="ws">
+
+</div>
+<p><strong>(c)</strong> Use the dotplot and summary statistics on the screen to fill in:</p>
+<table class="fillin">
+<tbody><tr>
+<th>
+<span class="math inline">\(n\)</span>
+</th>
+<th>
+<span class="math inline">\(\bar x\)</span>
+</th>
+<th>
+<span class="math inline">\(s\)</span>
+</th>
+<th>
+<span class="math inline">\(SE=s/\sqrt{n}\)</span>
+</th>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+</tbody></table>
+<aside class="notes">
+<p>Pairs work on this slide while you paste the class temperatures into R.</p>
+<pre><code>temp &lt;- c()   # paste the class values here
+tempdata &lt;- data.frame(temp = temp)
+gf_dotplot(~temp, data = tempdata, binwidth = 0.2)
+favstats(~temp, data = tempdata)</code></pre>
+<ol type="a">
+<li><p>The mean body temperature (°F) of all K students (or, as measured by this thermometer, of all students like these).</p></li>
+<li><p>H0: μ = 98.6 versus Ha: μ ≠ 98.6 (two-sided, since the question is whether it differs).</p></li>
+<li><p>Read n, x-bar and s from favstats; SE = s/√n.</p></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="your-turn-conditions-and-test" class="slide level2 smaller">
+<h2>Your Turn: Conditions and Test</h2>
+<p>Recall: <span class="math inline">\(H_0: \mu = 98.6\)</span> versus <span class="math inline">\(H_a: \mu \neq 98.6\)</span>. Use your <span class="math inline">\(n\)</span>, <span class="math inline">\(\bar x\)</span>, <span class="math inline">\(s\)</span> from the previous slide.</p>
+<p><strong>(d)</strong> Are the conditions for the <span class="math inline">\(t\)</span> test reasonable? Look at the dotplot.</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<p><strong>(e)</strong> Compute the test statistic, degrees of freedom, and <span class="math inline">\(p\)</span>-value:</p>
+<table class="fillin">
+<tbody><tr>
+<th>
+<span class="math inline">\(t\)</span>
+</th>
+<th>
+df
+</th>
+<th>
+<span class="math inline">\(p\)</span>-value
+</th>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+</tbody></table>
+<p><strong>(f)</strong> State your conclusion in the context of the problem.</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<ol start="4" type="a">
+<li><p>Discuss the two conditions. Our class is not a simple random sample of anything, which is the same caveat as for the sleep data; the dotplot should be roughly symmetric with no extreme outliers (watch for a reading far from the rest, which may be a recording error or a device problem). If n is under 30, the shape matters; if n is 30 or more, the t is fine.</p></li>
+<li><p>t = (x̄ − 98.6)/(s/√n); df = n − 1; two-sided p-value = <code>2 * pt(-abs(t), df)</code>. Check with <code>t.test(~temp, mu = 98.6, data = tempdata)</code>.</p></li>
+<li><p>Compare p to 0.05 and state the conclusion about the mean body temperature of students, not just “reject H0”. Fill in after seeing the data: forehead readings are often a bit below 98.6, so a small p-value is likely.</p></li>
+</ol>
+<p>While pairs work: upload the values to tempdata.csv (column name must be <code>temp</code>) and knit temperature_analysis_with_t.qmd so you can show the full analysis near the end.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="your-turn-confidence-interval" class="slide level2 smaller">
+<h2>Your Turn: Confidence Interval</h2>
+<p><strong>(g)</strong> Find a 95% confidence interval for the mean body temperature.</p>
+<table class="fillin">
+<tbody><tr>
+<th>
+df
+</th>
+<th>
+<span class="math inline">\(t^*\)</span>
+</th>
+<th>
+margin of error
+</th>
+<th>
+95% CI
+</th>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+</tbody></table>
+<p><strong>(h)</strong> Interpret the interval in context.</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<p><strong>(i)</strong> Is 98.6 inside your interval? Does this agree with your test conclusion? Explain.</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<ol start="7" type="a">
+<li><p>df = n − 1; t* = <code>qt(0.975, df)</code>; margin of error = t* · s/√n; interval = x̄ ± ME. Check with <code>t.test(~temp, conf.level = 0.95, data = tempdata)</code>.</p></li>
+<li><p>We are 95% confident that the mean body temperature of K students is between the two endpoints (°F).</p></li>
+<li><p>A two-sided test at α = 0.05 and a 95% interval always agree: reject H0 exactly when 98.6 is outside the interval.</p></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="discussion-what-are-we-measuring" class="slide level2">
+<h2>Discussion: What Are We Measuring?</h2>
+<div class="fragment">
+<p><strong>Turn and talk (60 sec):</strong></p>
+<ol type="1">
+<li>A forehead thermometer measures skin temperature and estimates body temperature from it. How could this affect our results?</li>
+<li>What if many of us just walked in from the cold? How would the data change?</li>
+<li>Does a small <span class="math inline">\(p\)</span>-value tell us that 98.6°F is wrong, or that this method gives a different number? What is the difference?</li>
+</ol>
+</div>
+<aside class="notes">
+<p>Statistical significance does not tell us why the sample mean differs from 98.6. Possible reasons: true differences in average temperature (modern studies often find averages a bit under 98.6°F), skin versus core temperature, room and outdoor temperature, time of day, device calibration, and the fact that our sample is a convenience sample of one class. This is a measurement and sampling issue, not something the t test can fix.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="sample-size-for-desired-margin-of-error" class="slide level2 smaller">
 <h2>Sample Size for Desired Margin of Error</h2>
 <ul>
@@ -266,15 +668,24 @@ SE=\frac{\sigma}{\sqrt{n}}
 <section id="summary" class="slide level2 smaller">
 <h2>Summary</h2>
 <ul>
-<li><p><strong>Standard Error &amp; Central Limit Theorem</strong><br>
-Standard error decreases with larger samples. Sample means follow a normal distribution if (n ).</p></li>
-<li><p><strong>t-Distribution</strong><br>
-Used when population standard deviation is unknown; has thicker tails than normal, adjusting for sample variability.</p></li>
-<li><p><strong>Inference Methods</strong><br>
-Hypothesis tests and confidence intervals for a single mean rely on the t-distribution, requiring normality or large (n).</p></li>
-<li><p><strong>Sample Size Planning</strong><br>
-Determine sample size for a desired margin of error using the z-distribution as an approximation.</p></li>
+<li><p><strong>Standard Error &amp; Central Limit Theorem</strong> Standard error decreases with larger samples. Sample means follow a normal distribution if <span class="math inline">\(n \ge 30\)</span>.</p></li>
+<li><p><strong>t-Distribution</strong> Used when population standard deviation is unknown; has thicker tails than normal, adjusting for sample variability.</p></li>
+<li><p><strong>Inference Methods</strong> Hypothesis tests and confidence intervals for a single mean rely on the t-distribution, requiring normality or large <span class="math inline">\(n\)</span>.</p></li>
+<li><p><strong>Sample Size Planning</strong> Determine sample size for a desired margin of error using the z-distribution as an approximation.</p></li>
 </ul>
+<aside class="notes">
+<p>If there is time: the t-distribution was introduced by William Gosset (“Student”) in 1908, and his first example used sleep data from patients at the asylum in Kalamazoo. No slide for this.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 
 </section>
     </div>
@@ -533,190 +944,173 @@ Determine sample size for a desired margin of error using the z-distribution as 
     </script>
 
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
           }
+          return false;
         }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
           }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
           for (const childEl of codeEl.children) {
             if (isCodeAnnotation(childEl)) {
               childEl.remove();
             }
           }
           return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
             }
           }
-        }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
           }
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
           }
-        } else {
-          return undefined;
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
         }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>

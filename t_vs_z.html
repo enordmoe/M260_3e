@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>t-distribution vs. standard normal</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #fff; color: #222;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+  #app { display: flex; flex-direction: column; height: 100%; box-sizing: border-box;
+    padding: 8px 14px 6px; gap: 8px; }
+  .controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 20px; }
+  .controls .lab { font-weight: 600; }
+  #dfSlider { flex: 1 1 200px; min-width: 160px; accent-color: #EA6820; height: 28px; }
+  #dfVal { font-size: 26px; font-weight: 700; min-width: 2.2em; text-align: right; color: #EA6820; }
+  button { font: inherit; font-size: 17px; padding: 5px 14px; border-radius: 6px;
+    border: 1px solid #999; background: #f4f4f4; color: #222; cursor: pointer; }
+  button:hover { background: #e6e6e6; }
+  button.on { background: #EA6820; border-color: #EA6820; color: #fff; }
+  .presets { display: flex; gap: 6px; align-items: center; font-size: 17px; }
+  .presets button { padding: 4px 10px; }
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .card { background: #f6f6f6; border-radius: 8px; padding: 6px 8px; text-align: center; }
+  .card .k { font-size: 15px; color: #555; }
+  .card .v { font-size: 24px; font-weight: 700; }
+  .card.t .v { color: #EA6820; }
+  .card.z .v { color: #1a3a8a; }
+  #plot { flex: 1 1 0; min-height: 0; position: relative; }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  #msg { text-align: center; font-size: 19px; color: #333; min-height: 1.3em; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="controls">
+    <span class="lab">df =</span>
+    <input type="range" id="dfSlider" min="1" max="100" value="1" step="1" aria-label="Degrees of freedom">
+    <span id="dfVal">1</span>
+    <button id="play">Play</button>
+    <button id="reset">Reset</button>
+    <span class="presets">Jump to:
+      <button data-df="1">1</button><button data-df="5">5</button><button data-df="10">10</button><button data-df="30">30</button><button data-df="100">100</button>
+    </span>
+  </div>
+
+  <div class="cards">
+    <div class="card t"><div class="k">Variance of t</div><div class="v" id="vVar">—</div></div>
+    <div class="card t"><div class="k">t* for 95% CI</div><div class="v" id="vTstar">—</div></div>
+    <div class="card t"><div class="k">t area beyond ±1.96</div><div class="v" id="vTail">—</div></div>
+    <div class="card z"><div class="k">Normal: z* · area beyond</div><div class="v" style="white-space:nowrap">1.96 · 5%</div></div>
+  </div>
+
+  <div id="plot"><canvas id="cv" role="img" aria-label="Density curves of the t-distribution and the standard normal distribution"></canvas></div>
+  <div id="msg"></div>
+</div>
+
+<script>
+// ---------- math ----------
+function lgamma(x) {
+  const c = [76.18009172947146, -86.50532032941677, 24.01409824083091,
+             -1.231739572450155, 0.1208650973866179e-2, -0.5395239384953e-5];
+  let y = x, tmp = x + 5.5, ser = 1.000000000190015;
+  tmp -= (x + 0.5) * Math.log(tmp);
+  for (let j = 0; j < 6; j++) ser += c[j] / ++y;
+  return -tmp + Math.log(2.5066282746310005 * ser / x);
+}
+function tPDF(x, df) {
+  const a = lgamma((df + 1) / 2) - lgamma(df / 2) - 0.5 * Math.log(df * Math.PI);
+  return Math.exp(a - ((df + 1) / 2) * Math.log(1 + x * x / df));
+}
+function zPDF(x) { return Math.exp(-0.5 * x * x) / Math.sqrt(2 * Math.PI); }
+
+function betacf(x, a, b) {
+  const TINY = 1e-30;
+  let qab = a + b, qap = a + 1, qam = a - 1, c = 1, d = 1 - qab * x / qap;
+  if (Math.abs(d) < TINY) d = TINY;
+  d = 1 / d;
+  let h = d;
+  for (let m = 1; m <= 300; m++) {
+    const m2 = 2 * m;
+    let aa = m * (b - m) * x / ((qam + m2) * (a + m2));
+    d = 1 + aa * d; if (Math.abs(d) < TINY) d = TINY;
+    c = 1 + aa / c; if (Math.abs(c) < TINY) c = TINY;
+    d = 1 / d; h *= d * c;
+    aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2));
+    d = 1 + aa * d; if (Math.abs(d) < TINY) d = TINY;
+    c = 1 + aa / c; if (Math.abs(c) < TINY) c = TINY;
+    d = 1 / d;
+    const del = d * c; h *= del;
+    if (Math.abs(del - 1) < 1e-12) break;
+  }
+  return h;
+}
+function incBeta(x, a, b) {
+  if (x <= 0) return 0;
+  if (x >= 1) return 1;
+  const bt = Math.exp(lgamma(a + b) - lgamma(a) - lgamma(b) + a * Math.log(x) + b * Math.log(1 - x));
+  if (x < (a + 1) / (a + b + 2)) return bt * betacf(x, a, b) / a;
+  return 1 - bt * betacf(1 - x, b, a) / b;
+}
+// P(T > t) for t >= 0
+function tUpper(t, df) { return 0.5 * incBeta(df / (df + t * t), df / 2, 0.5); }
+// t* with 2.5% in each tail
+function tStar(df) {
+  let lo = 0, hi = 2000;
+  for (let i = 0; i < 80; i++) {
+    const mid = (lo + hi) / 2;
+    if (tUpper(mid, df) > 0.025) lo = mid; else hi = mid;
+  }
+  return (lo + hi) / 2;
+}
+
+// ---------- drawing ----------
+const XMAX = 5, YMAX = 0.42, ZSTAR = 1.96;
+const ORANGE = '#EA6820', NAVY = '#1a3a8a';
+const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+let df = 1;
+
+function draw() {
+  const dpr = window.devicePixelRatio || 1;
+  const W = cv.clientWidth, H = cv.clientHeight;
+  if (!W || !H) return;
+  cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, W, H);
+
+  const fs = Math.max(13, Math.min(20, H / 17));
+  const L = fs * 3.4, R = 12, T = fs * 1.2, B = fs * 3.0;
+  const pw = W - L - R, ph = H - T - B;
+  const X = x => L + (x + XMAX) / (2 * XMAX) * pw;
+  const Y = y => T + ph * (1 - y / YMAX);
+
+  ctx.font = fs + 'px system-ui, Arial, sans-serif';
+  ctx.textBaseline = 'middle';
+
+  // grid + axes labels
+  ctx.lineWidth = 1; ctx.strokeStyle = '#e3e3e3'; ctx.fillStyle = '#444';
+  ctx.textAlign = 'center';
+  for (let x = -XMAX; x <= XMAX; x++) {
+    ctx.beginPath(); ctx.moveTo(X(x), T); ctx.lineTo(X(x), T + ph); ctx.stroke();
+    ctx.fillText(x, X(x), T + ph + fs * 1.0);
+  }
+  ctx.textAlign = 'right';
+  for (let y = 0; y <= 0.4001; y += 0.1) {
+    ctx.beginPath(); ctx.moveTo(L, Y(y)); ctx.lineTo(L + pw, Y(y)); ctx.stroke();
+    ctx.fillText(y.toFixed(1), L - 6, Y(y));
+  }
+  ctx.strokeStyle = '#888'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(L, T + ph); ctx.lineTo(L + pw, T + ph); ctx.stroke();
+  ctx.fillStyle = '#444'; ctx.textAlign = 'center';
+  ctx.fillText('x', L + pw / 2, H - fs * 0.6);
+  ctx.save(); ctx.translate(fs * 0.8, T + ph / 2); ctx.rotate(-Math.PI / 2);
+  ctx.fillText('Density', 0, 0); ctx.restore();
+
+  // shaded t tails beyond +/-1.96
+  const N = 400;
+  const step = 2 * XMAX / N;
+  ctx.fillStyle = 'rgba(234,104,32,0.38)';
+  for (const side of [-1, 1]) {
+    ctx.beginPath();
+    ctx.moveTo(X(side * ZSTAR), Y(0));
+    for (let x = ZSTAR; x <= XMAX + 1e-9; x += step) ctx.lineTo(X(side * x), Y(tPDF(x, df)));
+    ctx.lineTo(X(side * XMAX), Y(0));
+    ctx.closePath(); ctx.fill();
+  }
+
+  // +/-1.96 guide lines
+  ctx.setLineDash([5, 4]); ctx.strokeStyle = '#777'; ctx.lineWidth = 1.2;
+  for (const s of [-1, 1]) {
+    ctx.beginPath(); ctx.moveTo(X(s * ZSTAR), T); ctx.lineTo(X(s * ZSTAR), T + ph); ctx.stroke();
+  }
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#555'; ctx.textAlign = 'center';
+  ctx.fillText('−1.96', X(-ZSTAR), T - fs * 0.45);
+  ctx.fillText('1.96', X(ZSTAR), T - fs * 0.45);
+
+  // normal curve (dashed)
+  ctx.beginPath();
+  for (let i = 0; i <= N; i++) { const x = -XMAX + i * step; i ? ctx.lineTo(X(x), Y(zPDF(x))) : ctx.moveTo(X(x), Y(zPDF(x))); }
+  ctx.setLineDash([9, 6]); ctx.strokeStyle = NAVY; ctx.lineWidth = 3; ctx.stroke(); ctx.setLineDash([]);
+
+  // t curve (solid)
+  ctx.beginPath();
+  for (let i = 0; i <= N; i++) { const x = -XMAX + i * step; i ? ctx.lineTo(X(x), Y(tPDF(x, df))) : ctx.moveTo(X(x), Y(tPDF(x, df))); }
+  ctx.strokeStyle = ORANGE; ctx.lineWidth = 3.5; ctx.stroke();
+
+  // legend (top-left of plot area)
+  const lx = L + 14, ly = T + fs * 1.1;
+  ctx.textAlign = 'left';
+  ctx.strokeStyle = ORANGE; ctx.lineWidth = 3.5;
+  ctx.beginPath(); ctx.moveTo(lx, ly); ctx.lineTo(lx + 34, ly); ctx.stroke();
+  ctx.fillStyle = '#222'; ctx.fillText('t-distribution (df = ' + df + ')', lx + 42, ly);
+  ctx.strokeStyle = NAVY; ctx.lineWidth = 3; ctx.setLineDash([9, 6]);
+  ctx.beginPath(); ctx.moveTo(lx, ly + fs * 1.5); ctx.lineTo(lx + 34, ly + fs * 1.5); ctx.stroke(); ctx.setLineDash([]);
+  ctx.fillText('Standard normal Z', lx + 42, ly + fs * 1.5);
+}
+
+function update(newDf) {
+  df = parseInt(newDf, 10);
+  slider.value = df;
+  document.getElementById('dfVal').textContent = df;
+  document.getElementById('vVar').textContent = df > 2 ? (df / (df - 2)).toFixed(3) : (df === 2 ? '∞' : 'undefined');
+  document.getElementById('vTstar').textContent = tStar(df).toFixed(3);
+  document.getElementById('vTail').textContent = (2 * tUpper(ZSTAR, df) * 100).toFixed(2) + '%';
+  const m = df >= 60 ? 'Nearly identical to the normal curve.'
+          : df >= 30 ? 'Very close to normal; t* is close to 1.96.'
+          : df >= 10 ? 'Tails are still noticeably heavier than normal.'
+          : 'Heavy tails: far more area beyond ±1.96 than the normal curve.';
+  document.getElementById('msg').textContent = m;
+  draw();
+}
+
+// ---------- controls ----------
+const slider = document.getElementById('dfSlider');
+const playBtn = document.getElementById('play');
+let timer = null;
+function stop() { clearInterval(timer); timer = null; playBtn.textContent = 'Play'; playBtn.classList.remove('on'); }
+slider.addEventListener('input', () => { stop(); update(slider.value); });
+playBtn.addEventListener('click', () => {
+  if (timer) { stop(); return; }
+  if (df >= 100) update(1);
+  playBtn.textContent = 'Pause'; playBtn.classList.add('on');
+  timer = setInterval(() => { if (df >= 100) { stop(); return; } update(df + 1); }, 110);
+});
+document.getElementById('reset').addEventListener('click', () => { stop(); update(1); });
+document.querySelectorAll('[data-df]').forEach(b => b.addEventListener('click', () => { stop(); update(b.dataset.df); }));
+new ResizeObserver(draw).observe(document.getElementById('plot'));
+update(1);
+</script>
+</body>
+</html>
