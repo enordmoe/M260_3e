@@ -6,8 +6,8 @@
 <script src="Sec6p3_lect_m260_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="Sec6p3_lect_m260_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Sec6p3_lect_m260_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="Sec6p3_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.42">
+<link href="Sec6p3_lect_m260_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Math 260 Applied Statistics">
   <title>6.3 Inference About Differences in Proportions</title>
@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="Sec6p3_lect_m260_files/libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="Sec6p3_lect_m260_files/libs/revealjs/dist/reveal.css">
   <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -29,7 +32,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="Sec6p3_lect_m260_files/libs/revealjs/dist/theme/quarto-1246092c7357598352506a630e966e2e.css">
+  <link rel="stylesheet" href="Sec6p3_lect_m260_files/libs/revealjs/dist/theme/quarto-fe1b06afc5958099a575323cff4e8791.css">
   <link href="Sec6p3_lect_m260_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="Sec6p3_lect_m260_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="Sec6p3_lect_m260_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -123,6 +126,24 @@
       margin-right: 0; 
     }
   </style>
+  <style>
+  .reveal .ws   { height: 2.5em; }
+  .reveal .ws-l { height: 5em; }
+  /* typeable answer boxes (contenteditable): same minimum footprint as .ws / .ws-l, grow if you type more */
+  .reveal .ws.ed, .reveal .ws-l.ed { height: auto; text-align: left; font-size: 0.9em;
+    color: #1a3a8a; outline: none; }
+  .reveal .ws.ed   { min-height: 2.5em; }
+  .reveal .ws-l.ed { min-height: 5em; }
+  .reveal .ws.ed:focus, .reveal .ws-l.ed:focus { outline: 2px dashed #EA6820; outline-offset: 2px; }
+  .reveal table.fillin { border-collapse: collapse; margin: 0.4em 0 0.8em 0; }
+  .reveal table.fillin th, .reveal table.fillin td {
+    border: 1px solid #888 !important; text-align: center; vertical-align: middle;
+    padding: 0.2em 0.5em; width: 5.5em; height: 2.4em; }
+  .reveal table.fillin .lab { width: auto; font-weight: bold; }
+  .reveal table.fillin.compact { margin: 0.2em 0 0 0; font-size: 0.85em; }
+  .reveal table.fillin.compact th, .reveal table.fillin.compact td {
+    width: auto; height: 1.5em; padding: 0.15em 0.5em; }
+  </style>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -143,22 +164,106 @@ Math 260 Applied Statistics
 <section id="outline" class="slide level2">
 <h2>Outline</h2>
 <ul>
-<li>Standard Error<br>
-</li>
-<li>Sampling Distribution<br>
-</li>
-<li>Confidence Interval<br>
-</li>
+<li>Standard Error</li>
+<li>Sampling Distribution</li>
+<li>Confidence Interval</li>
 <li>Hypothesis Test</li>
 </ul>
 </section>
+<section id="warm-up-real-gap-or-luck" class="slide level2 smaller">
+<h2>Warm-up: Real Gap or Luck?</h2>
+<p>Pew Research Center (Feb.&nbsp;2026) asked a random sample of just over 5,000 U.S. adults whether they ever use AI chatbots such as ChatGPT, Gemini or Copilot.</p>
+<div class="columns">
+<div class="column" style="width:46%;">
+<table class="fillin compact">
+<tbody><tr>
+<th>
+Age group
+</th>
+<th>
+% who ever use
+</th>
+<th>
+Gap from row above
+</th>
+</tr>
+<tr>
+<td class="lab">
+18-29
+</td>
+<td>
+66%
+</td>
+<td>
+—
+</td>
+</tr>
+<tr>
+<td class="lab">
+30-49
+</td>
+<td>
+61%
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td class="lab">
+50-64
+</td>
+<td>
+42%
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td class="lab">
+65+
+</td>
+<td>
+23%
+</td>
+<td>
+</td>
+</tr>
+</tbody></table>
+</div><div class="column" style="width:54%;">
+<p><strong>Turn and talk (60-90 sec)</strong></p>
+<ol type="1">
+<li>Fill in the three gaps (percentage points).</li>
+<li>If Pew surveyed a <em>different</em> random sample, would the percentages be exactly the same?</li>
+<li>Which gap are you most sure is real? Least sure? Why? What would help you decide?</li>
+</ol>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+</div></div>
+
+<aside class="notes">
+<p>Intent: the table raises sampling variability vs.&nbsp;real difference before any formula. Gaps: 5, 19 and 19 points. Expected discussion: another random sample would give somewhat different percentages (sampling variability); the two 19-point gaps feel real, the 5-point gap between 18-29 and 30-49 is the one we are least sure about; we would want to know how many people are in each age group (sample size) and how much a percentage typically bounces from sample to sample (the standard error).</p>
+<p>Bridge: “That bounce is what the standard error of a difference measures.” We come back to this survey in Example 2. For a feel for the numbers: with 500 people per group, the SE of a gap of this kind is about 3 percentage points, so the 5-point gap would be only about 1.6 SEs while each 19-point gap would be more than 6 SEs. (Pew’s real age-group sample sizes are not 500; this is just for intuition. Do not give these numbers away during the warm-up.)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Source: Pew Research Center, “Americans and AI 2026” (survey of U.S. adults, Feb.&nbsp;17-23, 2026), share who ever use AI chatbots, by age.</p>
+</div></aside></section>
 <section id="context-inference-about-the-difference-in-proportions" class="slide level2 smaller">
 <h2>Context: Inference about the Difference in Proportions</h2>
 <p>Comparison of proportions from two different (independent) populations.</p>
 <p>Examples</p>
 <ul>
-<li>Compare success proportion in Group A versus Group B<br>
-</li>
+<li>Compare success proportion in Group A versus Group B</li>
 <li>Compare survival for group getting Treatment A versus survival for group getting Treatment B</li>
 </ul>
 <div class="fragment">
@@ -171,11 +276,96 @@ Math 260 Applied Statistics
 </ul>
 </div>
 </section>
+<section id="example-1-can-you-spot-the-human" class="slide level2 smaller">
+<h2>Example 1: Can You Spot the Human?</h2>
+<p>In a recent study, each interrogator held two 5-minute text chats at the same time, one with a real person and one with an AI, and then picked which partner they thought was the human. The AI, GPT-4.5 (prompted to act like a person), was picked as “the human” in 185 of the 254 games (about 73%).</p>
+<p><strong>(a)</strong> To do inference (a confidence interval or a hypothesis test) with these data, should we use the formulas for a single proportion or for a difference in proportions? Explain.</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<p><strong>(b)</strong> We want to test whether interrogators pick the AI and the human equally often. Define the parameter <span class="math inline">\(p\)</span> in words, then state <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_a\)</span>.</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+
+<aside class="notes">
+<ol type="a">
+<li><p>Single proportion. There is one set of 254 games and each game gives one verdict about one pair of partners. “AI picked” (185) and “human picked” (69) come from the same games, so they are complementary outcomes, not two independent groups.</p></li>
+<li><p>p = true proportion of games in which the interrogator picks the AI as the human. H0: p = 0.5, Ha: p not equal to 0.5.</p></li>
+</ol>
+<p>Teaching tip: this mirrors the “BUT NOT” bullet above (choices within the same group). Check: 185 + 69 = 254.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Source: Jones &amp; Bergen (2025), “Large language models pass a standard three-party Turing test” (arXiv:2503.23674; PNAS). Game counts are from the preprint; 185 is computed from the reported win rates.</p>
+</div></aside></section>
+<section id="example-1-continued" class="slide level2 smaller">
+<h2>Example 1 (continued)</h2>
+<p><strong>Recall:</strong> the AI was picked as “the human” in 185 of 254 games. The games came from two kinds of participants: 147 games with online workers (AI picked in 75.5%) and 107 games with college undergraduates (AI picked in 69.2%).</p>
+<p><strong>(c)</strong> Would it matter for the outcome of the test whether we define <span class="math inline">\(p\)</span> as the proportion of games where the AI is picked, or the proportion where the human is picked? Explain.</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<p><strong>(d)</strong> Suppose we want to know whether the AI’s “picked as human” rate differs between online workers and undergraduates. Is that a single-proportion or a difference-in-proportions problem? Define the parameters and state <span class="math inline">\(H_0\)</span>.</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<ol start="3" type="a">
+<li><p>No.&nbsp;Using the human-picked proportion gives p-hat = 69/254 = 0.272 and a z of -7.28 instead of +7.28 (z = (0.728 - 0.5)/sqrt(0.25/254)). The two-sided p-value is the same (about 3 x 10^-13), so the conclusion does not change. The AI was judged human significantly more often than chance.</p></li>
+<li><p>Difference in proportions: two independent groups of games. p1 = true rate the AI is picked as human among online-worker participants, p2 = same for undergraduate participants. H0: p1 = p2 (Ha: p1 not equal p2).</p></li>
+</ol>
+<p>Caveat if asked: each participant played several rounds, so games are not perfectly independent. We treat them as independent for teaching purposes. The counts 111/147 and 74/107 are computed from the reported percentages.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="standard-error-for-difference-in-proportions" class="slide level2">
 <h2>Standard Error for Difference in Proportions</h2>
 <p>The standard error for <span class="math inline">\(\hat p_1-\hat p_2\)</span> is <span class="math display">\[
 \text{SE}=\sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}}
 \]</span></p>
+</section>
+<section id="turn-and-talk-30-60-sec" class="slide level2 smaller">
+<h2>Turn and Talk (30-60 sec)</h2>
+<p>Look at the SE formula for <span class="math inline">\(\hat p_1-\hat p_2\)</span> again.</p>
+<ol type="1">
+<li>Where do you see each group’s own uncertainty in the formula? Why are the two pieces <strong>added</strong> and not subtracted, even though we are looking at a difference?</li>
+<li>What would happen to the SE if both sample sizes doubled?</li>
+</ol>
+<aside class="notes">
+<ol type="1">
+<li>Each group contributes its own p(1-p)/n term. Variances of independent estimates add even when we subtract the estimates, so uncertainty from both groups accumulates.</li>
+<li>Both terms are cut in half, so SE is divided by sqrt(2), about 1.41 (SE gets smaller, but not twice as small).</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="central-limit-theorem-for-difference-in-proportions" class="slide level2 smaller">
 <h2>Central Limit Theorem for Difference in Proportions</h2>
@@ -185,15 +375,75 @@ Math 260 Applied Statistics
 \]</span></p>
 <p>Conditions:</p>
 <ul>
-<li>Independent random samples<br>
-</li>
+<li>Independent random samples</li>
 <li>Sufficiently large samples
 <ul>
-<li><span class="math inline">\(n_1 p_1\ge 10\)</span> and <span class="math inline">\(n_1(1-p_1)\ge 10\)</span><br>
-</li>
+<li><span class="math inline">\(n_1 p_1\ge 10\)</span> and <span class="math inline">\(n_1(1-p_1)\ge 10\)</span></li>
 <li><span class="math inline">\(n_2 p_2\ge 10\)</span> and <span class="math inline">\(n_2(1-p_2)\ge 10\)</span></li>
 </ul></li>
 </ul>
+</section>
+<section id="example-2-who-uses-ai-chatbots" class="slide level2 smaller">
+<h2>Example 2: Who Uses AI Chatbots?</h2>
+<p>Remember the Pew chatbot survey from our warm-up (February 2026)? Suppose the true population percentages of U.S. adults who ever use AI chatbots are <strong>66%</strong> for adults ages 18-29 and <strong>42%</strong> for adults ages 50-64.</p>
+<p>We take independent random samples of 500 adults from each age group and compute <span class="math inline">\(\hat p_1-\hat p_2\)</span> (group 1 = ages 18-29, group 2 = ages 50-64).</p>
+<p><strong>(a)</strong> Check that the conditions for the Central Limit Theorem are met.</p>
+<div class="ws-l">
+
+</div>
+<p><strong>(b)</strong> Describe the <strong>shape</strong> of the distribution of <span class="math inline">\(\hat p_1-\hat p_2\)</span> and explain how you know.</p>
+<div class="ws ed" contenteditable="true">
+
+</div>
+
+<aside class="notes">
+<ol type="a">
+<li><p>Independent random samples (given). 500(0.66) = 330, 500(0.34) = 170, 500(0.42) = 210, 500(0.58) = 290; all at least 10.</p></li>
+<li><p>Approximately normal, because the conditions in (a) hold, so the CLT applies.</p></li>
+</ol>
+<p>Note: Pew’s figures are survey estimates (66% and 42%); like the Census numbers in the original version, we treat them as the true population values for this exercise. Pew’s actual age-group subsamples are not 500 each.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Source: Pew Research Center, “Americans and AI 2026” (survey of U.S. adults, Feb.&nbsp;17-23, 2026), share who ever use AI chatbots, by age.</p>
+</div></aside></section>
+<section id="example-2-continued" class="slide level2 smaller">
+<h2>Example 2 (continued)</h2>
+<p><strong>Recall:</strong> population percentages are 66% (ages 18-29) and 42% (ages 50-64); random samples of 500 from each group.</p>
+<p><strong>(c)</strong> Find the <strong>mean</strong> and the <strong>standard error</strong> of the distribution of <span class="math inline">\(\hat p_1-\hat p_2\)</span>.</p>
+<div class="ws-l">
+
+</div>
+<p><strong>(d)</strong> Using the 95% rule for a normal distribution, about 95% of all possible sample differences <span class="math inline">\(\hat p_1-\hat p_2\)</span> will fall between which two values?</p>
+<div class="ws">
+
+</div>
+<aside class="notes">
+<ol start="3" type="a">
+<li><p>Mean = 0.66 - 0.42 = 0.24. SE = sqrt(0.66(0.34)/500 + 0.42(0.58)/500) = sqrt(0.000449 + 0.000487) = 0.0306 (about 3 percentage points). Distribution: N(0.24, 0.0306).</p></li>
+<li><p>Mean plus or minus 2 SEs: 0.24 +/- 2(0.0306), or about 0.18 to 0.30 (using 1.96 gives 0.180 to 0.300). So most pairs of samples of 500 would show a gap of roughly 18 to 30 percentage points even though the true gap is 24. Link back to the warm-up: this is how much a gap bounces from sample to sample, and why a 5-point gap with groups this size would not be convincing while a 19-point gap would be.</p></li>
+</ol>
+<p>Teaching tip: the “ever use” wording in Pew’s 2026 question covers any AI chatbot, not just ChatGPT.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="confidence-interval-for-a-difference-in-proportions" class="slide level2 smaller">
 <h2>Confidence Interval for a Difference in Proportions</h2>
@@ -203,18 +453,79 @@ Math 260 Applied Statistics
 \]</span></p>
 <p>Conditions:</p>
 <ul>
-<li>Independent random samples<br>
-</li>
+<li>Independent random samples</li>
 <li>Sufficiently large samples
 <ul>
 <li>At least 10 successes and failures in each group</li>
 </ul></li>
 </ul>
 </section>
+<section id="example-3-glp-1-medications-and-age" class="slide level2 smaller">
+<h2>Example 3: GLP-1 Medications and Age</h2>
+<p>GLP-1 drugs (such as Ozempic, Wegovy, Zepbound and Mounjaro) are prescribed for diabetes, heart disease and weight loss. A late-2025 KFF Health Tracking Poll found that <strong>22%</strong> of adults ages 50-64 currently take a GLP-1 drug, compared with <strong>9%</strong> of adults ages 65 and older.</p>
+<p>Suppose these results are based on independent random samples of <strong>500</strong> adults in each age group (group 1 = ages 50-64, group 2 = ages 65 and older).</p>
+<p><strong>(a)</strong> Find the number of “yes” and “no” responses in each group. Are the conditions for a confidence interval met?</p>
+<div class="ws">
+
+</div>
+<p><strong>(b)</strong> Construct a 95% confidence interval for <span class="math inline">\(p_1-p_2\)</span>.</p>
+<div class="ws-l">
+
+</div>
+
+<aside class="notes">
+<ol type="a">
+<li><p>0.22(500) = 110 yes, 390 no; 0.09(500) = 45 yes, 455 no. All at least 10, and the samples are independent and random (given).</p></li>
+<li><p>p-hat1 - p-hat2 = 0.22 - 0.09 = 0.13. SE = sqrt(0.22(0.78)/500 + 0.09(0.91)/500) = sqrt(0.000343 + 0.000164) = 0.0225. With z* = 1.96, margin of error = 0.0441. 95% CI: 0.13 +/- 0.044 = (0.086, 0.174).</p></li>
+</ol>
+<p>Note: KFF’s full poll had 1,350 adults, so the real age-group subsamples are smaller than 500 and the real margins of error are wider. We pretend 500 per group.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Source: KFF Health Tracking Poll (Oct.&nbsp;27-Nov.&nbsp;2, 2025), current GLP-1 use by age.</p>
+</div></aside></section>
+<section id="example-3-continued" class="slide level2 smaller">
+<h2>Example 3 (continued)</h2>
+<p><strong>Recall:</strong> 22% of adults ages 50-64 and 9% of adults ages 65 and older currently take a GLP-1 drug (samples of 500 each).</p>
+<p><strong>(c)</strong> Interpret your interval in the context of the problem.</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<p><strong>(d)</strong> Is it plausible that the two population proportions are equal? Explain using your interval.</p>
+<div class="ws ed" contenteditable="true">
+
+</div>
+<p><strong>Turn and talk (30-60 sec).</strong> Use is much lower at 65 and older. Does this interval show that <em>getting older</em> makes people less likely to take these drugs? What else could explain the gap?</p>
+<aside class="notes">
+<ol start="3" type="a">
+<li><p>We are 95% confident that the proportion of adults ages 50-64 currently taking a GLP-1 drug is between about 8.6 and 17.4 percentage points higher than the proportion of adults 65 and older.</p></li>
+<li><p>No.&nbsp;0 is not in the interval (all values are positive), so equal proportions are not plausible at the 95% level.</p></li>
+</ol>
+<p>Why the drop at 65? KFF says the pattern likely reflects Medicare’s lack of coverage for drugs prescribed specifically for weight loss (Medicare covers these drugs for diabetes and heart disease). That is a plausible explanation, not something this poll tested. This is observational survey data, so age is not randomly assigned: insurance type, income, and rates of diabetes/obesity all differ by age group and are likely confounders. Interpret with “associated with”, not “causes”.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="test-for-difference-in-proportions" class="slide level2 smaller">
 <h2>Test for Difference in Proportions</h2>
-<p>To test <span class="math inline">\(H_0:p_1=p_2\)</span>, based on samples of size <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> from two groups, calculate<br>
-<span class="math display">\[
+<p>To test <span class="math inline">\(H_0:p_1=p_2\)</span>, based on samples of size <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> from two groups, calculate <span class="math display">\[
 z=\frac{\hat p_1-\hat p_2}{\sqrt{\frac{\hat p(1-\hat p)}{n_1}+\frac{\hat p(1-\hat p)}{n_2}}}
 \]</span> where <span class="math inline">\(\hat p\)</span> is the <em>pooled</em> proportion obtained by combining the two samples. That is,</p>
 <p><span class="math display">\[
@@ -225,8 +536,7 @@ z=\frac{\hat p_1-\hat p_2}{\sqrt{\frac{\hat p(1-\hat p)}{n_1}+\frac{\hat p(1-\ha
 <h2>Test for Difference in Proportions (continued)</h2>
 <p>Conditions:</p>
 <ul>
-<li>Independent random samples<br>
-</li>
+<li>Independent random samples</li>
 <li>Sufficiently large samples
 <ul>
 <li>At least 10 successes and failures in each group</li>
@@ -239,6 +549,174 @@ z=\frac{\hat p_1-\hat p_2}{\sqrt{\frac{\hat p(1-\hat p)}{n_1}+\frac{\hat p(1-\ha
 <p><span class="math display">\[
 z=\frac{\hat p_1-\hat p_2}{\sqrt{\hat p(1-\hat p)\left(\frac{1}{n_1}+\frac{1}{n_2}\right)}}
 \]</span> where <span class="math inline">\(\hat p\)</span> is again the <em>pooled</em> proportion obtained by combining the two samples.</p>
+</section>
+<section id="turn-and-talk-30-60-sec-1" class="slide level2 smaller">
+<h2>Turn and Talk (30-60 sec)</h2>
+<ol type="1">
+<li>If <span class="math inline">\(H_0: p_1=p_2\)</span> is true, how many different “true proportions” are there? Why does that make <strong>pooling</strong> the two samples sensible?</li>
+<li>Why don’t we pool when we build a <strong>confidence interval</strong>?</li>
+</ol>
+<aside class="notes">
+<ol type="1">
+<li>Under H0 both groups share one common proportion, so the best estimate uses all the data: p-hat = total successes / total sample size.</li>
+<li>A confidence interval does not assume p1 = p2; the groups may differ, so each group keeps its own p-hat in the SE.</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="video-break-golden-balls" class="slide level2 smaller">
+<h2>Video Break: Golden Balls</h2>
+<p><strong>Before we watch:</strong> two contestants each secretly choose <strong>split</strong> or <strong>steal</strong> for a big jackpot.</p>
+<ul>
+<li>Both split: they share the jackpot.</li>
+<li>One splits, one steals: the stealer takes it all.</li>
+<li>Both steal: both go home with nothing.</li>
+</ul>
+<p>What would you choose? Jot down your gut call before the video starts.</p>
+<aside class="notes">
+<p>Pause here and play the sample Golden Balls clip (add the link or embed here). Afterwards, move to the data on the next slide. Possible bridge: “Does the choice depend on who the contestant is? Let’s test whether older and younger contestants choose differently.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-4-split-or-steal" class="slide level2 smaller">
+<h2>Example 4: Split or Steal?</h2>
+<p>On the British TV show <em>Golden Balls</em>, two contestants each choose to <strong>split</strong> or <strong>steal</strong> a large jackpot. Use the data below to test whether the proportion who choose to split is different between older and younger people. Let group 1 = Under 40 and group 2 = Over 40.</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Age</th>
+<th style="text-align: right;">Split</th>
+<th style="text-align: right;">Steal</th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Under 40</td>
+<td style="text-align: right;">187</td>
+<td style="text-align: right;">195</td>
+<td style="text-align: right;">382</td>
+</tr>
+<tr class="even">
+<td>Over 40</td>
+<td style="text-align: right;">116</td>
+<td style="text-align: right;">76</td>
+<td style="text-align: right;">192</td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td style="text-align: right;">303</td>
+<td style="text-align: right;">271</td>
+<td style="text-align: right;">574</td>
+</tr>
+</tbody>
+</table>
+<p><strong>(a)</strong> Define the parameters <span class="math inline">\(p_1\)</span> and <span class="math inline">\(p_2\)</span> in words, then state <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_a\)</span>.</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+
+<aside class="notes">
+<ol type="a">
+<li>p1 = true proportion of Under-40 contestants who choose split; p2 = true proportion of Over-40 contestants who choose split. H0: p1 = p2. Ha: p1 not equal p2.</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Setting: <em>Golden Balls</em>, studied by van den Assem, van Dolder &amp; Thaler (2012), <em>Management Science</em> 58(1). Table as provided.</p>
+</div></aside></section>
+<section id="example-4-continued" class="slide level2 smaller">
+<h2>Example 4 (continued)</h2>
+<p><strong>Recall:</strong> Under 40: 187 of 382 chose split. Over 40: 116 of 192 chose split.</p>
+<p><strong>(b)</strong> Check the conditions. Then find <span class="math inline">\(\hat p_1\)</span>, <span class="math inline">\(\hat p_2\)</span> and the pooled proportion <span class="math inline">\(\hat p\)</span>.</p>
+<div class="ws-l">
+
+</div>
+<p><strong>(c)</strong> Compute the <span class="math inline">\(z\)</span> test statistic.</p>
+<div class="ws-l">
+
+</div>
+<aside class="notes">
+<ol start="2" type="a">
+<li><p>Conditions: independent random samples (treat contestants as such; they were not randomly selected, a caveat to mention) and at least 10 successes and failures in each group: 187, 195, 116, 76. p-hat1 = 187/382 = 0.489; p-hat2 = 116/192 = 0.604; pooled p-hat = 303/574 = 0.528.</p></li>
+<li><p>SE = sqrt(0.528(0.472)(1/382 + 1/192)) = 0.0442. z = (0.4895 - 0.6042)/0.0442 = about -2.60. (If group 1 = Over 40, z = +2.60; the sign depends on the ordering.)</p></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-4-conclusion" class="slide level2 smaller">
+<h2>Example 4 (conclusion)</h2>
+<p><strong>Recall:</strong> Under 40: 187 of 382 chose split. Over 40: 116 of 192 chose split. Use the <span class="math inline">\(z\)</span> you found in (c).</p>
+<p><strong>(d)</strong> Find the <span class="math inline">\(p\)</span>-value (use technology).</p>
+<div class="ws">
+
+</div>
+<p><strong>(e)</strong> State your conclusion in the context of the problem.</p>
+<div class="ws-l ed" contenteditable="true">
+
+</div>
+<aside class="notes">
+<ol start="4" type="a">
+<li><p>Two-sided p-value = 2 * P(Z &lt; -2.60) = about 0.009. In R: 2*pnorm(-abs(-2.596)) gives 0.0094. Check: prop.test(c(187, 116), c(382, 192), correct = FALSE) gives X-squared of about 6.74 (= z^2) and p = 0.0094. (R not run when this deck was built.)</p></li>
+<li><p>Strong evidence (p of about 0.009) that the proportion who choose split differs between age groups; older contestants chose split more often (about 60% vs 49%). Caveat: observational data from TV contestants, not a randomized experiment or a random sample, so we should be cautious about generalizing or claiming age causes the difference.</p></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="wrapping-up" class="slide level2 smaller">
+<h2>Wrapping Up</h2>
+<ul>
+<li class="fragment">Two <strong>independent groups</strong> call for a <strong>difference</strong> in proportions; choices within <strong>one</strong> group call for a single proportion.</li>
+<li class="fragment"><span class="math inline">\(\hat p_1-\hat p_2\)</span> is approximately normal when each group has at least 10 successes and failures; its SE adds the two groups’ variability.</li>
+<li class="fragment"><strong>Confidence interval:</strong> <span class="math inline">\((\hat p_1-\hat p_2)\pm z^*\,\text{SE}\)</span>, with each group’s own <span class="math inline">\(\hat p\)</span> in the SE.</li>
+<li class="fragment"><strong>Test of</strong> <span class="math inline">\(H_0:p_1=p_2\)</span>: use the <strong>pooled</strong> <span class="math inline">\(\hat p\)</span> in the SE, then find <span class="math inline">\(z\)</span> and the <span class="math inline">\(p\)</span>-value.</li>
+<li class="fragment">Interpret in context: which group is higher, by how much, and is <span class="math inline">\(0\)</span> plausible?</li>
+</ul>
 
 </section>
     </div>
@@ -497,190 +975,173 @@ z=\frac{\hat p_1-\hat p_2}{\sqrt{\hat p(1-\hat p)\left(\frac{1}{n_1}+\frac{1}{n_
     </script>
 
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
           }
+          return false;
         }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
           }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
           for (const childEl of codeEl.children) {
             if (isCodeAnnotation(childEl)) {
               childEl.remove();
             }
           }
           return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
             }
           }
-        }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
           }
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
           }
-        } else {
-          return undefined;
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
         }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>

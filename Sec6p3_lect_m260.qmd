@@ -8,6 +8,26 @@ format:
     reveal-options:
       slideNumber: true
     html-math-method: mathjax
+    include-in-header:
+      text: |
+        <style>
+        .reveal .ws   { height: 2.5em; }
+        .reveal .ws-l { height: 5em; }
+        /* typeable answer boxes (contenteditable): same minimum footprint as .ws / .ws-l, grow if you type more */
+        .reveal .ws.ed, .reveal .ws-l.ed { height: auto; text-align: left; font-size: 0.9em;
+          color: #1a3a8a; outline: none; }
+        .reveal .ws.ed   { min-height: 2.5em; }
+        .reveal .ws-l.ed { min-height: 5em; }
+        .reveal .ws.ed:focus, .reveal .ws-l.ed:focus { outline: 2px dashed #EA6820; outline-offset: 2px; }
+        .reveal table.fillin { border-collapse: collapse; margin: 0.4em 0 0.8em 0; }
+        .reveal table.fillin th, .reveal table.fillin td {
+          border: 1px solid #888 !important; text-align: center; vertical-align: middle;
+          padding: 0.2em 0.5em; width: 5.5em; height: 2.4em; }
+        .reveal table.fillin .lab { width: auto; font-weight: bold; }
+        .reveal table.fillin.compact { margin: 0.2em 0 0 0; font-size: 0.85em; }
+        .reveal table.fillin.compact th, .reveal table.fillin.compact td {
+          width: auto; height: 1.5em; padding: 0.15em 0.5em; }
+        </style>
 title-slide-attributes:
   data-background-color: "#EA6820"
 from: markdown+emoji
@@ -24,32 +44,125 @@ library(Lock5Data)
 
 
 ## Outline
-* Standard Error   
-* Sampling Distribution  
-* Confidence Interval  
-* Hypothesis Test  
+* Standard Error
+* Sampling Distribution
+* Confidence Interval
+* Hypothesis Test
 
 
 
-## Context: Inference about the Difference in Proportions {.smaller}  
+## Warm-up: Real Gap or Luck? {.smaller}
 
-Comparison of proportions from two different (independent) populations.  
+Pew Research Center (Feb. 2026) asked a random sample of just over 5,000 U.S. adults whether they ever use AI chatbots such as ChatGPT, Gemini or Copilot.
 
-Examples  
+:::: {.columns}
 
-  * Compare success proportion in Group A versus Group B   
-  * Compare survival for group getting Treatment A versus survival for group getting Treatment B   
+::: {.column width="46%"}
+<table class="fillin compact">
+<tr><th>Age group</th><th>% who ever use</th><th>Gap from row above</th></tr>
+<tr><td class="lab">18-29</td><td>66%</td><td>&mdash;</td></tr>
+<tr><td class="lab">30-49</td><td>61%</td><td></td></tr>
+<tr><td class="lab">50-64</td><td>42%</td><td></td></tr>
+<tr><td class="lab">65+</td><td>23%</td><td></td></tr>
+</table>
+:::
 
-. . . 
+::: {.column width="54%"}
+**Turn and talk (60-90 sec)**
 
-BUT NOT 
+1. Fill in the three gaps (percentage points).
+2. If Pew surveyed a *different* random sample, would the percentages be exactly the same?
+3. Which gap are you most sure is real? Least sure? Why? What would help you decide?
 
-  * Compare proportion of voters who prefer A to proportion who prefer B  
-    + This is a comparison of proportions within the same group.  
+::: {.ws-l .ed contenteditable="true"}
+:::
+:::
+
+::::
+
+::: aside
+Source: Pew Research Center, "Americans and AI 2026" (survey of U.S. adults, Feb. 17-23, 2026), share who ever use AI chatbots, by age.
+:::
+
+::: notes
+Intent: the table raises sampling variability vs. real difference before any formula. Gaps: 5, 19 and 19 points. Expected discussion: another random sample would give somewhat different percentages (sampling variability); the two 19-point gaps feel real, the 5-point gap between 18-29 and 30-49 is the one we are least sure about; we would want to know how many people are in each age group (sample size) and how much a percentage typically bounces from sample to sample (the standard error).
+
+Bridge: "That bounce is what the standard error of a difference measures." We come back to this survey in Example 2. For a feel for the numbers: with 500 people per group, the SE of a gap of this kind is about 3 percentage points, so the 5-point gap would be only about 1.6 SEs while each 19-point gap would be more than 6 SEs. (Pew's real age-group sample sizes are not 500; this is just for intuition. Do not give these numbers away during the warm-up.)
+:::
 
 
 
-## Standard Error for Difference in Proportions  
+## Context: Inference about the Difference in Proportions {.smaller}
+
+Comparison of proportions from two different (independent) populations.
+
+Examples
+
+  * Compare success proportion in Group A versus Group B
+  * Compare survival for group getting Treatment A versus survival for group getting Treatment B
+
+. . .
+
+BUT NOT
+
+  * Compare proportion of voters who prefer A to proportion who prefer B
+    + This is a comparison of proportions within the same group.
+
+
+
+## Example 1: Can You Spot the Human? {.smaller}
+
+In a recent study, each interrogator held two 5-minute text chats at the same time, one with a real person and one with an AI, and then picked which partner they thought was the human. The AI, GPT-4.5 (prompted to act like a person), was picked as "the human" in 185 of the 254 games (about 73%).
+
+**(a)** To do inference (a confidence interval or a hypothesis test) with these data, should we use the formulas for a single proportion or for a difference in proportions? Explain.
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+**(b)** We want to test whether interrogators pick the AI and the human equally often. Define the parameter $p$ in words, then state $H_0$ and $H_a$.
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+::: aside
+Source: Jones & Bergen (2025), "Large language models pass a standard three-party Turing test" (arXiv:2503.23674; PNAS). Game counts are from the preprint; 185 is computed from the reported win rates.
+:::
+
+::: notes
+(a) Single proportion. There is one set of 254 games and each game gives one verdict about one pair of partners. "AI picked" (185) and "human picked" (69) come from the same games, so they are complementary outcomes, not two independent groups.
+
+(b) p = true proportion of games in which the interrogator picks the AI as the human. H0: p = 0.5, Ha: p not equal to 0.5.
+
+Teaching tip: this mirrors the "BUT NOT" bullet above (choices within the same group). Check: 185 + 69 = 254.
+:::
+
+
+
+## Example 1 (continued) {.smaller}
+
+**Recall:** the AI was picked as "the human" in 185 of 254 games. The games came from two kinds of participants: 147 games with online workers (AI picked in 75.5%) and 107 games with college undergraduates (AI picked in 69.2%).
+
+**(c)** Would it matter for the outcome of the test whether we define $p$ as the proportion of games where the AI is picked, or the proportion where the human is picked? Explain.
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+**(d)** Suppose we want to know whether the AI's "picked as human" rate differs between online workers and undergraduates. Is that a single-proportion or a difference-in-proportions problem? Define the parameters and state $H_0$.
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+::: notes
+(c) No. Using the human-picked proportion gives p-hat = 69/254 = 0.272 and a z of -7.28 instead of +7.28 (z = (0.728 - 0.5)/sqrt(0.25/254)). The two-sided p-value is the same (about 3 x 10^-13), so the conclusion does not change. The AI was judged human significantly more often than chance.
+
+(d) Difference in proportions: two independent groups of games. p1 = true rate the AI is picked as human among online-worker participants, p2 = same for undergraduate participants. H0: p1 = p2 (Ha: p1 not equal p2).
+
+Caveat if asked: each participant played several rounds, so games are not perfectly independent. We treat them as independent for teaching purposes. The counts 111/147 and 74/107 are computed from the reported percentages.
+:::
+
+
+
+## Standard Error for Difference in Proportions
 
 The standard error for $\hat p_1-\hat p_2$ is
 $$
@@ -58,46 +171,171 @@ $$
 
 
 
-## Central Limit Theorem for Difference in Proportions {.smaller}  
+## Turn and Talk (30-60 sec) {.smaller}
 
-If $n$ is sufficiently large:   
+Look at the SE formula for $\hat p_1-\hat p_2$ again.
+
+1. Where do you see each group's own uncertainty in the formula? Why are the two pieces **added** and not subtracted, even though we are looking at a difference?
+2. What would happen to the SE if both sample sizes doubled?
+
+::: notes
+1. Each group contributes its own p(1-p)/n term. Variances of independent estimates add even when we subtract the estimates, so uncertainty from both groups accumulates.
+2. Both terms are cut in half, so SE is divided by sqrt(2), about 1.41 (SE gets smaller, but not twice as small).
+:::
+
+
+
+## Central Limit Theorem for Difference in Proportions {.smaller}
+
+If $n$ is sufficiently large:
 
 $$
 \hat p_1-\hat p_2 \sim N\left(p_1-p_2, \sqrt{\frac{p_1(1-p_1)}{n_1}+\frac{p_2(1-p_2)}{n_2}}\right)
 $$
 
-Conditions:  
+Conditions:
 
-  * Independent random samples  
-  * Sufficiently large samples  
-    + $n_1 p_1\ge 10$ and $n_1(1-p_1)\ge 10$  
-    + $n_2 p_2\ge 10$ and $n_2(1-p_2)\ge 10$  
+  * Independent random samples
+  * Sufficiently large samples
+    + $n_1 p_1\ge 10$ and $n_1(1-p_1)\ge 10$
+    + $n_2 p_2\ge 10$ and $n_2(1-p_2)\ge 10$
+
+
+
+## Example 2: Who Uses AI Chatbots? {.smaller}
+
+Remember the Pew chatbot survey from our warm-up (February 2026)? Suppose the true population percentages of U.S. adults who ever use AI chatbots are **66%** for adults ages 18-29 and **42%** for adults ages 50-64.
+
+We take independent random samples of 500 adults from each age group and compute $\hat p_1-\hat p_2$ (group 1 = ages 18-29, group 2 = ages 50-64).
+
+**(a)** Check that the conditions for the Central Limit Theorem are met.
+
+::: {.ws-l}
+:::
+
+**(b)** Describe the **shape** of the distribution of $\hat p_1-\hat p_2$ and explain how you know.
+
+::: {.ws .ed contenteditable="true"}
+:::
+
+::: aside
+Source: Pew Research Center, "Americans and AI 2026" (survey of U.S. adults, Feb. 17-23, 2026), share who ever use AI chatbots, by age.
+:::
+
+::: notes
+(a) Independent random samples (given). 500(0.66) = 330, 500(0.34) = 170, 500(0.42) = 210, 500(0.58) = 290; all at least 10.
+
+(b) Approximately normal, because the conditions in (a) hold, so the CLT applies.
+
+Note: Pew's figures are survey estimates (66% and 42%); like the Census numbers in the original version, we treat them as the true population values for this exercise. Pew's actual age-group subsamples are not 500 each.
+:::
+
+
+
+## Example 2 (continued) {.smaller}
+
+**Recall:** population percentages are 66% (ages 18-29) and 42% (ages 50-64); random samples of 500 from each group.
+
+**(c)** Find the **mean** and the **standard error** of the distribution of $\hat p_1-\hat p_2$.
+
+::: {.ws-l}
+:::
+
+**(d)** Using the 95% rule for a normal distribution, about 95% of all possible sample differences $\hat p_1-\hat p_2$ will fall between which two values?
+
+::: {.ws}
+:::
+
+::: notes
+(c) Mean = 0.66 - 0.42 = 0.24. SE = sqrt(0.66(0.34)/500 + 0.42(0.58)/500) = sqrt(0.000449 + 0.000487) = 0.0306 (about 3 percentage points). Distribution: N(0.24, 0.0306).
+
+(d) Mean plus or minus 2 SEs: 0.24 +/- 2(0.0306), or about 0.18 to 0.30 (using 1.96 gives 0.180 to 0.300). So most pairs of samples of 500 would show a gap of roughly 18 to 30 percentage points even though the true gap is 24. Link back to the warm-up: this is how much a gap bounces from sample to sample, and why a 5-point gap with groups this size would not be convincing while a 19-point gap would be.
+
+Teaching tip: the "ever use" wording in Pew's 2026 question covers any AI chatbot, not just ChatGPT.
+:::
 
 
 
 ## Confidence Interval for a Difference in Proportions  {.smaller}
 
 
-A confidence interval for $p_1-p_2$ can be computed as  
+A confidence interval for $p_1-p_2$ can be computed as
 
 $$
 (\hat p_1-\hat p_2) \pm z^* \sqrt{\frac{\hat p_1(1-\hat p_1)}{n_1}+\frac{\hat p_2(1-\hat p_2)}{n_2}}
 $$
 
-Conditions:  
+Conditions:
 
-  * Independent random samples  
-  * Sufficiently large samples  
-    + At least 10 successes and failures in each group  
+  * Independent random samples
+  * Sufficiently large samples
+    + At least 10 successes and failures in each group
+
+
+
+## Example 3: GLP-1 Medications and Age {.smaller}
+
+GLP-1 drugs (such as Ozempic, Wegovy, Zepbound and Mounjaro) are prescribed for diabetes, heart disease and weight loss. A late-2025 KFF Health Tracking Poll found that **22%** of adults ages 50-64 currently take a GLP-1 drug, compared with **9%** of adults ages 65 and older.
+
+Suppose these results are based on independent random samples of **500** adults in each age group (group 1 = ages 50-64, group 2 = ages 65 and older).
+
+**(a)** Find the number of "yes" and "no" responses in each group. Are the conditions for a confidence interval met?
+
+::: {.ws}
+:::
+
+**(b)** Construct a 95% confidence interval for $p_1-p_2$.
+
+::: {.ws-l}
+:::
+
+::: aside
+Source: KFF Health Tracking Poll (Oct. 27-Nov. 2, 2025), current GLP-1 use by age.
+:::
+
+::: notes
+(a) 0.22(500) = 110 yes, 390 no; 0.09(500) = 45 yes, 455 no. All at least 10, and the samples are independent and random (given).
+
+(b) p-hat1 - p-hat2 = 0.22 - 0.09 = 0.13. SE = sqrt(0.22(0.78)/500 + 0.09(0.91)/500) = sqrt(0.000343 + 0.000164) = 0.0225. With z* = 1.96, margin of error = 0.0441. 95% CI: 0.13 +/- 0.044 = (0.086, 0.174).
+
+Note: KFF's full poll had 1,350 adults, so the real age-group subsamples are smaller than 500 and the real margins of error are wider. We pretend 500 per group.
+:::
+
+
+
+## Example 3 (continued) {.smaller}
+
+**Recall:** 22% of adults ages 50-64 and 9% of adults ages 65 and older currently take a GLP-1 drug (samples of 500 each).
+
+**(c)** Interpret your interval in the context of the problem.
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+**(d)** Is it plausible that the two population proportions are equal? Explain using your interval.
+
+::: {.ws .ed contenteditable="true"}
+:::
+
+**Turn and talk (30-60 sec).** Use is much lower at 65 and older. Does this interval show that *getting older* makes people less likely to take these drugs? What else could explain the gap?
+
+::: notes
+(c) We are 95% confident that the proportion of adults ages 50-64 currently taking a GLP-1 drug is between about 8.6 and 17.4 percentage points higher than the proportion of adults 65 and older.
+
+(d) No. 0 is not in the interval (all values are positive), so equal proportions are not plausible at the 95% level.
+
+Why the drop at 65? KFF says the pattern likely reflects Medicare's lack of coverage for drugs prescribed specifically for weight loss (Medicare covers these drugs for diabetes and heart disease). That is a plausible explanation, not something this poll tested. This is observational survey data, so age is not randomly assigned: insurance type, income, and rates of diabetes/obesity all differ by age group and are likely confounders. Interpret with "associated with", not "causes".
+:::
+
 
 
 ## Test for Difference in Proportions   {.smaller}
 
-To test $H_0:p_1=p_2$, based on samples of size $n_1$ and $n_2$ from two groups, calculate  
+To test $H_0:p_1=p_2$, based on samples of size $n_1$ and $n_2$ from two groups, calculate
 $$
 z=\frac{\hat p_1-\hat p_2}{\sqrt{\frac{\hat p(1-\hat p)}{n_1}+\frac{\hat p(1-\hat p)}{n_2}}}
 $$
-where $\hat p$ is the *pooled* proportion obtained by combining the two samples.  That is,  
+where $\hat p$ is the *pooled* proportion obtained by combining the two samples.  That is,
 
 $$
 \hat p=\frac{\text{Total Successes}}{\text{Total Sample Size}}
@@ -105,23 +343,130 @@ $$
 
 
 
-## Test for Difference in Proportions  (continued)  
+## Test for Difference in Proportions  (continued)
 
-Conditions:  
+Conditions:
 
-  * Independent random samples  
-  * Sufficiently large samples  
-    + At least 10 successes and failures in each group  
+  * Independent random samples
+  * Sufficiently large samples
+    + At least 10 successes and failures in each group
 
 
 
 ## Test for Difference in Proportions: Simplified Formula
 
-The $z$-test statistic can be simplified by factoring:  
+The $z$-test statistic can be simplified by factoring:
 
 $$
 z=\frac{\hat p_1-\hat p_2}{\sqrt{\hat p(1-\hat p)\left(\frac{1}{n_1}+\frac{1}{n_2}\right)}}
 $$
-where $\hat p$ is again the *pooled* proportion obtained by combining the two samples.  
+where $\hat p$ is again the *pooled* proportion obtained by combining the two samples.
 
 
+
+## Turn and Talk (30-60 sec) {.smaller}
+
+1. If $H_0: p_1=p_2$ is true, how many different "true proportions" are there? Why does that make **pooling** the two samples sensible?
+2. Why don't we pool when we build a **confidence interval**?
+
+::: notes
+1. Under H0 both groups share one common proportion, so the best estimate uses all the data: p-hat = total successes / total sample size.
+2. A confidence interval does not assume p1 = p2; the groups may differ, so each group keeps its own p-hat in the SE.
+:::
+
+
+
+## Video Break: Golden Balls {.smaller}
+
+**Before we watch:** two contestants each secretly choose **split** or **steal** for a big jackpot.
+
+  * Both split: they share the jackpot.
+  * One splits, one steals: the stealer takes it all.
+  * Both steal: both go home with nothing.
+
+What would you choose? Jot down your gut call before the video starts.
+
+::: notes
+Pause here and play the sample Golden Balls clip (add the link or embed here). Afterwards, move to the data on the next slide. Possible bridge: "Does the choice depend on who the contestant is? Let's test whether older and younger contestants choose differently."
+:::
+
+
+
+## Example 4: Split or Steal? {.smaller}
+
+On the British TV show *Golden Balls*, two contestants each choose to **split** or **steal** a large jackpot. Use the data below to test whether the proportion who choose to split is different between older and younger people. Let group 1 = Under 40 and group 2 = Over 40.
+
+| Age      | Split | Steal | Total |
+|----------|------:|------:|------:|
+| Under 40 |   187 |   195 |   382 |
+| Over 40  |   116 |    76 |   192 |
+| Total    |   303 |   271 |   574 |
+
+**(a)** Define the parameters $p_1$ and $p_2$ in words, then state $H_0$ and $H_a$.
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+::: aside
+Setting: *Golden Balls*, studied by van den Assem, van Dolder & Thaler (2012), *Management Science* 58(1). Table as provided.
+:::
+
+::: notes
+(a) p1 = true proportion of Under-40 contestants who choose split; p2 = true proportion of Over-40 contestants who choose split. H0: p1 = p2. Ha: p1 not equal p2.
+:::
+
+
+
+## Example 4 (continued) {.smaller}
+
+**Recall:** Under 40: 187 of 382 chose split. Over 40: 116 of 192 chose split.
+
+**(b)** Check the conditions. Then find $\hat p_1$, $\hat p_2$ and the pooled proportion $\hat p$.
+
+::: {.ws-l}
+:::
+
+**(c)** Compute the $z$ test statistic.
+
+::: {.ws-l}
+:::
+
+::: notes
+(b) Conditions: independent random samples (treat contestants as such; they were not randomly selected, a caveat to mention) and at least 10 successes and failures in each group: 187, 195, 116, 76. p-hat1 = 187/382 = 0.489; p-hat2 = 116/192 = 0.604; pooled p-hat = 303/574 = 0.528.
+
+(c) SE = sqrt(0.528(0.472)(1/382 + 1/192)) = 0.0442. z = (0.4895 - 0.6042)/0.0442 = about -2.60. (If group 1 = Over 40, z = +2.60; the sign depends on the ordering.)
+:::
+
+
+
+## Example 4 (conclusion) {.smaller}
+
+**Recall:** Under 40: 187 of 382 chose split. Over 40: 116 of 192 chose split. Use the $z$ you found in (c).
+
+**(d)** Find the $p$-value (use technology).
+
+::: {.ws}
+:::
+
+**(e)** State your conclusion in the context of the problem.
+
+::: {.ws-l .ed contenteditable="true"}
+:::
+
+::: notes
+(d) Two-sided p-value = 2 * P(Z < -2.60) = about 0.009. In R: 2*pnorm(-abs(-2.596)) gives 0.0094. Check: prop.test(c(187, 116), c(382, 192), correct = FALSE) gives X-squared of about 6.74 (= z^2) and p = 0.0094. (R not run when this deck was built.)
+
+(e) Strong evidence (p of about 0.009) that the proportion who choose split differs between age groups; older contestants chose split more often (about 60% vs 49%). Caveat: observational data from TV contestants, not a randomized experiment or a random sample, so we should be cautious about generalizing or claiming age causes the difference.
+:::
+
+
+
+## Wrapping Up {.smaller}
+
+::: incremental
+* Two **independent groups** call for a **difference** in proportions; choices within **one** group call for a single proportion.
+* $\hat p_1-\hat p_2$ is approximately normal when each group has at least 10 successes and failures; its SE adds the two groups' variability.
+* **Confidence interval:** $(\hat p_1-\hat p_2)\pm z^*\,\text{SE}$, with each group's own $\hat p$ in the SE.
+* **Test of** $H_0:p_1=p_2$: use the **pooled** $\hat p$ in the SE, then find $z$ and the $p$-value.
+* Interpret in context: which group is higher, by how much, and is $0$ plausible?
+:::
