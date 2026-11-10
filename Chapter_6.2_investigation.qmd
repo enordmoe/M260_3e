@@ -1,0 +1,138 @@
+---
+title: 'Chapter 6: One-Sample Inference for Means with R'
+author: "Firstname Lastname"
+format:
+  html:
+    toc: true
+    toc_depth: 2
+    number-sections: false
+    number-depth: 2
+    theme: flatly
+    embed-resources: true
+execute: 
+  warning: false
+  message: false
+  echo: true
+---
+
+```{r, setup, include=FALSE}
+# These commands should always be near the top to ensure the libraries are loaded before the analysis.
+library(mosaic)
+library(Lock5Data)
+```
+
+This help sheet shows how to use built-in R procedures to carry out examples in Section 6.2. The primary R procedure for $t$ inference is `t.test()`.
+
+```{r, message = FALSE, echo = FALSE}
+library(mosaic)
+library(Lock5Data)
+```
+
+## 6.2-CI Confidence Intervals for a Mean Using the $t$-distribution
+
+**Example 6.13**
+
+Use the data on airborne times (in minutes) for **Flight433_3e** to find a 95% confidence interval for the mean flight time on this route from Boston to San Francisco.
+
+**Answer:**
+
+The variable of interest is *AirTime* in the data frame **Flight433_3e**.
+
+First look at the data frame:
+
+```{r}
+head(Flight433_3e)
+```
+
+Because the sample size of $n=28$ is not large enough for the CLT for means to apply, before using the t-distribution we should check a plot of the data for signs of extreme outliers or heavy skewness. The dotplot below shows no reasons for serious concerns.
+
+```{r}
+gf_dotplot(~AirTime, data = Flight433_3e)
+```
+
+Use the `t.test()` function to obtain the desired confidence interval. We show how to specify the confidence interval
+
+```{r}
+t.test(~AirTime, conf.level = .95, data = Flight433_3e)
+```
+
+Based on these data, we are 95% sure that the mean airborne time for Flight 433 from Boston to San Francisco is between 364.6 and 377.6 minutes.
+
+**Example 6.14**
+
+```{r}
+head(CommuteAtlanta)
+```
+
+We proceed to compute a 99% confidence interval for the mean commute time using the $t$ distribution and our two resampling methods.
+
+#### Confidence interval using t
+
+```{r}
+t.test(~Time, data = CommuteAtlanta, conf.level = .99)
+```
+
+We are 95% confident that the average commute time is between 26.7 and 31.5 minutes.
+
+> "Remember that the key idea when constructing a confidence interval is to use a method that produces an interval containing the true mean some fixed proportion of the time. That is true for both the formula-based $t$ and the boostrap intervals, even though they give slightly different intervals for any particular sample. The advantage of the $t$-interval is that it is most commonly used in practice when estimating a mean. The advantage of the bootstrap methods is that they remain valid in cases where conditions, such as normality for a small sample, might be questionable. Also, the bootstrap methods are flexible enough to use for almost all parameters, while the $t$-distribution only works for certain parameters such as the mean." (Lock5)
+
+**Example 6.15**
+
+A plot of the data on rent prices of **ManhattanApartments** suggests the normal assumption is clearly violated because of the strong right skewness and potential outliers with a small sample size ($n=20$). Instead, we would use the bootstrap method for a single mean from Chapter 3.
+
+```{r}
+gf_dotplot(~Rent, data = ManhattanApartments)
+```
+
+## 6.2-HT Test for a Single Mean
+
+**Example 6.17**
+
+```{r}
+head(BodyTemp50)
+```
+
+The relevant hypotheses are $H_0:\mu=98.6$ vs $H_a:\mu \ne 98.6$ where $\mu$ is the mean body temperature for all healthy humans. The figure below is a histogram of this sample of body temperatures. The plot raises no concerns about a lack of normality in the population and the sample size (n = 50) is quite large, so a $t$-distribution is appropriate for this test.
+
+```{r}
+gf_histogram(~BodyTemp, data = BodyTemp50)
+```
+
+Use the R function `t.test()` to carry out the procedure:
+
+```{r}
+t.test(~BodyTemp, mu = 98.6, data = BodyTemp50)
+```
+
+We obtain $t=-3.1414$ and 2-sided $p$-value=0.00285 for a $t$ distribution with 50-1=49 degrees of freedom. We have strong evidence that mean body temperate is not 98.6.
+
+**Example 6.18**
+
+TThe **FloridaLakes** dataset includes information on alkalinity values for 53 Florida lakes. The mean of the values is $\bar x = 37.5$ mg/L with standard deviation $s = 38.20$. Test to see if this sample provides evidence that the average alkalinity of all Florida lakes is greater than 35 mg/L.
+
+**Solution:**
+
+The figure below shows a histogram of the alkalinity values.
+
+```{r}
+gf_histogram(~Alkalinity, data = FloridaLakes)
+```
+
+We see in that the alkalinity values in this sample are very skewed and don't seem to follow a normal distribution at all. Nonetheless, the sample size of $n = 53$ is large enough that the CLT for means is relevant so a $t$-test is probably valid. The hypotheses for the test are:
+
+$$
+\begin{align}
+H_0: &\mu=35 \\
+H_a: &\mu>35
+\end{align}
+$$
+
+Use the `t.test()` function specifying the null hypothesis and the one-sided tail:
+
+```{r}
+t.test(~Alkalinity, mu=35, alt = "greater", data = FloridaLakes)
+```
+
+We obtain $t=0.482$ on $df=53-1=52$ degrees of freedom. The corresponding $p$-value is given a $p=0.316$. We have no evidence to reject the null hypothesis in favor of the alternative.
+
+Note the use of "greater" for the alternative. Another option is to use "less" for a less than alternative. The default value is "two.sided".

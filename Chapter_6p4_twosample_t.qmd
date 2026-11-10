@@ -1,0 +1,96 @@
+---
+title: 'Section 6.4: Two-Sample Inference for Means with R'
+format: 
+    html: 
+      toc: true
+      html-math-method: katex
+      number-depth: 3
+      theme: flatly
+      embed-resources: true
+execute:
+  warning: false
+editor: visual
+---
+
+```{r}
+#| label: setup
+#| include: false
+#| warning: false
+knitr::opts_chunk$set(echo = TRUE)
+options(digits=6)
+library(mosaic)
+library(Lock5Data)
+```
+
+This help sheet shows how to use built-in R procedures to carry out examples of two-sample inference for means in Section 6.4. The primary R procedure for $t$ inference is `t.test()`.
+
+# 6.4-CI Confidence Interval for a Difference in Means
+
+**Example 6.26**
+
+```{r}
+head(CommuteStLouis)
+favstats(~Time, data = CommuteStLouis)
+head(CommuteAtlanta)
+favstats(~Time, data = CommuteAtlanta)
+```
+
+The following questions assume we have a single data set. We can stack the two into one data frame called **commmutedata** using the following R code.
+
+```{r}
+commutedata <- bind_rows(CommuteStLouis, CommuteAtlanta)
+```
+
+Check for normality of the distributions with histograms and boxplots. First, histograms:
+
+```{r}
+gf_histogram(~Time | City ~ ., data = commutedata)
+```
+
+Next, boxplots comparing times for the cities:
+
+```{r}
+gf_boxplot(Time ~ City, data = commutedata)
+```
+
+Obtain a 90% confidence interval for the difference in population means using the `t.test()` function with formula notation (`y~x`):
+
+```{r}
+t.test(Time ~ City, data = commutedata, conf.level = 0.90)
+```
+
+If we just want the confidence interval, we can wrap `confint()` around the `t.test()` function as shown below but this is not necessary:
+
+```{r}
+confint(t.test(Time ~ City, data = commutedata, conf.level = 0.90))
+```
+
+# 6.4-HT Test for a Difference in Means
+
+**Example 6.27 Smiles and Leniency**
+
+Review the dataset:
+
+```{r}
+head(Smiles)
+```
+
+Check conditions:
+
+```{r}
+gf_histogram(~Leniency | Group ~ ., data = Smiles)
+```
+
+Now here's a boxplot similar to the one in Figure 6.19 on p. 495.
+
+```{r}
+gf_boxplot(Leniency ~ Group, data = Smiles)
+```
+
+Use the t-distribution to test whether the mean leniency score for smiling students is higher than the mean score for students with a neutral expression.
+
+```{r}
+t.test(Leniency ~ Group, alt = "less", data = Smiles)
+```
+
+R reports $t=-2.04$ with p-value=0.02223 on 65.367 degrees of freedom.

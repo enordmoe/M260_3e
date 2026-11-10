@@ -1,0 +1,82 @@
+---
+title: "Section 6.5: Matched Pairs Inference for Means with R"
+format: 
+    html: 
+      toc: true
+      html-math-method: katex
+      number-depth: 3
+      theme: flatly
+      embed-resources: true
+execute:
+  warning: false
+editor: visual
+---
+
+```{r}
+#| label: setup
+#| include: false
+#| warning: false
+knitr::opts_chunk$set(echo = TRUE)
+options(digits=6)
+library(mosaic)
+library(Lock5Data)
+```
+
+This help sheet shows how to use built-in R procedures to carry out examples of matched pairs inference for means in Section 6.5. The primary R procedure for $t$ inference is `t.test()`. Note that the matched pairs design may typically be viewed simply as inference about a single mean, once differences in the matched pairs have been computed.
+
+```{r,message=FALSE,echo=FALSE}
+library(mosaic)
+library(Lock5Data)
+```
+
+**Example 6.29 Matched Pairs Hypothesis Test**
+
+```{r}
+head(Wetsuits)
+```
+
+I recommend computing and saving the differences in the original data set and then plotting the data before proceeding.
+
+The code below uses the `mutate()` command to compute and add a column of differences (Wetsuit-NoWet) to the original data set:
+
+```{r}
+Wetsuits <- mutate(Wetsuits, diff = Wetsuit - NoWetsuit)
+```
+
+Now plot a dotplot of the differences as shown in the text:
+
+```{r}
+gf_dotplot(~diff, data = Wetsuits)
+```
+
+Although it is difficult to see a bell-shape for samples this small, the differences look relatively symmetric and have no clear outliers, so we don’t detect any serious problems with normality and can proceed with the t-distribution.
+
+Below is the R code for a one-sided hypothesis test.
+
+```{r}
+t.test(~diff, data = Wetsuits, alt = "greater")
+```
+
+The very large t-statistic and small p-value provide very convincing evidence that swimmers are faster on average when wearing wetsuits. Because this was a randomized experiment, we can conclude that wetsuits cause swimmers to swim faster.
+
+**Example 6.30 Matched Pairs Confidence Interval**
+
+Below is the R code for a 95% confidence interval. Note that 95% is the default value and need not be specified explicitly.
+
+```{r}
+t.test(~diff, data = Wetsuits, conf.level = .95)
+```
+
+We are 95% confident that for competitive swimmers and triathletes, wetsuits increase maximum swimming velocity by an average of between 0.064 and 0.091 meters per second.
+
+Note: Occasionally it is useful to plot the paired values to verify the paired, correlated nature of the data. It is this correlation that provides the gain in sensitivity of paired t analysis compared to the independent two samples t method.
+
+```{r}
+cor(Wetsuit ~ NoWetsuit, data = Wetsuits)
+```
+
+A plot of the paired data verifies the high correlation meaning that the fastest swimmers are fastest regardless of whether they are wearing a wetsuit or not.
+
+```{r}
+gf_point(Wetsuit ~ NoWetsuit, data = Wetsuits)
+```
